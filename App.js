@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 //HIIIIIIII
+//HI P2
 
 export default class App extends React.Component {
   render() {
