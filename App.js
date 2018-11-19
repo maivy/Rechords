@@ -1,13 +1,13 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-import { RecordCover } from './App/Components/';
+import { RecordCollectionHeader } from './App/Components/';
 
 export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <RecordCover />
+        <RecordCollectionHeader />
       </View>
     );
   }

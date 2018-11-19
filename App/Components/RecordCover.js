@@ -7,7 +7,7 @@ import { Metrics, Colors, Images } from '../Themes';
 export default class RecordCover extends React.Component {
     render() {
         return (
-            <ImageBackground
+            <ImageBackground 
                 style={styles.container}
                 imageStyle={styles.image}
                 source={Images.recordCover}>
@@ -41,20 +41,17 @@ export default class RecordCover extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
-        // flex: 1,
-        justifyContent: 'space-between',
-        alignItems: 'stretch',
         width: Metrics.record.outer,
         height: Metrics.record.outer,
         padding: Metrics.smallMargin
     },
     image: {
-        borderRadius: Metrics.borderRadius.small,
+        borderRadius: Metrics.borderRadius.recordCover,
     },
     overlay: {
         position: 'absolute',
         height: Metrics.heights.overlay,
-        borderRadius: Metrics.borderRadius.small,
+        borderRadius: Metrics.borderRadius.recordCover,
     },
     overlayTop: {
         left: 0,

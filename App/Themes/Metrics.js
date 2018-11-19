@@ -34,11 +34,12 @@ const metrics = {
     dot: width * 0.03,
   },
   heights: {
-    overlay: width * 0.5
+    overlay: width * 0.5,
+    header: 140,
   },
   borderRadius: {
-    small: 10,
-  }
+    recordCover: 10,
+  },
 }
 
 export default metrics
