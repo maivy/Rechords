@@ -32,7 +32,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         width: Metrics.record.outer,
         height: Metrics.record.outer,
-        // backgroundColor: Colors.black,
         borderRadius: Metrics.record.outer / 2,
     },
     inner: {

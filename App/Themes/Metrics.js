@@ -8,7 +8,7 @@ const metrics = {
   section: 25,
   baseMargin: 10,
   doubleBaseMargin: 20,
-  smallMargin: 5,
+  smallMargin: 15,
   doubleSection: 50,
   horizontalLineHeight: 1,
   screenWidth: width < height ? width : height,
@@ -33,6 +33,12 @@ const metrics = {
     inner: width * 0.55,
     dot: width * 0.03,
   },
+  heights: {
+    overlay: width * 0.5
+  },
+  borderRadius: {
+    small: 10,
+  }
 }
 
 export default metrics
