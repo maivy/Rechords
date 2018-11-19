@@ -1,13 +1,13 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-import { RecordCollectionToggle } from './App/Components/';
+import { RechordCollectionSortBar } from './App/Components/';
 
 export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <RecordCollectionToggle />
+        <RechordCollectionSortBar />
       </View>
     );
   }

@@ -8,6 +8,8 @@ const metrics = {
   section: 25,
   baseMargin: 10,
   doubleBaseMargin: 20,
+  miniMargin: 7,
+  tinyMargin: 10,
   smallMargin: 15,
   doubleSection: 50,
   horizontalLineHeight: 1,
@@ -39,9 +41,12 @@ const metrics = {
   heights: {
     overlay: width * 0.5,
     header: 140,
+    sortBy: 116,
   },
   borderRadius: {
     recordCover: 10,
+    sortBy: 15,
+    search: 10,
   },
 }
 

@@ -1,11 +1,16 @@
 import Record from './Record';
 import RecordCover from './RecordCover';
-import RecordCollectionHeader from './Headers/RecordCollectionHeader';
-import RecordCollectionToggle from './RecordCollectionToggle';
+import RechordCollectionHeader from './Headers/RechordCollectionHeader';
+import RechordCollectionToggle from './RechordCollectionToggle';
+import RechordCollectionSortBar from './RechordCollectionSortBar';
+
+import SortOption from './SortOption';
 
 export {
     Record,
     RecordCover,
-    RecordCollectionHeader,
-    RecordCollectionToggle
+    RechordCollectionHeader,
+    RechordCollectionToggle,
+    RechordCollectionSortBar,
+    SortOption
 }
