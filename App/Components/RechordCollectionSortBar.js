@@ -2,7 +2,8 @@ import React from 'react';
 import { StyleSheet, View, Text, TextInput, Image } from 'react-native';
 import { Metrics, Colors, Images } from '../Themes';
 
-import { SortOption } from '.';
+// import { SortOption } from '.';
+import SortOption from './SortOption';
 
 export default class RechordCollectionSortBy extends React.Component {
 

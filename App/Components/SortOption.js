@@ -1,8 +1,6 @@
 import React from 'react';
 import { StyleSheet, View, Text, Image } from 'react-native';
 
-import { Metrics, Colors, Images } from '../Themes';
-
 export default class SortOption extends React.Component {
     constructor(props) {
         super(props);
