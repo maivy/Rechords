@@ -1,13 +1,15 @@
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, ImageBackground } from 'react-native';
 
-import { Metrics, Colors } from '../Themes';
+import { Metrics, Colors, Images } from '../Themes';
 
 const center = Metrics.record.outer / 2;
 export default class Record extends React.Component {
     render() {
         return (
-            <View style={styles.outer}>
+            <ImageBackground
+                style={styles.outer}
+                source={Images.recordEdge}>
                 <View style={styles.inner}>
                     <View style={styles.textWrapper}>
                         <Text style={styles.text}>Happier</Text>
@@ -19,7 +21,7 @@ export default class Record extends React.Component {
                         <Text style={styles.text}>Marshmello, Bastille</Text>
                     </View>
                 </View> 
-            </View>
+            </ImageBackground>
         )
     }
 }
@@ -30,7 +32,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         width: Metrics.record.outer,
         height: Metrics.record.outer,
-        backgroundColor: Colors.black,
+        // backgroundColor: Colors.black,
         borderRadius: Metrics.record.outer / 2,
     },
     inner: {
