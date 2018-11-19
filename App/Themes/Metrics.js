@@ -33,6 +33,9 @@ const metrics = {
     inner: width * 0.55,
     dot: width * 0.03,
   },
+  widths: {
+    wide: width * 0.9
+  },
   heights: {
     overlay: width * 0.5,
     header: 140,
