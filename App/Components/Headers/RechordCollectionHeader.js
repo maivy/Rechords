@@ -7,7 +7,7 @@ export default class RecordCollectionHeader extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text style={Styles.h1}>Record Collection</Text>
+                <Text style={Styles.h1}>Rechord Collection</Text>
                 
                 <View style={styles.profileWrapper}>
                     <Image

@@ -31,15 +31,16 @@ const metrics = {
     logo: 200
   },
   record: {
-    outer: width * 0.9,
-    inner: width * 0.55,
-    dot: width * 0.03,
+    outer: '100%',
+    inner: '55%',
+    dot: '3%',
   },
   widths: {
-    wide: width * 0.9
+    wide: width * 0.9,
+    cover: width * 0.435
   },
   heights: {
-    overlay: width * 0.5,
+    overlay: '50%',
     header: 140,
     sortBy: 116,
   },
