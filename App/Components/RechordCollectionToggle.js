@@ -6,12 +6,15 @@ import { Metrics, Colors } from '../Themes';
 
 
 export default class RecordCollectionToggle extends React.Component {
-    state = {
-        index: 0
-    }
+    // state = {
+    //     index: 0
+    // }
 
-    updateIndex = (index) => {
-        this.setState({index: index});
+    // updateIndex = (index) => {
+    //     this.setState({index: index});
+    // }
+    constructor(props) {
+        super(props)
     }
 
     render() {
@@ -22,8 +25,8 @@ export default class RecordCollectionToggle extends React.Component {
                     selectedTextStyle={styles.selectedText}
                     textStyle={styles.text}
                     innerBorderStyle={styles.innerBorder}
-                    onPress={this.updateIndex}
-                    selectedIndex={this.state.index}
+                    onPress={this.props.updateIndex}
+                    selectedIndex={this.props.index}
                     buttons={['Personal', 'Friends']}
                     containerStyle={styles.toggle}
                 />

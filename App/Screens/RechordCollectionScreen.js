@@ -12,8 +12,19 @@ import { Colors, Metrics, Images } from '../Themes';
 import PersonalRechords from '../Data/PersonalRechords';
 
 export default class RechordCollectionScreen extends React.Component {
+
     state = {
-        data: PersonalRechords
+        data: PersonalRechords,
+        index: 0
+    }
+
+    updateIndex = (index) => {
+        this.setState({index: index});
+        if (index === 0) {
+            this.setState({data: PersonalRechords});
+        } else {
+            this.setState({data: []})
+        }
     }
 
     constructor(props) {
@@ -47,7 +58,10 @@ export default class RechordCollectionScreen extends React.Component {
                 </View>
 
                 <View style={styles.toggle}>
-                    <RechordCollectionToggle />
+                    <RechordCollectionToggle
+                        index={this.state.index}
+                        updateIndex={this.updateIndex}
+                    />
                 </View>
 
                 <FlatList
@@ -112,7 +126,6 @@ const styles = StyleSheet.create({
         // flexDirection: 'row',       // For ScrollView Option
         // flexWrap: 'wrap',
         justifyContent: 'space-between',
-        // marginTop: Metrics.smallMargin
     },
     coverWrapper: {
         width: Metrics.widths.cover,
