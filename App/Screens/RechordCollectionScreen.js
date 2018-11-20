@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, ScrollView } from 'react-native';
+import { StyleSheet, View, Text, ScrollView, FlatList } from 'react-native';
 
 import {
     RechordCollectionHeader,
@@ -9,8 +9,33 @@ import {
 } from '../Components/';
 
 import { Colors, Metrics, Images } from '../Themes';
+import PersonalRechords from '../Data/PersonalRechords';
 
 export default class RechordCollectionScreen extends React.Component {
+    state = {
+        data: PersonalRechords
+    }
+
+    constructor(props) {
+        super(props);
+        console.log(JSON.stringify(this.state.data));
+    }
+
+    _keyExtractor = (index) => JSON.stringify(index);
+
+    renderRechordItem = (item) => {
+        return (
+            <RechordListItem
+                coverContainerStyle={styles.coverWrapper}
+                image={item.image}
+                location={item.location}
+                date={item.date}
+                owner={item.owner}
+                title={item.title}
+            />
+        )
+    }
+
     render() {
         return (
             <View style={styles.container}>
@@ -25,7 +50,17 @@ export default class RechordCollectionScreen extends React.Component {
                     <RechordCollectionToggle />
                 </View>
 
-                <ScrollView contentContainerStyle={styles.covers}>
+                <FlatList
+                    columnWrapperStyle={styles.covers}
+                    numColumns={2}
+                    data={this.state.data}
+                    renderItem={({item}) => this.renderRechordItem(item)}
+                    keyExtractor={this._keyExtractor}
+                />
+
+                {/* If we wanna just go with hardcoded data */}
+
+                {/* <ScrollView contentContainerStyle={styles.covers}>
                     <RechordListItem
                         coverContainerStyle={styles.coverWrapper}
                         image={Images.cover6}
@@ -52,7 +87,7 @@ export default class RechordCollectionScreen extends React.Component {
                         owner='Tiffany Manuel'
                         title='Jetting Joy'
                     />
-                </ScrollView>
+                </ScrollView> */}
                 
             </View>
         )
@@ -65,18 +100,19 @@ const styles = StyleSheet.create({
         overflow: 'scroll'
     },
     sortBar: {
-        marginTop: -39,
+        marginTop: -39, // move sort bar over header
     },
     toggle: {
-        marginTop: Metrics.smallMargin
+        marginTop: Metrics.smallMargin,
+        marginBottom: Metrics.smallMargin
     },
     covers: {
         flex: 1,
         width: Metrics.widths.wide,
-        flexDirection: 'row',
-        flexWrap: 'wrap',
+        // flexDirection: 'row',       // For ScrollView Option
+        // flexWrap: 'wrap',
         justifyContent: 'space-between',
-        marginTop: Metrics.smallMargin
+        // marginTop: Metrics.smallMargin
     },
     coverWrapper: {
         width: Metrics.widths.cover,
