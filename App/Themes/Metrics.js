@@ -3,6 +3,7 @@ import { Dimensions, Platform } from 'react-native'
 const { width, height } = Dimensions.get('window')
 
 const metrics = {
+  width: width,
   marginHorizontal: 10,
   marginVertical: 10,
   section: 25,
@@ -31,9 +32,11 @@ const metrics = {
     logo: 200
   },
   record: {
-    outer: '100%',
-    inner: '55%',
-    dot: '3%',
+    outerLarge: width * 0.9,
+    innerLarge: width * 0.55,
+    outerSmall: width * 0.8,
+    innerSmall: width * 0.5,
+    dot: width * 0.03,
   },
   widths: {
     wide: width * 0.9,

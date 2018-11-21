@@ -6,13 +6,7 @@ import { Metrics, Colors } from '../Themes';
 
 
 export default class RecordCollectionToggle extends React.Component {
-    // state = {
-    //     index: 0
-    // }
 
-    // updateIndex = (index) => {
-    //     this.setState({index: index});
-    // }
     constructor(props) {
         super(props)
     }

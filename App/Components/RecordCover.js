@@ -63,8 +63,8 @@ export default class RecordCover extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
-        width: Metrics.record.outer,
-        height: Metrics.record.outer,
+        width: '100%',
+        height: '100%',
     },
     image: {
         borderRadius: Metrics.borderRadius.recordCover,

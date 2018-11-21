@@ -5,43 +5,76 @@ import { Metrics, Colors, Images } from '../Themes';
 
 const center = Metrics.record.outer / 2;
 export default class Record extends React.Component {
+    state = {
+        outerStyle: styles.outerLarge,
+        innerStyle: styles.innerLarge
+    }
+
+    constructor(props) {
+        super(props);
+    }
+
+    componentDidMount() {
+        if (this.props.small) {
+            this.setState({ outerStyle: styles.outerSmall });
+            this.setState({ innerStyle: styles.innerSmall });
+        }
+    }
+
     render() {
         return (
-            <ImageBackground
-                style={styles.outer}
-                source={Images.recordEdge}>
-                <View style={styles.inner}>
-                    <View style={styles.textWrapper}>
-                        <Text style={styles.text}>Happier</Text>
-                    </View>
+            <View style={this.props.containerStyle}>
+                <ImageBackground
+                    style={[styles.outer, this.state.outerStyle]}
+                    source={Images.recordEdge}>
+                    <View style={[styles.inner, this.state.innerStyle]}>
+                        <View style={styles.textWrapper}>
+                            <Text style={styles.text}>Happier</Text>
+                        </View>
 
-                    <View style={styles.dot}></View>
+                        <View style={styles.dot}></View>
 
-                    <View style={styles.textWrapper}>
-                        <Text style={styles.text}>Marshmello, Bastille</Text>
-                    </View>
-                </View> 
-            </ImageBackground>
+                        <View style={styles.textWrapper}>
+                            <Text style={styles.text}>Marshmello, Bastille</Text>
+                        </View>
+                    </View> 
+                </ImageBackground>
+            </View>
         )
     }
 }
 
 const styles = StyleSheet.create({
+    outerLarge: {
+        width: Metrics.record.outerLarge,
+        height: Metrics.record.outerLarge,
+        borderRadius: Metrics.record.outerLarge / 2,
+    },
+    innerLarge: {
+        width: Metrics.record.innerLarge,
+        height: Metrics.record.innerLarge,
+        borderRadius: Metrics.record.innerLarge / 2
+    },
+    outerSmall: {
+        width: Metrics.record.outerSmall,
+        height: Metrics.record.outerSmall,
+        borderRadius: Metrics.record.outerSmall / 2
+    },
+    innerSmall: {
+        width: Metrics.record.innerSmall,
+        height: Metrics.record.innerSmall,
+        borderRadius: Metrics.record.innerSmall / 2
+
+    },
     outer: {
         justifyContent: 'center',
         alignItems: 'center',
-        width: Metrics.record.outer,
-        height: Metrics.record.outer,
-        borderRadius: Metrics.record.outer / 2,
     },
     inner: {
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        width: Metrics.record.inner,
-        height: Metrics.record.inner,
         backgroundColor: Colors.purple,
-        borderRadius: Metrics.record.inner / 2
     },
     dot: {
         width: Metrics.record.dot,
