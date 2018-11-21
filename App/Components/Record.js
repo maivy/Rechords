@@ -1,9 +1,17 @@
+// EXAMPLE:
+// -------------------------------------
+// Add small tag for a smaller record size.
+//     <Record
+//         small
+//         title='Happier'
+//         artist='Marshmello, Bastille'
+//     />
+
 import React from 'react';
 import { StyleSheet, View, Text, ImageBackground } from 'react-native';
 
 import { Metrics, Colors, Images } from '../Themes';
 
-const center = Metrics.record.outer / 2;
 export default class Record extends React.Component {
     state = {
         outerStyle: styles.outerLarge,
@@ -24,21 +32,25 @@ export default class Record extends React.Component {
     render() {
         return (
             <View style={this.props.containerStyle}>
+
                 <ImageBackground
                     style={[styles.outer, this.state.outerStyle]}
                     source={Images.recordEdge}>
+
                     <View style={[styles.inner, this.state.innerStyle]}>
-                        <View style={styles.textWrapper}>
-                            <Text style={styles.text}>Happier</Text>
-                        </View>
 
+                        <View style={styles.textWrapper}>
+                            <Text style={styles.text}>{this.props.title}</Text>
+                        </View>
                         <View style={styles.dot}></View>
-
                         <View style={styles.textWrapper}>
-                            <Text style={styles.text}>Marshmello, Bastille</Text>
+                            <Text style={styles.text}>{this.props.artist}</Text>
                         </View>
+
                     </View> 
+
                 </ImageBackground>
+
             </View>
         )
     }
