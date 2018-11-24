@@ -14,9 +14,23 @@ import { LinearGradient } from 'expo';
 import { Metrics, Colors, Images } from '../Themes';
 
 export default class RecordCover extends React.Component {
+    state = {
+        fontStyle: {
+            fontSize: 11,
+        },
+    }
+
     constructor(props) {
         super(props);
         // console.log("FLIP: " + JSON.stringify(this.props.flip));
+    }
+
+    componentDidMount() {
+        if (this.props.fontStyle) {
+            this.setState({
+                fontStyle: this.props.fontStyle
+            });
+        }
     }
 
     render() {
@@ -43,8 +57,8 @@ export default class RecordCover extends React.Component {
                 <View style={styles.coverInfo}>
 
                     <View style={styles.top}>
-                        <Text style={[styles.text, styles.left]}>{this.props.date}</Text>
-                        <Text style={[styles.text, styles.right]}>{this.props.location}</Text>
+                        <Text style={[styles.text, styles.left, this.fontStyle]}>{this.props.date}</Text>
+                        <Text style={[styles.text, styles.right, this.fontStyle]}>{this.props.location}</Text>
                     </View>
 
                     <View style={styles.bottom}>
@@ -61,7 +75,7 @@ export default class RecordCover extends React.Component {
                             source={Images.flip}
                             onPress={() => this.props.flip()} /> */}
 
-                        <Text style={[styles.text, styles.right]}>{this.props.owner}</Text>
+                        <Text style={[styles.text, styles.right, this.fontStyle]}>{this.props.owner}</Text>
                     </View>
                     
                 </View>
@@ -119,7 +133,7 @@ const styles = StyleSheet.create({
         padding: Metrics.miniMargin,
     },
     text: {
-        fontSize: 11,
+        // fontSize: 11,
         color: Colors.blue,
     },
     flip: {

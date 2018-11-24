@@ -4,6 +4,7 @@ const { width, height } = Dimensions.get('window')
 
 const metrics = {
   width: width,
+  height: height,
   marginHorizontal: 10,
   marginVertical: 10,
   section: 25,
@@ -34,13 +35,14 @@ const metrics = {
   record: {
     outerLarge: width * 0.9,
     innerLarge: width * 0.55,
-    outerSmall: width * 0.8,
-    innerSmall: width * 0.5,
+    outerSmall: height / 2.7,
+    innerSmall: height / 4.7,
     dot: width * 0.03,
   },
   widths: {
     wide: width * 0.9,
-    cover: width * 0.435
+    cover: width * 0.435,
+    coverMedium: height / 2.5
   },
   heights: {
     overlay: '50%',

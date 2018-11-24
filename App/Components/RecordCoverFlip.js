@@ -66,6 +66,7 @@ export default class RecordCoverFlip extends Component {
               location='Harrison Hot Springs'
               date='08 31 18'
               owner='Tiffany Manuel'
+              fontStyle={{fontSize: 12}}
               flip={this.flipCard}
             />
             </TouchableOpacity>
@@ -100,8 +101,8 @@ const styles = StyleSheet.create({
     // justifyContent: "center",
   },
   flipCard: {
-    width: Metrics.widths.wide,
-    height: Metrics.widths.wide,
+    width: Metrics.widths.coverMedium,
+    height: Metrics.widths.coverMedium,
     backfaceVisibility: 'hidden',
     borderRadius: Metrics.borderRadius.recordCover
   },

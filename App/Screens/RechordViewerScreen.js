@@ -1,21 +1,21 @@
 import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 
-import { RecordCover } from '../Components';
+import { RecordCover, Record } from '../Components';
 import { Images, Metrics } from '../Themes';
+import RecordCoverFlip from '../Components/RecordCoverFlip';
 
 export default class RechordViewerScreen extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <View style={styles.coverWrapper}>
-                    <RecordCover 
-                        image={Images.cover1}
-                        location='Harrison Hot Springs'
-                        date='08 31 18'
-                        owner='Tiffany Manuel'
-                    />
-                </View>
+                <Record
+                    small
+                    title='Happier'
+                    artist='Marshmello, Bastille'
+                    containerStyle={styles.record}
+                />
+                <RecordCoverFlip />
             </View>
         )
     }
@@ -23,13 +23,12 @@ export default class RechordViewerScreen extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
-        // flex: 1,
+        flex: 1,
         alignItems: 'center',
         justifyContent: 'center'
     },
-    coverWrapper: {
-        // flex: 1,
-        width: Metrics.widths.wide,
-        height: Metrics.widths.wide,
+    record: {
+        position: 'absolute',
+        top: Metrics.record.outerLarge / 3
     }
 })
