@@ -1,15 +1,17 @@
 import React from 'react';
 import { StyleSheet, Text, View, SafeAreaView} from 'react-native';
 
-import { RechordCollectionScreen } from './App/Screens/';
-import { Record, RecordCover } from './App/Components/';
+import { RechordViewerScreen } from './App/Screens/';
+// import { Record, RecordCover } from './App/Components/';
 import { Metrics, Images } from './App/Themes';
+import RecordCoverFlip from './App/Components/RecordCoverFlip';
 
 export default class App extends React.Component {
   render() {
     return (
       <SafeAreaView style={styles.container}>
-        <RechordCollectionScreen />
+        {/* <RechordViewerScreen /> */}
+        <RecordCoverFlip />
       </SafeAreaView>
     );
   }
@@ -17,13 +19,9 @@ export default class App extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
+    flex: 1,
     backgroundColor: '#fff',
-    // alignItems: 'center',
-    // justifyContent: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-  coverWrapper: {
-    width: Metrics.widths.cover,
-    height: Metrics.widths.cover,
-},
 });

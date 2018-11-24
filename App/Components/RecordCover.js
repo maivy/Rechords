@@ -8,7 +8,7 @@
 //     />
 
 import React from 'react';
-import { StyleSheet, View, Text, Image, ImageBackground } from 'react-native';
+import { StyleSheet, View, Text, Image, ImageBackground, TouchableOpacity } from 'react-native';
 import { LinearGradient } from 'expo';
 
 import { Metrics, Colors, Images } from '../Themes';
@@ -16,6 +16,7 @@ import { Metrics, Colors, Images } from '../Themes';
 export default class RecordCover extends React.Component {
     constructor(props) {
         super(props);
+        // console.log("FLIP: " + JSON.stringify(this.props.flip));
     }
 
     render() {
@@ -47,9 +48,18 @@ export default class RecordCover extends React.Component {
                     </View>
 
                     <View style={styles.bottom}>
-                        <Image
+
+                        {/* For some reason, can't get onPress to work. */}
+
+                        <TouchableOpacity onPress={() => this.props.flip()}>
+                            <Image
+                                style={styles.flip}
+                                source={Images.flip} />
+                        </TouchableOpacity>
+                        {/* <Image
                             style={styles.flip}
-                            source={Images.flip} />
+                            source={Images.flip}
+                            onPress={() => this.props.flip()} /> */}
 
                         <Text style={[styles.text, styles.right]}>{this.props.owner}</Text>
                     </View>
