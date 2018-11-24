@@ -1,14 +1,34 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import firebase from 'firebase';
 
-//HIIIIIIII
+import NavBar from './App/Navigation/NavBar';
+import CreateAccount from './App/Screens/CreateAccount';
+import ActionBar from './App/Components/ActionBar';
+
+var config = {
+    apiKey: "AIzaSyD_vD_Nv5vj46_Tsvvn0Ton4grfSbodnuI",
+    authDomain: "rechords-7b3a3.firebaseapp.com",
+    databaseURL: "https://rechords-7b3a3.firebaseio.com",
+    projectId: "rechords-7b3a3",
+    storageBucket: "rechords-7b3a3.appspot.com",
+    messagingSenderId: "396699023083"
+  };
+  firebase.initializeApp(config);
 
 export default class App extends React.Component {
+  // componentDidMount() {
+  //   Font.loadAsync({
+  //     'avenir': require('./assets/Avenir.ttc'),
+  //   });
+  // }
+
   render() {
+    //if(user is not logged in)
     return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-      </View>
+      // <ActionBar/>
+      // <CreateAccount />
+      <NavBar />
     );
   }
 }
