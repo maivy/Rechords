@@ -39,6 +39,7 @@ export default class RechordListItem extends React.Component {
                         location={this.props.location}
                         date={this.props.date}
                         owner={this.props.owner}
+                        fontStyle={{ fontSize: 11 }}
                     />
                 </View>
 

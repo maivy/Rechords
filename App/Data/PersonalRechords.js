@@ -8,7 +8,7 @@ data = [
         date: '08 31 18',
         owner: 'Tiffany Manuel',
         title: 'Cliff Diving',
-        description: ''
+        description: '1'
     },
     {
         image: Images.cover1,
@@ -16,7 +16,7 @@ data = [
         date: '08 30 18',
         owner: 'Tiffany Manuel',
         title: 'Inflatables',
-        description: ''
+        description: '2'
     },
     {
         image: Images.cover5,
@@ -24,7 +24,7 @@ data = [
         date: '08 29 18',
         owner: 'Tiffany Manuel',
         title: "Bird's Eye View",
-        description: ''
+        description: '3'
     },
     {
         image: Images.cover4,
@@ -40,7 +40,7 @@ data = [
         date: '08 20 18',
         owner: 'Tiffany Manuel',
         title: 'Grouse Grind',
-        description: ''
+        description: '5'
     },
     {
         image: Images.cover2,
@@ -48,7 +48,7 @@ data = [
         date: '06 20 18',
         owner: 'Tiffany Manuel',
         title: 'Del Mar Fair 2018',
-        description: ''
+        description: '6'
     },
 ]
 

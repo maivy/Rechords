@@ -15,9 +15,7 @@ import { Metrics, Colors, Images } from '../Themes';
 
 export default class RecordCover extends React.Component {
     state = {
-        fontStyle: {
-            fontSize: 11,
-        },
+        fontStyle: {},
     }
 
     constructor(props) {
@@ -57,8 +55,8 @@ export default class RecordCover extends React.Component {
                 <View style={styles.coverInfo}>
 
                     <View style={styles.top}>
-                        <Text style={[styles.text, styles.left, this.fontStyle]}>{this.props.date}</Text>
-                        <Text style={[styles.text, styles.right, this.fontStyle]}>{this.props.location}</Text>
+                        <Text style={[styles.text, styles.left, this.state.fontStyle]}>{this.props.date}</Text>
+                        <Text style={[styles.text, styles.right, this.state.fontStyle]}>{this.props.location}</Text>
                     </View>
 
                     <View style={styles.bottom}>
@@ -75,7 +73,7 @@ export default class RecordCover extends React.Component {
                             source={Images.flip}
                             onPress={() => this.props.flip()} /> */}
 
-                        <Text style={[styles.text, styles.right, this.fontStyle]}>{this.props.owner}</Text>
+                        <Text style={[styles.text, styles.right, this.state.fontStyle]}>{this.props.owner}</Text>
                     </View>
                     
                 </View>
@@ -91,6 +89,11 @@ const styles = StyleSheet.create({
         height: '100%',
         backgroundColor: Colors.darkGrey,
         borderRadius: Metrics.borderRadius.recordCover,
+        shadowColor: 'black',
+        shadowOffset: {width: 0, height: 4},
+        shadowRadius: 5,
+        shadowOpacity: 0.5,
+        elevation: 5,
     },
     image: {
         borderRadius: Metrics.borderRadius.recordCover,

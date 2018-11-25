@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, ScrollView, FlatList } from 'react-native';
+import { StyleSheet, View, Text, ScrollView, FlatList, TouchableOpacity } from 'react-native';
 
 import {
     RechordCollectionHeader,
@@ -11,7 +11,7 @@ import {
 import { Colors, Metrics, Images } from '../Themes';
 import PersonalRechords from '../Data/PersonalRechords';
 
-export default class RechordCollectionScreen extends React.Component {
+export default class RechordCollectionScreen extends React.Component {  
 
     state = {
         data: PersonalRechords,
@@ -32,18 +32,34 @@ export default class RechordCollectionScreen extends React.Component {
         console.log(JSON.stringify(this.state.data));
     }
 
+    // static navigationOptions = ({ navigation }) => {
+    //     const { params = {} } = navigation.state;
+    //     const stackBarOptions = {
+    //         header: 'null'
+    //     }
+
+
+    // }
+
     _keyExtractor = (index) => JSON.stringify(index);
 
     renderRechordItem = (item) => {
         return (
-            <RechordListItem
-                coverContainerStyle={styles.coverWrapper}
-                image={item.image}
-                location={item.location}
-                date={item.date}
-                owner={item.owner}
-                title={item.title}
-            />
+            <TouchableOpacity onPress={() => this.props.navigation.navigate(
+                    'ViewerScreen',
+                    {
+                        item: item
+                    }
+                )}>
+                <RechordListItem
+                    coverContainerStyle={styles.coverWrapper}
+                    image={item.image}
+                    location={item.location}
+                    date={item.date}
+                    owner={item.owner}
+                    title={item.title}
+                />
+            </TouchableOpacity>
         )
     }
 
@@ -111,7 +127,7 @@ export default class RechordCollectionScreen extends React.Component {
 const styles = StyleSheet.create({
     container: {
         alignItems: 'center',
-        overflow: 'scroll'
+        overflow: 'scroll',
     },
     sortBar: {
         marginTop: -39, // move sort bar over header

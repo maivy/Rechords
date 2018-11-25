@@ -4,7 +4,7 @@ import { createStackNavigator, createBottomTabNavigator, createAppContainer } fr
 
 import * as screens from './App/Screens/';
 // import { Record, RecordCover } from './App/Components/';
-import { Metrics, Images } from './App/Themes';
+import { Metrics, Images, Colors } from './App/Themes';
 import RecordCoverFlip from './App/Components/RecordCoverFlip';
 
 import firebase from 'firebase';
@@ -28,6 +28,9 @@ var config = {
     ViewerScreen: { screen: screens.RechordViewerScreen },
   }, {
     initialRouteName: 'CollectionScreen',
+    headerMode: 'none',
+    mode: 'modal',
+    cardStyle: { backgroundColor: Colors.white }
   });
 
 export default class App extends React.Component {

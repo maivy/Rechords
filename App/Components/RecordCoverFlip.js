@@ -4,7 +4,8 @@ import {
   Text,
   View,
   TouchableOpacity,
-  Animated
+  Animated,
+  ScrollView,
 } from 'react-native';
 
 import { RecordCover } from '.';
@@ -58,37 +59,30 @@ export default class RecordCoverFlip extends Component {
     }
     return (
       <View style={styles.container}>
-        <View>
+        <TouchableOpacity onPress={() => this.flipCard()}>
           <Animated.View style={[styles.flipCard, frontAnimatedStyle]}>
-            <TouchableOpacity onPress={() => this.flipCard()}>
-            <RecordCover
-              image={Images.cover1}
-              location='Harrison Hot Springs'
-              date='08 31 18'
-              owner='Tiffany Manuel'
-              fontStyle={{fontSize: 12}}
-              flip={this.flipCard}
-            />
-            </TouchableOpacity>
+              <RecordCover
+                image={this.props.image}
+                location={this.props.location}
+                date={this.props.date}
+                owner={this.props.owner}
+                fontStyle={{fontSize: 15}}
+                // flip={this.flipCard}
+              />
           </Animated.View>
 
           {/* A temporary fix is to have the card flip if you tap anywhere. */}
 
           <Animated.View style={[backAnimatedStyle, styles.flipCard, styles.flipCardBack]}>
-            <TouchableOpacity onPress={() => this.flipCard()}>
-            <Text style={styles.flipText}>
-              Chris and I went jet skiing and it was the happiest I had been in awhile.
-              Being in the middle of a lake, surrounded by nothing but water, was what I
-              needed after months of stress. I finally felt like I could breathe and live
-              with no worries and live in the moment and just be happier.
-            </Text>
-            </TouchableOpacity>
+              <ScrollView>
+                <Text style={styles.flipText}>{this.props.description}</Text>
+              </ScrollView>
           </Animated.View>
-        </View>
-        
-        <TouchableOpacity onPress={() => this.flipCard()}>
-          <Text>Flip!</Text>
         </TouchableOpacity>
+        
+        {/* <TouchableOpacity onPress={() => this.flipCard()}>
+          <Text>Flip!</Text>
+        </TouchableOpacity> */}
       </View>
     );
   }
@@ -104,7 +98,7 @@ const styles = StyleSheet.create({
     width: Metrics.widths.coverMedium,
     height: Metrics.widths.coverMedium,
     backfaceVisibility: 'hidden',
-    borderRadius: Metrics.borderRadius.recordCover
+    borderRadius: Metrics.borderRadius.recordCover,
   },
   flipCardBack: {
     backgroundColor: Colors.darkGrey,

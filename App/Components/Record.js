@@ -101,6 +101,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     text: {
-        color: Colors.white
+        color: Colors.white,
+        textAlign: 'center'
     }
 });
