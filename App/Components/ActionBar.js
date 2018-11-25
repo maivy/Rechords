@@ -4,7 +4,7 @@ import {
   View, 
   TouchableOpacity, 
 } from 'react-native';
-import { Images } from '../Themes';
+import { Images, Metrics } from '../Themes';
 import { AntDesign, EvilIcons, Feather } from '@expo/vector-icons';
 
 export default class ActionBar extends React.Component {
@@ -50,7 +50,8 @@ export default class ActionBar extends React.Component {
 
 const styles = StyleSheet.create({
   actionBar: {
-    // flex: 1,
+		// flex: 1,
+		width: Metrics.widths.wide,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
