@@ -9,15 +9,13 @@ import {
   Dimensions, 
   TextInput,
   TouchableOpacity, 
-  AsyncStorage
 } from 'react-native';
-import firebase from 'firebase';
 import { LinearGradient, Font } from 'expo';
 import { Images } from '../Themes';
 
 const {width, height} = Dimensions.get('window');
 
-export default class CreateAccount extends React.Component {
+export default class SignIn extends React.Component {
   constructor(props) {
     super(props);
     this.state={
@@ -27,48 +25,17 @@ export default class CreateAccount extends React.Component {
     }
   }
 
-  signUp = async() => {
-    await firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
-    .then(this.completeSignUp)
-    .catch(function (error) {
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      if (errorCode == null) {
-        alert("success");
-      } else if (errorCode == 'auth/weak-password') {
-        alert('The password is too weak.');
-      } else if (errorCode == 'auth/email-already-in-use') {
-        alert('This email already has an account');
-      } else if (errorCode == 'auth/invalid-email') {
-        alert('Please enter a valid email');
-      } else {
-        alert(errorMessage);
-      }
-      console.log(error);
-    });
-    var user = firebase.auth().currentUser;
-    firebase.database().ref('users').child(user.uid).child('name').set(this.state.name);
-    // this.verifyEmail();
-  }
+  login = async() => {
+    await firebase.auth().signInWithEmailAndPassword(this.state.loginEmail, this.state.loginPassword)
+    .catch(error => this.setState({ errorMessageLogin: error.message }));
 
-  // verifyEmail = () => {
-  //   firebase.auth().currentUser.sendEmailVerification()
-  //     .then(() => {
-  //       // Verification email sent.
-  //       console.log("email Verification sent");
-  //       Alert.alert(
-  //         'Email Verification',
-  //         "We've sent a user verification email. Please click the link in your email inbox to be verified as a user",
-  //         [
-  //           { text: 'OK', onPress: () => this.setState({ skypeAlertClear: true }), style: 'cancel' },
-  //         ],
-  //         { cancelable: false }
-  //       )
-  //     })
-  //     .catch(function (error) {
-  //       // Error occurred. Inspect error.code.
-  //     });
-  // }
+    if (this.state.errorMessageLogin == "") {
+      console.log("email " + this.state.loginEmail);
+      console.log("password " + this.state.loginPassword);
+    } else {
+      alert(this.state.errorMessageLogin);
+    }
+  }
 
   render() {
     return (
@@ -82,17 +49,6 @@ export default class CreateAccount extends React.Component {
           </View>
 
           <View style={styles.textInputView}>
-            <View style={styles.textInput}>
-              <TextInput
-                style={styles.input}
-                placeholder="Name"
-                placeholderTextColor='white'
-                underlineColorAndroid='white'
-                autoCapitalize='none'
-                value={this.state.name}
-                onChangeText={(name) => this.setState({ name })}
-              />
-            </View>
 
             <View style={styles.textInput}>
               <TextInput
@@ -120,15 +76,15 @@ export default class CreateAccount extends React.Component {
 
           <View style={styles.createButtonView}>
             <TouchableOpacity
-              style={styles.createButton}
+              style={styles.button}
               activeOpacity = { .5 }
-              onPress={() => this.signUp()}
+              onPress={() => this.login()}
             >
-              <Text style={styles.createButtonText}>Create Account</Text>
+              <Text style={styles.buttonText}>Sign In</Text>
             </TouchableOpacity>
 
             <TouchableOpacity>
-              <Text style={styles.signIn}>Sign In</Text>
+              <Text style={styles.create}>Create Account</Text>
             </TouchableOpacity>
           </View>
         </LinearGradient>
@@ -189,10 +145,10 @@ const styles = StyleSheet.create({
 
   createButtonView: {
     alignItems: 'center',
-    marginTop: height * 0.13,
+    marginTop: height * 0.2,
   },
 
-  createButton: {
+  button: {
     width: width * 0.5,
     height: 50,
     paddingTop:15,
@@ -208,7 +164,7 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
 
-  createButtonText: {
+  buttonText: {
     // fontFamily: 'Avenir',
     fontWeight: 'bold',
     fontSize: 16,
@@ -216,7 +172,7 @@ const styles = StyleSheet.create({
     textAlign:'center',
   },
 
-  signIn: {
+  create: {
     // fontFamily: 'Avenir',
     fontWeight: 'bold',
     fontSize: 16,

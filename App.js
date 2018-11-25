@@ -5,6 +5,9 @@ import firebase from 'firebase';
 import NavBar from './App/Navigation/NavBar';
 import CreateAccount from './App/Screens/CreateAccount';
 import ActionBar from './App/Components/ActionBar';
+import SignIn from './App/Screens/SignIn';
+
+import { createStackNavigator, createBottomTabNavigator, createAppContainer } from 'react-navigation';
 
 var config = {
     apiKey: "AIzaSyD_vD_Nv5vj46_Tsvvn0Ton4grfSbodnuI",
@@ -16,6 +19,13 @@ var config = {
   };
   firebase.initializeApp(config);
 
+const StackNav = createStackNavigator({
+  Create: { screen: CreateAccount },
+}, {
+  initialRouteName: 'Create',
+  header: 'none',
+});
+
 export default class App extends React.Component {
   // componentDidMount() {
   //   Font.loadAsync({
@@ -26,9 +36,13 @@ export default class App extends React.Component {
   render() {
     //if(user is not logged in)
     return (
+      <View>
+        <StackNav/>
+      </View>
       // <ActionBar/>
       // <CreateAccount />
-      <NavBar />
+      // <SignIn />
+      // <NavBar />
     );
   }
 }
