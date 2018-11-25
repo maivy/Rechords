@@ -18,6 +18,13 @@ var config = {
   };
   firebase.initializeApp(config);
 
+const StackNav = createStackNavigator({
+  Create: { screen: CreateAccount },
+}, {
+  initialRouteName: 'Create',
+  header: 'none',
+});
+
 export default class App extends React.Component {
 
   render() {
