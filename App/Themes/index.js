@@ -1,3 +1,11 @@
-import Images from './Images'
+import Metrics from './Metrics';
+import Colors from './Colors';
+import Images from './Images';
+import Styles from './Styles';
 
-export { Images }
+export {
+    Metrics,
+    Colors,
+    Images,
+    Styles
+}
