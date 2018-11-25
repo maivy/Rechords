@@ -4,6 +4,7 @@ import RechordCollectionHeader from './Headers/RechordCollectionHeader';
 import RechordCollectionToggle from './RechordCollectionToggle';
 import RechordCollectionSortBar from './RechordCollectionSortBar';
 import RechordListItem from './RechordListItem';
+import ActionBar from './ActionBar';
 
 export {
     Record,
@@ -12,4 +13,5 @@ export {
     RechordCollectionToggle,
     RechordCollectionSortBar,
     RechordListItem,
+    ActionBar
 }

@@ -14,6 +14,10 @@ const images = {
     cover4: require('../Images/covers/cover4.png'),
     cover5: require('../Images/covers/cover5.png'),
     cover6: require('../Images/covers/cover6.png'),
+	logo: require('../Images/Logo.png'),
+	actionBar: require('../Images/ActionBar.png'),
+	share: require('../Images/Share.png'),
+	trash: require('../Images/Trash.png'),
 }
 
 export default images
