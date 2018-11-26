@@ -68,7 +68,8 @@ const styles = StyleSheet.create({
         borderRadius: Metrics.borderRadius.sortBy,
         shadowOffset: { width: 0, height: 1 },
         shadowColor: Colors.black,
-        shadowOpacity: 0.25
+        shadowOpacity: 0.25,
+        elevation: 1,
     },
     searchBar: {
         padding: Metrics.miniMargin,

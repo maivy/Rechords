@@ -39,7 +39,7 @@ export default class RechordListItem extends React.Component {
                         location={this.props.location}
                         date={this.props.date}
                         owner={this.props.owner}
-                        fontStyle={{ fontSize: 11 }}
+                        fontStyle={{ fontSize: 14 }}
                     />
                 </View>
 
@@ -58,7 +58,7 @@ export default class RechordListItem extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
-        marginBottom: Metrics.tinyMargin
+        marginBottom: Metrics.smallMargin
     },
     titleBar: {
         flexDirection: 'row',
@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
         marginTop: Metrics.miniMargin,
     },
     title: {
-        fontSize: 13,
+        fontSize: 15,
         fontWeight: 'bold',
         color: Colors.slateGrey,
     },

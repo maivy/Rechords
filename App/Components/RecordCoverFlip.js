@@ -66,7 +66,7 @@ export default class RecordCoverFlip extends Component {
                 location={this.props.location}
                 date={this.props.date}
                 owner={this.props.owner}
-                fontStyle={{fontSize: 15}}
+                fontStyle={{fontSize: 18}}
                 // flip={this.flipCard}
               />
           </Animated.View>
@@ -109,6 +109,7 @@ const styles = StyleSheet.create({
     height: '100%',
     fontSize: 18,
     color: 'white',
-    margin: Metrics.smallMargin
+    margin: Metrics.smallMargin,
+    fontFamily: 'avenir'
   }
 });

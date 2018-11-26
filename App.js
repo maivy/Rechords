@@ -1,6 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, View, SafeAreaView} from 'react-native';
-import { createStackNavigator, createBottomTabNavigator, createAppContainer } from 'react-navigation'
+import { Font } from 'expo';
+import { createStackNavigator, createBottomTabNavigator, createAppContainer } from 'react-navigation';
+import { setCustomText } from 'react-native-global-props';
 
 import * as screens from './App/Screens/';
 import { CollectionStack } from './App/Navigation'
@@ -20,10 +22,35 @@ var config = {
 
 export default class App extends React.Component {
 
+  state = {
+    fontLoaded: false
+  }
+
+  async componentDidMount() {
+    await Font.loadAsync({
+      'digital-7': require('./assets/fonts/Digital-7.ttf'),
+      'avenir': require('./assets/fonts/Avenir.ttf'),
+      'avenir-heavy': require('./assets/fonts/Avenir-Heavy.ttf'),
+    });
+    const customTextProps = { 
+      style: { 
+        fontFamily: 'avenir-heavy'
+      }
+    };
+    setCustomText(customTextProps);
+    this.setState({ fontLoaded: true });
+  }
+
   render() {
     return (
       <SafeAreaView style={styles.container}>
-        <CollectionStack />
+
+        {
+          this.state.fontLoaded ? (
+            <CollectionStack />
+          ) : null
+        }
+
       </SafeAreaView>
     );
   }
