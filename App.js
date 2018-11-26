@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, SafeAreaView} from 'react-native';
 import { createStackNavigator, createBottomTabNavigator, createAppContainer } from 'react-navigation'
 
 import * as screens from './App/Screens/';
-import { CollectionStack } from './App/Navigation'
+import { CollectionStack, NavBar } from './App/Navigation'
 import { Metrics, Images, Colors } from './App/Themes';
 
 import firebase from 'firebase';
@@ -24,6 +24,8 @@ export default class App extends React.Component {
     return (
       <SafeAreaView style={styles.container}>
         <CollectionStack />
+        {/* <NavBar /> */}
+        {/* <screens.CreateAccount /> */}
       </SafeAreaView>
     );
   }

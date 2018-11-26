@@ -1,3 +1,5 @@
+import { Metrics } from ".";
+
 /*
 
     Global Stylesheet
@@ -12,6 +14,10 @@ const styles = {
         color: 'rgba(255, 255, 255, 0.8)',
         textAlign: 'center',
         letterSpacing: 3
+    },
+    tabIcon: {
+        width: Metrics.icons.small,
+        height: Metrics.icons.small,
     }
 }
 

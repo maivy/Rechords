@@ -8,7 +8,7 @@ import {
     RechordListItem
 } from '../Components/';
 
-import { Colors, Metrics, Images } from '../Themes';
+import { Colors, Metrics, Images, Styles } from '../Themes';
 import PersonalRechords from '../Data/PersonalRechords';
 
 export default class RechordCollectionScreen extends React.Component {  
@@ -32,14 +32,23 @@ export default class RechordCollectionScreen extends React.Component {
         console.log(JSON.stringify(this.state.data));
     }
 
-    // static navigationOptions = ({ navigation }) => {
-    //     const { params = {} } = navigation.state;
-    //     const stackBarOptions = {
-    //         header: 'null'
-    //     }
-
-
-    // }
+    static navigationOptions = ({ navigation }) => {
+        const { params = {} } = navigation.state;
+        const tabBarOptions = {
+            tabBarLabel: 'Rechord Collection',
+            tabBarIcon: () => (
+                <Image
+                    style={Styles.tabIcon}
+                    source={Images.recordIconSlate} />
+            ),
+        }
+      
+        const result = {
+            ...tabBarOptions,
+        }
+      
+        return result;
+    }
 
     _keyExtractor = (index) => JSON.stringify(index);
 
