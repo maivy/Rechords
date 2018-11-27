@@ -11,6 +11,8 @@ import {
 import { RecordCover } from '.';
 import { Images, Colors, Metrics } from '../Themes';
 
+// Reused Code from: https://codedaily.io/screencasts/12/Create-a-Flip-Card-Animation-with-React-Native
+
 export default class RecordCoverFlip extends Component {
   
   componentWillMount() {
@@ -59,7 +61,14 @@ export default class RecordCoverFlip extends Component {
     }
     return (
       <View style={styles.container}>
-        <TouchableOpacity onPress={() => this.flipCard()}>
+        {/* <TouchableOpacity onPress={() => this.flipCard()}> */}
+
+          <Animated.View style={[backAnimatedStyle, styles.flipCard, styles.flipCardBack]}>
+              <ScrollView>
+                <Text style={styles.flipText}>{this.props.description}</Text>
+              </ScrollView>
+          </Animated.View>
+          
           <Animated.View style={[styles.flipCard, frontAnimatedStyle]}>
               <RecordCover
                 image={this.props.image}
@@ -67,18 +76,13 @@ export default class RecordCoverFlip extends Component {
                 date={this.props.date}
                 owner={this.props.owner}
                 fontStyle={{fontSize: 18}}
-                // flip={this.flipCard}
+                flip={this.flipCard}
               />
           </Animated.View>
 
           {/* A temporary fix is to have the card flip if you tap anywhere. */}
 
-          <Animated.View style={[backAnimatedStyle, styles.flipCard, styles.flipCardBack]}>
-              <ScrollView>
-                <Text style={styles.flipText}>{this.props.description}</Text>
-              </ScrollView>
-          </Animated.View>
-        </TouchableOpacity>
+        {/* </TouchableOpacity> */}
         
         {/* <TouchableOpacity onPress={() => this.flipCard()}>
           <Text>Flip!</Text>
