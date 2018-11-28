@@ -1,12 +1,10 @@
 import React from 'react';
-import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { Font } from 'expo';
-import { createStackNavigator, createBottomTabNavigator, createAppContainer } from 'react-navigation';
 import { setCustomText } from 'react-native-global-props';
 
-import * as screens from './App/Screens/';
+// import * as screens from './App/Scree?\ns/';
 import NavBar from './App/Navigation/NavBar';
-import { Metrics, Images, Colors } from './App/Themes';
 
 import firebase from 'firebase';
 
