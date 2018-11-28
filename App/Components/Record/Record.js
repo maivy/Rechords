@@ -10,7 +10,7 @@
 import React from 'react';
 import { StyleSheet, View, Text, ImageBackground } from 'react-native';
 
-import { Metrics, Colors, Images } from '../Themes';
+import { Metrics, Colors, Images } from '../../Themes';
 
 export default class Record extends React.Component {
     state = {

@@ -1,16 +1,14 @@
-import Record from './Record';
-import RecordCover from './RecordCover';
-import RecordBackCover from './RecordBackCover';
+import Record from './Record/Record';
+import RecordBackCover from './Record/RecordBackCover';
 import CollectionHeader from './Headers/CollectionHeader';
-import CollectionToggle from './CollectionToggle';
-import CollectionSortBar from './CollectionSortBar';
-import CollectionListItem from './CollectionListItem';
-import ActionBar from './ActionBar';
-import ViewHeader from './Headers/ViewerHeader'
+import CollectionToggle from './Collection/CollectionToggle';
+import CollectionSortBar from './Collection/CollectionSortBar';
+import CollectionListItem from './Collection/CollectionListItem';
+import ActionBar from './Collection/ActionBar';
+import ViewHeader from './Headers/ViewerHeader';
 
 export {
     Record,
-    RecordCover,
     RecordBackCover,
     CollectionHeader,
     CollectionToggle,

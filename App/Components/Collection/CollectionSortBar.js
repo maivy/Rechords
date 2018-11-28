@@ -1,9 +1,8 @@
 import React from 'react';
 import { StyleSheet, View, Text, TextInput, Image } from 'react-native';
-import { Metrics, Colors, Images } from '../Themes';
+import { Metrics, Colors, Images } from '../../Themes';
 
-// import { SortOption } from '.';
-import SortOption from './SortOption';
+import SortOption from '../SortOption';
 
 export default class CollectionSortBy extends React.Component {
 

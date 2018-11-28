@@ -4,14 +4,14 @@
 //         image={Images.cover1}
 //         location='Harrison Hot Springs'
 //         date='08 31 18'
-//         owner='Tiffany Manuel'
+//         owner=info.'Tiffany Manuel'
 //     />
 
 import React from 'react';
 import { StyleSheet, View, Text, Image, ImageBackground, TouchableOpacity } from 'react-native';
-import { LinearGradient, Font } from 'expo';
+import { LinearGradient } from 'expo';
 
-import { Metrics, Colors, Images } from '../Themes';
+import { Metrics, Colors, Images } from '../../Themes';
 
 export default class RecordCover extends React.Component {
     state = {
@@ -36,7 +36,7 @@ export default class RecordCover extends React.Component {
             <ImageBackground 
                 style={styles.container}
                 imageStyle={styles.image}
-                source={this.props.image}>
+                source={this.props.info.image}>
 
                 {/* Black/Transparent Gradients on Rechord Cover */}
                 
@@ -55,8 +55,8 @@ export default class RecordCover extends React.Component {
                 <View style={styles.coverInfo}>
 
                     <View style={styles.top}>
-                        <Text style={[styles.text, styles.left, this.state.fontStyle]}>{this.props.date}</Text>
-                        <Text style={[styles.text, styles.right, this.state.fontStyle]}>{this.props.location}</Text>
+                        <Text style={[styles.text, styles.left, this.state.fontStyle]}>{this.props.info.date}</Text>
+                        <Text style={[styles.text, styles.right, this.state.fontStyle]}>{this.props.info.location}</Text>
                     </View>
 
                     <View style={styles.bottom}>
@@ -73,7 +73,7 @@ export default class RecordCover extends React.Component {
                             ) : null
                         }
 
-                        <Text style={[styles.text, styles.right, this.state.fontStyle]}>{this.props.owner}</Text>
+                        <Text style={[styles.text, styles.right, this.state.fontStyle]}>{this.props.info.owner}</Text>
                     </View>
                     
                 </View>

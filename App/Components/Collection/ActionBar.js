@@ -4,7 +4,7 @@ import {
   View, 
   TouchableOpacity, 
 } from 'react-native';
-import { Images, Metrics } from '../Themes';
+import { Images, Metrics } from '../../Themes';
 import { AntDesign, EvilIcons, Feather } from '@expo/vector-icons';
 
 export default class ActionBar extends React.Component {

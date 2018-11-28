@@ -14,10 +14,13 @@ const images = {
     cover4: require('../Images/covers/cover4.png'),
     cover5: require('../Images/covers/cover5.png'),
     cover6: require('../Images/covers/cover6.png'),
-	logo: require('../Images/Logo.png'),
-	actionBar: require('../Images/ActionBar.png'),
-	share: require('../Images/Share.png'),
-	trash: require('../Images/Trash.png'),
+    logo: require('../Images/Logo.png'),
+    navAddPurple: require('../Images/navIcons/addPurple.png'),
+    navGlobePurple: require('../Images/navIcons/globePurple.png'),
+    navRechordPurple: require('../Images/navIcons/rechordPurple.png'),
+    navAddWhite: require('../Images/navIcons/addWhite.png'),
+    navGlobeWhite: require('../Images/navIcons/globeWhite.png'),
+    navRechordWhite: require('../Images/navIcons/rechordWhite.png'),
 }
 
 export default images

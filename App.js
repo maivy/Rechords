@@ -46,8 +46,7 @@ export default class App extends React.Component {
       <View style={styles.container}>
         {
           this.state.fontLoaded ? (
-            // <NavBar />
-            <screens.CreateAccount />
+            <NavBar />
           ) : null
         }
       </View>

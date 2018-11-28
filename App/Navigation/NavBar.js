@@ -1,30 +1,9 @@
-import React from 'react';
-import { StyleSheet, Image, Text, SafeAreaView } from 'react-native';
-import { createStackNavigator, createBottomTabNavigator, createAppContainer } from 'react-navigation'
-import * as screens from '../Screens';
-import { CollectionStack } from './';
-import { Images, Colors, Styles } from '../Themes';
+import { createBottomTabNavigator } from 'react-navigation'
 
-const NewRechordStack = createStackNavigator({
-	Home: { screen: screens.Home },
-	// SearchForSong: { screen: screens.SearchForSong },
-	// EditRechord: { screen: screens.EditRechord },
-}, {
-	initialRouteName: 'Home',
-});
+// import * as screens from '../Screens';
+import { NewRechordStack, CollectionStack, ExploreStack } from './';
 
-const ExploreStack = createStackNavigator({
-	Explore: { screen: screens.Explore },
-}, {
-	initialRouteName: 'Explore',
-});
-
-const styles = StyleSheet.create({
-	tabLabel: {
-		fontSize: 10,
-		color: Colors.white
-	}
-})
+import { Metrics, Colors } from '../Themes';
 
 const NavBar = createBottomTabNavigator({
 	RechordCollection: { screen: CollectionStack },
@@ -36,7 +15,10 @@ const NavBar = createBottomTabNavigator({
 		activeTintColor: Colors.white,
 		activeBackgroundColor: Colors.purple,
 		inactiveTintColor: Colors.purple,
-		inactiveBackgroundColor: Colors.white
+		inactiveBackgroundColor: Colors.white,
+		style: {
+			height: Metrics.navBarHeight,
+		}
 	},
 });
 

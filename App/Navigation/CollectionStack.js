@@ -1,14 +1,13 @@
 import React from 'react';
+import { Image } from 'react-native';
 import { createStackNavigator } from 'react-navigation';
-import { Foundation } from '@expo/vector-icons';
-
 
 import * as screens from '../Screens';
-import { Metrics, Images, Styles } from '../Themes';
+import { Images, Styles, Colors } from '../Themes';
 
 const CollectionStack = createStackNavigator({
-    CollectionScreen: { screen: screens.RechordCollectionScreen },
-    ViewerScreen: { screen: screens.RechordViewerScreen },
+    CollectionScreen: { screen: screens.CollectionScreen },
+    ViewerScreen: { screen: screens.ViewerScreen },
   }, {
     initialRouteName: 'CollectionScreen',
     headerMode: 'none',
@@ -17,23 +16,30 @@ const CollectionStack = createStackNavigator({
 });
 
 CollectionStack.navigationOptions = ({navigation}) => {
-  const { params = {} } = navigation.state;
-
-  const tabBarOptions = {
-    tabBarLabel: 'Rechord Collection',
-    tabBarIcon: ({ tintColor }) => (
-      <Foundation
-        name='record'
-        color={tintColor}
-        size={Metrics.icons.small}
-      />
-    ),
-  }
-
   let tabBarVisible = true;
   if (navigation.state.index > 0) {
     tabBarVisible = false;
     return { tabBarVisible };
+  }
+
+  const tabBarOptions = {
+    tabBarLabel: 'Rechord Collection',
+    tabBarIcon: ({ tintColor }) => {
+      let icon;
+      if (tintColor === Colors.white) {
+        icon =
+          <Image
+            source={Images.navRechordWhite}
+            styles={Styles.tabIcon} />
+      } else {
+        icon =
+          <Image
+            source={Images.navRechordPurple}
+            styles={Styles.tabIcon} />
+      }
+
+      return icon;
+    },
   }
 
   const result = {

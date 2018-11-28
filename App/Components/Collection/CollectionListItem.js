@@ -9,18 +9,14 @@
 //
 //     <RechordListItem
 //         coverContainerStyle={styles.coverWrapper}
-//         image={Images.cover6}
-//         location='Lynn Canyon'
-//         date='08 31 18'
-//         owner='Tiffany Manuel'
-//         title='Inflatables'
+//         info={item}
 //     />
 
 import React from 'react';
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 
-import { Metrics, Colors, Styles, Images } from '../Themes';
-import RecordCover from './RecordCover';
+import { Metrics, Colors, Images } from '../../Themes';
+import RecordCover from '../Record/RecordCover';
 
 export default class RechordListItem extends React.Component {
     constructor(props) {
@@ -32,21 +28,26 @@ export default class RechordListItem extends React.Component {
             <View style={styles.container}>
 
                 {/* Record Cover */}
-
-                <View style={this.props.coverContainerStyle}>
+                
+                <TouchableOpacity onPress={() => this.props.goToViewer(this.props.info)}>
+                    <View style={this.props.coverContainerStyle}>
+                        <RecordCover
+                            info={this.props.info}
+                            fontStyle={{ fontSize: 14 }}
+                        />
+                    </View>
+                </TouchableOpacity>
+                {/* <View style={this.props.coverContainerStyle}>
                     <RecordCover
-                        image={this.props.image}
-                        location={this.props.location}
-                        date={this.props.date}
-                        owner={this.props.owner}
+                        info={this.props.info}
                         fontStyle={{ fontSize: 14 }}
                     />
-                </View>
+                </View> */}
 
                 {/* Record Title and Heart Functionality */}
 
                 <View style={styles.titleBar}>
-                    <Text style={styles.title}>{this.props.title}</Text>
+                    <Text style={styles.title}>{this.props.info.title}</Text>
                     <Image
                         source={Images.heartEmptySlate}
                         style={styles.heart} />

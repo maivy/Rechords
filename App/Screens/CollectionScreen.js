@@ -1,23 +1,24 @@
 import React from 'react';
-import { StyleSheet, View, SafeAreaView, Text, ScrollView, FlatList, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, SafeAreaView, FlatList, } from 'react-native';
 
 import {
     CollectionHeader,
     CollectionSortBar,
     CollectionToggle,
     CollectionListItem
-} from '../Components/';
+} from '../Components';
 
-import { Colors, Metrics, Images, Styles } from '../Themes';
+import { Metrics } from '../Themes';
 import PersonalRechords from '../Data/PersonalRechords';
 
-export default class RechordCollectionScreen extends React.Component {  
+export default class CollectionScreen extends React.Component {  
 
     state = {
         data: PersonalRechords,
         index: 0
     }
 
+    // Function to toggle between personal and friend rechords
     updateIndex = (index) => {
         this.setState({index: index});
         if (index === 0) {
@@ -29,28 +30,24 @@ export default class RechordCollectionScreen extends React.Component {
 
     constructor(props) {
         super(props);
-        console.log(JSON.stringify(this.state.data));
     }
+
+    goToViewer = (item) => this.props.navigation.navigate(
+        'ViewerScreen',
+        {
+            item: item
+        }
+    )
 
     _keyExtractor = (index) => JSON.stringify(index);
 
     renderRechordItem = (item) => {
         return (
-            <TouchableOpacity onPress={() => this.props.navigation.navigate(
-                    'ViewerScreen',
-                    {
-                        item: item
-                    }
-                )}>
-                <CollectionListItem
-                    coverContainerStyle={styles.coverWrapper}
-                    image={item.image}
-                    location={item.location}
-                    date={item.date}
-                    owner={item.owner}
-                    title={item.title}
-                />
-            </TouchableOpacity>
+            <CollectionListItem
+                info={item}
+                coverContainerStyle={styles.coverWrapper}
+                goToViewer={this.goToViewer}
+            />
         )
     }
 
