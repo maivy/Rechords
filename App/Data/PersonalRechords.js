@@ -37,6 +37,16 @@ data = [
         favorite: false,
     },
     {
+        location: 'CF Pacific Centre Mall',
+        date: '08 29 18',
+        owner: 'Tiffany Manuel',
+        title: 'Shopping',
+        description: '4',
+        song: 'Hollaback Girl',
+        artist: 'Gwen Stefani',
+        favorite: false,
+    },
+    {
         image: Images.cover4,
         location: 'Harrison Hot Springs',
         date: '08 28 18',
