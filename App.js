@@ -5,6 +5,7 @@ import { setCustomText } from 'react-native-global-props';
 
 // import * as screens from './App/Scree?\ns/';
 import NavBar from './App/Navigation/NavBar';
+import SignedOutStack from './App/Navigation/SignedOutStack';
 
 import firebase from 'firebase';
 
@@ -21,7 +22,17 @@ firebase.initializeApp(config);
 export default class App extends React.Component {
 
   state = {
-    fontLoaded: false
+    fontLoaded: false,
+    loggedIn: false,
+  }
+    
+  checkIfUserLoggedIn = async() => {
+    var that = this;
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        that.setState({loggedIn: true});
+      }
+    });
   }
 
   async componentDidMount() {
@@ -37,18 +48,25 @@ export default class App extends React.Component {
     };
     setCustomText(customTextProps);
     this.setState({ fontLoaded: true });
+    this.checkIfUserLoggedIn();
   }
 
   render() {
-    return (
-      <View style={styles.container}>
-        {
-          this.state.fontLoaded ? (
-            <NavBar />
-          ) : null
-        }
-      </View>
-    );
+    if (this.state.loggedIn === true) {
+      return <NavBar />;
+    } else {
+      return <SignedOutStack />;
+    }
+    // return (
+    //   <View style={styles.container}>
+    //     {
+    //       this.state.fontLoaded ? (
+    //         // <NavBar />
+    //         <SignedOutStack />
+    //       ) : null
+    //     }
+    //   </View>
+    // );
   }
 }
 
