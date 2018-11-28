@@ -1,8 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, Button } from 'react-native';
 
-import { Foundation } from '@expo/vector-icons'
-//import { Images, Colors, Metrics } from '../Themes'
+import { Foundation } from '@expo/vector-icons';
+//import { Images, Colors, Metrics } from '../Themes';
 
 export default class CollectionView extends React.Component {
 

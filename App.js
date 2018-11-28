@@ -22,11 +22,11 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <SafeAreaView style={styles.container}>
-        <CollectionStack />
-        {/* <NavBar /> */}
+      <View style={styles.container}>
+        {/* <CollectionStack /> */}
+        <NavBar />
         {/* <screens.CreateAccount /> */}
-      </SafeAreaView>
+      </View>
     );
   }
 }

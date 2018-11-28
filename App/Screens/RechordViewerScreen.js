@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, SafeAreaView, Text, TouchableOpacity } from 'react-native';
 import { LinearGradient } from 'expo';
 
 import { RecordCover, Record, ActionBar, ViewHeader } from '../Components';
@@ -39,7 +39,7 @@ export default class RechordViewerScreen extends React.Component {
     render() {
         const params = this.props.navigation.state.params;
         return (
-            <View style={{flex: 1}}>
+            <SafeAreaView style={{flex: 1}}>
                 <LinearGradient
                     colors={['#68BEE2', '#9CA5D0']}
                     style={styles.gradient}
@@ -81,7 +81,7 @@ export default class RechordViewerScreen extends React.Component {
                     <ActionBar />
                 </View>
 
-            </View>
+            </SafeAreaView>
         )
     }
 }
@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
     gradient: {
         position: 'absolute',
         width: '100%',
-        height: '100%',
+        height: '110%',
         top: 0,
         left: 0,
     },

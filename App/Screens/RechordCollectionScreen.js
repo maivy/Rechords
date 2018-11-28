@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, ScrollView, FlatList, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, SafeAreaView, Text, ScrollView, FlatList, TouchableOpacity } from 'react-native';
 
 import {
     RechordCollectionHeader,
@@ -32,24 +32,6 @@ export default class RechordCollectionScreen extends React.Component {
         console.log(JSON.stringify(this.state.data));
     }
 
-    static navigationOptions = ({ navigation }) => {
-        const { params = {} } = navigation.state;
-        const tabBarOptions = {
-            tabBarLabel: 'Rechord Collection',
-            tabBarIcon: () => (
-                <Image
-                    style={Styles.tabIcon}
-                    source={Images.recordIconSlate} />
-            ),
-        }
-      
-        const result = {
-            ...tabBarOptions,
-        }
-      
-        return result;
-    }
-
     _keyExtractor = (index) => JSON.stringify(index);
 
     renderRechordItem = (item) => {
@@ -74,7 +56,7 @@ export default class RechordCollectionScreen extends React.Component {
 
     render() {
         return (
-            <View style={styles.container}>
+            <SafeAreaView style={styles.container}>
 
                 <RechordCollectionHeader />
 
@@ -128,7 +110,7 @@ export default class RechordCollectionScreen extends React.Component {
                     />
                 </ScrollView> */}
                 
-            </View>
+            </SafeAreaView>
         )
     }
 }
