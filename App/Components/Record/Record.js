@@ -10,7 +10,7 @@
 import React from 'react';
 import { StyleSheet, View, Text, ImageBackground } from 'react-native';
 
-import { Metrics, Colors, Images } from '../Themes';
+import { Metrics, Colors, Images } from '../../Themes';
 
 export default class Record extends React.Component {
     state = {
@@ -33,18 +33,24 @@ export default class Record extends React.Component {
         return (
             <View style={this.props.containerStyle}>
 
+                {/* Outer Edge of Record */}
+
                 <ImageBackground
                     style={[styles.outer, this.state.outerStyle]}
                     source={Images.recordEdge}>
 
+                    {/* Inner Middle of Record */}
+
                     <View style={[styles.inner, this.state.innerStyle]}>
 
                         <View style={styles.textWrapper}>
-                            <Text style={styles.text}>{this.props.title}</Text>
+                            <Text style={[styles.text, { fontSize: 20 }]}>{this.props.title}</Text>
                         </View>
+
                         <View style={styles.dot}></View>
+
                         <View style={styles.textWrapper}>
-                            <Text style={styles.text}>{this.props.artist}</Text>
+                            <Text style={[styles.text, { fontSize: 17 }]}>{this.props.artist}</Text>
                         </View>
 
                     </View> 
@@ -87,6 +93,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: Colors.purple,
+        padding: Metrics.smallMargin
     },
     dot: {
         width: Metrics.record.dot,
@@ -102,6 +109,7 @@ const styles = StyleSheet.create({
     },
     text: {
         color: Colors.white,
-        textAlign: 'center'
+        textAlign: 'center',
+        fontFamily: 'digital-7'
     }
 });

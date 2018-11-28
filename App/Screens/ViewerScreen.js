@@ -1,11 +1,11 @@
 import React from 'react';
-import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, SafeAreaView, TouchableOpacity } from 'react-native';
 import { LinearGradient } from 'expo';
 
-import { RecordCover, Record, ActionBar, ViewHeader } from '../Components';
-import { Images, Metrics, Colors } from '../Themes';
-import RecordCoverFlip from '../Components/RecordCoverFlip';
-import AntDesign from '@expo/vector-icons/AntDesign';
+import { Record, ActionBar, ViewHeader } from '../Components';
+import RecordCoverFlip from '../Components/Record/RecordCoverFlip';
+
+import { Metrics, Colors } from '../Themes';
 
 export default class RechordViewerScreen extends React.Component {
 
@@ -39,9 +39,9 @@ export default class RechordViewerScreen extends React.Component {
     render() {
         const params = this.props.navigation.state.params;
         return (
-            <View style={{flex: 1}}>
+            <SafeAreaView style={{flex: 1}}>
                 <LinearGradient
-                    colors={['#68BEE2', '#9CA5D0']}
+                    colors={[Colors.blue, Colors.purple]}
                     style={styles.gradient}
                 />
 
@@ -59,29 +59,25 @@ export default class RechordViewerScreen extends React.Component {
 
                             <Record
                                 small
-                                title='Happier'
-                                artist={'Marshmello,'+ '\n'+'Bastille'}
+                                title={params.item.song}
+                                artist={params.item.artist}
                                 containerStyle={styles.record}
                             />
                         </TouchableOpacity>
                         
                         <View style={styles.coverWrapper}>
                             <RecordCoverFlip
-                                image={params.item.image}
-                                location={params.item.location}
-                                date={params.item.date}
-                                owner={params.item.owner}
-                                title={params.item.title}
-                                description={params.item.description}
+                                info={params.item}
                                 style={styles.recordCover}
                             />
                         </View>
                     </View>
 
                     <ActionBar />
+                    
                 </View>
 
-            </View>
+            </SafeAreaView>
         )
     }
 }
@@ -100,8 +96,8 @@ const styles = StyleSheet.create({
     },
     gradient: {
         position: 'absolute',
-        width: '100%',
-        height: '100%',
+        width: Metrics.width,
+        height: Metrics.height,
         top: 0,
         left: 0,
     },

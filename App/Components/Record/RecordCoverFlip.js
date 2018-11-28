@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import {
   StyleSheet,
-  Text,
   View,
-  TouchableOpacity,
   Animated,
-  ScrollView,
 } from 'react-native';
 
-import { RecordCover } from '.';
-import { Images, Colors, Metrics } from '../Themes';
+import RecordCover from './RecordCover';
+import { RecordBackCover } from '..';
+import { Colors, Metrics } from '../../Themes';
+
+// Reused Code from: https://codedaily.io/screencasts/12/Create-a-Flip-Card-Animation-with-React-Native
 
 export default class RecordCoverFlip extends Component {
   
@@ -27,6 +27,8 @@ export default class RecordCoverFlip extends Component {
       inputRange: [0, 180],
       outputRange: ['180deg', '360deg']
     })
+    this.backOpacity = this.animatedValue.interpolate({ inputRange: [89, 90], outputRange: [1, 0] });
+    this.frontOpacity = this.animatedValue.interpolate({ inputRange: [89, 90], outputRange: [0, 1] });
   }
 
   flipCard = () => {
@@ -50,39 +52,33 @@ export default class RecordCoverFlip extends Component {
     const frontAnimatedStyle = {
       transform: [
         { rotateY: this.frontInterpolate}
-      ]
+      ],
+      opacity: this.backOpacity
     }
     const backAnimatedStyle = {
       transform: [
         { rotateY: this.backInterpolate }
-      ]
+      ],
+      opacity: this.frontOpacity
     }
     return (
       <View style={styles.container}>
-        <TouchableOpacity onPress={() => this.flipCard()}>
+
           <Animated.View style={[styles.flipCard, frontAnimatedStyle]}>
               <RecordCover
-                image={this.props.image}
-                location={this.props.location}
-                date={this.props.date}
-                owner={this.props.owner}
-                fontStyle={{fontSize: 15}}
-                // flip={this.flipCard}
+                info={this.props.info}
+                fontStyle={{ fontSize: 18 }}
+                flip={this.flipCard}
               />
           </Animated.View>
 
-          {/* A temporary fix is to have the card flip if you tap anywhere. */}
-
-          <Animated.View style={[backAnimatedStyle, styles.flipCard, styles.flipCardBack]}>
-              <ScrollView>
-                <Text style={styles.flipText}>{this.props.description}</Text>
-              </ScrollView>
+          <Animated.View style={[styles.flipCard, backAnimatedStyle, styles.flipCardBack]}>
+              <RecordBackCover
+                description={this.props.info.description}
+                flip={this.flipCard}
+              />
           </Animated.View>
-        </TouchableOpacity>
-        
-        {/* <TouchableOpacity onPress={() => this.flipCard()}>
-          <Text>Flip!</Text>
-        </TouchableOpacity> */}
+
       </View>
     );
   }
@@ -90,9 +86,7 @@ export default class RecordCoverFlip extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
     alignItems: "center",
-    // justifyContent: "center",
   },
   flipCard: {
     width: Metrics.widths.coverMedium,
@@ -105,10 +99,4 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: 0,
   },
-  flipText: {
-    height: '100%',
-    fontSize: 18,
-    color: 'white',
-    margin: Metrics.smallMargin
-  }
 });

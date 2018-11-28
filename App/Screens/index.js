@@ -1,14 +1,15 @@
-import RechordCollectionScreen from './RechordCollectionScreen';
-import RechordViewerScreen from './RechordViewerScreen';
-
-import CollectionView from './CollectionView';
 import Home from './Home';
+import EditRechord from './EditRechord';
+import CollectionScreen from './CollectionScreen';
+import ViewerScreen from './ViewerScreen';
 import Explore from './Explore';
+import CreateAccount from './CreateAccount';
 
 export {
-  RechordCollectionScreen,
-  RechordViewerScreen,
-  CollectionView,
   Home,
+  EditRechord,
+  CollectionScreen,
+  ViewerScreen,
   Explore,
+  CreateAccount
 }

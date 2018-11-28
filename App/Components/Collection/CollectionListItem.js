@@ -1,26 +1,23 @@
 // EXAMPLE:
 // -------------------------------------------------
-//
+
 //     In styles:
 //     coverWrapper: {
-//         width: Metrics.widths.cover, // however big you want the cover to be
+//         width: Metrics.widths.cover,  // however big you want the cover to be
 //         height: Metrics.widths.cover,
 //     }
-//
+
 //     <RechordListItem
 //         coverContainerStyle={styles.coverWrapper}
-//         image={Images.cover6}
-//         location='Lynn Canyon'
-//         date='08 31 18'
-//         owner='Tiffany Manuel'
-//         title='Inflatables'
+//         info={item}
+//         flip={this.flipCard}  // ignore if you don't want flip icon to show
 //     />
 
 import React from 'react';
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 
-import { Metrics, Colors, Styles, Images } from '../Themes';
-import RecordCover from './RecordCover';
+import { Metrics, Colors, Images } from '../../Themes';
+import RecordCover from '../Record/RecordCover';
 
 export default class RechordListItem extends React.Component {
     constructor(props) {
@@ -32,22 +29,21 @@ export default class RechordListItem extends React.Component {
             <View style={styles.container}>
 
                 {/* Record Cover */}
-
-                <View style={this.props.coverContainerStyle}>
-                    <RecordCover
-                        image={this.props.image}
-                        location={this.props.location}
-                        date={this.props.date}
-                        owner={this.props.owner}
-                        fontStyle={{ fontSize: 11 }}
-                    />
-                </View>
+                
+                <TouchableOpacity onPress={() => this.props.goToViewer(this.props.info)}>
+                    <View style={this.props.coverContainerStyle}>
+                        <RecordCover
+                            info={this.props.info}
+                            fontStyle={{ fontSize: 14 }}
+                        />
+                    </View>
+                </TouchableOpacity>
 
                 {/* Record Title and Heart Functionality */}
 
                 <View style={styles.titleBar}>
-                    <Text style={styles.title}>{this.props.title}</Text>
-                    <Image
+                    <Text style={styles.title}>{this.props.info.title}</Text>
+                    <Image                                      // still need to implement functionality
                         source={Images.heartEmptySlate}
                         style={styles.heart} />
                 </View>
@@ -58,7 +54,7 @@ export default class RechordListItem extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
-        marginBottom: Metrics.tinyMargin
+        marginBottom: Metrics.smallMargin
     },
     titleBar: {
         flexDirection: 'row',
@@ -66,7 +62,7 @@ const styles = StyleSheet.create({
         marginTop: Metrics.miniMargin,
     },
     title: {
-        fontSize: 13,
+        fontSize: 15,
         fontWeight: 'bold',
         color: Colors.slateGrey,
     },

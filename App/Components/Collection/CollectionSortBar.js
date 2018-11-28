@@ -1,11 +1,10 @@
 import React from 'react';
-import { StyleSheet, View, Text, TextInput, Image } from 'react-native';
-import { Metrics, Colors, Images } from '../Themes';
+import { StyleSheet, View, TextInput } from 'react-native';
+import { Metrics, Colors, Images } from '../../Themes';
 
-// import { SortOption } from '.';
-import SortOption from './SortOption';
+import SortOption from '../SortOption';
 
-export default class RechordCollectionSortBy extends React.Component {
+export default class CollectionSortBy extends React.Component {
 
     render() {
         return (
@@ -68,7 +67,8 @@ const styles = StyleSheet.create({
         borderRadius: Metrics.borderRadius.sortBy,
         shadowOffset: { width: 0, height: 1 },
         shadowColor: Colors.black,
-        shadowOpacity: 0.25
+        shadowOpacity: 0.25,
+        elevation: 5,
     },
     searchBar: {
         padding: Metrics.miniMargin,

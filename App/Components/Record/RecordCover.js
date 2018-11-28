@@ -1,17 +1,16 @@
 // EXAMPLE:
 // ----------------------------------------
 //     <RecordCover
-//         image={Images.cover1}
-//         location='Harrison Hot Springs'
-//         date='08 31 18'
-//         owner='Tiffany Manuel'
+//         info={this.props.info}
+//         fontStyle={{ fontSize: 18 }}  // font size of cover text
+//         flip={this.flipCard}          // if you want to include flip functionality
 //     />
 
 import React from 'react';
 import { StyleSheet, View, Text, Image, ImageBackground, TouchableOpacity } from 'react-native';
 import { LinearGradient } from 'expo';
 
-import { Metrics, Colors, Images } from '../Themes';
+import { Metrics, Colors, Images, Styles } from '../../Themes';
 
 export default class RecordCover extends React.Component {
     state = {
@@ -20,7 +19,6 @@ export default class RecordCover extends React.Component {
 
     constructor(props) {
         super(props);
-        // console.log("FLIP: " + JSON.stringify(this.props.flip));
     }
 
     componentDidMount() {
@@ -34,9 +32,9 @@ export default class RecordCover extends React.Component {
     render() {
         return (
             <ImageBackground 
-                style={styles.container}
+                style={[styles.container, Styles.shadow]}
                 imageStyle={styles.image}
-                source={this.props.image}>
+                source={this.props.info.image}>
 
                 {/* Black/Transparent Gradients on Rechord Cover */}
                 
@@ -55,25 +53,22 @@ export default class RecordCover extends React.Component {
                 <View style={styles.coverInfo}>
 
                     <View style={styles.top}>
-                        <Text style={[styles.text, styles.left, this.state.fontStyle]}>{this.props.date}</Text>
-                        <Text style={[styles.text, styles.right, this.state.fontStyle]}>{this.props.location}</Text>
+                        <Text style={[styles.text, styles.left, this.state.fontStyle]}>{this.props.info.date}</Text>
+                        <Text style={[styles.text, styles.right, this.state.fontStyle]}>{this.props.info.location}</Text>
                     </View>
 
                     <View style={styles.bottom}>
+                        {   // flip icon
+                            this.props.flip ? (
+                                <TouchableOpacity onPress={() => this.props.flip()}>
+                                    <Image
+                                        style={styles.flip}
+                                        source={Images.flip} />
+                                </TouchableOpacity>
+                            ) : null
+                        }
 
-                        {/* For some reason, can't get onPress to work. */}
-
-                        <TouchableOpacity onPress={() => this.props.flip()}>
-                            <Image
-                                style={styles.flip}
-                                source={Images.flip} />
-                        </TouchableOpacity>
-                        {/* <Image
-                            style={styles.flip}
-                            source={Images.flip}
-                            onPress={() => this.props.flip()} /> */}
-
-                        <Text style={[styles.text, styles.right, this.state.fontStyle]}>{this.props.owner}</Text>
+                        <Text style={[styles.text, styles.right, this.state.fontStyle]}>{this.props.info.owner}</Text>
                     </View>
                     
                 </View>
@@ -89,11 +84,6 @@ const styles = StyleSheet.create({
         height: '100%',
         backgroundColor: Colors.darkGrey,
         borderRadius: Metrics.borderRadius.recordCover,
-        shadowColor: 'black',
-        shadowOffset: {width: 0, height: 4},
-        shadowRadius: 5,
-        shadowOpacity: 0.5,
-        elevation: 5,
     },
     image: {
         borderRadius: Metrics.borderRadius.recordCover,
@@ -137,6 +127,7 @@ const styles = StyleSheet.create({
     },
     text: {
         // fontSize: 11,
+        fontFamily: 'digital-7',
         color: Colors.blue,
     },
     flip: {

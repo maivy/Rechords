@@ -12,6 +12,17 @@ const styles = {
         color: 'rgba(255, 255, 255, 0.8)',
         textAlign: 'center',
         letterSpacing: 3
+    },
+    tabIcon: {
+        width: 15,
+        height: 15,
+    },
+    shadow: {
+        shadowColor: 'black',
+        shadowOffset: { width: 0, height: 4 },
+        shadowRadius: 5,
+        shadowOpacity: 0.5,
+        elevation: 5,
     }
 }
 

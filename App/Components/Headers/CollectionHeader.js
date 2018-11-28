@@ -3,7 +3,7 @@ import { StyleSheet, View, Text, Image } from 'react-native';
 
 import { Metrics, Colors, Styles, Images } from '../../Themes';
 
-export default class RecordCollectionHeader extends React.Component {
+export default class CollectionHeader extends React.Component {
     render() {
         return (
             <View style={styles.container}>

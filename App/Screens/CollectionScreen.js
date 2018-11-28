@@ -1,23 +1,24 @@
 import React from 'react';
-import { StyleSheet, View, Text, ScrollView, FlatList, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, SafeAreaView, FlatList, } from 'react-native';
 
 import {
-    RechordCollectionHeader,
-    RechordCollectionSortBar,
-    RechordCollectionToggle,
-    RechordListItem
-} from '../Components/';
+    CollectionHeader,
+    CollectionSortBar,
+    CollectionToggle,
+    CollectionListItem
+} from '../Components';
 
-import { Colors, Metrics, Images } from '../Themes';
+import { Metrics } from '../Themes';
 import PersonalRechords from '../Data/PersonalRechords';
 
-export default class RechordCollectionScreen extends React.Component {  
+export default class CollectionScreen extends React.Component {  
 
     state = {
         data: PersonalRechords,
         index: 0
     }
 
+    // Function to toggle between personal and friend rechords
     updateIndex = (index) => {
         this.setState({index: index});
         if (index === 0) {
@@ -29,52 +30,39 @@ export default class RechordCollectionScreen extends React.Component {
 
     constructor(props) {
         super(props);
-        console.log(JSON.stringify(this.state.data));
     }
 
-    // static navigationOptions = ({ navigation }) => {
-    //     const { params = {} } = navigation.state;
-    //     const stackBarOptions = {
-    //         header: 'null'
-    //     }
-
-
-    // }
+    goToViewer = (item) => this.props.navigation.navigate(
+        'ViewerScreen',
+        {
+            item: item
+        }
+    )
 
     _keyExtractor = (index) => JSON.stringify(index);
 
     renderRechordItem = (item) => {
         return (
-            <TouchableOpacity onPress={() => this.props.navigation.navigate(
-                    'ViewerScreen',
-                    {
-                        item: item
-                    }
-                )}>
-                <RechordListItem
-                    coverContainerStyle={styles.coverWrapper}
-                    image={item.image}
-                    location={item.location}
-                    date={item.date}
-                    owner={item.owner}
-                    title={item.title}
-                />
-            </TouchableOpacity>
+            <CollectionListItem
+                info={item}
+                coverContainerStyle={styles.coverWrapper}
+                goToViewer={this.goToViewer}
+            />
         )
     }
 
     render() {
         return (
-            <View style={styles.container}>
+            <SafeAreaView style={styles.container}>
 
-                <RechordCollectionHeader />
+                <CollectionHeader />
 
                 <View style={styles.sortBar}>
-                    <RechordCollectionSortBar />
+                    <CollectionSortBar />
                 </View>
 
                 <View style={styles.toggle}>
-                    <RechordCollectionToggle
+                    <CollectionToggle
                         index={this.state.index}
                         updateIndex={this.updateIndex}
                     />
@@ -119,7 +107,7 @@ export default class RechordCollectionScreen extends React.Component {
                     />
                 </ScrollView> */}
                 
-            </View>
+            </SafeAreaView>
         )
     }
 }

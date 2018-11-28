@@ -1,36 +1,25 @@
-import { createStackNavigator, createBottomTabNavigator, createAppContainer } from 'react-navigation'
-import * as screens from '../Screens';
+import { createBottomTabNavigator } from 'react-navigation'
 
-const RechordCollectionStack = createStackNavigator({
-	CollectionView: { screen: screens.CollectionView },
-	// FriendCollection: { screen: FriendCollection },	// Needed?
-	// RechordView: { screen: screens.RechordView },
-	// SendToFriend: { screen: screens.SendToFriend },
-	// EditRechord: { screen: screens.EditRechord },
-}, {
-	initialRouteName: 'CollectionView',
-});
+// import * as screens from '../Screens';
+import { NewRechordStack, CollectionStack, ExploreStack } from './';
 
-const NewRechordStack = createStackNavigator({
-	Home: { screen: screens.Home },
-	// SearchForSong: { screen: screens.SearchForSong },
-	// EditRechord: { screen: screens.EditRechord },
-}, {
-	initialRouteName: 'Home',
-});
-
-const ExploreStack = createStackNavigator({
-	Explore: { screen: screens.Explore },
-}, {
-	initialRouteName: 'Explore',
-});
+import { Metrics, Colors } from '../Themes';
 
 const NavBar = createBottomTabNavigator({
-	RechordCollection: { screen: RechordCollectionStack },
+	RechordCollection: { screen: CollectionStack },
 	NewRechord: { screen: NewRechordStack },
 	Explore: { screen: ExploreStack },
 }, {
-	initialRouteName: 'NewRechord'
+	initialRouteName: 'RechordCollection',
+	tabBarOptions: {
+		activeTintColor: Colors.white,
+		activeBackgroundColor: Colors.purple,
+		inactiveTintColor: Colors.purple,
+		inactiveBackgroundColor: Colors.white,
+		style: {
+			height: Metrics.navBarHeight,
+		}
+	},
 });
 
 export default NavBar;

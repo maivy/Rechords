@@ -156,8 +156,8 @@ const styles = StyleSheet.create({
   },
 
   logo: {
-    width: width * 0.7,
-    height: width * 0.7,
+    width: width * 0.5,
+    height: width * 0.5,
     shadowColor: 'black',
     shadowOffset: {width: 0, height: 4},
     shadowRadius: 5,

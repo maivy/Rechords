@@ -1,37 +1,53 @@
 import React from 'react';
-import { StyleSheet, Text, View, SafeAreaView} from 'react-native';
-import { createStackNavigator, createBottomTabNavigator, createAppContainer } from 'react-navigation'
+import { StyleSheet, View } from 'react-native';
+import { Font } from 'expo';
+import { setCustomText } from 'react-native-global-props';
 
-import * as screens from './App/Screens/';
-import { CollectionStack } from './App/Navigation'
-import { Metrics, Images, Colors } from './App/Themes';
+// import * as screens from './App/Scree?\ns/';
+import NavBar from './App/Navigation/NavBar';
 
 import firebase from 'firebase';
 
 var config = {
-    apiKey: "AIzaSyD_vD_Nv5vj46_Tsvvn0Ton4grfSbodnuI",
-    authDomain: "rechords-7b3a3.firebaseapp.com",
-    databaseURL: "https://rechords-7b3a3.firebaseio.com",
-    projectId: "rechords-7b3a3",
-    storageBucket: "rechords-7b3a3.appspot.com",
-    messagingSenderId: "396699023083"
-  };
-  firebase.initializeApp(config);
-
-const StackNav = createStackNavigator({
-  Create: { screen: CreateAccount },
-}, {
-  initialRouteName: 'Create',
-  header: 'none',
-});
+  apiKey: "AIzaSyD_vD_Nv5vj46_Tsvvn0Ton4grfSbodnuI",
+  authDomain: "rechords-7b3a3.firebaseapp.com",
+  databaseURL: "https://rechords-7b3a3.firebaseio.com",
+  projectId: "rechords-7b3a3",
+  storageBucket: "rechords-7b3a3.appspot.com",
+  messagingSenderId: "396699023083"
+};
+firebase.initializeApp(config);
 
 export default class App extends React.Component {
 
+  state = {
+    fontLoaded: false
+  }
+
+  async componentDidMount() {
+    await Font.loadAsync({
+      'digital-7': require('./assets/fonts/Digital-7.ttf'),
+      'avenir': require('./assets/fonts/Avenir.ttf'),
+      'avenir-heavy': require('./assets/fonts/Avenir-Heavy.ttf'),
+    });
+    const customTextProps = { 
+      style: { 
+        fontFamily: 'avenir-heavy'
+      }
+    };
+    setCustomText(customTextProps);
+    this.setState({ fontLoaded: true });
+  }
+
   render() {
     return (
-      <SafeAreaView style={styles.container}>
-        <CollectionStack />
-      </SafeAreaView>
+      <View style={styles.container}>
+        {
+          this.state.fontLoaded ? (
+            <NavBar />
+          ) : null
+        }
+      </View>
     );
   }
 }
