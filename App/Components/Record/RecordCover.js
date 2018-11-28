@@ -1,17 +1,16 @@
 // EXAMPLE:
 // ----------------------------------------
 //     <RecordCover
-//         image={Images.cover1}
-//         location='Harrison Hot Springs'
-//         date='08 31 18'
-//         owner=info.'Tiffany Manuel'
+//         info={this.props.info}
+//         fontStyle={{ fontSize: 18 }}  // font size of cover text
+//         flip={this.flipCard}          // if you want to include flip functionality
 //     />
 
 import React from 'react';
 import { StyleSheet, View, Text, Image, ImageBackground, TouchableOpacity } from 'react-native';
 import { LinearGradient } from 'expo';
 
-import { Metrics, Colors, Images } from '../../Themes';
+import { Metrics, Colors, Images, Styles } from '../../Themes';
 
 export default class RecordCover extends React.Component {
     state = {
@@ -20,7 +19,6 @@ export default class RecordCover extends React.Component {
 
     constructor(props) {
         super(props);
-        // console.log("FLIP: " + JSON.stringify(this.props.flip));
     }
 
     componentDidMount() {
@@ -34,7 +32,7 @@ export default class RecordCover extends React.Component {
     render() {
         return (
             <ImageBackground 
-                style={styles.container}
+                style={[styles.container, Styles.shadow]}
                 imageStyle={styles.image}
                 source={this.props.info.image}>
 
@@ -60,10 +58,7 @@ export default class RecordCover extends React.Component {
                     </View>
 
                     <View style={styles.bottom}>
-
-                        {/* For some reason, can't get onPress to work. */}
-
-                        {
+                        {   // flip icon
                             this.props.flip ? (
                                 <TouchableOpacity onPress={() => this.props.flip()}>
                                     <Image
@@ -89,11 +84,6 @@ const styles = StyleSheet.create({
         height: '100%',
         backgroundColor: Colors.darkGrey,
         borderRadius: Metrics.borderRadius.recordCover,
-        shadowColor: 'black',
-        shadowOffset: { width: 0, height: 4 },
-        shadowRadius: 5,
-        shadowOpacity: 0.5,
-        elevation: 5,
     },
     image: {
         borderRadius: Metrics.borderRadius.recordCover,

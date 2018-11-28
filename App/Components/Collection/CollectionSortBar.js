@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, TextInput, Image } from 'react-native';
+import { StyleSheet, View, TextInput } from 'react-native';
 import { Metrics, Colors, Images } from '../../Themes';
 
 import SortOption from '../SortOption';

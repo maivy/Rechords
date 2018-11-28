@@ -1,15 +1,16 @@
 // EXAMPLE:
 // -------------------------------------------------
-//
+
 //     In styles:
 //     coverWrapper: {
-//         width: Metrics.widths.cover, // however big you want the cover to be
+//         width: Metrics.widths.cover,  // however big you want the cover to be
 //         height: Metrics.widths.cover,
 //     }
-//
+
 //     <RechordListItem
 //         coverContainerStyle={styles.coverWrapper}
 //         info={item}
+//         flip={this.flipCard}  // ignore if you don't want flip icon to show
 //     />
 
 import React from 'react';
@@ -37,18 +38,12 @@ export default class RechordListItem extends React.Component {
                         />
                     </View>
                 </TouchableOpacity>
-                {/* <View style={this.props.coverContainerStyle}>
-                    <RecordCover
-                        info={this.props.info}
-                        fontStyle={{ fontSize: 14 }}
-                    />
-                </View> */}
 
                 {/* Record Title and Heart Functionality */}
 
                 <View style={styles.titleBar}>
                     <Text style={styles.title}>{this.props.info.title}</Text>
-                    <Image
+                    <Image                                      // still need to implement functionality
                         source={Images.heartEmptySlate}
                         style={styles.heart} />
                 </View>

@@ -1,3 +1,11 @@
+// EXAMPLE: 
+// --------------------------------------------
+//     <SortOption
+//         icon={Images.recordIconSlate}
+//         text='Title'
+//         color={Colors.slateGrey}   // color of text, not icon
+//     />
+
 import React from 'react';
 import { StyleSheet, View, Text, Image } from 'react-native';
 

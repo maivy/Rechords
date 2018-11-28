@@ -1,16 +1,13 @@
 import React, { Component } from 'react';
 import {
   StyleSheet,
-  Text,
   View,
-  TouchableOpacity,
   Animated,
-  ScrollView,
 } from 'react-native';
 
 import RecordCover from './RecordCover';
 import { RecordBackCover } from '..';
-import { Images, Colors, Metrics } from '../../Themes';
+import { Colors, Metrics } from '../../Themes';
 
 // Reused Code from: https://codedaily.io/screencasts/12/Create-a-Flip-Card-Animation-with-React-Native
 
@@ -67,10 +64,10 @@ export default class RecordCoverFlip extends Component {
     return (
       <View style={styles.container}>
 
-          <Animated.View style={[styles.flipCard, frontAnimatedStyle ]}>
+          <Animated.View style={[styles.flipCard, frontAnimatedStyle]}>
               <RecordCover
                 info={this.props.info}
-                fontStyle={{fontSize: 18}}
+                fontStyle={{ fontSize: 18 }}
                 flip={this.flipCard}
               />
           </Animated.View>

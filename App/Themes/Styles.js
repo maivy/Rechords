@@ -1,5 +1,3 @@
-// import { Metrics } from ".";
-
 /*
 
     Global Stylesheet
@@ -18,6 +16,13 @@ const styles = {
     tabIcon: {
         width: 15,
         height: 15,
+    },
+    shadow: {
+        shadowColor: 'black',
+        shadowOffset: { width: 0, height: 4 },
+        shadowRadius: 5,
+        shadowOpacity: 0.5,
+        elevation: 5,
     }
 }
 

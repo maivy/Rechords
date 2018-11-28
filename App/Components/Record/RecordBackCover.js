@@ -1,7 +1,14 @@
+// EXAMPLE:
+// --------------------------------------------------
+//     <RecordBackCover
+//         description={this.props.info.description}
+//         flip={this.flipCard}
+//     />
+
 import React from 'react';
 import { StyleSheet, View, Text, Image, ScrollView, TouchableOpacity } from 'react-native';
 
-import { Metrics, Colors, Images } from '../../Themes';
+import { Metrics, Colors, Images, Styles } from '../../Themes';
 
 export default class RecordBackCover extends React.Component {
 
@@ -11,7 +18,7 @@ export default class RecordBackCover extends React.Component {
 
     render() {
         return (
-            <View style={styles.container}>
+            <View style={[styles.container, Styles.shadow]}>
 
                 <ScrollView style={styles.scrollView}>
                     <Text style={styles.description}>{this.props.description}</Text>
@@ -45,11 +52,11 @@ const styles = StyleSheet.create({
         padding: Metrics.smallMargin,
         backgroundColor: Colors.darkGrey,
         borderRadius: Metrics.borderRadius.recordCover,
-        shadowColor: 'black',
-        shadowOffset: { width: 0, height: 4 },
-        shadowRadius: 5,
-        shadowOpacity: 0.5,
-        elevation: 5,
+        // shadowColor: 'black',
+        // shadowOffset: { width: 0, height: 4 },
+        // shadowRadius: 5,
+        // shadowOpacity: 0.5,
+        // elevation: 5,
         overflow: 'scroll',
     },
     scrollView: {
