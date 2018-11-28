@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, ScrollView, FlatList, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, SafeAreaView, Text, ScrollView, FlatList, TouchableOpacity } from 'react-native';
 
 import {
     RechordCollectionHeader,
@@ -8,7 +8,7 @@ import {
     RechordListItem
 } from '../Components/';
 
-import { Colors, Metrics, Images } from '../Themes';
+import { Colors, Metrics, Images, Styles } from '../Themes';
 import PersonalRechords from '../Data/PersonalRechords';
 
 export default class RechordCollectionScreen extends React.Component {  
@@ -31,15 +31,6 @@ export default class RechordCollectionScreen extends React.Component {
         super(props);
         console.log(JSON.stringify(this.state.data));
     }
-
-    // static navigationOptions = ({ navigation }) => {
-    //     const { params = {} } = navigation.state;
-    //     const stackBarOptions = {
-    //         header: 'null'
-    //     }
-
-
-    // }
 
     _keyExtractor = (index) => JSON.stringify(index);
 
@@ -65,7 +56,7 @@ export default class RechordCollectionScreen extends React.Component {
 
     render() {
         return (
-            <View style={styles.container}>
+            <SafeAreaView style={styles.container}>
 
                 <RechordCollectionHeader />
 
@@ -119,7 +110,7 @@ export default class RechordCollectionScreen extends React.Component {
                     />
                 </ScrollView> */}
                 
-            </View>
+            </SafeAreaView>
         )
     }
 }

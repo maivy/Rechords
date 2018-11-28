@@ -5,7 +5,7 @@ import { createStackNavigator, createBottomTabNavigator, createAppContainer } fr
 import { setCustomText } from 'react-native-global-props';
 
 import * as screens from './App/Screens/';
-import { CollectionStack } from './App/Navigation'
+import { CollectionStack, NavBar } from './App/Navigation'
 import { Metrics, Images, Colors } from './App/Themes';
 
 import firebase from 'firebase';
@@ -18,7 +18,7 @@ var config = {
     storageBucket: "rechords-7b3a3.appspot.com",
     messagingSenderId: "396699023083"
   };
-  firebase.initializeApp(config);
+firebase.initializeApp(config);
 
 export default class App extends React.Component {
 
@@ -43,15 +43,13 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <SafeAreaView style={styles.container}>
-
+      <View style={styles.container}>
         {
           this.state.fontLoaded ? (
-            <CollectionStack />
+            <NavBar />
           ) : null
         }
-
-      </SafeAreaView>
+      </View>
     );
   }
 }

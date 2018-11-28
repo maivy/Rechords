@@ -1,7 +1,11 @@
 {
   "expo": {
     "name": "rechords-v1",
+<<<<<<< HEAD
     "description": "This project is really great.",
+=======
+    "description": "",
+>>>>>>> 15fb2f8bba8d118b4251bb80fbf5b58a3d6362a2
     "slug": "rechords-v1",
     "privacy": "public",
     "sdkVersion": "31.0.0",
