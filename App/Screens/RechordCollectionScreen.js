@@ -2,10 +2,10 @@ import React from 'react';
 import { StyleSheet, View, SafeAreaView, Text, ScrollView, FlatList, TouchableOpacity } from 'react-native';
 
 import {
-    RechordCollectionHeader,
-    RechordCollectionSortBar,
-    RechordCollectionToggle,
-    RechordListItem
+    CollectionHeader,
+    CollectionSortBar,
+    CollectionToggle,
+    CollectionListItem
 } from '../Components/';
 
 import { Colors, Metrics, Images, Styles } from '../Themes';
@@ -42,7 +42,7 @@ export default class RechordCollectionScreen extends React.Component {
                         item: item
                     }
                 )}>
-                <RechordListItem
+                <CollectionListItem
                     coverContainerStyle={styles.coverWrapper}
                     image={item.image}
                     location={item.location}
@@ -58,14 +58,14 @@ export default class RechordCollectionScreen extends React.Component {
         return (
             <SafeAreaView style={styles.container}>
 
-                <RechordCollectionHeader />
+                <CollectionHeader />
 
                 <View style={styles.sortBar}>
-                    <RechordCollectionSortBar />
+                    <CollectionSortBar />
                 </View>
 
                 <View style={styles.toggle}>
-                    <RechordCollectionToggle
+                    <CollectionToggle
                         index={this.state.index}
                         updateIndex={this.updateIndex}
                     />

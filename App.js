@@ -1,23 +1,23 @@
 import React from 'react';
-import { StyleSheet, Text, View, SafeAreaView} from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
 import { Font } from 'expo';
 import { createStackNavigator, createBottomTabNavigator, createAppContainer } from 'react-navigation';
 import { setCustomText } from 'react-native-global-props';
 
 import * as screens from './App/Screens/';
-import { CollectionStack, NavBar } from './App/Navigation'
+import NavBar from './App/Navigation/NavBar';
 import { Metrics, Images, Colors } from './App/Themes';
 
 import firebase from 'firebase';
 
 var config = {
-    apiKey: "AIzaSyD_vD_Nv5vj46_Tsvvn0Ton4grfSbodnuI",
-    authDomain: "rechords-7b3a3.firebaseapp.com",
-    databaseURL: "https://rechords-7b3a3.firebaseio.com",
-    projectId: "rechords-7b3a3",
-    storageBucket: "rechords-7b3a3.appspot.com",
-    messagingSenderId: "396699023083"
-  };
+  apiKey: "AIzaSyD_vD_Nv5vj46_Tsvvn0Ton4grfSbodnuI",
+  authDomain: "rechords-7b3a3.firebaseapp.com",
+  databaseURL: "https://rechords-7b3a3.firebaseio.com",
+  projectId: "rechords-7b3a3",
+  storageBucket: "rechords-7b3a3.appspot.com",
+  messagingSenderId: "396699023083"
+};
 firebase.initializeApp(config);
 
 export default class App extends React.Component {
@@ -46,7 +46,8 @@ export default class App extends React.Component {
       <View style={styles.container}>
         {
           this.state.fontLoaded ? (
-            <NavBar />
+            // <NavBar />
+            <screens.CreateAccount />
           ) : null
         }
       </View>

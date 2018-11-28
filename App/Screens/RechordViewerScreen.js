@@ -67,12 +67,13 @@ export default class RechordViewerScreen extends React.Component {
                         
                         <View style={styles.coverWrapper}>
                             <RecordCoverFlip
-                                image={params.item.image}
-                                location={params.item.location}
-                                date={params.item.date}
-                                owner={params.item.owner}
-                                title={params.item.title}
-                                description={params.item.description}
+                                info={params.item}
+                                // image={params.item.image}
+                                // location={params.item.location}
+                                // date={params.item.date}
+                                // owner={params.item.owner}
+                                // title={params.item.title}
+                                // description={params.item.description}
                                 style={styles.recordCover}
                             />
                         </View>
@@ -100,8 +101,8 @@ const styles = StyleSheet.create({
     },
     gradient: {
         position: 'absolute',
-        width: '100%',
-        height: '105%',
+        width: Metrics.width,
+        height: Metrics.height,
         top: 0,
         left: 0,
     },

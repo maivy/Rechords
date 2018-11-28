@@ -5,7 +5,7 @@ import { Metrics, Colors, Images } from '../Themes';
 // import { SortOption } from '.';
 import SortOption from './SortOption';
 
-export default class RechordCollectionSortBy extends React.Component {
+export default class CollectionSortBy extends React.Component {
 
     render() {
         return (
@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 0, height: 1 },
         shadowColor: Colors.black,
         shadowOpacity: 0.25,
-        elevation: 1,
+        elevation: 5,
     },
     searchBar: {
         padding: Metrics.miniMargin,

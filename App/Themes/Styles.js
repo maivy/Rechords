@@ -1,4 +1,4 @@
-import { Metrics } from ".";
+// import { Metrics } from ".";
 
 /*
 
@@ -16,8 +16,8 @@ const styles = {
         letterSpacing: 3
     },
     tabIcon: {
-        width: Metrics.icons.small,
-        height: Metrics.icons.small,
+        width: 15,
+        height: 15,
     }
 }
 

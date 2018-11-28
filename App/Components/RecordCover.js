@@ -16,7 +16,6 @@ import { Metrics, Colors, Images } from '../Themes';
 export default class RecordCover extends React.Component {
     state = {
         fontStyle: {},
-        // fontLoaded: false,
     }
 
     constructor(props) {
@@ -25,10 +24,6 @@ export default class RecordCover extends React.Component {
     }
 
     componentDidMount() {
-        // Font.loadAsync({
-        //     'digital-7': require('../../assets/fonts/Digital-7.ttf'),
-        // });
-        // this.setState({ fontLoaded: true });
         if (this.props.fontStyle) {
             this.setState({
                 fontStyle: this.props.fontStyle
@@ -68,21 +63,15 @@ export default class RecordCover extends React.Component {
 
                         {/* For some reason, can't get onPress to work. */}
 
-                        <TouchableOpacity onPress={() => this.props.flip()}>
-                            <Image
-                                style={styles.flip}
-                                source={Images.flip} />
-                        </TouchableOpacity>
-                        {/* <Image
-                            style={styles.flip}
-                            source={Images.flip}
-                            onPress={() => this.props.flip()} /> */}
-
-                        {/* {
-                            this.state.fontLoaded ? (
-                                <Text style={[styles.text, styles.right, this.state.fontStyle]}>{this.props.owner}</Text>
+                        {
+                            this.props.flip ? (
+                                <TouchableOpacity onPress={() => this.props.flip()}>
+                                    <Image
+                                        style={styles.flip}
+                                        source={Images.flip} />
+                                </TouchableOpacity>
                             ) : null
-                        } */}
+                        }
 
                         <Text style={[styles.text, styles.right, this.state.fontStyle]}>{this.props.owner}</Text>
                     </View>
@@ -101,7 +90,7 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.darkGrey,
         borderRadius: Metrics.borderRadius.recordCover,
         shadowColor: 'black',
-        shadowOffset: {width: 0, height: 4},
+        shadowOffset: { width: 0, height: 4 },
         shadowRadius: 5,
         shadowOpacity: 0.5,
         elevation: 5,

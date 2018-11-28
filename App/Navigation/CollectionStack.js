@@ -1,6 +1,6 @@
 import React from 'react';
 import { createStackNavigator } from 'react-navigation';
-import {Foundation} from '@expo/vector-icons';
+import { Foundation } from '@expo/vector-icons';
 
 
 import * as screens from '../Screens';
