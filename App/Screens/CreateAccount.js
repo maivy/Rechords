@@ -2,17 +2,14 @@ import React from 'react';
 import { 
   StyleSheet, 
   Text, 
-  SafeAreaView,
   View, 
   Image, 
-  Button, 
   Dimensions, 
   TextInput,
   TouchableOpacity, 
-  AsyncStorage
 } from 'react-native';
 import firebase from 'firebase';
-import { LinearGradient, Font } from 'expo';
+import { LinearGradient } from 'expo';
 import { Images } from '../Themes';
 
 const {width, height} = Dimensions.get('window');

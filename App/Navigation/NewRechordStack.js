@@ -6,7 +6,8 @@ import * as screens from '../Screens';
 import { Images, Styles, Colors } from '../Themes';
 
 const NewRechordStack = createStackNavigator({
-	Home: { screen: screens.Home },
+    Home: { screen: screens.Home },
+    Shazam: { screen: screens.Shazam },
 }, {
     initialRouteName: 'Home',
     headerMode: 'none',
