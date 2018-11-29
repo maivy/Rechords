@@ -20,7 +20,6 @@ import {
 import RecordCover from './RecordCover';
 import { RecordBackCover, RecordEditBack } from '..';
 import { Colors, Metrics } from '../../Themes';
-import SubmitButton from '../SubmitButton';
 
 // Reused Code from: https://codedaily.io/screencasts/12/Create-a-Flip-Card-Animation-with-React-Native
 
@@ -30,10 +29,15 @@ export default class RecordCoverFlip extends Component {
     description: '',
     frontZIndex: 100,
     backZIndex: 99,
+
   }
 
   updateDescription = (description) => {
     this.setState({ description: description });
+  }
+
+  constructor(props) {
+    super(props);
   }
   
   componentWillMount() {
@@ -159,8 +163,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   flipCard: {
-    width: Metrics.widths.coverMedium,
-    height: Metrics.widths.coverMedium,
+    // width: Metrics.widths.coverMedium,
+    // height: Metrics.widths.coverMedium,
+    width: '100%',
+    height: '100%',
     backfaceVisibility: 'hidden',
     borderRadius: Metrics.borderRadius.recordCover,
   },
