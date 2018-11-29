@@ -13,6 +13,8 @@ import {
   StyleSheet,
   View,
   Animated,
+  TouchableOpacity,
+  Text,
 } from 'react-native';
 
 import RecordCover from './RecordCover';
@@ -25,7 +27,9 @@ import SubmitButton from '../SubmitButton';
 export default class RecordCoverFlip extends Component {
 
   state = {
-    description: ''
+    description: '',
+    frontZIndex: 100,
+    backZIndex: 99,
   }
 
   updateDescription = (description) => {
@@ -64,7 +68,17 @@ export default class RecordCoverFlip extends Component {
         tension: 10
       }).start();
     }
-
+    if (this.state.frontZIndex === 100) {
+      this.setState({
+        frontZIndex: 90,
+        backZIndex: 100
+      });
+    } else {
+      this.setState({
+        frontZIndex: 100,
+        backZIndex: 90
+      });
+    }
   }
   
   render() {
@@ -72,29 +86,18 @@ export default class RecordCoverFlip extends Component {
       transform: [
         { rotateY: this.frontInterpolate}
       ],
-      opacity: this.backOpacity
+      opacity: this.backOpacity,
+      zIndex: this.state.frontZIndex
     }
     const backAnimatedStyle = {
       transform: [
         { rotateY: this.backInterpolate }
       ],
-      opacity: this.frontOpacity
+      opacity: this.frontOpacity,
+      zIndex: this.state.backZIndex
     }
     return (
       <View style={styles.container}>
-
-          {/* <Animated.View style={[styles.flipCard, backAnimatedStyle, styles.flipCardBack]}>
-              { // Check if in edit mode
-                this.props.edit ? (
-                  <RecordEditBack />
-                ) : (
-                  <RecordBackCover
-                    description={this.props.info.description}
-                    flip={this.flipCard}
-                  />
-                )
-              }
-          </Animated.View> */}
 
           <Animated.View style={[styles.flipCard, frontAnimatedStyle]}>
               { // Check if in edit mode
@@ -132,10 +135,17 @@ export default class RecordCoverFlip extends Component {
 
           {
             this.props.edit ? (
-              <SubmitButton
-                text='Flip'
-                function={this.flipCard}
-              />
+              <TouchableOpacity
+                style={styles.buttonWrapper}
+                onPress={() => this.flipCard()}>
+
+                <Text style={styles.editButton}>Flip</Text>
+              </TouchableOpacity>
+              
+              // <SubmitButton
+              //   text='Flip'
+              //   function={this.flipCard}
+              // />
             ) : null
           }
 
@@ -159,4 +169,12 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: 0,
   },
+  buttonWrapper: {
+    marginTop: Metrics.smallMargin
+  },
+  editButton: {
+    fontSize: 18,
+    textDecorationLine: 'underline',
+    color: Colors.blue
+  }
 });

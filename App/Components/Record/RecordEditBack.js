@@ -15,9 +15,12 @@ export default class RecordBackCover extends React.Component {
 
                 <ScrollView style={styles.scrollView}>
                     <TextInput
+                        multiline
+                        scrollEnabled
                         style={styles.description}
                         placeholder='Enter memory details...'
-                        onChangeText={(text) => this.props.updateDescription(text)}
+                        placeholderTextColor='#fff'
+                        onEndEditing={(text) => this.props.updateDescription(text)}
                     />
                 </ScrollView>
 
@@ -44,7 +47,6 @@ const styles = StyleSheet.create({
         flex: 1,
         fontSize: 18,
         color: Colors.white,
-        // backgroundColor: 'transparent',
         fontFamily: 'avenir'
     },
 })

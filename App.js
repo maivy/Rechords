@@ -49,19 +49,7 @@ export default class App extends React.Component {
       <View style={styles.container}>
         {
           this.state.fontLoaded ? (
-            // <NavBar />
-            <View>
-            <Record
-              tiny
-              title="Happier"
-              artist="Marshmello, Bastille"
-            />
-            <Record
-              small
-              title="Happier"
-              artist="Marshmello, Bastille"
-            />
-            </View>
+            <NavBar />
             // <screens.EditRechord />
           ) : null
         }

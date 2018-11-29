@@ -159,6 +159,7 @@ const styles = StyleSheet.create({
     },
     coverInfo: {
         flex: 1,
+        alignItems: 'center',
         padding: Metrics.miniMargin,
     },
     text: {
