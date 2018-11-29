@@ -13,6 +13,14 @@ export default class EditRechordScreen extends React.Component {
     state = {
         recordStyle: styles.recordHidden,
         recordHidden: true,
+
+        rechordTitle: '',
+        song: '',
+        artist: '',
+        location: '',
+        date: '',
+        description: '',
+        owner: '',
     }
 
     constructor(props) {
@@ -43,6 +51,7 @@ export default class EditRechordScreen extends React.Component {
             <View style={styles.container}>
                 <NewRechordHeader 
                     goBack={this.goBack}
+                    //pass state to update rechordTitle
                 />
 
                 <View style={styles.whiteBar}>
@@ -56,15 +65,15 @@ export default class EditRechordScreen extends React.Component {
 
                         <Record
                             small
-                            title={params.item.song}
-                            artist={params.item.artist}
+                            title={this.state.song}
+                            artist={this.state.artist}
                             containerStyle={styles.record}
                         />
                     </TouchableOpacity>
                     
                     <View style={styles.coverWrapper}>
                         <RecordCoverFlip
-                            info={params.item}
+                            info={this.state}
                             style={styles.recordCover}
                         />
                     </View>

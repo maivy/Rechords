@@ -27,7 +27,7 @@ export default class Home extends React.Component {
             <View>
               <Text style={styles.instructions}>Tap to Detect Song</Text>
               <TouchableOpacity
-                onPress={() => this.props.navigation.navigate("Shazam")}
+                onPress={() => this.props.navigation.navigate("NewRechordScreen")}
               >
                 <Image source={Images.logo} style={styles.logo}/>
               </TouchableOpacity>
