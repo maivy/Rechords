@@ -162,6 +162,8 @@ const styles = StyleSheet.create({
         zIndex: 0
     },
     coverWrapper: {
-        marginTop: -(Metrics.record.outerSmall * (3/5))
+        marginTop: -(Metrics.record.outerSmall * (3/5)),
+        width: Metrics.widths.coverMedium,
+        height: Metrics.widths.coverMedium,
     }
 })
