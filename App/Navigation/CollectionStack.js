@@ -8,6 +8,7 @@ import { Images, Styles, Colors } from '../Themes';
 const CollectionStack = createStackNavigator({
     CollectionScreen: { screen: screens.CollectionScreen },
     ViewerScreen: { screen: screens.ViewerScreen },
+    ShareScreen: { screen: screens.ShareScreen },
   }, {
     initialRouteName: 'CollectionScreen',
     headerMode: 'none',

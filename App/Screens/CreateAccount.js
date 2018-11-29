@@ -99,7 +99,6 @@ export default class CreateAccount extends React.Component {
                 placeholder="Name"
                 placeholderTextColor='white'
                 underlineColorAndroid='white'
-                autoCapitalize='none'
                 value={this.state.name}
                 onChangeText={(name) => this.setState({ name })}
               />

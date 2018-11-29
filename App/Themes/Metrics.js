@@ -13,6 +13,7 @@ const metrics = {
   miniMargin: 7,
   tinyMargin: 10,
   smallMargin: 15,
+  mediumMargin: 20,
   doubleSection: 50,
   horizontalLineHeight: 1,
   screenWidth: width < height ? width : height,

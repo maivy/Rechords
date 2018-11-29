@@ -6,8 +6,15 @@ import {
 } from 'react-native';
 import { Metrics } from '../../Themes';
 import { AntDesign, EvilIcons, Feather } from '@expo/vector-icons';
+import { Share } from '../../Screens/ShareScreen';
 
 export default class ActionBar extends React.Component {
+	goToShare = () => this.props.navigation.navigate(
+		'ShareScreen',
+		{
+				item: this.props.item
+		}
+	)
 
   render() {
     return (
@@ -36,7 +43,9 @@ export default class ActionBar extends React.Component {
     			/>
     		</TouchableOpacity>
 
-    		<TouchableOpacity>
+    		<TouchableOpacity
+					onPress={() => this.goToShare()}
+				>
     			<EvilIcons
     				name='share-apple'
     				size={40}

@@ -6,6 +6,7 @@ import { setCustomText } from 'react-native-global-props';
 // import * as screens from './App/Scree?\ns/';
 import NavBar from './App/Navigation/NavBar';
 import SignedOutStack from './App/Navigation/SignedOutStack';
+import NewRechordBar from './App/Components/NewRechordBar';
 
 import firebase from 'firebase';
 
@@ -53,7 +54,8 @@ export default class App extends React.Component {
 
   render() {
     if (this.state.loggedIn === true) {
-      return <NavBar />;
+      return <NewRechordBar />;
+      // return <NavBar />;
     } else {
       return <SignedOutStack />;
     }

@@ -10,7 +10,7 @@ const NavBar = createBottomTabNavigator({
 	NewRechord: { screen: NewRechordStack },
 	Explore: { screen: ExploreStack },
 }, {
-	initialRouteName: 'RechordCollection',
+	initialRouteName: 'NewRechord',
 	tabBarOptions: {
 		activeTintColor: Colors.white,
 		activeBackgroundColor: Colors.purple,
@@ -18,6 +18,11 @@ const NavBar = createBottomTabNavigator({
 		inactiveBackgroundColor: Colors.white,
 		style: {
 			height: Metrics.navBarHeight,
+			shadowColor: 'black',
+			shadowOffset: {width: 0, height: 4},
+			shadowRadius: 10,
+			shadowOpacity: 0.8,
+			elevation: 5,
 		}
 	},
 });

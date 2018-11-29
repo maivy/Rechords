@@ -6,7 +6,7 @@ import {
 } from 'react-native';
 
 import RecordCover from './RecordCover';
-import { RecordBackCover } from '..';
+import RecordBackCover from './RecordBackCover';
 import { Colors, Metrics } from '../../Themes';
 
 // Reused Code from: https://codedaily.io/screencasts/12/Create-a-Flip-Card-Animation-with-React-Native

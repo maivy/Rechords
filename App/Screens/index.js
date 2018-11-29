@@ -5,6 +5,8 @@ import CollectionScreen from './CollectionScreen';
 import ViewerScreen from './ViewerScreen';
 import Explore from './Explore';
 import CreateAccount from './CreateAccount';
+import ShareScreen from './ShareScreen';
+import LocationCollectionScreen from './LocationCollectionScreen';
 
 export {
   Home,
@@ -13,5 +15,7 @@ export {
   CollectionScreen,
   ViewerScreen,
   Explore,
-  CreateAccount
+  CreateAccount,
+  ShareScreen,
+  LocationCollectionScreen,
 }
