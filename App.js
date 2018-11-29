@@ -3,8 +3,12 @@ import { StyleSheet, View } from 'react-native';
 import { Font } from 'expo';
 import { setCustomText } from 'react-native-global-props';
 
-// import * as screens from './App/Scree?\ns/';
+import * as screens from './App/Screens/';
 import NavBar from './App/Navigation/NavBar';
+// import NewRecordCover from './App/Components/Record/NewRecordCover';
+import Database from './App/Data/Database';
+import PersonalRechords from './App/Data/PersonalRechords';
+import Record from './App/Components/Record/Record'
 
 import firebase from 'firebase';
 
@@ -16,6 +20,7 @@ var config = {
   storageBucket: "rechords-7b3a3.appspot.com",
   messagingSenderId: "396699023083"
 };
+
 firebase.initializeApp(config);
 
 export default class App extends React.Component {
@@ -45,6 +50,7 @@ export default class App extends React.Component {
         {
           this.state.fontLoaded ? (
             <NavBar />
+            // <screens.EditRechord />
           ) : null
         }
       </View>

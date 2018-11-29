@@ -1,27 +1,18 @@
-// EXAMPLE:
-// ----------------------------------------
-//     <RecordCover
-//         info={this.props.info}
-//         fontStyle={{ fontSize: 18 }}  // font size of cover text
-//         flip={this.flipCard}          // if you want to include flip functionality
-//     />
-
 import React from 'react';
 import { StyleSheet, View, Text, Image, ImageBackground, TouchableOpacity } from 'react-native';
-import { LinearGradient, ImagePicker, Permissions } from 'expo';
+import { LinearGradient } from 'expo';
 
-import SubmitButton from '../SubmitButton';
-import { Metrics, Colors, Images, Styles } from '../../Themes';
+import { SubmitButton } from '..';
+import { Metrics, Images, Colors, Styles } from '../../Themes';
+export default class NewRecordCover extends React.Component {
 
-export default class RecordCover extends React.Component {
     state = {
         fontStyle: {},
-        image: undefined,
-        ready: false
     }
-
+    
     constructor(props) {
         super(props);
+        console.log("INFO PROPS: " + this.props.info);
     }
 
     componentDidMount() {
@@ -30,39 +21,23 @@ export default class RecordCover extends React.Component {
                 fontStyle: this.props.fontStyle
             });
         }
-        if (this.props.info.image) {
-            this.setState({
-                image: this.props.info.image
-            });
-        }
-        this.setState({ ready: true });
     }
-
-    onPressUploadPicture = async () => {
-        const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
-        if (status === 'granted') {
-            let result = await ImagePicker.launchImageLibraryAsync({
-                allowsEditing: true,
-                aspect: [3, 3],
-            });
-            
-            console.log(result);
-            
-            if (!result.cancelled) {
-                this.setState({ image: {uri:result.uri} });
-            }
-        } else {
-            throw new Error('Camera roll permission denied');
-        }
-    };
 
     render() {
         return (
-            <ImageBackground 
-                style={[styles.container, Styles.shadow]}
-                imageStyle={styles.image}
-                source={this.state.image}
-                key={this.state.image}>
+
+            // {
+            //     this.props.info.image ? (
+            //         <ImageBackground
+            //             style={[styles.container, Styles.shadow]}
+            //             imageStyle={styles.image}
+            //             source={this.props.info.image}>
+            //     ) : (
+
+            //     )
+            // }
+
+            <View style={[styles.container, Styles.shadow]}>
 
                 {/* Black/Transparent Gradients on Rechord Cover */}
                 
@@ -85,14 +60,9 @@ export default class RecordCover extends React.Component {
                         <Text style={[styles.text, styles.right, this.state.fontStyle]}>{this.props.info.location}</Text>
                     </View>
 
-                    {
-                        this.props.noImage ? (
-                            <SubmitButton
-                                text='Select Photo'
-                                function={this.onPressUploadPicture}
-                            />
-                        ) : null
-                    }
+                    <SubmitButton
+                        text='Select Photo'
+                    />
 
                     <View style={styles.bottom}>
                         {   // flip icon
@@ -110,7 +80,7 @@ export default class RecordCover extends React.Component {
                     
                 </View>
 
-            </ImageBackground>
+            </View>
         )
     }
 }
@@ -152,6 +122,7 @@ const styles = StyleSheet.create({
     left: {
         flex: 1,
         textAlign: 'left'
+        
     },
     right: {
         flex: 1,
@@ -159,7 +130,6 @@ const styles = StyleSheet.create({
     },
     coverInfo: {
         flex: 1,
-        alignItems: 'center',
         padding: Metrics.miniMargin,
     },
     text: {
