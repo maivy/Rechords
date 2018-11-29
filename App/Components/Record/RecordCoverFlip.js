@@ -18,6 +18,7 @@ import {
 import RecordCover from './RecordCover';
 import { RecordBackCover, RecordEditBack } from '..';
 import { Colors, Metrics } from '../../Themes';
+import SubmitButton from '../SubmitButton';
 
 // Reused Code from: https://codedaily.io/screencasts/12/Create-a-Flip-Card-Animation-with-React-Native
 
@@ -82,20 +83,33 @@ export default class RecordCoverFlip extends Component {
     return (
       <View style={styles.container}>
 
+          {/* <Animated.View style={[styles.flipCard, backAnimatedStyle, styles.flipCardBack]}>
+              { // Check if in edit mode
+                this.props.edit ? (
+                  <RecordEditBack />
+                ) : (
+                  <RecordBackCover
+                    description={this.props.info.description}
+                    flip={this.flipCard}
+                  />
+                )
+              }
+          </Animated.View> */}
+
           <Animated.View style={[styles.flipCard, frontAnimatedStyle]}>
               { // Check if in edit mode
                 this.props.edit ? (
-                  <RecordCover
-                    info={this.props.info}
-                    fontStyle={{ fontSize: 18 }}
-                    flip={this.flipCard}
-                  />
-                ) : (
                   <RecordCover
                     noImage
                     info={this.props.info}
                     fontStyle={{ fontSize: 18 }}
                     updateDescription={this.updateDescription}
+                  />
+                ) : (
+                  <RecordCover
+                    info={this.props.info}
+                    fontStyle={{ fontSize: 18 }}
+                    flip={this.flipCard}
                   />
                 )
               }
@@ -104,19 +118,26 @@ export default class RecordCoverFlip extends Component {
           <Animated.View style={[styles.flipCard, backAnimatedStyle, styles.flipCardBack]}>
               { // Check if in edit mode
                 this.props.edit ? (
+                  <RecordEditBack
+                    updateDescription={this.updateDescription}
+                  />
+                ) : (
                   <RecordBackCover
                     description={this.props.info.description}
                     flip={this.flipCard}
                   />
-                ) : (
-                  <RecordEditBack />
                 )
               }
-              {/* <RecordBackCover
-                description={this.props.info.description}
-                flip={this.flipCard}
-              /> */}
           </Animated.View>
+
+          {
+            this.props.edit ? (
+              <SubmitButton
+                text='Flip'
+                function={this.flipCard}
+              />
+            ) : null
+          }
 
       </View>
     );

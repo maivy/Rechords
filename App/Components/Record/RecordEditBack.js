@@ -15,7 +15,7 @@ export default class RecordBackCover extends React.Component {
 
                 <ScrollView style={styles.scrollView}>
                     <TextInput
-                        styles={styles.description}
+                        style={styles.description}
                         placeholder='Enter memory details...'
                         onChangeText={(text) => this.props.updateDescription(text)}
                     />

@@ -30,7 +30,7 @@ export default class RecordCover extends React.Component {
                 fontStyle: this.props.fontStyle
             });
         }
-        if (!this.props.noImage) {
+        if (this.props.info.image) {
             this.setState({
                 image: this.props.info.image
             });

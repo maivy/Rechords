@@ -8,6 +8,7 @@ import NavBar from './App/Navigation/NavBar';
 // import NewRecordCover from './App/Components/Record/NewRecordCover';
 import Database from './App/Data/Database';
 import PersonalRechords from './App/Data/PersonalRechords';
+import Record from './App/Components/Record/Record'
 
 import firebase from 'firebase';
 
@@ -49,7 +50,19 @@ export default class App extends React.Component {
         {
           this.state.fontLoaded ? (
             // <NavBar />
-            <screens.EditRechord />
+            <View>
+            <Record
+              tiny
+              title="Happier"
+              artist="Marshmello, Bastille"
+            />
+            <Record
+              small
+              title="Happier"
+              artist="Marshmello, Bastille"
+            />
+            </View>
+            // <screens.EditRechord />
           ) : null
         }
       </View>

@@ -4,7 +4,7 @@ import { Images } from "../Themes";
 
 data = [
     {
-        // image: Images.cover6,
+        image: Images.cover6,
         location: 'Lynn Canyon',
         date: '08 31 18',
         owner: 'Tiffany Manuel',
