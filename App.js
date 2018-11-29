@@ -1,12 +1,11 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, SafeAreaView } from 'react-native';
 import { Font } from 'expo';
 import { setCustomText } from 'react-native-global-props';
 
 // import * as screens from './App/Scree?\ns/';
 import NavBar from './App/Navigation/NavBar';
 import SignedOutStack from './App/Navigation/SignedOutStack';
-import NewRechordBar from './App/Components/NewRechordBar';
 
 import firebase from 'firebase';
 
@@ -53,22 +52,14 @@ export default class App extends React.Component {
   }
 
   render() {
-    if (this.state.loggedIn === true) {
-      return <NewRechordBar />;
-      // return <NavBar />;
-    } else {
+    if (this.state.loggedIn && this.state.fontLoaded) {
+      return <NavBar />;
+        
+    } else if (this.state.fontLoaded) {
       return <SignedOutStack />;
+    } else {
+      return null;
     }
-    // return (
-    //   <View style={styles.container}>
-    //     {
-    //       this.state.fontLoaded ? (
-    //         // <NavBar />
-    //         <SignedOutStack />
-    //       ) : null
-    //     }
-    //   </View>
-    // );
   }
 }
 

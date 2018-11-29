@@ -16,6 +16,13 @@ export default class ActionBar extends React.Component {
 		}
 	)
 
+	goToEdit = () => this.props.navigation.navigate(
+		'EditScreen',
+		{
+			item: this.props.item
+		}
+	)
+
   render() {
     return (
     	<View style={styles.actionBar}>
@@ -35,7 +42,9 @@ export default class ActionBar extends React.Component {
     			/>
     		</TouchableOpacity>
 
-    		<TouchableOpacity>
+    		<TouchableOpacity
+					onPress={() => this.goToEdit()}
+				>
     			<Feather
     				name='edit'
     				size={25}

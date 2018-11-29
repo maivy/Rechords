@@ -37,7 +37,7 @@ export default class Home extends React.Component {
               <TouchableOpacity
                 style={styles.searchButton}
                 activeOpacity = { .5 }
-                onPress={() => this.signUp()}
+                onPress={() => this.props.navigation.navigate("FindSong")}
               >
                 <FontAwesome
                   name='search'
