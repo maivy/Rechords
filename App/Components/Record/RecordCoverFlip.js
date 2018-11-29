@@ -1,3 +1,13 @@
+// EXAMPLE:
+// --------------------------------------------
+//     <View style={styles.coverWrapper}>  // set width and height of cover here
+//         <RecordCoverFlip
+//             edit                        // add edit tag if edit mode
+//             info={params.item}
+//             style={styles.recordCover}
+//         />
+//     </View>
+
 import React, { Component } from 'react';
 import {
   StyleSheet,
@@ -6,12 +16,20 @@ import {
 } from 'react-native';
 
 import RecordCover from './RecordCover';
-import { RecordBackCover } from '..';
+import { RecordBackCover, RecordEditBack } from '..';
 import { Colors, Metrics } from '../../Themes';
 
 // Reused Code from: https://codedaily.io/screencasts/12/Create-a-Flip-Card-Animation-with-React-Native
 
 export default class RecordCoverFlip extends Component {
+
+  state = {
+    description: ''
+  }
+
+  updateDescription = (description) => {
+    this.setState({ description: description });
+  }
   
   componentWillMount() {
     this.animatedValue = new Animated.Value(0);
@@ -65,18 +83,39 @@ export default class RecordCoverFlip extends Component {
       <View style={styles.container}>
 
           <Animated.View style={[styles.flipCard, frontAnimatedStyle]}>
-              <RecordCover
-                info={this.props.info}
-                fontStyle={{ fontSize: 18 }}
-                flip={this.flipCard}
-              />
+              { // Check if in edit mode
+                this.props.edit ? (
+                  <RecordCover
+                    info={this.props.info}
+                    fontStyle={{ fontSize: 18 }}
+                    flip={this.flipCard}
+                  />
+                ) : (
+                  <RecordCover
+                    noImage
+                    info={this.props.info}
+                    fontStyle={{ fontSize: 18 }}
+                    updateDescription={this.updateDescription}
+                  />
+                )
+              }
           </Animated.View>
 
           <Animated.View style={[styles.flipCard, backAnimatedStyle, styles.flipCardBack]}>
-              <RecordBackCover
+              { // Check if in edit mode
+                this.props.edit ? (
+                  <RecordBackCover
+                    description={this.props.info.description}
+                    flip={this.flipCard}
+                  />
+                ) : (
+                  <RecordEditBack />
+                )
+              }
+              {/* <RecordBackCover
                 description={this.props.info.description}
                 flip={this.flipCard}
-              />
+              /> */}
           </Animated.View>
 
       </View>
