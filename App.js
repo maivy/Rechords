@@ -49,8 +49,8 @@ export default class App extends React.Component {
       <View style={styles.container}>
         {
           this.state.fontLoaded ? (
-            <NavBar />
-            // <screens.EditRechord />
+            // <NavBar />
+            <screens.EditRechord />
           ) : null
         }
       </View>
