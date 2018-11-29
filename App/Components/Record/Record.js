@@ -13,6 +13,7 @@ import { StyleSheet, View, Text, ImageBackground } from 'react-native';
 import { Metrics, Colors, Images } from '../../Themes';
 
 export default class Record extends React.Component {
+
     state = {
         outerStyle: styles.outerLarge,
         innerStyle: styles.innerLarge
@@ -26,6 +27,9 @@ export default class Record extends React.Component {
         if (this.props.small) {
             this.setState({ outerStyle: styles.outerSmall });
             this.setState({ innerStyle: styles.innerSmall });
+        } else if (this.props.tiny) {
+            this.setState({ outerStyle: styles.outerTiny });
+            this.setState({ innerStyle: styles.innerTiny });
         }
     }
 
@@ -83,6 +87,16 @@ const styles = StyleSheet.create({
         height: Metrics.record.innerSmall,
         borderRadius: Metrics.record.innerSmall / 2
 
+    },
+    outerTiny: {
+        width: Metrics.record.outerTiny,
+        height: Metrics.record.outerTiny,
+        borderRadius: Metrics.record.outerTiny / 2
+    },
+    innerTiny: {
+        width: Metrics.record.innerTiny,
+        height: Metrics.record.innerTiny,
+        borderRadius: Metrics.record.innerTiny / 2
     },
     outer: {
         justifyContent: 'center',

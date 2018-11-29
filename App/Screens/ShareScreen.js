@@ -52,7 +52,7 @@ export default class ShareScreen extends React.Component {
                         onPress={() => this.toggleRecord()}>
 
                         <Record
-                            small
+                            tiny
                             title={params.item.song}
                             artist={params.item.artist}
                             containerStyle={styles.record}

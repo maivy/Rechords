@@ -58,13 +58,20 @@ export default class EditRechordScreen extends React.Component {
                     <NewRechordBarFinal/>
                 </View>
                 
-                <View style={[styles.rechord]}>
+                <View style={styles.album}>  
+                    <RecordCoverFlip
+                        edit                        
+                        info={this.state}
+                        style={styles.recordCover}
+                    />
+                </View>
+                {/* <View style={[styles.rechord]}>
                     <TouchableOpacity
                         style={this.state.recordStyle}
                         onPress={() => this.toggleRecord()}>
 
                         <Record
-                            small
+                            tiny
                             title={this.state.song}
                             artist={this.state.artist}
                             containerStyle={styles.record}
@@ -77,7 +84,7 @@ export default class EditRechordScreen extends React.Component {
                             style={styles.recordCover}
                         />
                     </View>
-                </View>
+                </View> */}
 
                 <View style={styles.createButtonView}>
                     <TouchableOpacity
@@ -102,6 +109,9 @@ const styles = StyleSheet.create({
         fontSize: 24,
         marginTop: Metrics.smallMargin,
         marginBottom: Metrics.smallMargin,
+    },
+    album: {
+        marginTop: Metrics.mediumMargin,
     },
     rechord: {
         alignItems: 'center'

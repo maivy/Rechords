@@ -1,17 +1,40 @@
+// EXAMPLE:
+// --------------------------------------------
+//     <View style={styles.coverWrapper}>  // set width and height of cover here
+//         <RecordCoverFlip
+//             edit                        // add edit tag if edit mode
+//             info={params.item}
+//             style={styles.recordCover}
+//         />
+//     </View>
+
 import React, { Component } from 'react';
 import {
   StyleSheet,
   View,
   Animated,
+  TouchableOpacity,
+  Text,
 } from 'react-native';
 
 import RecordCover from './RecordCover';
-import RecordBackCover from './RecordBackCover';
+import { RecordBackCover, RecordEditBack } from '..';
 import { Colors, Metrics } from '../../Themes';
+import SubmitButton from '../SubmitButton';
 
 // Reused Code from: https://codedaily.io/screencasts/12/Create-a-Flip-Card-Animation-with-React-Native
 
 export default class RecordCoverFlip extends Component {
+
+  state = {
+    description: '',
+    frontZIndex: 100,
+    backZIndex: 99,
+  }
+
+  updateDescription = (description) => {
+    this.setState({ description: description });
+  }
   
   componentWillMount() {
     this.animatedValue = new Animated.Value(0);
@@ -45,7 +68,17 @@ export default class RecordCoverFlip extends Component {
         tension: 10
       }).start();
     }
-
+    if (this.state.frontZIndex === 100) {
+      this.setState({
+        frontZIndex: 90,
+        backZIndex: 100
+      });
+    } else {
+      this.setState({
+        frontZIndex: 100,
+        backZIndex: 90
+      });
+    }
   }
   
   render() {
@@ -53,31 +86,68 @@ export default class RecordCoverFlip extends Component {
       transform: [
         { rotateY: this.frontInterpolate}
       ],
-      opacity: this.backOpacity
+      opacity: this.backOpacity,
+      zIndex: this.state.frontZIndex
     }
     const backAnimatedStyle = {
       transform: [
         { rotateY: this.backInterpolate }
       ],
-      opacity: this.frontOpacity
+      opacity: this.frontOpacity,
+      zIndex: this.state.backZIndex
     }
     return (
       <View style={styles.container}>
 
           <Animated.View style={[styles.flipCard, frontAnimatedStyle]}>
-              <RecordCover
-                info={this.props.info}
-                fontStyle={{ fontSize: 18 }}
-                flip={this.flipCard}
-              />
+              { // Check if in edit mode
+                this.props.edit ? (
+                  <RecordCover
+                    noImage
+                    info={this.props.info}
+                    fontStyle={{ fontSize: 18 }}
+                    updateDescription={this.updateDescription}
+                  />
+                ) : (
+                  <RecordCover
+                    info={this.props.info}
+                    fontStyle={{ fontSize: 18 }}
+                    flip={this.flipCard}
+                  />
+                )
+              }
           </Animated.View>
 
           <Animated.View style={[styles.flipCard, backAnimatedStyle, styles.flipCardBack]}>
-              <RecordBackCover
-                description={this.props.info.description}
-                flip={this.flipCard}
-              />
+              { // Check if in edit mode
+                this.props.edit ? (
+                  <RecordEditBack
+                    updateDescription={this.updateDescription}
+                  />
+                ) : (
+                  <RecordBackCover
+                    description={this.props.info.description}
+                    flip={this.flipCard}
+                  />
+                )
+              }
           </Animated.View>
+
+          {
+            this.props.edit ? (
+              <TouchableOpacity
+                style={styles.buttonWrapper}
+                onPress={() => this.flipCard()}>
+
+                <Text style={styles.editButton}>Flip</Text>
+              </TouchableOpacity>
+              
+              // <SubmitButton
+              //   text='Flip'
+              //   function={this.flipCard}
+              // />
+            ) : null
+          }
 
       </View>
     );
@@ -99,4 +169,12 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: 0,
   },
+  buttonWrapper: {
+    marginTop: Metrics.smallMargin
+  },
+  editButton: {
+    fontSize: 18,
+    textDecorationLine: 'underline',
+    color: Colors.blue
+  }
 });

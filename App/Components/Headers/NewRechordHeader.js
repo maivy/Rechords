@@ -55,6 +55,7 @@ const styles = StyleSheet.create({
     },
     rechordTitleView: {
         marginTop: Metrics.height * 0.02,
+        marginLeft: Metrics.smallMargin,
     },
     rechordTitle: {
         color: Colors.white,

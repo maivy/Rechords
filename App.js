@@ -3,7 +3,7 @@ import { StyleSheet, SafeAreaView } from 'react-native';
 import { Font } from 'expo';
 import { setCustomText } from 'react-native-global-props';
 
-// import * as screens from './App/Scree?\ns/';
+import * as screens from './App/Screens/';
 import NavBar from './App/Navigation/NavBar';
 import SignedOutStack from './App/Navigation/SignedOutStack';
 
@@ -17,6 +17,7 @@ var config = {
   storageBucket: "rechords-7b3a3.appspot.com",
   messagingSenderId: "396699023083"
 };
+
 firebase.initializeApp(config);
 
 export default class App extends React.Component {
