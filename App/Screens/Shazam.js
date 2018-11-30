@@ -13,7 +13,7 @@ import { FontAwesome } from '@expo/vector-icons';
 
 const {width, height} = Dimensions.get('window');
 
-export default class Home extends React.Component {
+export default class Shazam extends React.Component {
 
   render() {
     return (
@@ -24,28 +24,8 @@ export default class Home extends React.Component {
         >
 
           <View style={styles.logoView}>
-            <View>
-              <Text style={styles.instructions}>Tap to Detect Song</Text>
-              <TouchableOpacity
-                onPress={() => this.props.navigation.navigate("NewRechordScreen")}
-              >
-                <Image source={Images.logo} style={styles.logo}/>
-              </TouchableOpacity>
-            </View>
-
-            <View style={styles.searchButtonView}>
-              <TouchableOpacity
-                style={styles.searchButton}
-                activeOpacity = { .5 }
-                onPress={() => this.props.navigation.navigate("FindSong")}
-              >
-                <FontAwesome
-                  name='search'
-                  color= {Colors.blue}
-                  size={Metrics.icons.small}
-                />
-              </TouchableOpacity>
-            </View>
+              <Text style={styles.instructions}>Detecting Song...</Text>
+              <Image source={Images.logo} style={styles.logo}/>
           </View>
         </LinearGradient>
       </View>

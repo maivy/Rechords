@@ -1,14 +1,11 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, SafeAreaView } from 'react-native';
 import { Font } from 'expo';
 import { setCustomText } from 'react-native-global-props';
 
 import * as screens from './App/Screens/';
 import NavBar from './App/Navigation/NavBar';
-// import NewRecordCover from './App/Components/Record/NewRecordCover';
-import Database from './App/Data/Database';
-import PersonalRechords from './App/Data/PersonalRechords';
-import Record from './App/Components/Record/Record'
+import SignedOutStack from './App/Navigation/SignedOutStack';
 
 import firebase from 'firebase';
 
@@ -26,7 +23,17 @@ firebase.initializeApp(config);
 export default class App extends React.Component {
 
   state = {
-    fontLoaded: false
+    fontLoaded: false,
+    loggedIn: false,
+  }
+    
+  checkIfUserLoggedIn = async() => {
+    var that = this;
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        that.setState({loggedIn: true});
+      }
+    });
   }
 
   async componentDidMount() {
@@ -42,19 +49,18 @@ export default class App extends React.Component {
     };
     setCustomText(customTextProps);
     this.setState({ fontLoaded: true });
+    this.checkIfUserLoggedIn();
   }
 
   render() {
-    return (
-      <View style={styles.container}>
-        {
-          this.state.fontLoaded ? (
-            <NavBar />
-            // <screens.EditRechord />
-          ) : null
-        }
-      </View>
-    );
+    if (this.state.loggedIn && this.state.fontLoaded) {
+      return <NavBar />;
+        
+    } else if (this.state.fontLoaded) {
+      return <SignedOutStack />;
+    } else {
+      return null;
+    }
   }
 }
 

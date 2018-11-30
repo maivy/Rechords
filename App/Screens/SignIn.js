@@ -2,14 +2,13 @@ import React from 'react';
 import { 
   StyleSheet, 
   Text, 
-  SafeAreaView,
   View, 
   Image, 
-  Button, 
   Dimensions, 
   TextInput,
   TouchableOpacity, 
 } from 'react-native';
+import firebase from 'firebase';
 import { LinearGradient, Font } from 'expo';
 import { Images } from '../Themes';
 
@@ -22,16 +21,17 @@ export default class SignIn extends React.Component {
       name: '',
       email: '',
       password: '',
+      errorMessageLogin: '',
     }
   }
 
   login = async() => {
-    await firebase.auth().signInWithEmailAndPassword(this.state.loginEmail, this.state.loginPassword)
+    await firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
     .catch(error => this.setState({ errorMessageLogin: error.message }));
 
     if (this.state.errorMessageLogin == "") {
-      console.log("email " + this.state.loginEmail);
-      console.log("password " + this.state.loginPassword);
+      console.log("email " + this.state.email);
+      console.log("password " + this.state.password);
     } else {
       alert(this.state.errorMessageLogin);
     }
@@ -83,7 +83,9 @@ export default class SignIn extends React.Component {
               <Text style={styles.buttonText}>Sign In</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => this.props.navigation.navigate("CreateAccount")}
+            >
               <Text style={styles.create}>Create Account</Text>
             </TouchableOpacity>
           </View>
@@ -112,8 +114,8 @@ const styles = StyleSheet.create({
   },
 
   logo: {
-    width: width * 0.7,
-    height: width * 0.7,
+    width: width * 0.5,
+    height: width * 0.5,
     shadowColor: 'black',
     shadowOffset: {width: 0, height: 4},
     shadowRadius: 5,
@@ -145,7 +147,7 @@ const styles = StyleSheet.create({
 
   createButtonView: {
     alignItems: 'center',
-    marginTop: height * 0.2,
+    marginTop: height * 0.21,
   },
 
   button: {
