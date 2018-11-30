@@ -31,8 +31,8 @@ export default class NewRechordHeader extends React.Component {
                         style={styles.rechordTitle}
                         placeholder="Enter Rechord Title..."
                         placeholderTextColor={Colors.white}
-                        value={this.state.rechordTitle}
-                        onChangeText={(rechordTitle) => this.setState({ rechordTitle })}
+                        value={this.props.rechordTitle}
+                        onChangeText={(rechordTitle) => this.props.updateRechordTitle()}
                     />
                 </View>
             </View>
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
         height: Metrics.heights.header,
         padding: Metrics.smallMargin,
         backgroundColor: Colors.purple,
-        marginTop: 50,
+        // marginTop: 50,
     },
     left: {
         position: 'absolute',

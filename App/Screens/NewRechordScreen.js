@@ -4,23 +4,23 @@ import Record from '../Components/Record/Record';
 import NewRechordHeader from '../Components/Headers/NewRechordHeader';
 import RecordCoverFlip from '../Components/Record/RecordCoverFlip';
 import NewRechordBarFinal from '../Components/NewRechordBarFinal';
+import NewRechordBarEdit from '../Components/NewRechordBarEdit';
 import { Metrics, Colors } from '../Themes';
 
 const {width, height} = Dimensions.get('window');
+const date = new Date();
 
 export default class EditRechordScreen extends React.Component {
 
     state = {
-        recordStyle: styles.recordHidden,
-        recordHidden: true,
-
         rechordTitle: '',
-        song: '',
-        artist: '',
+        song: 'No Song',
+        artist: 'No Artist',
         location: '',
-        date: '',
+        date: (date.getMonth() + 1) + " " + date.getDate() + " " + JSON.stringify(date.getFullYear()).substr(2, 2),
         description: '',
         owner: '',
+        index: 0,
     }
 
     constructor(props) {
@@ -31,78 +31,57 @@ export default class EditRechordScreen extends React.Component {
         this.props.navigation.navigate('Home');
     }
 
-    toggleRecord() {
-        if (this.state.recordHidden) {
-            this.setState({ 
-                recordStyle: styles.recordShown,
-                recordHidden: false,
-            });
-        } else {
-            this.setState({
-                recordStyle: styles.recordHidden,
-                recordHidden: true,
-            });
-        }
+    updateRechordTitle = (title) => {
+        this.setState({rechordTitle: title});
     }
 
     render() {
         const params = this.props.navigation.state.params;
         return (
-            <View style={styles.container}>
+            <SafeAreaView style={styles.container}>
                 <NewRechordHeader 
                     goBack={this.goBack}
-                    //pass state to update rechordTitle
+                    rechordTitle={this.state.rechordTitle}
+                    updateRechordTitle={this.updateRechordTitle}
                 />
 
                 <View style={styles.whiteBar}>
-                    <NewRechordBarFinal/>
-                </View>
-                
-                <View style={styles.album}>  
-                    <RecordCoverFlip
-                        edit                        
-                        info={this.state}
-                        style={styles.recordCover}
+                    <NewRechordBarFinal
+                        item={this.state}
+                        date={date}
                     />
                 </View>
-                {/* <View style={[styles.rechord]}>
-                    <TouchableOpacity
-                        style={this.state.recordStyle}
-                        onPress={() => this.toggleRecord()}>
 
-                        <Record
-                            tiny
-                            title={this.state.song}
-                            artist={this.state.artist}
-                            containerStyle={styles.record}
-                        />
-                    </TouchableOpacity>
-                    
-                    <View style={styles.coverWrapper}>
+                <View style={styles.editCover}>
+                    <View style={styles.album}>  
                         <RecordCoverFlip
+                            edit                        
                             info={this.state}
-                            style={styles.recordCover}
+                            albumStyle={styles.albumStyle}
                         />
                     </View>
-                </View> */}
 
-                <View style={styles.createButtonView}>
-                    <TouchableOpacity
-                        style={styles.createButton}
-                        activeOpacity = { .5 }
-                        onPress={() => this.signUp()}
-                    >
-                        <Text style={styles.createButtonText}>Save</Text>
-                    </TouchableOpacity>
+                    <View style={styles.createButtonView}>
+                        <TouchableOpacity
+                            style={styles.createButton}
+                            activeOpacity = { .5 }
+                            onPress={() => this.signUp()}
+                        >
+                            <Text style={styles.createButtonText}>Save</Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
-            </View>
+                
+            </SafeAreaView>
         )
     }
 }
 
 const styles = StyleSheet.create({
     container: {
+        flex: 1,
         alignItems: 'center',
+        justifyContent: 'space-around',
         overflow: 'scroll',
     },
     rechordTitle: {
@@ -110,8 +89,17 @@ const styles = StyleSheet.create({
         marginTop: Metrics.smallMargin,
         marginBottom: Metrics.smallMargin,
     },
-    album: {
-        marginTop: Metrics.mediumMargin,
+    // editCover: {
+    //     flex: 1,
+    //     justifyContent: 'space-around',
+    //     marginTop: Metrics.mediumMargin
+    // },
+    // album: {
+    //     marginBottom: Metrics.mediumMargin,
+    // },
+    albumStyle: {
+        width: Metrics.widths.coverMedium,
+        height: Metrics.widths.coverMedium, 
     },
     rechord: {
         alignItems: 'center'
@@ -122,15 +110,11 @@ const styles = StyleSheet.create({
     recordHidden: {
         zIndex: 0
     },
-    coverWrapper: {
-        marginTop: -(Metrics.record.outerSmall * (3/5))
-    },
     createButtonView: {
         alignItems: 'center',
         marginTop: height * 0.04,
         marginBottom: height * 0.05,
     },
-    
     createButton: {
         width: width * 0.5,
         height: 50,
@@ -155,5 +139,6 @@ const styles = StyleSheet.create({
     },
     whiteBar: {
         marginTop: -39,
+        marginBottom: Metrics.mediumMargin
     },
 })

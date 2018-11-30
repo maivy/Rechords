@@ -95,6 +95,7 @@ export default class App extends React.Component {
           this.state.fontLoaded ? (
             <NavBar />
             // <screens.EditRechord uid={this.state.uid} />
+            // <screens.NewRechordScreen />
           ) : null
         }
       </View>

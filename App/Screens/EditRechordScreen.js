@@ -40,7 +40,7 @@ export default class EditRechordScreen extends React.Component {
     render() {
         const params = this.props.navigation.state.params;
         return (
-            <View style={styles.container}>
+            <SafeAreaView style={styles.container}>
                 <EditRechordHeader 
                     goBack={this.goBack}
                     item={params.item}
@@ -49,25 +49,12 @@ export default class EditRechordScreen extends React.Component {
                     <NewRechordBarFinal/>
                 </View>
                 
-                <View style={[styles.rechord]}>
-                    <TouchableOpacity
-                        style={this.state.recordStyle}
-                        onPress={() => this.toggleRecord()}>
-
-                        <Record
-                            small
-                            title={params.item.song}
-                            artist={params.item.artist}
-                            containerStyle={styles.record}
-                        />
-                    </TouchableOpacity>
-                    
-                    <View style={styles.coverWrapper}>
-                        <RecordCoverFlip
-                            info={params.item}
-                            style={styles.recordCover}
-                        />
-                    </View>
+                <View style={styles.album}>  
+                    <RecordCoverFlip
+                        edit                        
+                        info={this.state}
+                        style={styles.recordCover}
+                    />
                 </View>
 
                 <View style={styles.createButtonView}>
@@ -79,7 +66,7 @@ export default class EditRechordScreen extends React.Component {
                         <Text style={styles.createButtonText}>Save</Text>
                     </TouchableOpacity>
                 </View>
-            </View>
+            </SafeAreaView>
         )
     }
 }
@@ -93,6 +80,12 @@ const styles = StyleSheet.create({
         fontSize: 24,
         marginTop: Metrics.smallMargin,
         marginBottom: Metrics.smallMargin,
+    },
+    album: {
+        marginTop: Metrics.mediumMargin,
+        width: Metrics.widths.coverMedium,
+        height: Metrics.widths.coverMedium, 
+        marginBottom: Metrics.mediumMargin,
     },
     rechord: {
         alignItems: 'center'

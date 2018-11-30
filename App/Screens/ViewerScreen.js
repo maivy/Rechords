@@ -16,7 +16,6 @@ export default class RechordViewerScreen extends React.Component {
 
     constructor(props) {
         super(props)
-        console.log(JSON.stringify(this.props.navigation));
     }
 
     goBack = () => {
@@ -79,6 +78,7 @@ export default class RechordViewerScreen extends React.Component {
                             </View>
                         </View>
                         
+                        <ActionBar/>
                     </View>
 
                 </SafeAreaView>
@@ -153,6 +153,8 @@ const styles = StyleSheet.create({
     },
     rechord: {
         alignItems: 'center',
+        // marginBottom: Metrics.height * 0.15,
+        // marginTop: Metrics.height
     },
     recordShown: {
         zIndex: 100

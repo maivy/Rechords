@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     backgroundColor: Colors.slateGrey,
     height: 80,
-    borderRadius: 15,
+    borderRadius: 10,
     margin: 2,
   },
   label: {

@@ -123,10 +123,16 @@ export default class RecordCover extends React.Component {
 
                     {
                         this.props.noImage ? (
-                            <SubmitButton
+                            <View style={styles.uploadButton}>
+                                <SubmitButton
                                 text='Select Photo'
                                 function={this.onPressUploadPicture}
                             />
+                            </View>
+                            // <SubmitButton
+                            //     text='Select Photo'
+                            //     function={this.onPressUploadPicture}
+                            // />
                         ) : null
                     }
 

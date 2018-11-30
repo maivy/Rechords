@@ -28,10 +28,6 @@ export default class EditRechord extends React.Component {
                         fontStyle={{ fontSize: 18 }}
                         uid={this.props.uid}
                     />
-                    {/* <SubmitButton 
-                        text="upload"
-                        function={() => this.addRechord()}
-                    /> */}
                 </View>
             </SafeAreaView>
         )

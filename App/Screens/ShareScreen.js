@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, SafeAreaView, TouchableOpacity, Text, Dimensions } from 'react-native';
+import { StyleSheet, View, SafeAreaView, TouchableOpacity, Text, Dimensions, TextInput } from 'react-native';
 import Record from '../Components/Record/Record';
 import ShareHeader from '../Components/Headers/ShareHeader';
 import RecordCoverFlip from '../Components/Record/RecordCoverFlip';
@@ -12,6 +12,8 @@ export default class ShareScreen extends React.Component {
     state = {
         recordStyle: styles.recordHidden,
         recordHidden: true,
+
+        message: '',
     }
 
     constructor(props) {
@@ -62,20 +64,32 @@ export default class ShareScreen extends React.Component {
                     <View style={styles.coverWrapper}>
                         <RecordCoverFlip
                             info={params.item}
-                            style={styles.recordCover}
+                            albumStyle={styles.albumStyle}
                         />
                     </View>
                 </View>
 
-                <View style={styles.createButtonView}>
+                <View style={styles.messageView}>
+                    <TextInput
+                        style={styles.messageInput}
+                        placeholder="Write a message (optional)"
+                        placeholderTextColor={Colors.slateGrey}
+                        value={this.state.message}
+                        onChangeText={(message) => this.setState({ message })}
+                        multiline={true}
+                    />
+                </View>
+
+                <View style={styles.sendButtonView}>
                     <TouchableOpacity
-                        style={styles.createButton}
+                        style={styles.sendButton}
                         activeOpacity = { .5 }
-                        onPress={() => this.signUp()}
+                        onPress={() => this.signUp()}   // Implement 
                     >
-                        <Text style={styles.createButtonText}>Send</Text>
+                        <Text style={styles.sendButtonText}>Send</Text>
                     </TouchableOpacity>
                 </View>
+                
             </SafeAreaView>
         )
     }
@@ -88,8 +102,8 @@ const styles = StyleSheet.create({
     },
     rechordTitle: {
         fontSize: 24,
-        marginTop: Metrics.smallMargin,
-        marginBottom: Metrics.smallMargin,
+        marginTop: Metrics.miniMargin,
+        marginBottom: Metrics.miniMargin,
     },
     rechord: {
         alignItems: 'center'
@@ -101,15 +115,28 @@ const styles = StyleSheet.create({
         zIndex: 0
     },
     coverWrapper: {
-        marginTop: -(Metrics.record.outerSmall * (3/5))
+        marginTop: -(Metrics.record.outerSmall * (3/5)),
+        width: width * 0.6,
+        height: width * 0.6,
     },
-    createButtonView: {
+    messageView: {
+        width: width * 0.9,
+        height: height * 0.15,
+        borderWidth: 1,
+        borderColor: Colors.darkGrey,
+        borderRadius: 5, 
+        marginTop: Metrics.smallMargin,
+        padding: Metrics.miniMargin,
+    },
+    messageInput: {
+        color: Colors.darkGrey,
+    },
+    sendButtonView: {
         alignItems: 'center',
-        marginTop: height * 0.04,
+        marginTop: height * 0.01,
         marginBottom: height * 0.05,
-    },
-    
-    createButton: {
+    },    
+    sendButton: {
         width: width * 0.5,
         height: 50,
         paddingTop:15,
@@ -125,7 +152,7 @@ const styles = StyleSheet.create({
         elevation: 5,
     },
 
-    createButtonText: {
+    sendButtonText: {
         fontWeight: 'bold',
         fontSize: 16,
         color: 'white',

@@ -3,6 +3,10 @@ import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import { Ionicons, MaterialCommunityIcons, Entypo } from '@expo/vector-icons';
 import { Metrics, Colors, Images } from '../Themes';
 
+const monthNames = ["January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"
+];
+
 export default class NewRechordBarFinal extends React.Component {
 
     render() {
@@ -24,7 +28,7 @@ export default class NewRechordBarFinal extends React.Component {
                         color={Colors.blue}
                         size={Metrics.icons.small}
                     />
-                    <Text style={styles.itemLabel}>Happier - Marshmello, Bastille</Text>
+                    <Text style={styles.itemLabel}>{this.props.item.song + " - " + this.props.item.artist}</Text>
                 </View>
 
                 <View style={styles.item}>
@@ -42,7 +46,7 @@ export default class NewRechordBarFinal extends React.Component {
                         color={Colors.blue}
                         size={Metrics.icons.small}
                     />
-                    <Text style={styles.itemLabel}>June 20, 2018</Text>
+                    <Text style={styles.itemLabel}>{monthNames[this.props.date.getMonth()] + " " + this.props.date.getDate() + ", " + this.props.date.getFullYear()}</Text>
                 </View>
             </View>
         )

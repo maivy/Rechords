@@ -39,7 +39,7 @@ const metrics = {
     outerSmall: height / 2.7,
     innerSmall: height / 4.7,
     outerTiny: height * 0.3,   // you can change the size of a tiny record here!
-    innerTiny: height * 0.15,
+    innerTiny: height * 0.17,
     dot: width * 0.03,
   },
   widths: {
