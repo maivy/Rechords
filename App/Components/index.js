@@ -7,6 +7,9 @@ import CollectionSortBar from './Collection/CollectionSortBar';
 import CollectionListItem from './Collection/CollectionListItem';
 import ActionBar from './Collection/ActionBar';
 import ViewHeader from './Headers/ViewerHeader';
+import LocationCollectionHeader from './Headers/LocationCollectionHeader';
+import LocationCollectionSortBar from './Explore/LocationCollection/LocationCollectionSortBar';
+import LocationCollectionToggle from './Explore/LocationCollection/LocationCollectionToggle';
 
 export {
     Record,
@@ -18,4 +21,7 @@ export {
     CollectionListItem,
     ActionBar,
     ViewHeader,
+    LocationCollectionHeader,
+    LocationCollectionSortBar,
+    LocationCollectionToggle,
 }

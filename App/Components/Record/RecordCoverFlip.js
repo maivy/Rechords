@@ -111,6 +111,7 @@ export default class RecordCoverFlip extends Component {
                     info={this.props.info}
                     fontStyle={{ fontSize: 18 }}
                     updateDescription={this.updateDescription}
+                    uid={this.props.uid}
                   />
                 ) : (
                   <RecordCover

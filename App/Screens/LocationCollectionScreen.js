@@ -2,15 +2,14 @@ import React from 'react';
 import { StyleSheet, View, SafeAreaView, FlatList, } from 'react-native';
 
 import {
-    CollectionHeader,
-    CollectionSortBar,
-    CollectionToggle,
+    LocationCollectionHeader,
+    LocationCollectionSortBar,
+    LocationCollectionToggle,
     CollectionListItem
 } from '../Components';
 
 import { Metrics } from '../Themes';
 import PersonalRechords from '../Data/PersonalRechords';
-import FriendRechords from '../Data/FriendRechords';
 
 export default class CollectionScreen extends React.Component {  
 
@@ -25,7 +24,7 @@ export default class CollectionScreen extends React.Component {
         if (index === 0) {
             this.setState({data: PersonalRechords});
         } else {
-            this.setState({data: FriendRechords})
+            this.setState({data: []})
         }
     }
 
@@ -37,9 +36,13 @@ export default class CollectionScreen extends React.Component {
         'ViewerScreen',
         {
             item: item,
-            location: false,
+            location: true
         }
     )
+
+    goBack = () => {
+        this.props.navigation.navigate('Explore')
+    }
 
     _keyExtractor = (index) => JSON.stringify(index);
 
@@ -54,17 +57,21 @@ export default class CollectionScreen extends React.Component {
     }
 
     render() {
+        const params = this.props.navigation.state.params;
         return (
             <SafeAreaView style={styles.container}>
 
-                <CollectionHeader />
+                <LocationCollectionHeader 
+                    location={params.location}
+                    goBack={this.goBack}
+                />
 
                 <View style={styles.sortBar}>
-                    <CollectionSortBar />
+                    <LocationCollectionSortBar />
                 </View>
 
                 <View style={styles.toggle}>
-                    <CollectionToggle
+                    <LocationCollectionToggle
                         index={this.state.index}
                         updateIndex={this.updateIndex}
                     />
@@ -120,7 +127,7 @@ const styles = StyleSheet.create({
         overflow: 'scroll',
     },
     sortBar: {
-        marginTop: -39, // move sort bar over header
+        marginTop: -65, // move sort bar over header
     },
     toggle: {
         marginTop: Metrics.smallMargin,

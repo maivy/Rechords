@@ -2,17 +2,14 @@ import React from 'react';
 import { 
   StyleSheet, 
   Text, 
-  SafeAreaView,
   View, 
   Image, 
-  Button, 
   Dimensions, 
   TextInput,
   TouchableOpacity, 
-  AsyncStorage
 } from 'react-native';
 import firebase from 'firebase';
-import { LinearGradient, Font } from 'expo';
+import { LinearGradient } from 'expo';
 import { Images } from '../Themes';
 
 const {width, height} = Dimensions.get('window');
@@ -24,6 +21,7 @@ export default class CreateAccount extends React.Component {
       name: '',
       email: '',
       password: '',
+      errorMessageLogin: '',
     }
   }
 
@@ -48,7 +46,20 @@ export default class CreateAccount extends React.Component {
     });
     var user = firebase.auth().currentUser;
     firebase.database().ref('users').child(user.uid).child('name').set(this.state.name);
+    this.login();
     // this.verifyEmail();
+  }
+
+  login = async() => {
+    await firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
+    .catch(error => this.setState({ errorMessageLogin: error.message }));
+
+    if (this.state.errorMessageLogin == "") {
+      console.log("email " + this.state.email);
+      console.log("password " + this.state.password);
+    } else {
+      alert(this.state.errorMessageLogin);
+    }
   }
 
   // verifyEmail = () => {
@@ -88,7 +99,6 @@ export default class CreateAccount extends React.Component {
                 placeholder="Name"
                 placeholderTextColor='white'
                 underlineColorAndroid='white'
-                autoCapitalize='none'
                 value={this.state.name}
                 onChangeText={(name) => this.setState({ name })}
               />
@@ -127,7 +137,9 @@ export default class CreateAccount extends React.Component {
               <Text style={styles.createButtonText}>Create Account</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => this.props.navigation.navigate("SignIn")}
+            >
               <Text style={styles.signIn}>Sign In</Text>
             </TouchableOpacity>
           </View>
@@ -181,7 +193,6 @@ const styles = StyleSheet.create({
   },
 
   input: {
-    // fontFamily: 'Avenir',
     fontWeight: 'bold',
     fontSize: 18,
     color: 'white',
@@ -209,7 +220,6 @@ const styles = StyleSheet.create({
   },
 
   createButtonText: {
-    // fontFamily: 'Avenir',
     fontWeight: 'bold',
     fontSize: 16,
     color: 'white',
@@ -217,7 +227,6 @@ const styles = StyleSheet.create({
   },
 
   signIn: {
-    // fontFamily: 'Avenir',
     fontWeight: 'bold',
     fontSize: 16,
     color: 'white',

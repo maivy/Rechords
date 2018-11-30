@@ -16,10 +16,15 @@ export default class RechordViewerScreen extends React.Component {
 
     constructor(props) {
         super(props)
+        console.log(JSON.stringify(this.props.navigation));
     }
 
     goBack = () => {
-        this.props.navigation.navigate('CollectionScreen')
+        if(this.props.navigation.state.params.location) {
+            this.props.navigation.navigate('LocationCollection')
+        } else {
+            this.props.navigation.navigate('CollectionScreen')
+        }
     }
 
     toggleRecord() {
@@ -38,47 +43,92 @@ export default class RechordViewerScreen extends React.Component {
 
     render() {
         const params = this.props.navigation.state.params;
-        return (
-            <SafeAreaView style={{flex: 1}}>
-                <LinearGradient
-                    colors={[Colors.blue, Colors.purple]}
-                    style={styles.gradient}
-                />
-
-                <View style={styles.container}>
-
-                    <ViewHeader
-                        title={params.item.title}
-                        goBack={this.goBack}
+        if(params.location) {
+            return (
+                <SafeAreaView style={{flex: 1}}>
+                    <LinearGradient
+                        colors={[Colors.blue, Colors.purple]}
+                        style={styles.gradient}
                     />
 
-                    <View style={[styles.rechord]}>
-                        <TouchableOpacity
-                            style={this.state.recordStyle}
-                            onPress={() => this.toggleRecord()}>
+                    <View style={styles.container}>
 
-                            <Record
-                                small
-                                title={params.item.song}
-                                artist={params.item.artist}
-                                containerStyle={styles.record}
-                            />
-                        </TouchableOpacity>
-                        
-                        <View style={styles.coverWrapper}>
-                            <RecordCoverFlip
-                                info={params.item}
-                                style={styles.recordCover}
-                            />
+                        <ViewHeader
+                            title={params.item.title}
+                            goBack={this.goBack}
+                        />
+
+                        <View style={[styles.rechord]}>
+                            <TouchableOpacity
+                                style={this.state.recordStyle}
+                                onPress={() => this.toggleRecord()}>
+
+                                <Record
+                                    small
+                                    title={params.item.song}
+                                    artist={params.item.artist}
+                                    containerStyle={styles.record}
+                                />
+                            </TouchableOpacity>
+                            
+                            <View style={styles.coverWrapper}>
+                                <RecordCoverFlip
+                                    info={params.item}
+                                    style={styles.recordCover}
+                                />
+                            </View>
                         </View>
+                        
                     </View>
 
-                    <ActionBar />
-                    
-                </View>
+                </SafeAreaView>
+            )
+        } else {
+            return (
+                <SafeAreaView style={{flex: 1}}>
+                    <LinearGradient
+                        colors={[Colors.blue, Colors.purple]}
+                        style={styles.gradient}
+                    />
 
-            </SafeAreaView>
-        )
+                    <View style={styles.container}>
+
+                        <ViewHeader
+                            title={params.item.title}
+                            goBack={this.goBack}
+                        />
+
+                        <View style={[styles.rechord]}>
+                            <TouchableOpacity
+                                style={this.state.recordStyle}
+                                onPress={() => this.toggleRecord()}>
+
+                                <Record
+                                    small
+                                    title={params.item.song}
+                                    artist={params.item.artist}
+                                    containerStyle={styles.record}
+                                />
+                            </TouchableOpacity>
+                            
+                            <View style={styles.coverWrapper}>
+                                <RecordCoverFlip
+                                    info={params.item}
+                                    style={styles.recordCover}
+                                />
+                            </View>
+                        </View>
+                    
+                        <ActionBar 
+                            navigation={this.props.navigation}
+                            item={params.item}
+                        />
+                        
+                    </View>
+
+                </SafeAreaView>
+            )
+        }
     }
 }
 
@@ -102,7 +152,7 @@ const styles = StyleSheet.create({
         left: 0,
     },
     rechord: {
-        alignItems: 'center'
+        alignItems: 'center',
     },
     recordShown: {
         zIndex: 100

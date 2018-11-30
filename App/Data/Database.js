@@ -2,19 +2,34 @@ import PersonalRechords from './PersonalRechords';
 
 import firebase from 'firebase';
 
-export default class Database {
-    constructor() {
-        database = firebase.database();
-    }
+// export default class Database {
+//     constructor() {
+//         database = firebase.database();
+//     }
 
-    addRechord(rechordObject) {
-        database.ref('rechords/').set(rechordObject).then(() => {
-            console.log("added rechord!");
-        });
-    }
+//     addRechord(rechordObject) {
+//         database.ref('rechords/').update(rechordObject).then(() => {
+//             console.log("added rechord!");
+//         });
+//     }
 
-    main() {
-        this.addRechord(PersonalRechords[0]);
-    }
+//     main() {
+//         this.addRechord(PersonalRechords[0]);
+//     }
+// }
+
+const Database = {
+
+    // addRechord: (rechordObject) => {
+    //     database.ref('rechords/').update(rechordObject).then(() => {
+    //         console.log("added rechord!");
+    //     });
+    // }
+
 }
+
+export default Database
+
+
+
 
