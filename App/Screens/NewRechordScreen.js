@@ -112,6 +112,9 @@ const styles = StyleSheet.create({
     },
     album: {
         marginTop: Metrics.mediumMargin,
+        width: Metrics.widths.coverMedium,
+        height: Metrics.widths.coverMedium, 
+        marginBottom: Metrics.mediumMargin,
     },
     rechord: {
         alignItems: 'center'

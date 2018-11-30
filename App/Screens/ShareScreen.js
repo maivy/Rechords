@@ -101,7 +101,9 @@ const styles = StyleSheet.create({
         zIndex: 0
     },
     coverWrapper: {
-        marginTop: -(Metrics.record.outerSmall * (3/5))
+        marginTop: -(Metrics.record.outerSmall * (3/5)),
+        width: width * 0.7,
+        height: width * 0.7,
     },
     createButtonView: {
         alignItems: 'center',
