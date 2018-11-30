@@ -16,7 +16,6 @@ export default class RechordViewerScreen extends React.Component {
 
     constructor(props) {
         super(props)
-        console.log(JSON.stringify(this.props.navigation));
     }
 
     goBack = () => {
