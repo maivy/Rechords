@@ -10,6 +10,8 @@ import React from 'react';
 import { StyleSheet, View, Text, Image, ImageBackground, TouchableOpacity } from 'react-native';
 import { LinearGradient, ImagePicker, Permissions } from 'expo';
 
+import firebase from 'firebase';
+
 import SubmitButton from '../SubmitButton';
 import { Metrics, Colors, Images, Styles } from '../../Themes';
 
@@ -17,6 +19,7 @@ export default class RecordCover extends React.Component {
     state = {
         fontStyle: {},
         image: undefined,
+        imageURI: '',
         ready: false
     }
 
@@ -49,8 +52,41 @@ export default class RecordCover extends React.Component {
             console.log(result);
             
             if (!result.cancelled) {
-                this.setState({ image: {uri:result.uri} });
+                await this.setState({ 
+                    image: { uri: result.uri },
+                    imageURI: result.uri
+                });
             }
+
+            console.log("working " + this.state);
+            const ref = firebase.storage().ref('rechords/');
+            console.log("ref " + ref);
+            const response = await fetch(this.state.imageURI);
+
+            console.log("RESPONSE " + response);
+            
+            const blob = await response.blob();
+            console.log("BLOB " + blob);
+            var that = this;
+        
+            await ref.put(blob).then((snapshot) => {
+                console.log('puts blob');
+                console.log("SNAPSHOT " + snapshot);
+                
+                snapshot.ref.getDownloadURL().then(function(downloadURL) {
+                    that.setState({ imageURI: downloadURL });
+                    console.log("download url " + downloadURL);
+                    firebase.database().ref('users').child(firebase.auth().currentUser.uid).update({
+                        image: downloadURL,
+                    });
+                    that.setState({ imageURI: downloadURL });
+                });
+        
+            });
+            console.log("image url " + this.state.imageURI);
+            // firebase.database().ref('users').child(firebase.auth().currentUser.uid).update({
+            //     image: this.state.imageURI,
+            // });
         } else {
             throw new Error('Camera roll permission denied');
         }
@@ -87,10 +123,16 @@ export default class RecordCover extends React.Component {
 
                     {
                         this.props.noImage ? (
-                            <SubmitButton
+                            <View style={styles.uploadButton}>
+                                <SubmitButton
                                 text='Select Photo'
                                 function={this.onPressUploadPicture}
                             />
+                            </View>
+                            // <SubmitButton
+                            //     text='Select Photo'
+                            //     function={this.onPressUploadPicture}
+                            // />
                         ) : null
                     }
 

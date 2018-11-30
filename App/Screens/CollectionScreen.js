@@ -10,6 +10,7 @@ import {
 
 import { Metrics } from '../Themes';
 import PersonalRechords from '../Data/PersonalRechords';
+import FriendRechords from '../Data/FriendRechords';
 
 export default class CollectionScreen extends React.Component {  
 
@@ -24,7 +25,7 @@ export default class CollectionScreen extends React.Component {
         if (index === 0) {
             this.setState({data: PersonalRechords});
         } else {
-            this.setState({data: []})
+            this.setState({data: FriendRechords})
         }
     }
 

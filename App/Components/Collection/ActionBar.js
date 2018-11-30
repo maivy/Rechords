@@ -6,7 +6,7 @@ import {
 } from 'react-native';
 import { Metrics } from '../../Themes';
 import { AntDesign, EvilIcons, Feather } from '@expo/vector-icons';
-import { Share } from '../../Screens/ShareScreen';
+// import { Share } from '../../Screens/ShareScreen';
 
 export default class ActionBar extends React.Component {
 	goToShare = () => this.props.navigation.navigate(

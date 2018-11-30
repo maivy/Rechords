@@ -40,7 +40,7 @@ export default class EditRechordScreen extends React.Component {
     render() {
         const params = this.props.navigation.state.params;
         return (
-            <View style={styles.container}>
+            <SafeAreaView style={styles.container}>
                 <EditRechordHeader 
                     goBack={this.goBack}
                     item={params.item}
@@ -66,7 +66,7 @@ export default class EditRechordScreen extends React.Component {
                         <Text style={styles.createButtonText}>Save</Text>
                     </TouchableOpacity>
                 </View>
-            </View>
+            </SafeAreaView>
         )
     }
 }

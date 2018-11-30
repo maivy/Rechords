@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
         height: Metrics.heights.header,
         padding: Metrics.smallMargin,
         backgroundColor: Colors.purple,
-        marginTop: 50,
+        // marginTop: 50,
     },
     left: {
         position: 'absolute',

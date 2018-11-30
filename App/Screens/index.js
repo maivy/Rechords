@@ -1,6 +1,7 @@
 import Home from './Home';
 import Shazam from './Shazam';
 import EditRechordScreen from './EditRechordScreen';
+import EditRechord from './EditRechord';
 import CollectionScreen from './CollectionScreen';
 import ViewerScreen from './ViewerScreen';
 import Explore from './Explore';
@@ -13,6 +14,7 @@ import NewRechordScreen from './NewRechordScreen';
 export {
   Home,
   Shazam,
+  EditRechord,
   EditRechordScreen,
   CollectionScreen,
   ViewerScreen,

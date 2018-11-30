@@ -103,7 +103,7 @@ export default class RecordCoverFlip extends Component {
     return (
       <View style={styles.container}>
 
-          <Animated.View style={[styles.flipCard, frontAnimatedStyle]}>
+          <Animated.View style={[styles.flipCard, this.props.albumStyle, frontAnimatedStyle]}>
               { // Check if in edit mode
                 this.props.edit ? (
                   <RecordCover
@@ -111,6 +111,7 @@ export default class RecordCoverFlip extends Component {
                     info={this.props.info}
                     fontStyle={{ fontSize: 18 }}
                     updateDescription={this.updateDescription}
+                    uid={this.props.uid}
                   />
                 ) : (
                   <RecordCover
@@ -122,7 +123,7 @@ export default class RecordCoverFlip extends Component {
               }
           </Animated.View>
 
-          <Animated.View style={[styles.flipCard, backAnimatedStyle, styles.flipCardBack]}>
+          <Animated.View style={[styles.flipCard, this.props.albumStyle, backAnimatedStyle, styles.flipCardBack]}>
               { // Check if in edit mode
                 this.props.edit ? (
                   <RecordEditBack
@@ -145,11 +146,6 @@ export default class RecordCoverFlip extends Component {
 
                 <Text style={styles.editButton}>Flip</Text>
               </TouchableOpacity>
-              
-              // <SubmitButton
-              //   text='Flip'
-              //   function={this.flipCard}
-              // />
             ) : null
           }
 

@@ -64,7 +64,7 @@ export default class ShareScreen extends React.Component {
                     <View style={styles.coverWrapper}>
                         <RecordCoverFlip
                             info={params.item}
-                            style={styles.recordCover}
+                            albumStyle={styles.albumStyle}
                         />
                     </View>
                 </View>
@@ -116,8 +116,8 @@ const styles = StyleSheet.create({
     },
     coverWrapper: {
         marginTop: -(Metrics.record.outerSmall * (3/5)),
-        width: width * 0.7,
-        height: width * 0.7,
+        width: width * 0.6,
+        height: width * 0.6,
     },
     messageView: {
         width: width * 0.9,

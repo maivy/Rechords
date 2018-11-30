@@ -38,7 +38,7 @@ export default class EditRechordScreen extends React.Component {
     render() {
         const params = this.props.navigation.state.params;
         return (
-            <View style={styles.container}>
+            <SafeAreaView style={styles.container}>
                 <NewRechordHeader 
                     goBack={this.goBack}
                     rechordTitle={this.state.rechordTitle}
@@ -51,32 +51,37 @@ export default class EditRechordScreen extends React.Component {
                         date={date}
                     />
                 </View>
-                
-                <View style={styles.album}>  
-                    <RecordCoverFlip
-                        edit                        
-                        info={this.state}
-                        style={styles.recordCover}
-                    />
-                </View>
 
-                <View style={styles.createButtonView}>
-                    <TouchableOpacity
-                        style={styles.createButton}
-                        activeOpacity = { .5 }
-                        onPress={() => this.signUp()}
-                    >
-                        <Text style={styles.createButtonText}>Save</Text>
-                    </TouchableOpacity>
+                <View style={styles.editCover}>
+                    <View style={styles.album}>  
+                        <RecordCoverFlip
+                            edit                        
+                            info={this.state}
+                            albumStyle={styles.albumStyle}
+                        />
+                    </View>
+
+                    <View style={styles.createButtonView}>
+                        <TouchableOpacity
+                            style={styles.createButton}
+                            activeOpacity = { .5 }
+                            onPress={() => this.signUp()}
+                        >
+                            <Text style={styles.createButtonText}>Save</Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
-            </View>
+                
+            </SafeAreaView>
         )
     }
 }
 
 const styles = StyleSheet.create({
     container: {
+        flex: 1,
         alignItems: 'center',
+        justifyContent: 'space-around',
         overflow: 'scroll',
     },
     rechordTitle: {
@@ -84,11 +89,17 @@ const styles = StyleSheet.create({
         marginTop: Metrics.smallMargin,
         marginBottom: Metrics.smallMargin,
     },
-    album: {
-        marginTop: Metrics.mediumMargin,
+    // editCover: {
+    //     flex: 1,
+    //     justifyContent: 'space-around',
+    //     marginTop: Metrics.mediumMargin
+    // },
+    // album: {
+    //     marginBottom: Metrics.mediumMargin,
+    // },
+    albumStyle: {
         width: Metrics.widths.coverMedium,
         height: Metrics.widths.coverMedium, 
-        marginBottom: Metrics.mediumMargin,
     },
     rechord: {
         alignItems: 'center'
@@ -99,15 +110,11 @@ const styles = StyleSheet.create({
     recordHidden: {
         zIndex: 0
     },
-    coverWrapper: {
-        marginTop: -(Metrics.record.outerSmall * (3/5))
-    },
     createButtonView: {
         alignItems: 'center',
         marginTop: height * 0.04,
         marginBottom: height * 0.05,
     },
-    
     createButton: {
         width: width * 0.5,
         height: 50,
@@ -132,5 +139,6 @@ const styles = StyleSheet.create({
     },
     whiteBar: {
         marginTop: -39,
+        marginBottom: Metrics.mediumMargin
     },
 })

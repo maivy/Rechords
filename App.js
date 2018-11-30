@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, SafeAreaView } from 'react-native';
+import { View, StyleSheet, SafeAreaView } from 'react-native';
 import { Font } from 'expo';
 import { setCustomText } from 'react-native-global-props';
 
@@ -8,6 +8,9 @@ import NavBar from './App/Navigation/NavBar';
 import SignedOutStack from './App/Navigation/SignedOutStack';
 
 import firebase from 'firebase';
+import Database from './App/Data/Database';
+import PersonalRechords from './App/Data/PersonalRechords';
+import Images from './App/Themes/Images';
 
 var config = {
   apiKey: "AIzaSyD_vD_Nv5vj46_Tsvvn0Ton4grfSbodnuI",
@@ -25,16 +28,48 @@ export default class App extends React.Component {
   state = {
     fontLoaded: false,
     loggedIn: false,
+    image: '',
+    uid: '',
   }
+  
     
   checkIfUserLoggedIn = async() => {
     var that = this;
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         that.setState({loggedIn: true});
+        that.setState({uid: firebase.auth().currentUser.uid})
       }
     });
   }
+
+  addRechord = (rechordObject) => {
+    console.log("working");
+    const ref = firebase.storage().ref('rechords').child(this.state.uid).child("image");
+    // const response = await fetch(rechordObject.image);
+    console.log("rechord object image " + Images.cover6);
+    const uri = rechordObjIect.image.uri;
+    console.log('uri ' + uri);
+ 
+    // const blob = await rechordObject.image.blob();
+    // var that = this;
+
+    // await ref.put(blob).then((snapshot) => {
+    //   console.log('puts blob');
+
+    //   snapshot.ref.getDownloadURL().then(function(downloadURL) {
+    //     that.setState({ image: downloadURL });
+    //     rechordObject.image = this.state.image;
+    // });
+
+    // });
+
+    // await firebase.database().ref('users').child(firebase.auth().currentUser.uid).update(rechordObject);
+    // rechordObject.image
+    // database.ref('rechords/').update(rechordObject).then(() => {
+    //     console.log("added rechord!");
+    // });
+  } 
 
   async componentDidMount() {
     await Font.loadAsync({
@@ -50,17 +85,28 @@ export default class App extends React.Component {
     setCustomText(customTextProps);
     this.setState({ fontLoaded: true });
     this.checkIfUserLoggedIn();
+    // this.addRechord(PersonalRechords[0]);
   }
 
   render() {
-    if (this.state.loggedIn && this.state.fontLoaded) {
-      return <NavBar />;
-        
-    } else if (this.state.fontLoaded) {
-      return <SignedOutStack />;
-    } else {
-      return null;
-    }
+    return (
+      <View style={styles.container}>
+        {
+          this.state.fontLoaded ? (
+            <NavBar />
+            // <screens.EditRechord uid={this.state.uid} />
+            // <screens.NewRechordScreen />
+          ) : null
+        }
+      </View>
+    )
+    // if (this.state.loggedIn && this.state.fontLoaded) {
+    //   return <NavBar />;
+    // } else if (this.state.fontLoaded) {
+    //   return <SignedOutStack />;
+    // } else {
+    //   return null;
+    // }
   }
 }
 
