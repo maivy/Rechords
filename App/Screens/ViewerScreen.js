@@ -78,6 +78,7 @@ export default class RechordViewerScreen extends React.Component {
                             </View>
                         </View>
                         
+                        <ActionBar/>
                     </View>
 
                 </SafeAreaView>
@@ -152,7 +153,8 @@ const styles = StyleSheet.create({
     },
     rechord: {
         alignItems: 'center',
-        marginBottom: Metrics.height * 0.15,
+        // marginBottom: Metrics.height * 0.15,
+        // marginTop: Metrics.height
     },
     recordShown: {
         zIndex: 100

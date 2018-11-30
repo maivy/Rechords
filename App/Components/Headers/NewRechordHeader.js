@@ -31,8 +31,8 @@ export default class NewRechordHeader extends React.Component {
                         style={styles.rechordTitle}
                         placeholder="Enter Rechord Title..."
                         placeholderTextColor={Colors.white}
-                        value={this.state.rechordTitle}
-                        onChangeText={(rechordTitle) => this.setState({ rechordTitle })}
+                        value={this.props.rechordTitle}
+                        onChangeText={(rechordTitle) => this.props.updateRechordTitle()}
                     />
                 </View>
             </View>
