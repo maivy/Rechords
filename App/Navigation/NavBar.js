@@ -1,12 +1,22 @@
+import { Component } from 'react';
 import { createBottomTabNavigator } from 'react-navigation'
 
-// import * as screens from '../Screens';
 import { NewRechordStack, CollectionStack, ExploreStack } from './';
 
 import { Metrics, Colors } from '../Themes';
 
+const mapNavigationStateParamsToProps = (SomeComponent) => {
+    return class extends Component {
+        static navigationOptions = SomeComponent.navigationOptions; // better use hoist-non-react-statics
+        render() {
+            const {navigation: {state: {params}}} = this.props
+            return <SomeComponent {...params} {...this.props} />
+        }
+    }
+}
+
 const NavBar = createBottomTabNavigator({
-	RechordCollection: { screen: CollectionStack },
+	RechordCollection: { screen: mapNavigationStateParamsToProps(CollectionStack) },
 	NewRechord: { screen: NewRechordStack },
 	Explore: { screen: ExploreStack },
 }, {

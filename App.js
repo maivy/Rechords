@@ -88,12 +88,16 @@ export default class App extends React.Component {
     // this.addRechord(PersonalRechords[0]);
   }
 
+  logOut = () => {
+    this.setState({ loggedIn: false });
+  }
+
   render() {
     return (
       <View style={styles.container}>
         {
           this.state.fontLoaded ? (
-            <NavBar />
+            <NavBar logOut={this.logOut} />
             // <screens.EditRechord uid={this.state.uid} />
             // <screens.NewRechordScreen />
           ) : null
