@@ -18,7 +18,7 @@ export default class RecordBackCover extends React.Component {
 
     render() {
         return (
-            <View style={[styles.container, Styles.shadow]}>
+            <View style={[styles.container]}>
 
                 <ScrollView style={styles.scrollView}>
                     <Text style={styles.description}>{this.props.description}</Text>
@@ -52,11 +52,11 @@ const styles = StyleSheet.create({
         padding: Metrics.smallMargin,
         backgroundColor: Colors.darkGrey,
         borderRadius: Metrics.borderRadius.recordCover,
-        // shadowColor: 'black',
-        // shadowOffset: { width: 0, height: 4 },
-        // shadowRadius: 5,
-        // shadowOpacity: 0.5,
-        // elevation: 5,
+        shadowColor: 'black',
+        shadowOffset: { width: 0, height: 4 },
+        shadowRadius: 5,
+        shadowOpacity: 0.5,
+        elevation: 5,
         overflow: 'scroll',
     },
     scrollView: {

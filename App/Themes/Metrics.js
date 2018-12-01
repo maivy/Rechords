@@ -48,7 +48,7 @@ const metrics = {
     coverMedium: height / 2.5
   },
   heights: {
-    overlay: '50%',
+    overlay: '40%',
     header: 140,
     sortBy: 116,
   },
