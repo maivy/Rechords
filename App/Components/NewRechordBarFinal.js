@@ -8,46 +8,71 @@ const monthNames = ["January", "February", "March", "April", "May", "June",
 ];
 
 export default class NewRechordBarFinal extends React.Component {
+    constructor(props) {
+        super(props)
+    }
 
     render() {
         return (
             <View style={styles.container}>
-                <TouchableOpacity>
-                    <View style={styles.edit}>
+                <View style={styles.allItems}>
+                    <View style={[styles.item, { marginTop: 0 }]}>
+                        <View style={styles.iconView}>
+                            <Ionicons
+                                name='ios-musical-notes'
+                                color={Colors.blue}
+                                size={Metrics.icons.small}
+                            />
+                        </View>
+                        <View style={styles.textInputView}>
+                            <Text style={styles.itemLabel}>{this.props.item.song + " - " + this.props.item.artist}</Text>
+                        </View>
+                    </View>
+
+                    <View style={styles.item}>
+                        <View style={styles.iconView}>
+                            <Entypo
+                                name='location-pin'
+                                color={Colors.blue}
+                                size={Metrics.icons.small}
+                            />
+                        </View>
+                        <View style={styles.textInputView}>
+                            <Text style={styles.itemLabel}>Harrison Hot Springs</Text>
+                        </View>
+                    </View>
+
+                    <View style={[styles.item, { marginBottom: 0 }]}>
+                        <View style={styles.iconView}>
+                            <Ionicons
+                                name='ios-calendar'
+                                color={Colors.blue}
+                                size={Metrics.icons.small}
+                            />
+                        </View>
+                        <View style={styles.textInputView}>
+                            <Text style={styles.itemLabel}>{monthNames[this.props.date.getMonth()] + " " + this.props.date.getDate() + ", " + this.props.date.getFullYear()}</Text>
+                        </View>
+                    </View>
+                
+                </View>
+
+                
+
+                <TouchableOpacity
+                    style={styles.edit}
+                    onPress={() => this.props.toggleEditMode()}>
+                    <View>
                         <MaterialCommunityIcons
                             name='pencil-circle'
                             color={Colors.blue}
-                            size={Metrics.icons.small}
+                            size={Metrics.icons.medium}
                         />
                     </View>
                 </TouchableOpacity>
+
                 
-                <View style={styles.item}>
-                    <Ionicons
-                        name='ios-musical-notes'
-                        color={Colors.blue}
-                        size={Metrics.icons.small}
-                    />
-                    <Text style={styles.itemLabel}>{this.props.item.song + " - " + this.props.item.artist}</Text>
-                </View>
-
-                <View style={styles.item}>
-                    <Entypo
-                        name='location-pin'
-                        color={Colors.blue}
-                        size={Metrics.icons.small}
-                    />
-                    <Text style={styles.itemLabel}>Harrison Hot Springs</Text>
-                </View>
-
-                <View style={styles.item}>
-                    <Ionicons
-                        name='ios-calendar'
-                        color={Colors.blue}
-                        size={Metrics.icons.small}
-                    />
-                    <Text style={styles.itemLabel}>{monthNames[this.props.date.getMonth()] + " " + this.props.date.getDate() + ", " + this.props.date.getFullYear()}</Text>
-                </View>
+                
             </View>
         )
     }
@@ -55,7 +80,7 @@ export default class NewRechordBarFinal extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
-        justifyContent: 'space-between',
+        flexDirection: 'row',
         width: Metrics.widths.wide,
         height: Metrics.heights.sortBy,
         padding: Metrics.tinyMargin,
@@ -70,14 +95,32 @@ const styles = StyleSheet.create({
     },
     edit: {
         alignItems: 'flex-end',
+        marginTop: -7,
+        marginLeft: 4,
+    },
+    allItems: {
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginRight: Metrics.tinyMargin,
     },
     item: {
         flexDirection: 'row',
         justifyContent: 'flex-start',
+        marginTop: Metrics.tinyMargin /2,
+    },
+    iconView: {
+        width: Metrics.icons.small,
+        height: Metrics.icons.small,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginRight: Metrics.tinyMargin
+    },
+    textInputView: {
+        width: Metrics.widths.wide * 0.74,
     },
     itemLabel: {
-        marginLeft: 30,
+        fontFamily: 'avenir-heavy',
         color: Colors.darkGrey,
-        position: 'absolute',
     },
 })

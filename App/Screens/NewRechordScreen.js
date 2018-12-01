@@ -20,7 +20,7 @@ export default class EditRechordScreen extends React.Component {
         date: (date.getMonth() + 1) + " " + date.getDate() + " " + JSON.stringify(date.getFullYear()).substr(2, 2),
         description: '',
         owner: '',
-        index: 0,
+        edit: false,
     }
 
     constructor(props) {
@@ -35,6 +35,14 @@ export default class EditRechordScreen extends React.Component {
         this.setState({rechordTitle: title});
     }
 
+    toggleEditMode = () =>  {
+        if (this.state.edit) {
+            this.setState({ edit: false });
+        } else {
+            this.setState({ edit: true });
+        }
+    }
+
     render() {
         const params = this.props.navigation.state.params;
         return (
@@ -46,10 +54,21 @@ export default class EditRechordScreen extends React.Component {
                 />
 
                 <View style={styles.whiteBar}>
-                    <NewRechordBarFinal
-                        item={this.state}
-                        date={date}
-                    />
+                {
+                    this.state.edit ? (
+                        <NewRechordBarEdit
+                            item={this.state}
+                            date={date}
+                            toggleEditMode={this.toggleEditMode}
+                        />
+                    ) : (
+                        <NewRechordBarFinal
+                            item={this.state}
+                            date={date}
+                            toggleEditMode={this.toggleEditMode}
+                        />
+                    )
+                }
                 </View>
 
                 <View style={styles.editCover}>
@@ -86,8 +105,8 @@ const styles = StyleSheet.create({
     },
     rechordTitle: {
         fontSize: 24,
-        marginTop: Metrics.smallMargin,
-        marginBottom: Metrics.smallMargin,
+        marginTop: Metrics.mediumMargin,
+        marginBottom: Metrics.tinyMargin,
     },
     // editCover: {
     //     flex: 1,
