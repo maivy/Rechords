@@ -3,68 +3,84 @@ import { StyleSheet, View, TextInput, TouchableOpacity } from 'react-native';
 import { Ionicons, MaterialCommunityIcons, Entypo } from '@expo/vector-icons';
 import { Metrics, Colors, Images } from '../Themes';
 
+const monthNames = ["January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"
+];
+
 export default class NewRechordBarEdit extends React.Component {
+    constructor(props) {
+        super(props)
+    }
 
     render() {
         return (
             <View style={styles.container}>
-                <TouchableOpacity>
-                    <View style={styles.edit}>
+
+                <View style={styles.allItems}>
+                    <View style={[styles.item, { marginTop: 0}]}>
+                        <View style={styles.iconView}>
+                            <Ionicons
+                                name='ios-musical-notes'
+                                color={Colors.blue}
+                                size={Metrics.icons.small}
+                            />
+                        </View>
+                        <View style={styles.textInputView}>
+                            <TextInput 
+                                style={styles.itemLabel}
+                                value={this.props.item.song + " - " + this.props.item.artist}
+                            />
+                        </View>
+                    </View>
+
+                    <View style={styles.item}>
+                        <View style={styles.iconView}>
+                            <Entypo
+                                name='location-pin'
+                                color={Colors.blue}
+                                size={Metrics.icons.small}
+                            />
+                        </View>
+                        <View style={styles.textInputView}>
+                            <TextInput 
+                                style={styles.itemLabel}
+                                value={this.props.item.location}
+                                onChangeText={(location) => this.props.updateLocation(location)}
+                            />
+                        </View>
+                    </View>
+
+                    <View style={[styles.item, { marginBottom: 0 }]}>
+                        <View style={styles.iconView}>
+                            <Ionicons
+                                name='ios-calendar'
+                                color={Colors.blue}
+                                size={Metrics.icons.small}
+                            />
+                        </View>
+
+                        <View style={styles.textInputView}>
+                            <TextInput 
+                                style={styles.itemLabel}
+                                value={monthNames[this.props.date.getMonth()] + " " + this.props.date.getDate() + ", " + this.props.date.getFullYear()}
+                                // onChangeText={(date) => this.props.updateDate(date)}
+                            />
+                        </View>
+                    </View>
+                
+                </View>
+
+                <TouchableOpacity
+                    style={styles.edit}
+                    onPress={() => this.props.toggleEditMode()}>
+                    <View>
                         <Ionicons
                             name='ios-checkmark-circle'
                             color={Colors.blue}
-                            size={Metrics.icons.small}
+                            size={Metrics.icons.medium}
                         />
                     </View>
                 </TouchableOpacity>
-                
-                <View style={styles.item}>
-                    <Ionicons
-                        name='ios-musical-notes'
-                        color={Colors.blue}
-                        size={Metrics.icons.small}
-                    />
-                    <View style={styles.textInputView}>
-                        <TextInput 
-                            style={styles.itemLabel}
-                            placeholder="Happier - Marshmello, Bastille"
-                            placeholderTextColor={Colors.darkGrey}
-                            underlineColorAndroid='white'
-                        />
-                    </View>
-                </View>
-
-                <View style={styles.item}>
-                    <Entypo
-                        name='location-pin'
-                        color={Colors.blue}
-                        size={Metrics.icons.small}
-                    />
-                    <View style={styles.textInputView}>
-                        <TextInput 
-                            style={styles.itemLabel}
-                            placeholder="Happier - Marshmello, Bastille"
-                            placeholderTextColor={Colors.darkGrey}
-                            underlineColorAndroid='white'
-                        />
-                    </View>
-                </View>
-
-                <View style={styles.item}>
-                    <Ionicons
-                        name='ios-calendar'
-                        color={Colors.blue}
-                        size={Metrics.icons.small}
-                    />
-                    <View style={styles.textInputView}>
-                        <TextInput 
-                            style={styles.itemLabel}
-                            placeholder="Happier - Marshmello, Bastille"
-                            placeholderTextColor={Colors.darkGrey}
-                            underlineColorAndroid='white'
-                        />
-                    </View>
-                </View>
             </View>
         )
     }
@@ -72,7 +88,7 @@ export default class NewRechordBarEdit extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
-        justifyContent: 'space-between',
+        flexDirection: 'row',
         width: Metrics.widths.wide,
         height: Metrics.heights.sortBy,
         padding: Metrics.tinyMargin,
@@ -87,24 +103,39 @@ const styles = StyleSheet.create({
     },
     edit: {
         alignItems: 'flex-end',
+        marginTop: -7,
+        marginLeft: 6,
+    },
+    allItems: {
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginRight: Metrics.tinyMargin,
     },
     item: {
+        // flex: 1,
         flexDirection: 'row',
         justifyContent: 'flex-start',
+        marginTop: Metrics.tinyMargin /2,
+        marginBottom: Metrics.tinyMargin /2,
+    },
+    iconView: {
+        width: Metrics.icons.small,
+        height: Metrics.icons.small,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginRight: Metrics.tinyMargin
     },
     textInputView: {
-        flexDirection: 'column',
-        position: 'absolute',
-        marginLeft: 30,
-        alignItems: 'flex-start',
         paddingLeft: 5,
         paddingRight: 5,
-        paddingTop: 1,
-        paddingBottom: 1,
-        width: Metrics.widths.wide * 0.8,
-        backgroundColor: '#e5e5e5',
+        paddingTop: 2,
+        paddingBottom: 2,
+        width: Metrics.widths.wide * 0.74,
+        backgroundColor: Colors.slateGreyAlpha,
     },
     itemLabel: {
+        fontFamily: 'avenir-heavy',
         color: Colors.darkGrey,
     },
 })

@@ -6,33 +6,63 @@ import RecordCoverFlip from '../Components/Record/RecordCoverFlip';
 import NewRechordBarFinal from '../Components/NewRechordBarFinal';
 import NewRechordBarEdit from '../Components/NewRechordBarEdit';
 import { Metrics, Colors } from '../Themes';
+import firebase from 'firebase';
 
 const {width, height} = Dimensions.get('window');
 const date = new Date();
 
 export default class EditRechordScreen extends React.Component {
-
-    state = {
-        rechordTitle: '',
-        song: 'No Song',
-        artist: 'No Artist',
-        location: '',
-        date: (date.getMonth() + 1) + " " + date.getDate() + " " + JSON.stringify(date.getFullYear()).substr(2, 2),
-        description: '',
-        owner: '',
-        index: 0,
-    }
-
     constructor(props) {
         super(props)
+
+        this.state = {
+            rechordTitle: '',
+            song: 'Put Your Rechords On',
+            artist: 'Corinne Bailey Rae',
+            location: 'Example Location',
+            date: (date.getMonth() + 1) + " " + date.getDate() + " " + JSON.stringify(date.getFullYear()).substr(2, 2),
+            description: 'Example Description',
+            owner: '',
+            edit: false,
+        }
+
+        this.findOwner();
+    }
+
+    findOwner = () => {
+        var user = firebase.auth().currentUser;
+        var ref = firebase.database().ref("users/" + user.uid);
+        var name;
+        var that = this;
+        ref.once("value")
+            .then(function(snapshot) {
+                name = snapshot.child("name").val();
+                that.setState({ owner: name });
+        });
     }
 
     goBack = () => {
         this.props.navigation.navigate('Home');
     }
 
-    updateRechordTitle = (title) => {
-        this.setState({rechordTitle: title});
+    updateRechordTitle = (newTitle) => {
+        this.setState({ rechordTitle: newTitle });
+    }
+
+    updateLocation = (newLocation) => {
+        this.setState({ location: newLocation });
+    }
+
+    updateDate = (newDate) => {
+        this.setState({ date: newDate });
+    }
+
+    toggleEditMode = () =>  {
+        if (this.state.edit) {
+            this.setState({ edit: false });
+        } else {
+            this.setState({ edit: true });
+        }
     }
 
     render() {
@@ -46,10 +76,23 @@ export default class EditRechordScreen extends React.Component {
                 />
 
                 <View style={styles.whiteBar}>
-                    <NewRechordBarEdit
-                        item={this.state}
-                        date={date}
-                    />
+                {
+                    this.state.edit ? (
+                        <NewRechordBarEdit
+                            item={this.state}
+                            date={date}
+                            toggleEditMode={this.toggleEditMode}
+                            updateLocation={this.updateLocation}
+                            updateDate={this.updateDate}
+                        />
+                    ) : (
+                        <NewRechordBarFinal
+                            item={this.state}
+                            date={date}
+                            toggleEditMode={this.toggleEditMode}
+                        />
+                    )
+                }
                 </View>
 
                 <View style={styles.editCover}>
@@ -86,8 +129,8 @@ const styles = StyleSheet.create({
     },
     rechordTitle: {
         fontSize: 24,
-        marginTop: Metrics.smallMargin,
-        marginBottom: Metrics.smallMargin,
+        marginTop: Metrics.mediumMargin,
+        marginBottom: Metrics.tinyMargin,
     },
     // editCover: {
     //     flex: 1,

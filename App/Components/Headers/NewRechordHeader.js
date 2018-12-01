@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
         zIndex: 100,
     },
     rechordTitleView: {
-        marginTop: Metrics.height * 0.02,
+        marginTop: Metrics.mediumMargin,
         marginLeft: Metrics.smallMargin,
     },
     rechordTitle: {
