@@ -46,7 +46,7 @@ export default class EditRechordScreen extends React.Component {
                 />
 
                 <View style={styles.whiteBar}>
-                    <NewRechordBarFinal
+                    <NewRechordBarEdit
                         item={this.state}
                         date={date}
                     />
