@@ -5,18 +5,8 @@ import { createStackNavigator } from 'react-navigation';
 import * as screens from '../Screens';
 import { Images, Styles, Colors } from '../Themes';
 
-const mapNavigationStateParamsToProps = (SomeComponent) => {
-  return class extends Component {
-      static navigationOptions = SomeComponent.navigationOptions; // better use hoist-non-react-statics
-      render() {
-          const {navigation: {state: {params}}} = this.props
-          return <SomeComponent {...params} {...this.props} />
-      }
-  }
-}
-
 const CollectionStack = createStackNavigator({
-    CollectionScreen: { screen: mapNavigationStateParamsToProps(screens.CollectionScreen) },
+    CollectionScreen: { screen: screens.CollectionScreen },
     ViewerScreen: { screen: screens.ViewerScreen },
     ShareScreen: { screen: screens.ShareScreen },
     EditScreen: { screen: screens.EditRechordScreen },

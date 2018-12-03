@@ -3,6 +3,10 @@ import { StyleSheet, View, TextInput, TouchableOpacity } from 'react-native';
 import { Ionicons, MaterialCommunityIcons, Entypo } from '@expo/vector-icons';
 import { Metrics, Colors, Images } from '../Themes';
 
+const monthNames = ["January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"
+];
+
 export default class NewRechordBarEdit extends React.Component {
     constructor(props) {
         super(props)
@@ -24,9 +28,7 @@ export default class NewRechordBarEdit extends React.Component {
                         <View style={styles.textInputView}>
                             <TextInput 
                                 style={styles.itemLabel}
-                                placeholder="Happier - Marshmello, Bastille"
-                                placeholderTextColor={Colors.darkGrey}
-                                underlineColorAndroid='white'
+                                value={this.props.item.song + " - " + this.props.item.artist}
                             />
                         </View>
                     </View>
@@ -42,9 +44,8 @@ export default class NewRechordBarEdit extends React.Component {
                         <View style={styles.textInputView}>
                             <TextInput 
                                 style={styles.itemLabel}
-                                placeholder="Happier - Marshmello, Bastille"
-                                placeholderTextColor={Colors.darkGrey}
-                                underlineColorAndroid='white'
+                                value={this.props.item.location}
+                                onChangeText={(location) => this.props.updateLocation(location)}
                             />
                         </View>
                     </View>
@@ -61,9 +62,8 @@ export default class NewRechordBarEdit extends React.Component {
                         <View style={styles.textInputView}>
                             <TextInput 
                                 style={styles.itemLabel}
-                                placeholder="Happier - Marshmello, Bastille"
-                                placeholderTextColor={Colors.darkGrey}
-                                underlineColorAndroid='white'
+                                value={monthNames[this.props.date.getMonth()] + " " + this.props.date.getDate() + ", " + this.props.date.getFullYear()}
+                                // onChangeText={(date) => this.props.updateDate(date)}
                             />
                         </View>
                     </View>
