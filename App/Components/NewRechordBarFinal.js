@@ -54,7 +54,7 @@ export default class NewRechordBarFinal extends React.Component {
                         </View>
 
                         <View style={styles.textInputView}>
-                            <Text style={styles.itemLabel} numberOfLines={1}>{monthNames[this.props.date.getMonth()] + " " + this.props.date.getDate() + ", " + this.props.date.getFullYear()}</Text>
+                            <Text style={styles.itemLabel} numberOfLines={1}>{this.props.item.dateString}</Text>
                         </View>
                     </View>
                 

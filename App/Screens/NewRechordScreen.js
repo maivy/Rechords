@@ -10,8 +10,11 @@ import firebase from 'firebase';
 
 const {width, height} = Dimensions.get('window');
 const date = new Date();
+const monthNames = ["January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"
+];
 
-export default class EditRechordScreen extends React.Component {
+export default class NewRechordScreen extends React.Component {
     constructor(props) {
         super(props)
 
@@ -21,8 +24,10 @@ export default class EditRechordScreen extends React.Component {
             artist: 'Corinne Bailey Rae',
             location: 'Example Location',
             date: (date.getMonth() + 1) + " " + date.getDate() + " " + JSON.stringify(date.getFullYear()).substr(2, 2),
+            dateString: monthNames[date.getMonth()] + " " + date.getDate() + ", " + date.getFullYear(),
             description: 'Example Description',
             owner: '',
+            image: '',
             edit: false,
         }
 
@@ -54,7 +59,20 @@ export default class EditRechordScreen extends React.Component {
     }
 
     updateDate = (newDate) => {
-        this.setState({ date: newDate });
+        newDateNums = (newDate.getMonth() + 1) + " " + newDate.getDate() + " " + JSON.stringify(newDate.getFullYear()).substr(2, 2);
+        this.setState({ date: newDateNums });
+
+        newDateString = monthNames[newDate.getMonth()] + " " + newDate.getDate() + ", " + newDate.getFullYear();
+        this.setState({ dateString: newDateString });
+    }
+
+    updateImage = (newImage) => {
+        this.setState({ image: newImage });
+    }
+
+    updateDescription = (newDescription) => {
+        console.log(newDescription);
+        this.setState({ description: newDescription });
     }
 
     toggleEditMode = () =>  {
@@ -63,6 +81,18 @@ export default class EditRechordScreen extends React.Component {
         } else {
             this.setState({ edit: true });
         }
+    }
+
+    saveRechord = () => {
+        var ref = firebase.database().ref('users').child(firebase.auth().currentUser.uid).child('rechords').child(this.state.rechordTitle);
+        ref.child('song').set(this.state.song);
+        ref.child('artist').set(this.state.artist);
+        ref.child('location').set(this.state.location);
+        ref.child('date').set(this.state.date);
+        ref.child('dateString').set(this.state.dateString);
+        ref.child('description').set(this.state.description);
+        ref.child('owner').set(this.state.owner);
+        ref.child('albumCover').set(this.state.image);
     }
 
     render() {
@@ -80,7 +110,6 @@ export default class EditRechordScreen extends React.Component {
                     this.state.edit ? (
                         <NewRechordBarEdit
                             item={this.state}
-                            date={date}
                             toggleEditMode={this.toggleEditMode}
                             updateLocation={this.updateLocation}
                             updateDate={this.updateDate}
@@ -88,7 +117,6 @@ export default class EditRechordScreen extends React.Component {
                     ) : (
                         <NewRechordBarFinal
                             item={this.state}
-                            date={date}
                             toggleEditMode={this.toggleEditMode}
                         />
                     )
@@ -101,17 +129,29 @@ export default class EditRechordScreen extends React.Component {
                             edit                        
                             info={this.state}
                             albumStyle={styles.albumStyle}
+                            updateImage={this.updateImage}
+                            updateDescription={this.updateDescription}
                         />
                     </View>
 
                     <View style={styles.createButtonView}>
-                        <TouchableOpacity
-                            style={styles.createButton}
-                            activeOpacity = { .5 }
-                            onPress={() => this.signUp()}
-                        >
-                            <Text style={styles.createButtonText}>Save</Text>
-                        </TouchableOpacity>
+                    {
+                        (this.state.rechordTitle === '') ? (
+                            <View
+                                style={[styles.createButton, {backgroundColor: Colors.slateGreyAlpha}]}
+                            >
+                                <Text style={styles.createButtonText}>Save</Text>
+                            </View>
+                        ) : (
+                            <TouchableOpacity
+                                style={styles.createButton}
+                                activeOpacity = { .5 }
+                                onPress={() => this.saveRechord()}
+                            >
+                                <Text style={styles.createButtonText}>Save</Text>
+                            </TouchableOpacity>
+                        )
+                    }
                     </View>
                 </View>
                 
@@ -132,14 +172,6 @@ const styles = StyleSheet.create({
         marginTop: Metrics.mediumMargin,
         marginBottom: Metrics.tinyMargin,
     },
-    // editCover: {
-    //     flex: 1,
-    //     justifyContent: 'space-around',
-    //     marginTop: Metrics.mediumMargin
-    // },
-    // album: {
-    //     marginBottom: Metrics.mediumMargin,
-    // },
     albumStyle: {
         width: Metrics.widths.coverMedium,
         height: Metrics.widths.coverMedium, 

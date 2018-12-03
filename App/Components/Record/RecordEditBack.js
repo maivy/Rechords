@@ -20,7 +20,8 @@ export default class RecordBackCover extends React.Component {
                         style={styles.description}
                         placeholder='Enter memory details...'
                         placeholderTextColor='#fff'
-                        onEndEditing={(text) => this.props.updateDescription(text)}
+                        // onEndEditing={(text) => this.props.updateDescription(text)}
+                        onChangeText={(text) => this.props.updateDescription(text)}
                     />
                 </ScrollView>
 

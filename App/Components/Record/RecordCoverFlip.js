@@ -32,10 +32,6 @@ export default class RecordCoverFlip extends Component {
 
   }
 
-  updateDescription = (description) => {
-    this.setState({ description: description });
-  }
-
   constructor(props) {
     super(props);
   }
@@ -110,7 +106,7 @@ export default class RecordCoverFlip extends Component {
                     noImage
                     info={this.props.info}
                     fontStyle={{ fontSize: 18 }}
-                    updateDescription={this.updateDescription}
+                    updateImage={this.props.updateImage}
                     uid={this.props.uid}
                   />
                 ) : (
@@ -127,7 +123,7 @@ export default class RecordCoverFlip extends Component {
               { // Check if in edit mode
                 this.props.edit ? (
                   <RecordEditBack
-                    updateDescription={this.updateDescription}
+                    updateDescription={this.props.updateDescription}
                   />
                 ) : (
                   <RecordBackCover
