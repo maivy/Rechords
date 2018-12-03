@@ -71,7 +71,6 @@ export default class NewRechordScreen extends React.Component {
     }
 
     updateDescription = (newDescription) => {
-        console.log(newDescription);
         this.setState({ description: newDescription });
     }
 

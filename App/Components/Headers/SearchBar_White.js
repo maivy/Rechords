@@ -13,6 +13,7 @@ export default class SearchBar_White extends React.Component {
                     style={styles.input}
                     placeholder={this.props.placeholder}
                     placeholderTextColor={Colors.slateGrey}
+                    onChangeText={(newFriend) => this.props.onChangeTextFunction(newFriend)}
                 />
             </View>
         )

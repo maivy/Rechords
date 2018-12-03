@@ -21,7 +21,7 @@ export default class ShareScreen extends React.Component {
     state = {
         recordStyle: styles.recordHidden,
         recordHidden: true,
-
+        friend: '',
         message: '',
     }
 
@@ -33,9 +33,14 @@ export default class ShareScreen extends React.Component {
         this.props.navigation.navigate('ViewerScreen')
     }
 
+    updateFriend = (newFriend) => {
+        this.setState({ friend: newFriend });
+        console.log(newFriend);
+    }
+
     send = () => {
         Alert.alert(
-            this.props.navigation.state.params.item.title + ' has been sent to Friend',
+            this.props.navigation.state.params.item.title + ' has been sent to ' + this.state.friend,
             '',
             [
                 {text: 'Undo', onPress: () => console.log('Undo Pressed'), style: 'destructive'},
@@ -65,6 +70,7 @@ export default class ShareScreen extends React.Component {
             <SafeAreaView style={styles.container}>
                 <ShareHeader 
                     goBack={this.goBack}
+                    updateFriend={this.updateFriend}
                 />
 
                 <Text style={styles.rechordTitle}>{params.item.title}</Text>
