@@ -29,6 +29,7 @@ export default class ShareHeader extends React.Component {
 
                 <SearchBar_White
                     placeholder="Search for friend"
+                    onChangeTextFunction={this.props.updateFriend}
                 />
             </View>
         )
