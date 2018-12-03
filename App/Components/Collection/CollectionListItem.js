@@ -42,7 +42,7 @@ export default class RechordListItem extends React.Component {
                 {/* Record Title and Heart Functionality */}
 
                 <View style={styles.titleBar}>
-                    <Text style={styles.title}>{this.props.info.title}</Text>
+                    <Text style={styles.title} numberOfLines={1}>{this.props.info.title}</Text>
                     <Image                                      // still need to implement functionality
                         source={Images.heartEmptySlate}
                         style={styles.heart} />

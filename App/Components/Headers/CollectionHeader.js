@@ -4,8 +4,29 @@ import firebase from 'firebase';
 import { Metrics, Colors, Styles, Images } from '../../Themes';
 
 export default class CollectionHeader extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            currUser: '',
+        }
+
+        this.findOwner();
+    }
     signOut = () => {
         firebase.auth().signOut();
+    }
+
+    findOwner = () => {
+        var user = firebase.auth().currentUser;
+        var ref = firebase.database().ref("users/" + user.uid);
+        var name;
+        var that = this;
+        ref.once("value")
+            .then(function(snapshot) {
+                name = snapshot.child("name").val();
+                that.setState({ currUser: name });
+        });
     }
 
     render() {
@@ -19,7 +40,7 @@ export default class CollectionHeader extends React.Component {
                         source={Images.profileIcon} />
                     
                     <View style={styles.profileTextWrapper}>
-                        <Text style={styles.profileName}>Tiffany Manuel</Text>
+                        <Text style={styles.profileName}>{this.state.currUser}</Text>
 
                         <TouchableOpacity
                             onPress={() => this.signOut()}
