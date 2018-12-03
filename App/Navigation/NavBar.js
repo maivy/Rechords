@@ -1,8 +1,6 @@
 import { createBottomTabNavigator } from 'react-navigation'
 
-// import * as screens from '../Screens';
 import { NewRechordStack, CollectionStack, ExploreStack } from './';
-
 import { Metrics, Colors } from '../Themes';
 
 const NavBar = createBottomTabNavigator({
