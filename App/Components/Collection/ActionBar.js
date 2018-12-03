@@ -2,7 +2,9 @@ import React from 'react';
 import { 
   StyleSheet, 
   View, 
-  TouchableOpacity, 
+	TouchableOpacity, 
+	ActionSheetIOS,
+	Alert,
 } from 'react-native';
 import { Metrics } from '../../Themes';
 import { AntDesign, EvilIcons, Feather } from '@expo/vector-icons';
@@ -15,6 +17,29 @@ export default class ActionBar extends React.Component {
 				item: this.props.item
 		}
 	)
+
+	showShareOptions = () => {
+		ActionSheetIOS.showActionSheetWithOptions({
+			options: ['Cancel', 'Send to Friend', 'Add to ' + this.props.item.location + ' Public Collection'],
+			cancelButtonIndex: 0,
+			message: this.props.item.title,
+		},
+		(buttonIndex) => {
+			if (buttonIndex === 1) { 
+				this.goToShare();
+			} else if (buttonIndex === 2) {
+				Alert.alert(
+					this.props.item.title + ' has been added to ' + this.props.item.location + ' public collection.',
+					'',
+					[
+						{text: 'Undo', onPress: () => console.log('Undo Pressed'), style: 'destructive'},
+						{text: 'Okay', onPress: () => console.log('OK Pressed')},
+					],
+					{ cancelable: false }
+				)
+			}
+		});
+	}
 
 	goToEdit = () => this.props.navigation.navigate(
 		'EditScreen',
@@ -53,7 +78,7 @@ export default class ActionBar extends React.Component {
     		</TouchableOpacity>
 
     		<TouchableOpacity
-					onPress={() => this.goToShare()}
+					onPress={() => this.showShareOptions()}
 				>
     			<EvilIcons
     				name='share-apple'

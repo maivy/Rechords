@@ -24,7 +24,7 @@ export default class CollectionScreen extends React.Component {
     updateIndex = (index) => {
         this.setState({index: index});
         if (index === 0) {
-            this.setState({data: PersonalRechords});
+            this.getRechords();
         } else {
             this.setState({data: FriendRechords})
         }
@@ -39,7 +39,6 @@ export default class CollectionScreen extends React.Component {
     getRechords = () => {
         // Look at following line for sort by functionality (orderByChild(...))
         var ref = firebase.database().ref('users').child(firebase.auth().currentUser.uid).child('rechords').orderByChild('date');
-        console.log(ref);
         var rechords = [];
         var that = this;
         ref.once("value")
