@@ -11,11 +11,12 @@ import {
 import { Metrics } from '../Themes';
 import PersonalRechords from '../Data/PersonalRechords';
 import FriendRechords from '../Data/FriendRechords';
+import firebase from 'firebase';
 
 export default class CollectionScreen extends React.Component {  
 
     state = {
-        data: PersonalRechords,
+        data: [],
         index: 0
     }
 
@@ -31,6 +32,24 @@ export default class CollectionScreen extends React.Component {
 
     constructor(props) {
         super(props);
+
+        this.getRechords();
+    }
+
+    getRechords = () => {
+        // Look at following line for sort by functionality (orderByChild(...))
+        var ref = firebase.database().ref('users').child(firebase.auth().currentUser.uid).child('rechords').orderByChild('date');
+        console.log(ref);
+        var rechords = [];
+        var that = this;
+        ref.once("value")
+            .then(function(snapshot) {
+                snapshot.forEach(function(childSnapshot) {
+                    var childData = childSnapshot.val();
+                    rechords.push(childData);
+                })
+                that.setState({ data: rechords });
+        });
     }
 
     goToViewer = (item) => this.props.navigation.navigate(

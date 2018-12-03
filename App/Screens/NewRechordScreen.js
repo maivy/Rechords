@@ -6,7 +6,7 @@ import RecordCoverFlip from '../Components/Record/RecordCoverFlip';
 import NewRechordBarFinal from '../Components/NewRechordBarFinal';
 import NewRechordBarEdit from '../Components/NewRechordBarEdit';
 import { Metrics, Colors } from '../Themes';
-import firebase from 'firebase';
+import firebase from 'firebase';``
 
 const {width, height} = Dimensions.get('window');
 const date = new Date();
@@ -85,6 +85,7 @@ export default class NewRechordScreen extends React.Component {
 
     saveRechord = () => {
         var ref = firebase.database().ref('users').child(firebase.auth().currentUser.uid).child('rechords').child(this.state.rechordTitle);
+        ref.child('title').set(this.state.rechordTitle);
         ref.child('song').set(this.state.song);
         ref.child('artist').set(this.state.artist);
         ref.child('location').set(this.state.location);
@@ -92,7 +93,8 @@ export default class NewRechordScreen extends React.Component {
         ref.child('dateString').set(this.state.dateString);
         ref.child('description').set(this.state.description);
         ref.child('owner').set(this.state.owner);
-        ref.child('albumCover').set(this.state.image);
+        ref.child('image').set(this.state.image);
+        ref.child('favorite').set(false);
     }
 
     render() {
@@ -136,7 +138,7 @@ export default class NewRechordScreen extends React.Component {
 
                     <View style={styles.createButtonView}>
                     {
-                        (this.state.rechordTitle === '') ? (
+                        (this.state.rechordTitle === '') || (this.state.edit) ? (
                             <View
                                 style={[styles.createButton, {backgroundColor: Colors.slateGreyAlpha}]}
                             >
