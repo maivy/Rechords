@@ -65,6 +65,7 @@ const styles = StyleSheet.create({
         fontSize: 15,
         fontWeight: 'bold',
         color: Colors.slateGrey,
+        width: 130,
     },
     heart: {
         height: Metrics.icons.tiny,

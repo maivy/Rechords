@@ -83,7 +83,7 @@ export default class NewRechordScreen extends React.Component {
     }
 
     saveRechord = () => {
-        var ref = firebase.database().ref('users').child(firebase.auth().currentUser.uid).child('rechords').child(this.state.rechordTitle);
+        var ref = firebase.database().ref('users').child(firebase.auth().currentUser.uid).child('rechords').push();
         ref.child('title').set(this.state.rechordTitle);
         ref.child('song').set(this.state.song);
         ref.child('artist').set(this.state.artist);
@@ -94,6 +94,8 @@ export default class NewRechordScreen extends React.Component {
         ref.child('owner').set(this.state.owner);
         ref.child('image').set(this.state.image);
         ref.child('favorite').set(false);
+
+        this.props.navigation.navigate("RechordCollection");
     }
 
     render() {

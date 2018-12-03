@@ -41,9 +41,11 @@ export default class CollectionScreen extends React.Component {
         var ref = firebase.database().ref('users').child(firebase.auth().currentUser.uid).child('rechords').orderByChild('date');
         var rechords = [];
         var that = this;
+
         ref.once("value")
             .then(function(snapshot) {
                 snapshot.forEach(function(childSnapshot) {
+                    console.log(childSnapshot);
                     var childData = childSnapshot.val();
                     rechords.push(childData);
                 })

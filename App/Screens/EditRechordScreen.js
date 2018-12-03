@@ -77,7 +77,7 @@ export default class NewRechordScreen extends React.Component {
     }
 
     saveRechord = () => {
-        firebase.database().ref('users').child(firebase.auth().currentUser.uid).child('rechords').child(this.props.navigation.state.params.item.title).remove()
+        // firebase.database().ref('users').child(firebase.auth().currentUser.uid).child('rechords').child(this.props.navigation.state.params.item.title).remove()
 
         var ref = firebase.database().ref('users').child(firebase.auth().currentUser.uid).child('rechords').child(this.state.rechordTitle);
         ref.child('title').set(this.state.rechordTitle);
