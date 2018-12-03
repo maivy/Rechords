@@ -76,14 +76,15 @@ export default class RecordCover extends React.Component {
                 snapshot.ref.getDownloadURL().then(function(downloadURL) {
                     that.setState({ imageURI: downloadURL });
                     console.log("download url " + downloadURL);
-                    firebase.database().ref('users').child(firebase.auth().currentUser.uid).update({
-                        image: downloadURL,
-                    });
+                    // firebase.database().ref('users').child(firebase.auth().currentUser.uid).update({
+                    //     image: downloadURL,
+                    // });
                     that.setState({ imageURI: downloadURL });
                 });
         
             });
             console.log("image url " + this.state.imageURI);
+            this.props.updateImage(this.state.imageURI);
             // firebase.database().ref('users').child(firebase.auth().currentUser.uid).update({
             //     image: this.state.imageURI,
             // });

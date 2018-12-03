@@ -89,24 +89,24 @@ export default class App extends React.Component {
   }
 
   render() {
-    return (
-      <View style={styles.container}>
-        {
-          this.state.fontLoaded ? (
-            <NavBar />
-            // <screens.EditRechord uid={this.state.uid} />
-            // <screens.NewRechordScreen />
-          ) : null
-        }
-      </View>
-    )
-    // if (this.state.loggedIn && this.state.fontLoaded) {
-    //   return <NavBar />;
-    // } else if (this.state.fontLoaded) {
-    //   return <SignedOutStack />;
-    // } else {
-    //   return null;
-    // }
+    // return (
+    //   <View style={styles.container}>
+    //     {
+    //       this.state.fontLoaded ? (
+    //         <NavBar />
+    //         // <screens.EditRechord uid={this.state.uid} />
+    //         // <screens.NewRechordScreen />
+    //       ) : null
+    //     }
+    //   </View>
+    // )
+    if (this.state.loggedIn && this.state.fontLoaded) {
+      return <NavBar />;
+    } else if (this.state.fontLoaded) {
+      return <SignedOutStack />;
+    } else {
+      return null;
+    }
   }
 }
 

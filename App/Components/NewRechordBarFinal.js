@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, ScrollView } from 'react-native';
 import { Ionicons, MaterialCommunityIcons, Entypo } from '@expo/vector-icons';
 import { Metrics, Colors, Images } from '../Themes';
 
@@ -24,8 +24,9 @@ export default class NewRechordBarFinal extends React.Component {
                                 size={Metrics.icons.small}
                             />
                         </View>
+
                         <View style={styles.textInputView}>
-                            <Text style={styles.itemLabel}>{this.props.item.song + " - " + this.props.item.artist}</Text>
+                            <Text style={styles.itemLabel} numberOfLines={1}>{this.props.item.song + " - " + this.props.item.artist}</Text>
                         </View>
                     </View>
 
@@ -37,8 +38,9 @@ export default class NewRechordBarFinal extends React.Component {
                                 size={Metrics.icons.small}
                             />
                         </View>
+
                         <View style={styles.textInputView}>
-                            <Text style={styles.itemLabel}>Harrison Hot Springs</Text>
+                            <Text style={styles.itemLabel} numberOfLines={1}>{this.props.item.location}</Text>
                         </View>
                     </View>
 
@@ -50,8 +52,9 @@ export default class NewRechordBarFinal extends React.Component {
                                 size={Metrics.icons.small}
                             />
                         </View>
+
                         <View style={styles.textInputView}>
-                            <Text style={styles.itemLabel}>{monthNames[this.props.date.getMonth()] + " " + this.props.date.getDate() + ", " + this.props.date.getFullYear()}</Text>
+                            <Text style={styles.itemLabel} numberOfLines={1}>{this.props.item.dateString}</Text>
                         </View>
                     </View>
                 

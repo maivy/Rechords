@@ -5,9 +5,9 @@ import Ionicons from '@expo/vector-icons/Ionicons'
 import { Metrics, Colors, Styles, Images } from '../../Themes';
 
 export default class NewRechordHeader extends React.Component {
-    state = {
-        rechordTitle: '',
-    }
+    // state = {
+    //     rechordTitle: '',
+    // }
     render() {
         return (
             <View style={styles.container}>
@@ -32,7 +32,7 @@ export default class NewRechordHeader extends React.Component {
                         placeholder="Enter Rechord Title..."
                         placeholderTextColor={Colors.white}
                         value={this.props.rechordTitle}
-                        onChangeText={(rechordTitle) => this.props.updateRechordTitle()}
+                        onChangeText={(rechordTitle) => this.props.updateRechordTitle(rechordTitle)}
                     />
                 </View>
             </View>

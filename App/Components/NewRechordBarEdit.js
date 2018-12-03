@@ -1,12 +1,32 @@
 import React from 'react';
-import { StyleSheet, View, TextInput, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, TextInput, TouchableOpacity, Text } from 'react-native';
 import { Ionicons, MaterialCommunityIcons, Entypo } from '@expo/vector-icons';
 import { Metrics, Colors, Images } from '../Themes';
+import DateTimePicker from 'react-native-modal-datetime-picker';
+
+const monthNames = ["January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"
+];
+
+// Reused code from: https://github.com/mmazzarolo/react-native-modal-datetime-picker
 
 export default class NewRechordBarEdit extends React.Component {
+    state = {
+        isDateTimePickerVisible: false,
+    }
+
     constructor(props) {
         super(props)
     }
+
+    showDateTimePicker = () => this.setState({ isDateTimePickerVisible: true });
+
+    hideDateTimePicker = () => this.setState({ isDateTimePickerVisible: false });
+
+    handleDatePicked = (date) => {
+        this.hideDateTimePicker();
+        this.props.updateDate(date);
+    };
 
     render() {
         return (
@@ -24,9 +44,7 @@ export default class NewRechordBarEdit extends React.Component {
                         <View style={styles.textInputView}>
                             <TextInput 
                                 style={styles.itemLabel}
-                                placeholder="Happier - Marshmello, Bastille"
-                                placeholderTextColor={Colors.darkGrey}
-                                underlineColorAndroid='white'
+                                value={this.props.item.song + " - " + this.props.item.artist}
                             />
                         </View>
                     </View>
@@ -42,9 +60,8 @@ export default class NewRechordBarEdit extends React.Component {
                         <View style={styles.textInputView}>
                             <TextInput 
                                 style={styles.itemLabel}
-                                placeholder="Happier - Marshmello, Bastille"
-                                placeholderTextColor={Colors.darkGrey}
-                                underlineColorAndroid='white'
+                                value={this.props.item.location}
+                                onChangeText={(location) => this.props.updateLocation(location)}
                             />
                         </View>
                     </View>
@@ -59,11 +76,18 @@ export default class NewRechordBarEdit extends React.Component {
                         </View>
 
                         <View style={styles.textInputView}>
-                            <TextInput 
-                                style={styles.itemLabel}
-                                placeholder="Happier - Marshmello, Bastille"
-                                placeholderTextColor={Colors.darkGrey}
-                                underlineColorAndroid='white'
+                            <TouchableOpacity
+                                onPress={() => this.showDateTimePicker()}
+                            >
+                                <Text style={styles.itemLabel} numberOfLines={1}>{this.props.item.dateString}</Text>
+                            </TouchableOpacity>
+
+                            <DateTimePicker
+                                isVisible={this.state.isDateTimePickerVisible}
+                                date={this.props.date}
+                                mode='date'
+                                onConfirm={(date) => this.handleDatePicked(date)}
+                                onCancel={() => this.hideDateTimePicker()}
                             />
                         </View>
                     </View>
