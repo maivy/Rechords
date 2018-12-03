@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
+
 import SearchBar_White from './SearchBar_White';
 import { Metrics, Colors, Styles } from '../../Themes';
 
@@ -27,6 +28,7 @@ export default class FindSongHeader extends React.Component {
 
                     <SearchBar_White
                         placeholder="Search for a song, artist, etc."
+                        findSong={this.props.findSong}
                     />
                 </View>
 

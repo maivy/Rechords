@@ -2,8 +2,6 @@ import React from 'react';
 import { StyleSheet, View, TextInput } from 'react-native';
 import { Metrics, Colors, Images } from '../../Themes';
 
-import SortOption from '../SortOption';
-
 export default class SearchBar_White extends React.Component {
 
     render() {
@@ -13,6 +11,7 @@ export default class SearchBar_White extends React.Component {
                     style={styles.input}
                     placeholder={this.props.placeholder}
                     placeholderTextColor={Colors.slateGrey}
+                    onChangeText={(text) => this.props.findSong()}
                 />
             </View>
         )
