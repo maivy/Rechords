@@ -4,8 +4,14 @@ import firebase from 'firebase';
 import { Metrics, Colors, Styles, Images } from '../../Themes';
 
 export default class CollectionHeader extends React.Component {
+
+    constructor(props) {
+        super(props)
+    }
+
     signOut = () => {
         firebase.auth().signOut();
+        this.props.logOut();
     }
 
     render() {

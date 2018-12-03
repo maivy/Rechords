@@ -57,7 +57,7 @@ export default class CollectionScreen extends React.Component {
         return (
             <SafeAreaView style={styles.container}>
 
-                <CollectionHeader />
+                <CollectionHeader logOut={this.props.screenProps.logOut} />
 
                 <View style={styles.sortBar}>
                     <CollectionSortBar />
