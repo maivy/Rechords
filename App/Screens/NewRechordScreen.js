@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, SafeAreaView, TouchableOpacity, Text, Dimensions } from 'react-native';
-import Record from '../Components/Record/Record';
+import { Location, Permissions } from 'expo';
+
 import NewRechordHeader from '../Components/Headers/NewRechordHeader';
 import RecordCoverFlip from '../Components/Record/RecordCoverFlip';
 import NewRechordBarFinal from '../Components/NewRechordBarFinal';
@@ -11,10 +12,12 @@ import firebase from 'firebase';
 const {width, height} = Dimensions.get('window');
 const date = new Date();
 const monthNames = ["January", "February", "March", "April", "May", "June",
-  "July", "August", "September", "October", "November", "December"
-];
+                    "July", "August", "September", "October", "November", "December"
+                    ];
+const apiKey = 'AIzaSyDsUW3B-p8Bx8JwkW9aGdYUkaRa4y5RHV0';
 
 export default class NewRechordScreen extends React.Component {
+
     constructor(props) {
         super(props)
 
@@ -32,6 +35,8 @@ export default class NewRechordScreen extends React.Component {
         }
 
         this.findOwner();
+
+        this._getLocationAsync();
     }
 
     findOwner = () => {
@@ -45,6 +50,24 @@ export default class NewRechordScreen extends React.Component {
                 that.setState({ owner: name });
         });
     }
+
+    _getLocationAsync = async () => {
+        let { status } = await Permissions.askAsync(Permissions.LOCATION);
+        if (status !== 'granted') {
+          this.setState({
+            errorMessage: 'Permission to access location was denied',
+          });
+        }
+    
+        let location = await Location.getCurrentPositionAsync({});
+
+        fetch('https://maps.googleapis.com/maps/api/geocode/json?address=' + location.coords.latitude + ',' + location.coords.longitude + '&key=' + apiKey)
+        .then((response) => response.json())
+        .then((responseJson) => {
+            // console.log('ADDRESS GEOCODE is BACK!! => ' + JSON.stringify(responseJson.results[0].address_components[0].short_name));
+            this.setState({ location: responseJson.results[0].address_components[0].short_name } );
+        })
+    };
 
     goBack = () => {
         this.props.navigation.navigate('Home');
