@@ -1,3 +1,5 @@
+// https://github.com/benestudio/react-native-ws-2018-feb/blob/5d14c5c11865725dc0c4c067ae18ff39b84f1d35/src/api/search.js
+
 const apiPrefix = 'https://api.spotify.com/v1';
 
 export default async ({
@@ -6,8 +8,9 @@ export default async ({
   q,
   token,
 }) => {
-  const uri = `${apiPrefix}/search?type=track&limit=${limit}&offset=${offset}&q=${encodeURIComponent(q)}`;
-  console.log('search begin, uri =', uri, 'token =', token);
+
+  const uri = `${apiPrefix}/search?type=track&limit=${limit}&offset=${offset}&q=${encodeURIComponent(q)}&type=track`;
+
   const res = await fetch(uri, {
     method: 'GET',
     headers: {
@@ -15,7 +18,6 @@ export default async ({
     }
   });
   const json = await res.json();
-  console.log('search got json', json);
 
   if (!res.ok) {
     return [];
@@ -26,13 +28,12 @@ export default async ({
       items,
     }
   } = json;
-  // const items = json.tracks.items;
-  return items.map(item => ({
+  const itemsParsed = json.tracks.items;
+  let results = itemsParsed.map(item => ({
     id: item.id,
     title: item.name,
-    imageUri: item.album.images
-      ? item.album.images[0].url
-      : undefined
+    artists: item.artists,
+
   }));
-  console.log('search end');
+  return results;
 };

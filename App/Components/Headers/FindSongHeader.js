@@ -28,7 +28,7 @@ export default class FindSongHeader extends React.Component {
 
                     <SearchBar_White
                         placeholder="Search for a song, artist, etc."
-                        findSong={this.props.findSong}
+                        onChangeTextFunction={this.props.onChangeTextFunction}
                     />
                 </View>
 

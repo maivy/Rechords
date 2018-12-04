@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, SafeAreaView, TouchableOpacity, Text, Dimensions } from 'react-native';
+import { StyleSheet, View, SafeAreaView, TouchableOpacity, Text, Dimensions, FlatList } from 'react-native';
 import search from '../Data/api/searchApi'
 
 import { FindSongHeader } from '../Components/';
@@ -22,7 +22,8 @@ export default class FindSongScreen extends React.Component {
         super(props)
 
         this.state = {
-            authorizationCode: ''
+            authorizationCode: '',
+            searchResults: [],
         }
 
         this.getAuthorizationCode();
@@ -47,24 +48,38 @@ export default class FindSongScreen extends React.Component {
         this.props.navigation.navigate('Home')
     }
 
-    findSong = (searchEntry) => {
-        search({
-            offset: 0,
-            limit: 10,
-            q = searchEntry,
-            token: this.state.authorizationCode
+    goToNewRechord = (song, artist) => {
+        this.props.navigation.navigate('NewRechordScreen', {
+            song: song,
+            artist: artist
         })
     }
 
-    getAlbums = () => {
-        spotifyApi.getArtistAlbums('43ZHCT0cAZBISjO8DG9PnE').then(
-            function(data) {
-                console.log('Artist albums', data.body);
-            },
-            function(err) {
-                console.error(err);
-            }
-        );
+    findSong = async (searchEntry) => {
+        const results = await search({
+            offset: 0,
+            limit: 10,
+            q: searchEntry,
+            token: this.state.authorizationCode
+        });
+        // console.log('Search results: ' + JSON.stringify(results[0].artists[0].name));
+        this.setState({ searchResults: results });
+    }
+
+    _keyExtractor = (index) => JSON.stringify(index);
+
+    renderItem = (item) => {
+        let song = item.title;
+        let artist = item.artists[0].name;
+        return (
+            <TouchableOpacity
+                style={styles.listItem}
+                onPress={() => this.goToNewRechord(song, artist)}>
+
+                <Text style={styles.title}>{song}</Text>
+                <Text style={styles.artist}>{artist}</Text>
+            </TouchableOpacity>
+        )
     }
 
     render() {
@@ -73,8 +88,19 @@ export default class FindSongScreen extends React.Component {
             <SafeAreaView style={styles.container}>
                 <FindSongHeader 
                     goBack={this.goBack}
-                    findSong={this.getAlbums}
+                    onChangeTextFunction={this.findSong}
+                    style={styles.header}
                 />
+
+                <View style={styles.list}>
+                    <FlatList
+                        data={this.state.searchResults}
+                        renderItem={({item}) => this.renderItem(item)}
+                        keyExtractor={this._keyExtractor}
+                        ListEmptyComponent={<Text style={styles.noResults}>No results :(</Text>}
+                    />
+                </View>
+
             </SafeAreaView>
         )
     }
@@ -85,49 +111,24 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         overflow: 'scroll',
     },
-    rechordTitle: {
-        fontSize: 24,
-        marginTop: Metrics.smallMargin,
-        marginBottom: Metrics.smallMargin,
+    list: {
+        marginTop: Metrics.smallMargin
     },
-    rechord: {
-        alignItems: 'center'
+    listItem: {
+        width: Metrics.widths.wide,
+        marginBottom: Metrics.tinyMargin
     },
-    recordShown: {
-        zIndex: 100
-    },
-    recordHidden: {
-        zIndex: 0
-    },
-    coverWrapper: {
-        marginTop: -(Metrics.record.outerSmall * (3/5))
-    },
-    createButtonView: {
-        alignItems: 'center',
-        marginTop: height * 0.04,
-        marginBottom: height * 0.05,
-    },
-    
-    createButton: {
-        width: width * 0.5,
-        height: 50,
-        paddingTop:15,
-        paddingBottom:15,
-        marginLeft:30,
-        marginRight:30,
-        backgroundColor:'#68BEE2',
-        borderRadius:100,
-        shadowColor: 'black',
-        shadowOffset: {width: 0, height: 4},
-        shadowRadius: 5,
-        shadowOpacity: 0.5,
-        elevation: 5,
-    },
-
-    createButtonText: {
-        fontWeight: 'bold',
+    title: {
         fontSize: 16,
-        color: 'white',
-        textAlign:'center',
+        color: Colors.darkGrey
     },
+    artist: {
+        fontFamily: 'avenir',
+        fontSize: 14,
+        color: Colors.slateGrey
+    },
+    noResults: {
+        fontSize: 16,
+        color: Colors.darkGrey
+    }
 })

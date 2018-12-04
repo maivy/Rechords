@@ -35,7 +35,7 @@ export default class RecordCover extends React.Component {
         }
         if (this.props.info.image) {
             this.setState({
-                image: this.props.info.image
+                image: {uri: this.props.info.image}
             });
         }
         this.setState({ ready: true });
@@ -58,6 +58,22 @@ export default class RecordCover extends React.Component {
                 });
             }
 
+
+            const blob = await new Promise((resolve, reject) => {
+                const xhr = new XMLHttpRequest();
+                xhr.onload = function() {
+                  resolve(xhr.response);
+                };
+                xhr.onerror = function(e) {
+                  console.log(e);
+                  reject(new TypeError('Network request failed'));
+                };
+                xhr.responseType = 'blob';
+                xhr.open('GET', this.state.imageURI, true);
+                xhr.send(null);
+              });
+
+
             console.log("working " + this.state);
             const ref = firebase.storage().ref('rechords/');
             console.log("ref " + ref);
@@ -65,21 +81,22 @@ export default class RecordCover extends React.Component {
 
             console.log("RESPONSE " + response);
             
-            const blob = await response.blob();
+            // const blob = await response.blob();
             console.log("BLOB " + blob);
-            var that = this;
+            var _this = this;
         
-            await ref.put(blob).then((snapshot) => {
+            await ref.put(blob, {contentType: "image/jpeg"}).then(async (snapshot) => {
                 console.log('puts blob');
                 console.log("SNAPSHOT " + snapshot);
                 
-                snapshot.ref.getDownloadURL().then(function(downloadURL) {
-                    that.setState({ imageURI: downloadURL });
+                await snapshot.ref.getDownloadURL().then(async (downloadURL) => {
+                    await _this.setState({ imageURI: downloadURL });
+                    await _this.setState({ image: {uri: downloadURL} });
                     console.log("download url " + downloadURL);
                     // firebase.database().ref('users').child(firebase.auth().currentUser.uid).update({
                     //     image: downloadURL,
                     // });
-                    that.setState({ imageURI: downloadURL });
+                    // that.setState({ imageURI: downloadURL });
                 });
         
             });

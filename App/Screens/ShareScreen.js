@@ -1,5 +1,14 @@
 import React from 'react';
-import { StyleSheet, View, SafeAreaView, TouchableOpacity, Text, Dimensions, TextInput } from 'react-native';
+import { 
+    StyleSheet, 
+    View, 
+    SafeAreaView, 
+    TouchableOpacity, 
+    Text, 
+    Dimensions, 
+    TextInput,
+    Alert, 
+} from 'react-native';
 import Record from '../Components/Record/Record';
 import ShareHeader from '../Components/Headers/ShareHeader';
 import RecordCoverFlip from '../Components/Record/RecordCoverFlip';
@@ -12,7 +21,7 @@ export default class ShareScreen extends React.Component {
     state = {
         recordStyle: styles.recordHidden,
         recordHidden: true,
-
+        friend: '',
         message: '',
     }
 
@@ -22,6 +31,23 @@ export default class ShareScreen extends React.Component {
 
     goBack = () => {
         this.props.navigation.navigate('ViewerScreen')
+    }
+
+    updateFriend = (newFriend) => {
+        this.setState({ friend: newFriend });
+        console.log(newFriend);
+    }
+
+    send = () => {
+        Alert.alert(
+            this.props.navigation.state.params.item.title + ' has been sent to ' + this.state.friend,
+            '',
+            [
+                {text: 'Undo', onPress: () => console.log('Undo Pressed'), style: 'destructive'},
+                {text: 'Okay', onPress: () => this.goBack()},
+            ],
+            { cancelable: false }
+        )
     }
 
     toggleRecord() {
@@ -44,6 +70,7 @@ export default class ShareScreen extends React.Component {
             <SafeAreaView style={styles.container}>
                 <ShareHeader 
                     goBack={this.goBack}
+                    updateFriend={this.updateFriend}
                 />
 
                 <Text style={styles.rechordTitle}>{params.item.title}</Text>
@@ -84,7 +111,7 @@ export default class ShareScreen extends React.Component {
                     <TouchableOpacity
                         style={styles.sendButton}
                         activeOpacity = { .5 }
-                        onPress={() => this.signUp()}   // Implement 
+                        onPress={() => this.send()}   // Implement 
                     >
                         <Text style={styles.sendButtonText}>Send</Text>
                     </TouchableOpacity>
@@ -116,8 +143,8 @@ const styles = StyleSheet.create({
     },
     coverWrapper: {
         marginTop: -(Metrics.record.outerSmall * (3/5)),
-        width: width * 0.6,
-        height: width * 0.6,
+        width: width * 0.7,
+        height: width * 0.7,
     },
     messageView: {
         width: width * 0.9,
