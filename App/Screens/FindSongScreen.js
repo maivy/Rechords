@@ -58,7 +58,7 @@ export default class FindSongScreen extends React.Component {
     findSong = async (searchEntry) => {
         const results = await search({
             offset: 0,
-            limit: 10,
+            limit: 20,
             q: searchEntry,
             token: this.state.authorizationCode
         });
@@ -108,10 +108,12 @@ export default class FindSongScreen extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
+        flex: 1,
         alignItems: 'center',
         overflow: 'scroll',
     },
     list: {
+        flex: 1,
         marginTop: Metrics.smallMargin
     },
     listItem: {
