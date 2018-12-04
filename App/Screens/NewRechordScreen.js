@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, SafeAreaView, TouchableOpacity, Text, Dimensions } from 'react-native';
+import { StyleSheet, View, SafeAreaView, TouchableOpacity, Text, Dimensions, Animated } from 'react-native';
 import { Location, Permissions } from 'expo';
 import firebase from 'firebase';
 
@@ -33,15 +33,21 @@ export default class NewRechordScreen extends React.Component {
             owner: '',
             image: '',
             edit: false,
+            moveAnimation: undefined
         }
 
         this.findOwner();
+
     }
 
     componentWillMount() {
         this._getLocationAsync();
         this.updateSong();
         console.log('Song updated with: ' + this.state.song + '=' + this.state.artist);
+    }
+
+    componentDidMount() {
+        // this.getCoverPosition();
     }
 
     findOwner = () => {
@@ -73,6 +79,38 @@ export default class NewRechordScreen extends React.Component {
             this.setState({ location: responseJson.results[0].address_components[0].short_name } );
         })
     };
+
+    getCoverPosition = () => {
+        var that = this;
+        this.coverFlip.measure((fx, fy, width, height, px, py) => {
+            console.log('Component width is: ' + width)
+            console.log('Component height is: ' + height)
+            console.log('X offset to page: ' + px)
+            console.log('Y offset to page: ' + py)
+            that.x = px;
+            that.y = py;
+        })
+
+        if (that.x !== undefined) {
+            this.setState({
+                moveAnimation: new Animated.ValueXY({
+                    x: that.x,
+                    y: that.y
+                })
+            });
+            console.log('CURRENT X: ' + that.x);
+            console.log('CURRENT Y: ' + that.y);
+        }
+    }
+
+    // _moveCover = () => {
+    //     Animated.spring(this.moveAnimation, {
+    //         toValue: {
+    //             x: 100,
+    //             y: 100
+    //         }
+    //     }).start();
+    // }
 
     goBack = () => {
         this.props.navigation.navigate('Home');
@@ -172,13 +210,17 @@ export default class NewRechordScreen extends React.Component {
                 </View>
 
                 <View style={styles.editCover}>
-                    <View style={styles.album}>  
+                    <View style={styles.album}
+                        onLayout={(event) => this.getCoverPosition(event)}
+                        ref={view => { this.coverFlip = view; }}>  
                         <RecordCoverFlip
                             edit                        
                             info={this.state}
                             albumStyle={styles.albumStyle}
                             updateImage={this.updateImage}
                             updateDescription={this.updateDescription}
+                            _moveCover={this._moveCover}
+                            moveAnimation={this.state.moveAnimation}
                         />
                     </View>
 

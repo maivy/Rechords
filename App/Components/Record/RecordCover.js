@@ -34,9 +34,15 @@ export default class RecordCover extends React.Component {
             });
         }
         if (this.props.info.image) {
-            this.setState({
-                image: {uri: this.props.info.image}
-            });
+            if (typeof this.props.info.image === 'string') {
+                this.setState({
+                    image: { uri: this.props.info.image }
+                });
+            } else {
+                this.setState({
+                    image: this.props.info.image
+                });
+            }
         }
         this.setState({ ready: true });
     }

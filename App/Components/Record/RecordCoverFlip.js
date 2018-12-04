@@ -79,6 +79,14 @@ export default class RecordCoverFlip extends Component {
         backZIndex: 90
       });
     }
+    // this.props._moveCover();
+    // console.log("Called this.props._moveCover()");
+  }
+
+  getLayout() {
+    if (this.props.moveAnimation) {
+      return this.props.moveAnimation.getLayout();
+    } else return {}
   }
   
   render() {
