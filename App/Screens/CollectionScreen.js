@@ -32,7 +32,6 @@ export default class CollectionScreen extends React.Component {
 
     constructor(props) {
         super(props);
-
         this.getRechords();
     }
 

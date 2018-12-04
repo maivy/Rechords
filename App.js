@@ -23,6 +23,9 @@ var config = {
 
 firebase.initializeApp(config);
 
+// var SpotifyWebApi = require('spotify-web-api-node');
+// var spotifyApi = new SpotifyWebApi();
+
 export default class App extends React.Component {
 
   state = {
