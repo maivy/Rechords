@@ -94,6 +94,7 @@ export default class NewRechordScreen extends React.Component {
         ref.child('owner').set(this.state.owner);
         ref.child('image').set(this.state.image);
         ref.child('favorite').set(false);
+        ref.child('reference').set(ref.getKey());
 
         this.props.navigation.navigate("RechordCollection");
     }

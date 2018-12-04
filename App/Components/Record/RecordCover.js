@@ -75,7 +75,7 @@ export default class RecordCover extends React.Component {
 
 
             console.log("working " + this.state);
-            const ref = firebase.storage().ref('rechords/');
+            const ref = firebase.storage().ref().child(this.state.imageURI);
             console.log("ref " + ref);
             const response = await fetch(this.state.imageURI);
 
