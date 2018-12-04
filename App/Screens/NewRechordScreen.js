@@ -1,15 +1,16 @@
 import React from 'react';
 import { StyleSheet, View, SafeAreaView, TouchableOpacity, Text, Dimensions } from 'react-native';
 import { Location, Permissions } from 'expo';
+import firebase from 'firebase';
 
 import NewRechordHeader from '../Components/Headers/NewRechordHeader';
 import RecordCoverFlip from '../Components/Record/RecordCoverFlip';
 import NewRechordBarFinal from '../Components/NewRechordBarFinal';
 import NewRechordBarEdit from '../Components/NewRechordBarEdit';
 import { Metrics, Colors } from '../Themes';
-import firebase from 'firebase';``
+// import { throws } from 'assert';
 
-const {width, height} = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 const date = new Date();
 const monthNames = ["January", "February", "March", "April", "May", "June",
                     "July", "August", "September", "October", "November", "December"
@@ -37,9 +38,10 @@ export default class NewRechordScreen extends React.Component {
         this.findOwner();
     }
 
-    componentDidMount() {
+    componentWillMount() {
         this._getLocationAsync();
-        this.setSong();
+        this.updateSong();
+        console.log('Song updated with: ' + this.state.song + '=' + this.state.artist);
     }
 
     findOwner = () => {
@@ -72,16 +74,6 @@ export default class NewRechordScreen extends React.Component {
         })
     };
 
-    setSong() {
-        const params = this.props.navigation.state.params;
-        if (params) {
-            this.setState({
-                song: params.song,
-                artist: params.artist
-            });
-        }
-    }
-
     goBack = () => {
         this.props.navigation.navigate('Home');
     }
@@ -108,6 +100,21 @@ export default class NewRechordScreen extends React.Component {
 
     updateDescription = (newDescription) => {
         this.setState({ description: newDescription });
+    }
+
+    updateSong() {
+        const params = this.props.navigation.state.params;
+        if (params) {
+            this.setState({
+                song: params.song,
+                artist: params.artist
+            });
+        }
+        // console.log("Song has been updated with: " + this.state.song + '-' + this.state.artist);
+    }
+
+    goToFindSong = () => {
+        this.props.navigation.navigate('FindSong');
     }
 
     toggleEditMode = () =>  {
@@ -152,6 +159,8 @@ export default class NewRechordScreen extends React.Component {
                             toggleEditMode={this.toggleEditMode}
                             updateLocation={this.updateLocation}
                             updateDate={this.updateDate}
+                            goToFindSong={this.goToFindSong}
+                            updateSong={this.updateSong}
                         />
                     ) : (
                         <NewRechordBarFinal

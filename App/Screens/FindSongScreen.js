@@ -49,10 +49,12 @@ export default class FindSongScreen extends React.Component {
     }
 
     goToNewRechord = (song, artist) => {
+        console.log('Go to new rechord with: ' + song + '-' + artist);
+        // this.props.navigation.state.params.updateSong();
         this.props.navigation.navigate('NewRechordScreen', {
             song: song,
             artist: artist
-        })
+        });
     }
 
     findSong = async (searchEntry) => {
