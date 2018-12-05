@@ -24,7 +24,7 @@ export default class CollectionScreen extends React.Component {
     updateIndex = (index) => {
         this.setState({index: index});
         if (index === 0) {
-            this.getRechords();
+            this.componentWillMount();
         } else {
             this.setState({data: FriendRechords})
         }
@@ -32,33 +32,34 @@ export default class CollectionScreen extends React.Component {
 
     constructor(props) {
         super(props);
-        this.getRechords();
     }
 
-    getRechords = () => {
+    componentWillMount = () => {
         // Look at following line for sort by functionality (orderByChild(...))
         var ref = firebase.database().ref('users').child(firebase.auth().currentUser.uid).child('rechords').orderByChild('date');
         var rechords = [];
         var that = this;
 
-        ref.once("value")
-            .then(function(snapshot) {
-                snapshot.forEach(function(childSnapshot) {
-                    console.log(childSnapshot);
-                    var childData = childSnapshot.val();
-                    rechords.push(childData);
-                })
-                that.setState({ data: rechords });
+        ref.on('value', function(dataSnapshot) {
+            rechords = [];
+            dataSnapshot.forEach(function(childSnapshot) {
+                var childData = childSnapshot.val();
+                rechords.push(childData);
+            })
+            that.setState({ data: rechords });
         });
     }
 
-    goToViewer = (item) => this.props.navigation.navigate(
+    goToViewer = (item) => {
+        console.log(item);
+        this.props.navigation.navigate(
         'ViewerScreen',
         {
             item: item,
             location: false,
         }
     )
+    }
 
     _keyExtractor = (index) => JSON.stringify(index);
 

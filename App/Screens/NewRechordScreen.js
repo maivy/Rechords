@@ -1,6 +1,15 @@
 import React from 'react';
-import { StyleSheet, View, SafeAreaView, TouchableOpacity, Text, Dimensions, Animated } from 'react-native';
+import {
+    StyleSheet,
+    View,
+    SafeAreaView,
+    TouchableOpacity,
+    Text,
+    Dimensions,
+    Animated,
+    Keyboard } from 'react-native';
 import { Location, Permissions } from 'expo';
+import { NavigationActions, StackActions, NavigationEvents } from 'react-navigation';
 import firebase from 'firebase';
 
 import NewRechordHeader from '../Components/Headers/NewRechordHeader';
@@ -8,7 +17,6 @@ import RecordCoverFlip from '../Components/Record/RecordCoverFlip';
 import NewRechordBarFinal from '../Components/NewRechordBarFinal';
 import NewRechordBarEdit from '../Components/NewRechordBarEdit';
 import { Metrics, Colors } from '../Themes';
-// import { throws } from 'assert';
 
 const { width, height } = Dimensions.get('window');
 const date = new Date();
@@ -42,8 +50,6 @@ export default class NewRechordScreen extends React.Component {
 
     componentWillMount() {
         this._getLocationAsync();
-        this.updateSong();
-        console.log('Song updated with: ' + this.state.song + '=' + this.state.artist);
     }
 
     componentDidMount() {
@@ -112,8 +118,22 @@ export default class NewRechordScreen extends React.Component {
     //     }).start();
     // }
 
+    resetNavigation = () => {
+        const resetAction = StackActions.reset({
+            index: 0,
+            actions: [ NavigationActions.navigate({ routeName: 'Home' }) ],
+        });
+        this.props.navigation.dispatch(resetAction);
+    }
+    
     goBack = () => {
         this.props.navigation.navigate('Home');
+    }
+
+    goToFindSong = () => {
+        this.props.navigation.navigate('FindSong', {
+            updateSong: this.updateSong
+        });
     }
 
     updateRechordTitle = (newTitle) => {
@@ -140,7 +160,7 @@ export default class NewRechordScreen extends React.Component {
         this.setState({ description: newDescription });
     }
 
-    updateSong() {
+    updateSong = (song, artist) => {
         const params = this.props.navigation.state.params;
         if (params) {
             this.setState({
@@ -148,11 +168,7 @@ export default class NewRechordScreen extends React.Component {
                 artist: params.artist
             });
         }
-        // console.log("Song has been updated with: " + this.state.song + '-' + this.state.artist);
-    }
-
-    goToFindSong = () => {
-        this.props.navigation.navigate('FindSong');
+        console.log("Song has been updated with: " + this.state.song + '-' + this.state.artist);
     }
 
     toggleEditMode = () =>  {
@@ -175,14 +191,20 @@ export default class NewRechordScreen extends React.Component {
         ref.child('owner').set(this.state.owner);
         ref.child('image').set(this.state.image);
         ref.child('favorite').set(false);
+        ref.child('reference').set(ref.getKey());
 
+        this.resetNavigation();
         this.props.navigation.navigate("RechordCollection");
     }
 
     render() {
         const params = this.props.navigation.state.params;
         return (
-            <SafeAreaView style={styles.container}>
+            <SafeAreaView style={styles.safe}>
+            <NavigationEvents
+                onWillFocus={() => this.updateSong()}
+            />
+            <TouchableOpacity style={styles.container} onPress={Keyboard.dismiss}>
                 <NewRechordHeader 
                     goBack={this.goBack}
                     rechordTitle={this.state.rechordTitle}
@@ -210,9 +232,9 @@ export default class NewRechordScreen extends React.Component {
                 </View>
 
                 <View style={styles.editCover}>
-                    <View style={styles.album}
-                        onLayout={(event) => this.getCoverPosition(event)}
-                        ref={view => { this.coverFlip = view; }}>  
+                    <View style={styles.album}>
+                        {/* onLayout={(event) => this.getCoverPosition(event)}
+                        ref={view => { this.coverFlip = view; }}>   */}
                         <RecordCoverFlip
                             edit                        
                             info={this.state}
@@ -244,13 +266,16 @@ export default class NewRechordScreen extends React.Component {
                     }
                     </View>
                 </View>
-                
+                </TouchableOpacity>
             </SafeAreaView>
         )
     }
 }
 
 const styles = StyleSheet.create({
+    safe: {
+        flex: 1,
+    },
     container: {
         flex: 1,
         alignItems: 'center',

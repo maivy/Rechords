@@ -40,7 +40,7 @@ export default class FindSongScreen extends React.Component {
         });
         let responseJson = await response.json();
         let accessToken = await responseJson.access_token;
-        await console.log("Authorization Code: " + JSON.stringify(accessToken));
+        // await console.log("Authorization Code: " + JSON.stringify(accessToken));
         await this.setState({ authorizationCode: accessToken });
     }
 
@@ -49,8 +49,6 @@ export default class FindSongScreen extends React.Component {
     }
 
     goToNewRechord = (song, artist) => {
-        console.log('Go to new rechord with: ' + song + '-' + artist);
-        // this.props.navigation.state.params.updateSong();
         this.props.navigation.navigate('NewRechordScreen', {
             song: song,
             artist: artist
@@ -88,6 +86,7 @@ export default class FindSongScreen extends React.Component {
         const params = this.props.navigation.state.params;
         return (
             <SafeAreaView style={styles.container}>
+
                 <FindSongHeader 
                     goBack={this.goBack}
                     onChangeTextFunction={this.findSong}
