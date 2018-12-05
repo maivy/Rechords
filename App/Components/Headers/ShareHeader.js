@@ -27,10 +27,17 @@ export default class ShareHeader extends React.Component {
                     <Text style={Styles.h1}>Send to Friend</Text>
                 </View>
 
-                <SearchBar_White
+                <TouchableOpacity onPress={() => this.props.goToFindFriend()}>
+                    <SearchBar_White
+                        placeholder="Search for friend"
+                        editable={false}
+                        // onChangeTextFunction={this.props.onChangeTextFunction}
+                    />
+                </TouchableOpacity>
+                {/* <SearchBar_White
                     placeholder="Search for friend"
-                    onChangeTextFunction={this.props.updateFriend}
-                />
+                    onChangeTextFunction={this.props.onChangeTextFunction}
+                /> */}
             </View>
         )
     }

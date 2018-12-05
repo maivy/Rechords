@@ -72,6 +72,7 @@ export default class EditRechordScreen extends React.Component {
 
     updateImage = (newImage) => {
         this.setState({ image: newImage });
+        console.log("image updated!");
     }
 
     updateDescription = (newDescription) => {

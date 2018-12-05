@@ -8,7 +8,6 @@ import NavBar from './App/Navigation/NavBar';
 import SignedOutStack from './App/Navigation/SignedOutStack';
 
 import firebase from 'firebase';
-import Database from './App/Data/Database';
 import PersonalRechords from './App/Data/PersonalRechords';
 import Images from './App/Themes/Images';
 
