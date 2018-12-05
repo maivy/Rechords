@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, TextInput } from 'react-native';
+import { StyleSheet, View, TextInput, TouchableOpacity } from 'react-native';
 import { Metrics, Colors, Images } from '../../Themes';
 
 export default class SearchBar_White extends React.Component {
@@ -7,12 +7,26 @@ export default class SearchBar_White extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <TextInput
-                    style={styles.input}
-                    placeholder={this.props.placeholder}
-                    placeholderTextColor={Colors.slateGrey}
-                    onChangeText={(text) => this.props.onChangeTextFunction(text)}
-                />
+                {
+                    this.props.uneditable ? (
+                        <TextInput
+                            style={styles.input}
+                            editable={false}
+                            placeholder={this.props.placeholder}
+                            placeholderTextColor={Colors.slateGrey}
+                            onChangeText={(text) => this.props.onChangeTextFunction(text)}
+                            onTouchStart={() => this.props.onPressFunction()}
+                        />
+
+                    ) : (
+                        <TextInput
+                            style={styles.input}
+                            placeholder={this.props.placeholder}
+                            placeholderTextColor={Colors.slateGrey}
+                            onChangeText={(text) => this.props.onChangeTextFunction(text)}
+                        />
+                    )
+                }
             </View>
         )
     }
@@ -33,6 +47,7 @@ const styles = StyleSheet.create({
         elevation: 5,
     },
     input: {
+        fontFamily: 'avenir-heavy',
         color: Colors.darkGrey,
     }
 })

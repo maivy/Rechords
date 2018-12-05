@@ -40,7 +40,7 @@ export default class FindSongScreen extends React.Component {
         });
         let responseJson = await response.json();
         let accessToken = await responseJson.access_token;
-        await console.log("Authorization Code: " + JSON.stringify(accessToken));
+        // await console.log("Authorization Code: " + JSON.stringify(accessToken));
         await this.setState({ authorizationCode: accessToken });
     }
 
@@ -48,10 +48,8 @@ export default class FindSongScreen extends React.Component {
         this.props.navigation.navigate('Home')
     }
 
-    goToNewRechord = (song, artist) => {
-        console.log('Go to new rechord with: ' + song + '-' + artist);
-        // this.props.navigation.state.params.updateSong();
-        this.props.navigation.navigate('NewRechordScreen', {
+    goBackFromSearch = (screen, song, artist) => {
+        this.props.navigation.navigate(screen, {
             song: song,
             artist: artist
         });
@@ -71,12 +69,17 @@ export default class FindSongScreen extends React.Component {
     _keyExtractor = (index) => JSON.stringify(index);
 
     renderItem = (item) => {
+        let screen = 'NewRechordScreen';
+        const params = this.props.navigation.state.params;
+        if (params) {
+            screen = params.screen;
+        }
         let song = item.title;
         let artist = item.artists[0].name;
         return (
             <TouchableOpacity
                 style={styles.listItem}
-                onPress={() => this.goToNewRechord(song, artist)}>
+                onPress={() => this.goBackFromSearch(screen, song, artist)}>
 
                 <Text style={styles.title}>{song}</Text>
                 <Text style={styles.artist}>{artist}</Text>
@@ -88,6 +91,7 @@ export default class FindSongScreen extends React.Component {
         const params = this.props.navigation.state.params;
         return (
             <SafeAreaView style={styles.container}>
+
                 <FindSongHeader 
                     goBack={this.goBack}
                     onChangeTextFunction={this.findSong}

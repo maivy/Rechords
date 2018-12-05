@@ -76,6 +76,7 @@ export default class RecordCover extends React.Component {
               });
 
             const ref = firebase.storage().ref().child(this.state.imageURI);
+
             const response = await fetch(this.state.imageURI);
             
             // const blob = await response.blob();
@@ -85,7 +86,8 @@ export default class RecordCover extends React.Component {
                 
                 await snapshot.ref.getDownloadURL().then(async (downloadURL) => {
                     await _this.setState({ imageURI: downloadURL });
-                    await _this.setState({ image: {uri: downloadURL} });
+                    await _this.setState({ image: { uri: downloadURL } });
+                    console.log("download url " + downloadURL);
                     // firebase.database().ref('users').child(firebase.auth().currentUser.uid).update({
                     //     image: downloadURL,
                     // });
@@ -93,7 +95,9 @@ export default class RecordCover extends React.Component {
                 });
         
             });
-            this.props.updateImage(this.state.imageURI);
+            // console.log("image url " + this.state.imageURI);
+            await this.props.updateImage(this.state.imageURI);
+            console.log("image url " + this.state.imageURI);
             // firebase.database().ref('users').child(firebase.auth().currentUser.uid).update({
             //     image: this.state.imageURI,
             // });
@@ -135,14 +139,10 @@ export default class RecordCover extends React.Component {
                         this.props.noImage ? (
                             <View style={styles.uploadButton}>
                                 <SubmitButton
-                                text='Select Photo'
-                                function={this.onPressUploadPicture}
-                            />
+                                    text='Select Photo'
+                                    function={this.onPressUploadPicture}
+                                />
                             </View>
-                            // <SubmitButton
-                            //     text='Select Photo'
-                            //     function={this.onPressUploadPicture}
-                            // />
                         ) : null
                     }
 

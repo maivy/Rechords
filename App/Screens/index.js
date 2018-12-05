@@ -9,6 +9,7 @@ import CreateAccount from './CreateAccount';
 import ShareScreen from './ShareScreen';
 import LocationCollectionScreen from './LocationCollectionScreen';
 import FindSongScreen from './FindSongScreen';
+import FindFriendScreen from './FindFriendScreen';
 import NewRechordScreen from './NewRechordScreen';
 
 export {
@@ -23,5 +24,6 @@ export {
   ShareScreen,
   LocationCollectionScreen,
   FindSongScreen,
+  FindFriendScreen,
   NewRechordScreen,
 }
