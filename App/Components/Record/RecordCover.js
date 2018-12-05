@@ -9,7 +9,6 @@
 import React from 'react';
 import { StyleSheet, View, Text, Image, ImageBackground, TouchableOpacity } from 'react-native';
 import { LinearGradient, ImagePicker, Permissions } from 'expo';
-
 import firebase from 'firebase';
 
 import SubmitButton from '../SubmitButton';
@@ -109,7 +108,7 @@ export default class RecordCover extends React.Component {
                 style={[styles.container, Styles.shadow]}
                 imageStyle={styles.image}
                 source={this.state.image}
-                key={this.state.image}>
+                key={this.state.imageURI}>
 
                 {/* Black/Transparent Gradients on Rechord Cover */}
                 

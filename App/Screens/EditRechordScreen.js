@@ -42,6 +42,7 @@ export default class EditRechordScreen extends React.Component {
     }
 
     goBack = () => {
+        console.log("SEND IMAGE BACK: " + this.state.image);
         this.props.navigation.navigate('ViewerScreen', {item: this.state});
     }
 
@@ -115,21 +116,21 @@ export default class EditRechordScreen extends React.Component {
                 />
 
                 <View style={styles.whiteBar}>
-                {
-                    this.state.edit ? (
+                {/* {
+                    this.state.edit ? ( */}
                         <NewRechordBarEdit
                             item={this.state}
                             toggleEditMode={this.toggleEditMode}
                             updateLocation={this.updateLocation}
                             updateDate={this.updateDate}
                         />
-                    ) : (
+                    {/* ) : (
                         <NewRechordBarFinal
                             item={this.state}
                             toggleEditMode={this.toggleEditMode}
                         />
                     )
-                }
+                } */}
                 </View>
 
                 <View style={styles.editCover}>

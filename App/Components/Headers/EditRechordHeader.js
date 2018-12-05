@@ -29,8 +29,7 @@ export default class EditRechordHeader extends React.Component {
                 <View style={styles.rechordTitleView}>
                     <TextInput 
                         style={styles.rechordTitle}
-                        placeholder={this.props.rechordTitle}
-                        placeholderTextColor={Colors.white}
+                        value={this.props.rechordTitle}
                         onChangeText={(rechordTitle) => this.props.updateRechordTitle(rechordTitle)}
                     />
                 </View>

@@ -55,6 +55,7 @@ export default class CollectionScreen extends React.Component {
         'ViewerScreen',
         {
             item: item,
+            ref: item.reference,
             location: false,
         }
     )
