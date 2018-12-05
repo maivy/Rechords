@@ -145,10 +145,20 @@ export default class NewRechordScreen extends React.Component {
     }
 
     updateDate = (newDate) => {
-        newDateNums = (newDate.getMonth() + 1) + " " + newDate.getDate() + " " + JSON.stringify(newDate.getFullYear()).substr(2, 2);
-        this.setState({ date: newDateNums });
+        var newDateNums;
+        if(JSON.stringify(newDate.getDate()).length === 1) {
+            newDateNums = (newDate.getMonth() + 1) + " 0" + newDate.getDate() + " " + JSON.stringify(newDate.getFullYear()).substr(2, 2);
+        } else { 
+            newDateNums = (newDate.getMonth() + 1) + " " + newDate.getDate() + " " + JSON.stringify(newDate.getFullYear()).substr(2, 2);
+        }
 
-        newDateString = monthNames[newDate.getMonth()] + " " + newDate.getDate() + ", " + newDate.getFullYear();
+        if(JSON.stringify(newDate.getMonth()).length === 1) {
+            newDateNums = "0" + newDateNums;
+        }
+        this.setState({ date: newDateNums});
+        console.log(newDateNums);
+
+        var newDateString = monthNames[newDate.getMonth()] + " " + newDate.getDate() + ", " + newDate.getFullYear();
         this.setState({ dateString: newDateString });
     }
 

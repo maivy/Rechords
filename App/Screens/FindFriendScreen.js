@@ -4,10 +4,9 @@ import { createFilter } from 'react-native-search-filter';
 
 import search from '../Data/api/searchApi';
 import friends from '../Data/Friends';
-import { FindSongHeader } from '../Components/';
+import SearchHeader from '../Components/Headers/SearchHeader';
 import { Metrics, Colors } from '../Themes';
 
-const {width, height} = Dimensions.get('window');
 const KEYS_TO_FILTERS = ['name'];
 
 export default class FindFriendScreen extends React.Component {
@@ -29,9 +28,11 @@ export default class FindFriendScreen extends React.Component {
     }
 
     goBack = (friend) => {
-        this.props.navigation.navigate('ShareScreen', {
-            friend: friend
-        })
+        const params = this.props.navigation.state.params;
+        if (friend !== undefined) {
+            params.updateFriend(friend);
+        }
+        this.props.navigation.navigate('ShareScreen');
     }
 
     findSong = async (searchEntry) => {
@@ -48,20 +49,13 @@ export default class FindFriendScreen extends React.Component {
     _keyExtractor = (index) => JSON.stringify(index);
 
     renderItem = (item) => {
-        let screen = 'NewRechordScreen';
-        const params = this.props.navigation.state.params;
-        if (params) {
-            screen = params.screen;
-        }
-        let song = item.title;
-        let artist = item.artists[0].name;
+        let friend = item.name;
         return (
             <TouchableOpacity
                 style={styles.listItem}
-                onPress={() => this.goBackFromSearch(screen, song, artist)}>
+                onPress={() => this.goBack(friend)}>
 
-                <Text style={styles.title}>{song}</Text>
-                <Text style={styles.artist}>{artist}</Text>
+                <Text style={styles.title}>{friend}</Text>
             </TouchableOpacity>
         )
     }
@@ -73,8 +67,10 @@ export default class FindFriendScreen extends React.Component {
         return (
             <SafeAreaView style={styles.container}>
 
-                <FindSongHeader 
+                <SearchHeader
                     goBack={this.goBack}
+                    screenTitle='Find A Friend'
+                    placeholderText='Search for a friend...'
                     onChangeTextFunction={this.searchUpdated}
                     style={styles.header}
                 />

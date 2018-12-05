@@ -1,10 +1,12 @@
+
 import React from 'react';
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
+
 import SearchBar_White from './SearchBar_White';
 import { Metrics, Colors, Styles } from '../../Themes';
 
-export default class ShareHeader extends React.Component {
+export default class SearchHeader extends React.Component {
     constructor(props) {
         super(props)
     }
@@ -23,21 +25,15 @@ export default class ShareHeader extends React.Component {
                             size={Metrics.icons.medium}
                         />
                     </TouchableOpacity>
+                    <Text style={Styles.h1}>{this.props.screenTitle}</Text>
 
-                    <Text style={Styles.h1}>Send to Friend</Text>
+                    <SearchBar_White
+                        placeholder={this.props.placeholderText}
+                        onChangeTextFunction={this.props.onChangeTextFunction}
+                    />
                 </View>
 
-                <TouchableOpacity onPress={() => this.props.goToFindFriend()}>
-                    <SearchBar_White
-                        uneditable
-                        placeholder={this.props.placeholderText}
-                        onPressFunction={this.props.goToFindFriend}
-                    />
-                </TouchableOpacity>
-                {/* <SearchBar_White
-                    placeholder="Search for friend"
-                    onChangeTextFunction={this.props.onChangeTextFunction}
-                /> */}
+                
             </View>
         )
     }

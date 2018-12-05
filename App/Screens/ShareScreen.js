@@ -26,14 +26,8 @@ export default class ShareScreen extends React.Component {
     state = {
         recordStyle: styles.recordHidden,
         recordHidden: true,
-        friend: '',
+        friend: 'Find a friend...',
         friends: friends,
-        searchTerm: '',
-        // message: '',
-    }
-
-    searchUpdated = (term) => {
-        this.setState({ searchTerm: term })
     }
 
     constructor(props) {
@@ -45,7 +39,10 @@ export default class ShareScreen extends React.Component {
     }
 
     goToFindFriend = () => {
-        this.props.navigation.navigate('FindFriendScreen');
+        this.props.navigation.navigate('FindFriendScreen', {
+            friend: this.state.friend,
+            updateFriend: this.updateFriend
+        });
     }
 
     updateFriend = (newFriend) => {
@@ -81,60 +78,60 @@ export default class ShareScreen extends React.Component {
 
     render() {
         const params = this.props.navigation.state.params;
-        const filteredFriends = friends.filter(createFilter(this.state.searchTerm, KEYS_TO_FILTERS));
-        console.log("SEARCH TERMS: "+JSON.stringify(filteredFriends));
         return (
             <SafeAreaView style={styles.container}>
                 <ShareHeader 
                     goBack={this.goBack}
                     goToFindFriend={this.goToFindFriend}
-                    onChangeTextFunction={this.searchUpdated}
+                    placeholderText={this.state.friend}
                 />
 
-                <Text style={styles.rechordTitle}>{params.item.title}</Text>
-                
-                <View style={[styles.rechord]}>
-                    <TouchableOpacity
-                        style={this.state.recordStyle}
-                        onPress={() => this.toggleRecord()}>
-
-                        <Record
-                            tiny
-                            title={params.item.song}
-                            artist={params.item.artist}
-                            containerStyle={styles.record}
-                        />
-                    </TouchableOpacity>
+                <View style={styles.mainContent}>
+                    <Text style={styles.rechordTitle}>{params.item.title}</Text>
                     
-                    <View style={styles.coverWrapper}>
-                        <RecordCoverFlip
-                            info={params.item}
-                            albumStyle={styles.albumStyle}
-                        />
+                    <View style={[styles.rechord]}>
+                        <TouchableOpacity
+                            style={this.state.recordStyle}
+                            onPress={() => this.toggleRecord()}>
+
+                            <Record
+                                tiny
+                                title={params.item.song}
+                                artist={params.item.artist}
+                                containerStyle={styles.record}
+                            />
+                        </TouchableOpacity>
+                        
+                        <View style={styles.coverWrapper}>
+                            <RecordCoverFlip
+                                info={params.item}
+                                albumStyle={styles.albumStyle}
+                            />
+                        </View>
                     </View>
-                </View>
 
-                {/* To implement if we have time */}
+                    {/* To implement if we have time */}
 
-                {/* <View style={styles.messageView}>
-                    <TextInput
-                        style={styles.messageInput}
-                        placeholder="Write a message (optional)"
-                        placeholderTextColor={Colors.slateGrey}
-                        value={this.state.message}
-                        onChangeText={(message) => this.setState({ message })}
-                        multiline={true}
-                    />
-                </View> */}
+                    {/* <View style={styles.messageView}>
+                        <TextInput
+                            style={styles.messageInput}
+                            placeholder="Write a message (optional)"
+                            placeholderTextColor={Colors.slateGrey}
+                            value={this.state.message}
+                            onChangeText={(message) => this.setState({ message })}
+                            multiline={true}
+                        />
+                    </View> */}
 
-                <View style={styles.sendButtonView}>
-                    <TouchableOpacity
-                        style={styles.sendButton}
-                        activeOpacity = { .5 }
-                        onPress={() => this.send()}   // Implement 
-                    >
-                        <Text style={styles.sendButtonText}>Send</Text>
-                    </TouchableOpacity>
+                    <View style={styles.sendButtonView}>
+                        <TouchableOpacity
+                            style={styles.sendButton}
+                            activeOpacity = { .5 }
+                            onPress={() => this.send()}   // Implement 
+                        >
+                            <Text style={styles.sendButtonText}>Send</Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
                 
             </SafeAreaView>
@@ -147,6 +144,11 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         overflow: 'scroll',
+    },
+    mainContent: {
+        flex: 1,
+        justifyContent: 'space-around',
+        alignItems: 'center',
     },
     rechordTitle: {
         fontSize: 24,

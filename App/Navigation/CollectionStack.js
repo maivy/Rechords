@@ -11,7 +11,7 @@ const CollectionStack = createStackNavigator({
     ShareScreen: { screen: screens.ShareScreen },
     EditScreen: { screen: screens.EditRechordScreen },
     FindSong: { screen: screens.FindSongScreen },
-    FindFriendScreen: { screen: screens.FindSongScreen }
+    FindFriendScreen: { screen: screens.FindFriendScreen }
   }, {
     initialRouteName: 'CollectionScreen',
     headerMode: 'none',

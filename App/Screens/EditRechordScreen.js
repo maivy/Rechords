@@ -47,7 +47,7 @@ export default class EditRechordScreen extends React.Component {
         // setTimeout(60);
         this.props.navigation.navigate('ViewerScreen', {item: this.state});
     }
-
+    
     goToFindSong = () => {
         this.props.navigation.navigate('FindSong', {
             screen: 'EditScreen'
@@ -101,7 +101,6 @@ export default class EditRechordScreen extends React.Component {
     }
 
     saveRechord = () => {
-        console.log("NEW IMG: " + this.state.image);
         var ref = firebase.database().ref('users').child(firebase.auth().currentUser.uid).child('rechords').child(this.state.reference);
         ref.child('title').set(this.state.title);
         ref.child('song').set(this.state.song);
