@@ -15,7 +15,6 @@ export default class FindFriendScreen extends React.Component {
 
         this.state = {
             searchResults: friends,
-            // searchTerm: '',
         }
 
     }
@@ -23,7 +22,7 @@ export default class FindFriendScreen extends React.Component {
     searchUpdated = (term) => {
         // this.setState({ searchTerm: term });
         const filteredFriends = friends.filter(createFilter(term, KEYS_TO_FILTERS));
-        console.log("SEARCH TERMS: "+JSON.stringify(filteredFriends));
+        // console.log("SEARCH TERMS: "+JSON.stringify(filteredFriends));
         this.setState({ searchResults: filteredFriends });
     }
 
@@ -33,17 +32,6 @@ export default class FindFriendScreen extends React.Component {
             params.updateFriend(friend);
         }
         this.props.navigation.navigate('ShareScreen');
-    }
-
-    findSong = async (searchEntry) => {
-        const results = await search({
-            offset: 0,
-            limit: 20,
-            q: searchEntry,
-            token: this.state.authorizationCode
-        });
-        // console.log('Search results: ' + JSON.stringify(results[0].artists[0].name));
-        this.setState({ searchResults: results });
     }
 
     _keyExtractor = (index) => JSON.stringify(index);
@@ -62,8 +50,6 @@ export default class FindFriendScreen extends React.Component {
 
     render() {
         const params = this.props.navigation.state.params;
-        // const filteredFriends = friends.filter(createFilter(this.state.searchTerm, KEYS_TO_FILTERS));
-        // console.log("SEARCH TERMS: "+JSON.stringify(filteredFriends));
         return (
             <SafeAreaView style={styles.container}>
 
