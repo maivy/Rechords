@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, View, SafeAreaView, TouchableOpacity } from 'react-native';
 import { LinearGradient } from 'expo';
 import { NavigationEvents } from 'react-navigation';
-import { Record, ActionBar, ViewHeader } from '../Components';
+import { Record, ActionBar, ViewHeader, ActionBarLocation } from '../Components';
 import RecordCoverFlip from '../Components/Record/RecordCoverFlip';
 import firebase from 'firebase';
 import { Metrics, Colors } from '../Themes';
@@ -44,32 +44,37 @@ export default class RechordViewerScreen extends React.Component {
             reference: this.props.navigation.state.params.item.reference,
             edit: false,
         }
+        // if(this.state.reference !== '') {
+        //     this.componentWillMount
+        // }
         this.componentWillMount();
         // console.log(this.state.title);
     }
 
     componentWillMount = () => {
         // var params = this.props.navigation.state.params;
-        var ref = firebase.database().ref('users').child(firebase.auth().currentUser.uid).child('rechords').child(this.state.reference);
-        var that = this;
-        ref.on('value', function(dataSnapshot) {
-            console.log("CHANGE");
-            dataSnapshot.forEach(function(childSnapshot) {
-                var childData = childSnapshot.val();
-                var childKey = childSnapshot.key;
-                console.log("CHILD KEY: " + childKey);
-                if(childKey === 'title') {
-                    that.setState({ title: childData}, () => {
-                        console.log("TITLE CHANGED: " + that.state.title)
-                    });
-                    // console.log("TITLE: " + that.state.title);
-                } else if(childKey === 'image') {
-                    that.setState({ image: childData }, () => {
-                        console.log("IMAGE: " + that.state.image);
-                    });
-                }
-            })
-        });
+        if(this.state.reference !== '') {
+            var ref = firebase.database().ref('users').child(firebase.auth().currentUser.uid).child('rechords').child(this.state.reference);
+            var that = this;
+            ref.on('value', function(dataSnapshot) {
+                console.log("CHANGE");
+                dataSnapshot.forEach(function(childSnapshot) {
+                    var childData = childSnapshot.val();
+                    var childKey = childSnapshot.key;
+                    console.log("CHILD KEY: " + childKey);
+                    if(childKey === 'title') {
+                        that.setState({ title: childData}, () => {
+                            console.log("TITLE CHANGED: " + that.state.title)
+                        });
+                        // console.log("TITLE: " + that.state.title);
+                    } else if(childKey === 'image') {
+                        that.setState({ image: childData }, () => {
+                            console.log("IMAGE: " + that.state.image);
+                        });
+                    }
+                })
+            });
+        }
     }
 
     // updateImage = (params) => {
@@ -148,7 +153,7 @@ export default class RechordViewerScreen extends React.Component {
 
                     {
                         params.location ? (
-                            <ActionBar/>
+                            <ActionBarLocation/>
                         ) : (
                             <ActionBar 
                                 navigation={this.props.navigation}
