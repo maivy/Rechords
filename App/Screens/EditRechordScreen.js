@@ -44,6 +44,7 @@ export default class EditRechordScreen extends React.Component {
     }
 
     goBack = () => {
+        // setTimeout(60);
         this.props.navigation.navigate('ViewerScreen', {item: this.state});
     }
 
