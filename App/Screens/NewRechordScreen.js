@@ -132,7 +132,7 @@ export default class NewRechordScreen extends React.Component {
 
     goToFindSong = () => {
         this.props.navigation.navigate('FindSong', {
-            updateSong: this.updateSong
+            screen: 'NewRechordScreen'
         });
     }
 
@@ -160,7 +160,7 @@ export default class NewRechordScreen extends React.Component {
         this.setState({ description: newDescription });
     }
 
-    updateSong = (song, artist) => {
+    updateSong = () => {
         const params = this.props.navigation.state.params;
         if (params) {
             this.setState({
@@ -168,7 +168,7 @@ export default class NewRechordScreen extends React.Component {
                 artist: params.artist
             });
         }
-        console.log("Song has been updated with: " + this.state.song + '-' + this.state.artist);
+        // console.log("Song has been updated with: " + this.state.song + '-' + this.state.artist);
     }
 
     toggleEditMode = () =>  {
@@ -220,7 +220,6 @@ export default class NewRechordScreen extends React.Component {
                             updateLocation={this.updateLocation}
                             updateDate={this.updateDate}
                             goToFindSong={this.goToFindSong}
-                            updateSong={this.updateSong}
                         />
                     ) : (
                         <NewRechordBarFinal

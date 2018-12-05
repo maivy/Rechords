@@ -9,7 +9,8 @@ import {
     Alert, 
     Keyboard
 } from 'react-native';
-import Record from '../Components/Record/Record';
+import { NavigationEvents } from 'react-navigation';
+
 import EditRechordHeader from '../Components/Headers/EditRechordHeader';
 import RecordCoverFlip from '../Components/Record/RecordCoverFlip';
 import NewRechordBarFinal from '../Components/NewRechordBarFinal';
@@ -46,6 +47,12 @@ export default class EditRechordScreen extends React.Component {
         this.props.navigation.navigate('ViewerScreen', {item: this.state});
     }
 
+    goToFindSong = () => {
+        this.props.navigation.navigate('FindSong', {
+            screen: 'EditScreen'
+        });
+    }
+
     updateRechordTitle = (newTitle) => {
         this.setState({ title: newTitle });
     }
@@ -68,6 +75,19 @@ export default class EditRechordScreen extends React.Component {
 
     updateDescription = (newDescription) => {
         this.setState({ description: newDescription });
+    }
+
+    updateSong = () => {
+        const params = this.props.navigation.state.params;
+        if (params) {
+            if (params.song) {
+                this.setState({
+                    song: params.song,
+                    artist: params.artist
+                });
+            }
+        }
+        console.log("Song has been updated with: " + this.state.song + '-' + this.state.artist);
     }
 
     toggleEditMode = () =>  {
@@ -107,6 +127,9 @@ export default class EditRechordScreen extends React.Component {
         const params = this.props.navigation.state.params;
         return (
             <SafeAreaView style={{flex: 1}}>
+            <NavigationEvents
+                onWillFocus={() => this.updateSong()}
+            />
             <TouchableOpacity style={styles.container} onPress={Keyboard.dismiss}>
                 <EditRechordHeader 
                     goBack={this.goBack}
@@ -122,6 +145,7 @@ export default class EditRechordScreen extends React.Component {
                             toggleEditMode={this.toggleEditMode}
                             updateLocation={this.updateLocation}
                             updateDate={this.updateDate}
+                            goToFindSong={this.goToFindSong}
                         />
                     ) : (
                         <NewRechordBarFinal

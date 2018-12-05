@@ -48,8 +48,8 @@ export default class FindSongScreen extends React.Component {
         this.props.navigation.navigate('Home')
     }
 
-    goToNewRechord = (song, artist) => {
-        this.props.navigation.navigate('NewRechordScreen', {
+    goBackFromSearch = (screen, song, artist) => {
+        this.props.navigation.navigate(screen, {
             song: song,
             artist: artist
         });
@@ -69,12 +69,17 @@ export default class FindSongScreen extends React.Component {
     _keyExtractor = (index) => JSON.stringify(index);
 
     renderItem = (item) => {
+        let screen = 'NewRechordScreen';
+        const params = this.props.navigation.state.params;
+        if (params) {
+            screen = params.screen;
+        }
         let song = item.title;
         let artist = item.artists[0].name;
         return (
             <TouchableOpacity
                 style={styles.listItem}
-                onPress={() => this.goToNewRechord(song, artist)}>
+                onPress={() => this.goBackFromSearch(screen, song, artist)}>
 
                 <Text style={styles.title}>{song}</Text>
                 <Text style={styles.artist}>{artist}</Text>
