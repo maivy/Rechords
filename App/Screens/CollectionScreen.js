@@ -41,10 +41,11 @@ export default class CollectionScreen extends React.Component {
         var that = this;
 
         ref.on('value', function(dataSnapshot) {
+            // console.log(dataSnapshot);
             rechords = [];
             dataSnapshot.forEach(function(childSnapshot) {
                 var childData = childSnapshot.val();
-                rechords.push(childData);
+                rechords.unshift(childData);
             })
             that.setState({ data: rechords });
         });
@@ -77,7 +78,7 @@ export default class CollectionScreen extends React.Component {
         return (
             <SafeAreaView style={styles.container}>
 
-                <CollectionHeader />
+                <CollectionHeader logOut={this.props.screenProps.logOut} />
 
                 <View style={styles.sortBar}>
                     <CollectionSortBar />
@@ -91,6 +92,7 @@ export default class CollectionScreen extends React.Component {
                 </View>
 
                 <FlatList
+                    // inverted
                     columnWrapperStyle={styles.covers}
                     numColumns={2}
                     data={this.state.data}

@@ -10,6 +10,7 @@ import ViewHeader from './Headers/ViewerHeader';
 import LocationCollectionHeader from './Headers/LocationCollectionHeader';
 import LocationCollectionSortBar from './Explore/LocationCollection/LocationCollectionSortBar';
 import LocationCollectionToggle from './Explore/LocationCollection/LocationCollectionToggle';
+import FindSongHeader from './Headers/FindSongHeader';
 
 export {
     Record,
@@ -24,4 +25,5 @@ export {
     LocationCollectionHeader,
     LocationCollectionSortBar,
     LocationCollectionToggle,
+    FindSongHeader
 }

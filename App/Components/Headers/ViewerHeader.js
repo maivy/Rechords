@@ -42,6 +42,8 @@ const styles = StyleSheet.create({
     },
     title: {
         flex: 1,
+        paddingLeft: Metrics.mediumMargin + Metrics.miniMargin,
+        paddingRight: Metrics.mediumMargin + Metrics.miniMargin,
         textAlign: 'center',
         fontSize: 24,
         fontWeight: 'bold',

@@ -34,9 +34,15 @@ export default class RecordCover extends React.Component {
             });
         }
         if (this.props.info.image) {
-            this.setState({
-                image: {uri: this.props.info.image}
-            });
+            if (typeof this.props.info.image === 'string') {
+                this.setState({
+                    image: { uri: this.props.info.image }
+                });
+            } else {
+                this.setState({
+                    image: this.props.info.image
+                });
+            }
         }
         this.setState({ ready: true });
     }
@@ -48,8 +54,6 @@ export default class RecordCover extends React.Component {
                 allowsEditing: true,
                 aspect: [3, 3],
             });
-            
-            console.log(result);
             
             if (!result.cancelled) {
                 await this.setState({ 
@@ -65,7 +69,6 @@ export default class RecordCover extends React.Component {
                   resolve(xhr.response);
                 };
                 xhr.onerror = function(e) {
-                  console.log(e);
                   reject(new TypeError('Network request failed'));
                 };
                 xhr.responseType = 'blob';
@@ -73,26 +76,17 @@ export default class RecordCover extends React.Component {
                 xhr.send(null);
               });
 
-
-            console.log("working " + this.state);
             const ref = firebase.storage().ref().child(this.state.imageURI);
-            console.log("ref " + ref);
             const response = await fetch(this.state.imageURI);
-
-            console.log("RESPONSE " + response);
             
             // const blob = await response.blob();
-            console.log("BLOB " + blob);
             var _this = this;
         
             await ref.put(blob, {contentType: "image/jpeg"}).then(async (snapshot) => {
-                console.log('puts blob');
-                console.log("SNAPSHOT " + snapshot);
                 
                 await snapshot.ref.getDownloadURL().then(async (downloadURL) => {
                     await _this.setState({ imageURI: downloadURL });
                     await _this.setState({ image: {uri: downloadURL} });
-                    console.log("download url " + downloadURL);
                     // firebase.database().ref('users').child(firebase.auth().currentUser.uid).update({
                     //     image: downloadURL,
                     // });
@@ -100,7 +94,6 @@ export default class RecordCover extends React.Component {
                 });
         
             });
-            console.log("image url " + this.state.imageURI);
             this.props.updateImage(this.state.imageURI);
             // firebase.database().ref('users').child(firebase.auth().currentUser.uid).update({
             //     image: this.state.imageURI,

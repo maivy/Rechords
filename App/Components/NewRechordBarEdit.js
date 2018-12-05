@@ -45,6 +45,8 @@ export default class NewRechordBarEdit extends React.Component {
                             <TextInput 
                                 style={styles.itemLabel}
                                 value={this.props.item.song + " - " + this.props.item.artist}
+                                editable={false}
+                                onTouchStart={() => this.props.goToFindSong()}
                             />
                         </View>
                     </View>
@@ -58,11 +60,11 @@ export default class NewRechordBarEdit extends React.Component {
                             />
                         </View>
                         <View style={styles.textInputView}>
-                            <TextInput 
-                                style={styles.itemLabel}
-                                value={this.props.item.location}
-                                onChangeText={(location) => this.props.updateLocation(location)}
-                            />
+                                <TextInput 
+                                    style={styles.itemLabel}
+                                    value={this.props.item.location}
+                                    onChangeText={(location) => this.props.updateLocation(location)}
+                                />
                         </View>
                     </View>
 

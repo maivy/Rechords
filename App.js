@@ -23,6 +23,9 @@ var config = {
 
 firebase.initializeApp(config);
 
+// var SpotifyWebApi = require('spotify-web-api-node');
+// var spotifyApi = new SpotifyWebApi();
+
 export default class App extends React.Component {
 
   state = {
@@ -43,34 +46,6 @@ export default class App extends React.Component {
     });
   }
 
-  addRechord = (rechordObject) => {
-    console.log("working");
-    const ref = firebase.storage().ref('rechords').child(this.state.uid).child("image");
-    // const response = await fetch(rechordObject.image);
-    console.log("rechord object image " + Images.cover6);
-    const uri = rechordObjIect.image.uri;
-    console.log('uri ' + uri);
- 
-    // const blob = await rechordObject.image.blob();
-    // var that = this;
-
-    // await ref.put(blob).then((snapshot) => {
-    //   console.log('puts blob');
-
-    //   snapshot.ref.getDownloadURL().then(function(downloadURL) {
-    //     that.setState({ image: downloadURL });
-    //     rechordObject.image = this.state.image;
-    // });
-
-    // });
-
-    // await firebase.database().ref('users').child(firebase.auth().currentUser.uid).update(rechordObject);
-    // rechordObject.image
-    // database.ref('rechords/').update(rechordObject).then(() => {
-    //     console.log("added rechord!");
-    // });
-  } 
-
   async componentDidMount() {
     await Font.loadAsync({
       'digital-7': require('./assets/fonts/Digital-7.ttf'),
@@ -85,23 +60,15 @@ export default class App extends React.Component {
     setCustomText(customTextProps);
     this.setState({ fontLoaded: true });
     this.checkIfUserLoggedIn();
-    // this.addRechord(PersonalRechords[0]);
+  }
+
+  logOut = () => {
+    this.setState({ loggedIn: false });
   }
 
   render() {
-    // return (
-    //   <View style={styles.container}>
-    //     {
-    //       this.state.fontLoaded ? (
-    //         <NavBar />
-    //         // <screens.EditRechord uid={this.state.uid} />
-    //         // <screens.NewRechordScreen />
-    //       ) : null
-    //     }
-    //   </View>
-    // )
     if (this.state.loggedIn && this.state.fontLoaded) {
-      return <NavBar />;
+      return <NavBar screenProps={{logOut: this.logOut}} />;
     } else if (this.state.fontLoaded) {
       return <SignedOutStack />;
     } else {

@@ -1,20 +1,24 @@
 import React from 'react';
-import { StyleSheet, View, SafeAreaView, TouchableOpacity, Text, Dimensions } from 'react-native';
-import Record from '../Components/Record/Record';
+import { StyleSheet, View, SafeAreaView, TouchableOpacity, Text, Dimensions, Animated } from 'react-native';
+import { Location, Permissions } from 'expo';
+import firebase from 'firebase';
+
 import NewRechordHeader from '../Components/Headers/NewRechordHeader';
 import RecordCoverFlip from '../Components/Record/RecordCoverFlip';
 import NewRechordBarFinal from '../Components/NewRechordBarFinal';
 import NewRechordBarEdit from '../Components/NewRechordBarEdit';
 import { Metrics, Colors } from '../Themes';
-import firebase from 'firebase';``
+// import { throws } from 'assert';
 
-const {width, height} = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 const date = new Date();
 const monthNames = ["January", "February", "March", "April", "May", "June",
-  "July", "August", "September", "October", "November", "December"
-];
+                    "July", "August", "September", "October", "November", "December"
+                    ];
+const apiKey = 'AIzaSyDsUW3B-p8Bx8JwkW9aGdYUkaRa4y5RHV0';
 
 export default class NewRechordScreen extends React.Component {
+
     constructor(props) {
         super(props)
 
@@ -22,16 +26,28 @@ export default class NewRechordScreen extends React.Component {
             rechordTitle: '',
             song: 'Put Your Rechords On',
             artist: 'Corinne Bailey Rae',
-            location: 'Example Location',
+            location: '--',
             date: (date.getMonth() + 1) + " " + date.getDate() + " " + JSON.stringify(date.getFullYear()).substr(2, 2),
             dateString: monthNames[date.getMonth()] + " " + date.getDate() + ", " + date.getFullYear(),
             description: 'Example Description',
             owner: '',
             image: '',
             edit: false,
+            moveAnimation: undefined
         }
 
         this.findOwner();
+
+    }
+
+    componentWillMount() {
+        this._getLocationAsync();
+        this.updateSong();
+        console.log('Song updated with: ' + this.state.song + '=' + this.state.artist);
+    }
+
+    componentDidMount() {
+        // this.getCoverPosition();
     }
 
     findOwner = () => {
@@ -46,6 +62,56 @@ export default class NewRechordScreen extends React.Component {
         });
     }
 
+    _getLocationAsync = async () => {
+        let { status } = await Permissions.askAsync(Permissions.LOCATION);
+        if (status !== 'granted') {
+          this.setState({
+            errorMessage: 'Permission to access location was denied',
+          });
+        }
+    
+        let location = await Location.getCurrentPositionAsync({});
+
+        fetch('https://maps.googleapis.com/maps/api/geocode/json?address=' + location.coords.latitude + ',' + location.coords.longitude + '&key=' + apiKey)
+        .then((response) => response.json())
+        .then((responseJson) => {
+            // console.log('ADDRESS GEOCODE is BACK!! => ' + JSON.stringify(responseJson.results[0].address_components[0].short_name));
+            this.setState({ location: responseJson.results[0].address_components[0].short_name } );
+        })
+    };
+
+    getCoverPosition = () => {
+        var that = this;
+        this.coverFlip.measure((fx, fy, width, height, px, py) => {
+            console.log('Component width is: ' + width)
+            console.log('Component height is: ' + height)
+            console.log('X offset to page: ' + px)
+            console.log('Y offset to page: ' + py)
+            that.x = px;
+            that.y = py;
+        })
+
+        if (that.x !== undefined) {
+            this.setState({
+                moveAnimation: new Animated.ValueXY({
+                    x: that.x,
+                    y: that.y
+                })
+            });
+            console.log('CURRENT X: ' + that.x);
+            console.log('CURRENT Y: ' + that.y);
+        }
+    }
+
+    // _moveCover = () => {
+    //     Animated.spring(this.moveAnimation, {
+    //         toValue: {
+    //             x: 100,
+    //             y: 100
+    //         }
+    //     }).start();
+    // }
+
     goBack = () => {
         this.props.navigation.navigate('Home');
     }
@@ -59,10 +125,20 @@ export default class NewRechordScreen extends React.Component {
     }
 
     updateDate = (newDate) => {
-        newDateNums = (newDate.getMonth() + 1) + " " + newDate.getDate() + " " + JSON.stringify(newDate.getFullYear()).substr(2, 2);
-        this.setState({ date: newDateNums });
+        var newDateNums;
+        if(JSON.stringify(newDate.getDate()).length === 1) {
+            newDateNums = (newDate.getMonth() + 1) + " 0" + newDate.getDate() + " " + JSON.stringify(newDate.getFullYear()).substr(2, 2);
+        } else { 
+            newDateNums = (newDate.getMonth() + 1) + " " + newDate.getDate() + " " + JSON.stringify(newDate.getFullYear()).substr(2, 2);
+        }
 
-        newDateString = monthNames[newDate.getMonth()] + " " + newDate.getDate() + ", " + newDate.getFullYear();
+        if(JSON.stringify(newDate.getMonth()).length === 1) {
+            newDateNums = "0" + newDateNums;
+        }
+        this.setState({ date: newDateNums});
+        console.log(newDateNums);
+
+        var newDateString = monthNames[newDate.getMonth()] + " " + newDate.getDate() + ", " + newDate.getFullYear();
         this.setState({ dateString: newDateString });
     }
 
@@ -72,6 +148,21 @@ export default class NewRechordScreen extends React.Component {
 
     updateDescription = (newDescription) => {
         this.setState({ description: newDescription });
+    }
+
+    updateSong() {
+        const params = this.props.navigation.state.params;
+        if (params) {
+            this.setState({
+                song: params.song,
+                artist: params.artist
+            });
+        }
+        // console.log("Song has been updated with: " + this.state.song + '-' + this.state.artist);
+    }
+
+    goToFindSong = () => {
+        this.props.navigation.navigate('FindSong');
     }
 
     toggleEditMode = () =>  {
@@ -117,6 +208,8 @@ export default class NewRechordScreen extends React.Component {
                             toggleEditMode={this.toggleEditMode}
                             updateLocation={this.updateLocation}
                             updateDate={this.updateDate}
+                            goToFindSong={this.goToFindSong}
+                            updateSong={this.updateSong}
                         />
                     ) : (
                         <NewRechordBarFinal
@@ -128,13 +221,17 @@ export default class NewRechordScreen extends React.Component {
                 </View>
 
                 <View style={styles.editCover}>
-                    <View style={styles.album}>  
+                    <View style={styles.album}
+                        onLayout={(event) => this.getCoverPosition(event)}
+                        ref={view => { this.coverFlip = view; }}>  
                         <RecordCoverFlip
                             edit                        
                             info={this.state}
                             albumStyle={styles.albumStyle}
                             updateImage={this.updateImage}
                             updateDescription={this.updateDescription}
+                            _moveCover={this._moveCover}
+                            moveAnimation={this.state.moveAnimation}
                         />
                     </View>
 
