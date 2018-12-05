@@ -46,6 +46,7 @@ export default class CollectionScreen extends React.Component {
             dataSnapshot.forEach(function(childSnapshot) {
                 var childData = childSnapshot.val();
                 rechords.unshift(childData);
+
             })
             that.setState({ data: rechords });
         });

@@ -77,6 +77,7 @@ export default class RecordCover extends React.Component {
               });
 
             const ref = firebase.storage().ref().child(this.state.imageURI);
+
             const response = await fetch(this.state.imageURI);
             
             // const blob = await response.blob();
