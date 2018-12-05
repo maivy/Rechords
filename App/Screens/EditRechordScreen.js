@@ -22,7 +22,7 @@ const monthNames = ["January", "February", "March", "April", "May", "June",
   "July", "August", "September", "October", "November", "December"
 ];
 
-export default class NewRechordScreen extends React.Component {
+export default class EditRechordScreen extends React.Component {
     constructor(props) {
         super(props)
 
@@ -62,7 +62,9 @@ export default class NewRechordScreen extends React.Component {
     }
 
     updateImage = (newImage) => {
+        console.log("UPDATE IMAGE WITH: " + newImage);
         this.setState({ image: newImage });
+        console.log("NEW IMAGE STATE: " + this.state.image);
     }
 
     updateDescription = (newDescription) => {
@@ -87,6 +89,7 @@ export default class NewRechordScreen extends React.Component {
         ref.child('dateString').set(this.state.dateString);
         ref.child('description').set(this.state.description);
         ref.child('owner').set(this.state.owner);
+        console.log("IMAGE ADDED TO FIREBASE: " + this.state.image);
         ref.child('image').set(this.state.image);
         ref.child('favorite').set(false);
 

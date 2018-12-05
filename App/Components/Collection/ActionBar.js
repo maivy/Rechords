@@ -51,7 +51,9 @@ export default class ActionBar extends React.Component {
   render() {
     return (
     	<View style={styles.actionBar}>
-    		<TouchableOpacity>
+    		<TouchableOpacity
+				// onPress={() => this.props.deleteRechord()}
+			>
     			<EvilIcons
     				name='trash'
     				size={40}

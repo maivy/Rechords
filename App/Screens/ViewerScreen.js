@@ -84,6 +84,7 @@ export default class RechordViewerScreen extends React.Component {
                             <ActionBar 
                                 navigation={this.props.navigation}
                                 item={params.item}
+                                // deleteRechord={this.}
                             />
                         )
                     }
