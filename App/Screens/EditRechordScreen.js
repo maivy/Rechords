@@ -27,7 +27,7 @@ export default class NewRechordScreen extends React.Component {
         super(props)
 
         this.state = {
-            rechordTitle: this.props.navigation.state.params.item.title,
+            title: this.props.navigation.state.params.item.title,
             song: this.props.navigation.state.params.item.song,
             artist: this.props.navigation.state.params.item.artist,
             location: this.props.navigation.state.params.item.location,
@@ -36,16 +36,17 @@ export default class NewRechordScreen extends React.Component {
             description: this.props.navigation.state.params.item.description,
             owner: this.props.navigation.state.params.item.owner,
             image: this.props.navigation.state.params.item.image,
+            reference: this.props.navigation.state.params.item.reference,
             edit: false,
         }
     }
 
     goBack = () => {
-        this.props.navigation.navigate('ViewerScreen');
+        this.props.navigation.navigate('ViewerScreen', {item: this.state});
     }
 
     updateRechordTitle = (newTitle) => {
-        this.setState({ rechordTitle: newTitle });
+        this.setState({ title: newTitle });
     }
 
     updateLocation = (newLocation) => {
@@ -77,10 +78,8 @@ export default class NewRechordScreen extends React.Component {
     }
 
     saveRechord = () => {
-        // firebase.database().ref('users').child(firebase.auth().currentUser.uid).child('rechords').child(this.props.navigation.state.params.item.title).remove()
-
-        var ref = firebase.database().ref('users').child(firebase.auth().currentUser.uid).child('rechords').child(this.state.rechordTitle);
-        ref.child('title').set(this.state.rechordTitle);
+        var ref = firebase.database().ref('users').child(firebase.auth().currentUser.uid).child('rechords').child(this.state.reference);
+        ref.child('title').set(this.state.title);
         ref.child('song').set(this.state.song);
         ref.child('artist').set(this.state.artist);
         ref.child('location').set(this.state.location);
@@ -108,7 +107,7 @@ export default class NewRechordScreen extends React.Component {
             <SafeAreaView style={styles.container}>
                 <EditRechordHeader 
                     goBack={this.goBack}
-                    rechordTitle={this.state.rechordTitle}
+                    rechordTitle={this.state.title}
                     updateRechordTitle={this.updateRechordTitle}
                 />
 
@@ -143,7 +142,7 @@ export default class NewRechordScreen extends React.Component {
 
                     <View style={styles.createButtonView}>
                     {
-                        (this.state.rechordTitle === '') || (this.state.edit) ? (
+                        (this.state.title === '') || (this.state.edit) ? (
                             <View
                                 style={[styles.createButton, {backgroundColor: Colors.slateGreyAlpha}]}
                             >
