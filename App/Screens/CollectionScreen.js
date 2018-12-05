@@ -42,23 +42,21 @@ export default class CollectionScreen extends React.Component {
         var that = this;
 
         ref.on('value', function(dataSnapshot) {
-            // console.log(dataSnapshot);
             rechords = [];
             dataSnapshot.forEach(function(childSnapshot) {
                 var childData = childSnapshot.val();
-                rechords.unshift(childData);
-
+                rechords.unshift(childData);    // Note: unshift() adds to the front of the array
             })
             that.setState({ data: rechords });
         });
     }
 
     goToViewer = (item) => {
-        console.log(item);
         this.props.navigation.navigate(
         'ViewerScreen',
         {
             item: item,
+            ref: item.reference,
             location: false,
         }
     )
@@ -94,7 +92,6 @@ export default class CollectionScreen extends React.Component {
                 </View>
 
                 <FlatList
-                    // inverted
                     columnWrapperStyle={styles.covers}
                     numColumns={2}
                     data={this.state.data}

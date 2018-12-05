@@ -70,6 +70,7 @@ export default class NewRechordBarFinal extends React.Component {
                             name='pencil-circle'
                             color={Colors.blue}
                             size={Metrics.icons.medium}
+                            style={styles.editIcon}
                         />
                     </View>
                 </TouchableOpacity>
@@ -100,6 +101,13 @@ const styles = StyleSheet.create({
         alignItems: 'flex-end',
         marginTop: -7,
         marginLeft: 4,
+        
+    },
+    editIcon: {
+        // shadowOffset: { width: 0, height: 1 },
+        // shadowColor: Colors.black,
+        // shadowOpacity: 0.,
+        // elevation: 5,
     },
     allItems: {
         flexDirection: 'column',

@@ -222,8 +222,8 @@ export default class NewRechordScreen extends React.Component {
                 />
 
                 <View style={styles.whiteBar}>
-                {
-                    this.state.edit ? (
+                {/* {
+                    this.state.edit ? ( */}
                         <NewRechordBarEdit
                             item={this.state}
                             toggleEditMode={this.toggleEditMode}
@@ -231,13 +231,13 @@ export default class NewRechordScreen extends React.Component {
                             updateDate={this.updateDate}
                             goToFindSong={this.goToFindSong}
                         />
-                    ) : (
+                    {/* ) : (
                         <NewRechordBarFinal
                             item={this.state}
                             toggleEditMode={this.toggleEditMode}
                         />
                     )
-                }
+                } */}
                 </View>
 
                 <View style={styles.editCover}>

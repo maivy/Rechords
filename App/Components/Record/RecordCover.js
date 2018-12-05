@@ -9,7 +9,6 @@
 import React from 'react';
 import { StyleSheet, View, Text, Image, ImageBackground, TouchableOpacity } from 'react-native';
 import { LinearGradient, ImagePicker, Permissions } from 'expo';
- 
 import firebase from 'firebase';
 
 import SubmitButton from '../SubmitButton';

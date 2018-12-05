@@ -6,6 +6,7 @@ import CollectionToggle from './Collection/CollectionToggle';
 import CollectionSortBar from './Collection/CollectionSortBar';
 import CollectionListItem from './Collection/CollectionListItem';
 import ActionBar from './Collection/ActionBar';
+import ActionBarLocation from './Explore/ActionBarLocation';
 import ViewHeader from './Headers/ViewerHeader';
 import LocationCollectionHeader from './Headers/LocationCollectionHeader';
 import LocationCollectionSortBar from './Explore/LocationCollection/LocationCollectionSortBar';
@@ -25,5 +26,6 @@ export {
     LocationCollectionHeader,
     LocationCollectionSortBar,
     LocationCollectionToggle,
-    FindSongHeader
+    FindSongHeader,
+    ActionBarLocation,
 }

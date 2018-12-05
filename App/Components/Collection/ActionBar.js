@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import { Metrics } from '../../Themes';
 import { AntDesign, EvilIcons, Feather } from '@expo/vector-icons';
+import firebase from 'firebase';
 // import { Share } from '../../Screens/ShareScreen';
 
 export default class ActionBar extends React.Component {
@@ -48,10 +49,21 @@ export default class ActionBar extends React.Component {
 		}
 	)
 
+	goToCollection = () => this.props.navigation.navigate(
+		'CollectionScreen'
+	)
+
+	deleteRechord = () => {
+		firebase.database().ref('users').child(firebase.auth().currentUser.uid).child('rechords').child(this.props.item.reference).remove();
+		this.goToCollection();
+	}
+
   render() {
     return (
     	<View style={styles.actionBar}>
-    		<TouchableOpacity>
+    		<TouchableOpacity
+				onPress={() => this.deleteRechord()}
+			>
     			<EvilIcons
     				name='trash'
     				size={40}

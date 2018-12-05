@@ -13,6 +13,7 @@ data = [
         song: 'Dive',
         artist: 'Ed Sheeran',
         favorite: false,
+        reference: '',
     },
     {
         image: Images.cover1,
@@ -24,6 +25,7 @@ data = [
         song: 'Inflatable Friend',
         artist: 'Henry Jackman',
         favorite: false,
+        reference: '',
     },
     {
         image: Images.cover5,
@@ -35,6 +37,7 @@ data = [
         song: 'High On Life (feat. Bonn)',
         artist: 'Martin Garrix',
         favorite: false,
+        reference: '',
     },
     {
         location: 'CF Pacific Centre Mall',
@@ -45,6 +48,7 @@ data = [
         song: 'Hollaback Girl',
         artist: 'Gwen Stefani',
         favorite: false,
+        reference: '',
     },
     {
         image: Images.cover4,
@@ -56,6 +60,7 @@ data = [
         song: 'Happier',
         artist: 'Marshmello, Bastille',
         favorite: true,
+        reference: '',
     },
     {
         image: Images.cover3,
@@ -67,6 +72,7 @@ data = [
         song: 'Kids In The Street',
         artist: 'The All-American Rejects',
         favorite: false,
+        reference: '',
     },
     {
         image: Images.cover2,
@@ -78,6 +84,7 @@ data = [
         song: 'Sunroof',
         artist: 'courtship',
         favorite: true,
+        reference: '',
     },
 ]
 

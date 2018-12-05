@@ -44,7 +44,7 @@ export default class EditRechordScreen extends React.Component {
     }
 
     goBack = () => {
-        // setTimeout(60);
+        console.log("SEND IMAGE BACK: " + this.state.image);
         this.props.navigation.navigate('ViewerScreen', {item: this.state});
     }
     
@@ -71,8 +71,9 @@ export default class EditRechordScreen extends React.Component {
     }
 
     updateImage = (newImage) => {
+        console.log("UPDATE IMAGE WITH: " + newImage);
         this.setState({ image: newImage });
-        console.log("image updated!");
+        console.log("NEW IMAGE STATE: " + this.state.image);
     }
 
     updateDescription = (newDescription) => {
@@ -110,6 +111,7 @@ export default class EditRechordScreen extends React.Component {
         ref.child('dateString').set(this.state.dateString);
         ref.child('description').set(this.state.description);
         ref.child('owner').set(this.state.owner);
+        console.log("IMAGE ADDED TO FIREBASE: " + this.state.image);
         ref.child('image').set(this.state.image);
         ref.child('favorite').set(false);
 
@@ -139,8 +141,8 @@ export default class EditRechordScreen extends React.Component {
                 />
 
                 <View style={styles.whiteBar}>
-                {
-                    this.state.edit ? (
+                {/* {
+                    this.state.edit ? ( */}
                         <NewRechordBarEdit
                             item={this.state}
                             toggleEditMode={this.toggleEditMode}
@@ -148,13 +150,13 @@ export default class EditRechordScreen extends React.Component {
                             updateDate={this.updateDate}
                             goToFindSong={this.goToFindSong}
                         />
-                    ) : (
+                    {/* ) : (
                         <NewRechordBarFinal
                             item={this.state}
                             toggleEditMode={this.toggleEditMode}
                         />
                     )
-                }
+                } */}
                 </View>
 
                 <View style={styles.editCover}>

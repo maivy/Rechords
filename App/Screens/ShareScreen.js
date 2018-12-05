@@ -47,7 +47,6 @@ export default class ShareScreen extends React.Component {
 
     updateFriend = (newFriend) => {
         this.setState({ friend: newFriend });
-        console.log(newFriend);
     }
 
     send = () => {

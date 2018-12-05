@@ -1,22 +1,89 @@
 import React from 'react';
 import { StyleSheet, View, SafeAreaView, TouchableOpacity } from 'react-native';
 import { LinearGradient } from 'expo';
-
-import { Record, ActionBar, ViewHeader } from '../Components';
+import { NavigationEvents } from 'react-navigation';
+import { Record, ActionBar, ViewHeader, ActionBarLocation } from '../Components';
 import RecordCoverFlip from '../Components/Record/RecordCoverFlip';
-
+import firebase from 'firebase';
 import { Metrics, Colors } from '../Themes';
 
 export default class RechordViewerScreen extends React.Component {
 
-    state = {
-        recordStyle: styles.recordHidden,
-        recordHidden: true,
-    }
+    // state = {
+    //     recordStyle: styles.recordHidden,
+    //     recordHidden: true,
+
+    //     title: this.props.navigation.state.params.item.title,
+    //     song: this.props.navigation.state.params.item.song,
+    //     artist: this.props.navigation.state.params.item.artist,
+    //     location: this.props.navigation.state.params.item.location,
+    //     date: this.props.navigation.state.params.item.date,
+    //     dateString: this.props.navigation.state.params.item.dateString,
+    //     description: this.props.navigation.state.params.item.description,
+    //     owner: this.props.navigation.state.params.item.owner,
+    //     image: this.props.navigation.state.params.item.image,
+    //     reference: this.props.navigation.state.params.item.reference,
+    //     edit: false,
+    // }
 
     constructor(props) {
         super(props)
+        this.state = {
+            recordStyle: styles.recordHidden,
+            recordHidden: true,
+    
+            title: this.props.navigation.state.params.item.title,
+            song: this.props.navigation.state.params.item.song,
+            artist: this.props.navigation.state.params.item.artist,
+            location: this.props.navigation.state.params.item.location,
+            date: this.props.navigation.state.params.item.date,
+            dateString: this.props.navigation.state.params.item.dateString,
+            description: this.props.navigation.state.params.item.description,
+            owner: this.props.navigation.state.params.item.owner,
+            image: this.props.navigation.state.params.item.image,
+            reference: this.props.navigation.state.params.item.reference,
+            edit: false,
+        }
+        // if(this.state.reference !== '') {
+        //     this.componentWillMount
+        // }
+        this.componentWillMount();
+        // console.log(this.state.title);
     }
+
+    componentWillMount = () => {
+        // var params = this.props.navigation.state.params;
+        if(this.state.reference !== '') {
+            var ref = firebase.database().ref('users').child(firebase.auth().currentUser.uid).child('rechords').child(this.state.reference);
+            var that = this;
+            ref.on('value', function(dataSnapshot) {
+                console.log("CHANGE");
+                dataSnapshot.forEach(function(childSnapshot) {
+                    var childData = childSnapshot.val();
+                    var childKey = childSnapshot.key;
+                    console.log("CHILD KEY: " + childKey);
+                    if(childKey === 'title') {
+                        that.setState({ title: childData}, () => {
+                            console.log("TITLE CHANGED: " + that.state.title)
+                        });
+                        // console.log("TITLE: " + that.state.title);
+                    } else if(childKey === 'image') {
+                        that.setState({ image: childData }, () => {
+                            console.log("IMAGE: " + that.state.image);
+                        });
+                    }
+                })
+            });
+        }
+    }
+
+    // updateImage = (params) => {
+    //     console.log("UPDATING VIEWER IMAGE: " + params.item.image);
+    //     console.log("OLD IMAGE: " + this.state.image);
+    //     this.setState({ image: params.item.image }, () => {
+    //         console.log(this.state.image, 'NEW STATE');
+    //     });
+    // }
 
     goBack = () => {
         if(this.props.navigation.state.params.location) {
@@ -44,6 +111,9 @@ export default class RechordViewerScreen extends React.Component {
         const params = this.props.navigation.state.params;
         return (
             <SafeAreaView style={{flex: 1}}>
+                {/* <NavigationEvents
+                    onDidFocus={() => this.componentWillMount()}
+                /> */}
                 <LinearGradient
                     colors={[Colors.blue, Colors.purple]}
                     style={styles.gradient}
@@ -52,7 +122,8 @@ export default class RechordViewerScreen extends React.Component {
                 <View style={styles.container}>
 
                     <ViewHeader
-                        title={params.item.title}
+                        // title={params.item.title}
+                        title={this.state.title}
                         goBack={this.goBack}
                     />
 
@@ -65,6 +136,8 @@ export default class RechordViewerScreen extends React.Component {
                                 small
                                 title={params.item.song}
                                 artist={params.item.artist}
+                                // title={this.state.title}
+                                // artist={this.state.artist}
                                 containerStyle={styles.record}
                             />
                         </TouchableOpacity>
@@ -72,6 +145,7 @@ export default class RechordViewerScreen extends React.Component {
                         <View style={styles.coverWrapper}>
                             <RecordCoverFlip
                                 info={params.item}
+                                // info={this.state}
                                 style={styles.recordCover}
                             />
                         </View>
@@ -79,11 +153,13 @@ export default class RechordViewerScreen extends React.Component {
 
                     {
                         params.location ? (
-                            <ActionBar/>
+                            <ActionBarLocation/>
                         ) : (
                             <ActionBar 
                                 navigation={this.props.navigation}
                                 item={params.item}
+                                // item={this.state}
+                                // deleteRechord={this.}
                             />
                         )
                     }

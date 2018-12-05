@@ -96,7 +96,7 @@ export default class NewRechordBarEdit extends React.Component {
                 
                 </View>
 
-                <TouchableOpacity
+                {/* <TouchableOpacity
                     style={styles.edit}
                     onPress={() => this.props.toggleEditMode()}>
                     <View>
@@ -106,7 +106,7 @@ export default class NewRechordBarEdit extends React.Component {
                             size={Metrics.icons.medium}
                         />
                     </View>
-                </TouchableOpacity>
+                </TouchableOpacity> */}
             </View>
         )
     }
@@ -127,14 +127,18 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.25,
         elevation: 5,
     },
-    edit: {
-        alignItems: 'flex-end',
-        marginTop: -7,
-        marginLeft: 6,
-    },
+    // edit: {
+    //     alignItems: 'flex-end',
+    //     marginTop: -7,
+    //     marginLeft: 6,
+    //     shadowOffset: { width: 0, height: 1 },
+    //     shadowColor: Colors.black,
+    //     shadowOpacity: 0.25,
+    //     elevation: 5,
+    // },
     allItems: {
         flexDirection: 'column',
-        justifyContent: 'space-between',
+        justifyContent: 'space-around',
         alignItems: 'center',
         marginRight: Metrics.tinyMargin,
     },
