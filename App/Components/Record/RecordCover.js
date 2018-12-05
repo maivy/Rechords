@@ -9,7 +9,7 @@
 import React from 'react';
 import { StyleSheet, View, Text, Image, ImageBackground, TouchableOpacity } from 'react-native';
 import { LinearGradient, ImagePicker, Permissions } from 'expo';
-
+ 
 import firebase from 'firebase';
 
 import SubmitButton from '../SubmitButton';
@@ -87,7 +87,8 @@ export default class RecordCover extends React.Component {
                 
                 await snapshot.ref.getDownloadURL().then(async (downloadURL) => {
                     await _this.setState({ imageURI: downloadURL });
-                    await _this.setState({ image: {uri: downloadURL} });
+                    await _this.setState({ image: { uri: downloadURL } });
+                    console.log("download url " + downloadURL);
                     // firebase.database().ref('users').child(firebase.auth().currentUser.uid).update({
                     //     image: downloadURL,
                     // });
@@ -95,7 +96,9 @@ export default class RecordCover extends React.Component {
                 });
         
             });
-            this.props.updateImage(this.state.imageURI);
+            // console.log("image url " + this.state.imageURI);
+            await this.props.updateImage(this.state.imageURI);
+            console.log("image url " + this.state.imageURI);
             // firebase.database().ref('users').child(firebase.auth().currentUser.uid).update({
             //     image: this.state.imageURI,
             // });
@@ -110,7 +113,7 @@ export default class RecordCover extends React.Component {
                 style={[styles.container, Styles.shadow]}
                 imageStyle={styles.image}
                 source={this.state.image}
-                key={this.state.image}>
+                key={this.state.imageURI}>
 
                 {/* Black/Transparent Gradients on Rechord Cover */}
                 
@@ -137,14 +140,10 @@ export default class RecordCover extends React.Component {
                         this.props.noImage ? (
                             <View style={styles.uploadButton}>
                                 <SubmitButton
-                                text='Select Photo'
-                                function={this.onPressUploadPicture}
-                            />
+                                    text='Select Photo'
+                                    function={this.onPressUploadPicture}
+                                />
                             </View>
-                            // <SubmitButton
-                            //     text='Select Photo'
-                            //     function={this.onPressUploadPicture}
-                            // />
                         ) : null
                     }
 

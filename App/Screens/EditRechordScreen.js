@@ -44,6 +44,7 @@ export default class EditRechordScreen extends React.Component {
     }
 
     goBack = () => {
+        // setTimeout(60);
         this.props.navigation.navigate('ViewerScreen', {item: this.state});
     }
     
@@ -71,6 +72,7 @@ export default class EditRechordScreen extends React.Component {
 
     updateImage = (newImage) => {
         this.setState({ image: newImage });
+        console.log("image updated!");
     }
 
     updateDescription = (newDescription) => {
