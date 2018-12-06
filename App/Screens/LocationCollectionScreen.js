@@ -7,7 +7,7 @@ import {
     LocationCollectionToggle,
     CollectionListItem
 } from '../Components';
-
+import firebase from 'firebase';
 import { Metrics } from '../Themes';
 import PersonalRechords from '../Data/PersonalRechords';
 
@@ -22,14 +22,31 @@ export default class CollectionScreen extends React.Component {
     updateIndex = (index) => {
         this.setState({index: index});
         if (index === 0) {
-            this.setState({data: PersonalRechords});
+            // this.setState({data: PersonalRechords});
+            this.componentWillMount();
         } else {
-            this.setState({data: []})
+            this.setState({data: []});
         }
     }
 
     constructor(props) {
         super(props);
+    }
+
+    componentWillMount = () => {
+        // Look at following line for sort by functionality (orderByChild(...))
+        var ref = firebase.database().ref('explore').child(this.props.navigation.state.params.location);
+        var rechords = [];
+        var that = this;
+
+        ref.on('value', function(dataSnapshot) {
+            rechords = [];
+            dataSnapshot.forEach(function(childSnapshot) {
+                var childData = childSnapshot.val();
+                rechords.unshift(childData);    // Note: unshift() adds to the front of the array
+            })
+            that.setState({ data: rechords });
+        });
     }
 
     goToViewer = (item) => this.props.navigation.navigate(
