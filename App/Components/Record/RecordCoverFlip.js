@@ -29,6 +29,7 @@ export default class RecordCoverFlip extends Component {
     description: '',
     frontZIndex: 100,
     backZIndex: 99,
+    flipText: 'Edit memory description'
 
   }
 
@@ -56,13 +57,13 @@ export default class RecordCoverFlip extends Component {
 
   flipCard = () => {
     if (this.value >= 90) {
-      Animated.spring(this.animatedValue,{
+      Animated.spring(this.animatedValue, {
         toValue: 0,
         friction: 8,
         tension: 10
       }).start();
     } else {
-      Animated.spring(this.animatedValue,{
+      Animated.spring(this.animatedValue, {
         toValue: 180,
         friction: 8,
         tension: 10
@@ -78,6 +79,11 @@ export default class RecordCoverFlip extends Component {
         frontZIndex: 100,
         backZIndex: 90
       });
+    }
+    if (this.state.flipText === 'Edit memory description') {
+      this.setState({ flipText: 'Edit rechord cover' });
+    } else {
+      this.setState({ flipText: 'Edit memory description' });
     }
     // this.props._moveCover();
     // console.log("Called this.props._moveCover()");
@@ -131,6 +137,7 @@ export default class RecordCoverFlip extends Component {
               { // Check if in edit mode
                 this.props.edit ? (
                   <RecordEditBack
+                    description={this.props.info.description}
                     updateDescription={this.props.updateDescription}
                     description={this.props.info.description}
                   />
@@ -149,7 +156,7 @@ export default class RecordCoverFlip extends Component {
                 style={styles.buttonWrapper}
                 onPress={() => this.flipCard()}>
 
-                <Text style={styles.editButton}>Flip</Text>
+                <Text style={styles.editButton}>{this.state.flipText}</Text>
               </TouchableOpacity>
             ) : null
           }

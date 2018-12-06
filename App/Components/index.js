@@ -6,6 +6,7 @@ import CollectionToggle from './Collection/CollectionToggle';
 import CollectionSortBar from './Collection/CollectionSortBar';
 import CollectionListItem from './Collection/CollectionListItem';
 import ActionBar from './Collection/ActionBar';
+import ActionBarFriend from './Collection/ActionBarFriend'
 import ActionBarLocation from './Explore/ActionBarLocation';
 import ViewHeader from './Headers/ViewerHeader';
 import LocationCollectionHeader from './Headers/LocationCollectionHeader';
@@ -22,6 +23,7 @@ export {
     CollectionSortBar,
     CollectionListItem,
     ActionBar,
+    ActionBarFriend,
     ViewHeader,
     LocationCollectionHeader,
     LocationCollectionSortBar,

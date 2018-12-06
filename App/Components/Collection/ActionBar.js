@@ -105,25 +105,26 @@ export default class ActionBar extends React.Component {
     			/>
     		</TouchableOpacity>
 
-    		<TouchableOpacity
+
+			<TouchableOpacity
 					onPress={() => this.goToEdit()}
 				>
-    			<Feather
-    				name='edit'
-    				size={25}
-    				color={'#68BEE2'}
-    			/>
-    		</TouchableOpacity>
+				<Feather
+					name='edit'
+					size={25}
+					color={'#68BEE2'}
+				/>
+			</TouchableOpacity>
 
-    		<TouchableOpacity
+			<TouchableOpacity
 					onPress={() => this.showShareOptions()}
 				>
-    			<EvilIcons
-    				name='share-apple'
-    				size={40}
-    				color={'#68BEE2'}
-    			/>
-    		</TouchableOpacity>
+				<EvilIcons
+					name='share-apple'
+					size={40}
+					color={'#68BEE2'}
+				/>
+			</TouchableOpacity>
     	</View>
     );
   }

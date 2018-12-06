@@ -4,6 +4,7 @@ import {
     View,
     SafeAreaView,
     TouchableOpacity,
+    TouchableWithoutFeedback,
     Text,
     Dimensions,
     Animated,
@@ -231,68 +232,70 @@ export default class NewRechordScreen extends React.Component {
             <NavigationEvents
                 onWillFocus={() => this.updateSong()}
             />
-            <TouchableOpacity style={styles.container} onPress={Keyboard.dismiss}>
-                <NewRechordHeader 
-                    goBack={this.goBack}
-                    rechordTitle={this.state.rechordTitle}
-                    updateRechordTitle={this.updateRechordTitle}
-                />
+            <TouchableWithoutFeedback style={{ flex: 1 }} onPress={Keyboard.dismiss}>
+                <View style={styles.container}>
+                    <NewRechordHeader 
+                        goBack={this.goBack}
+                        rechordTitle={this.state.rechordTitle}
+                        updateRechordTitle={this.updateRechordTitle}
+                    />
 
-                <View style={styles.whiteBar}>
-                {/* {
-                    this.state.edit ? ( */}
-                        <NewRechordBarEdit
-                            item={this.state}
-                            toggleEditMode={this.toggleEditMode}
-                            updateLocation={this.updateLocation}
-                            updateDate={this.updateDate}
-                            goToFindSong={this.goToFindSong}
-                        />
-                    {/* ) : (
-                        <NewRechordBarFinal
-                            item={this.state}
-                            toggleEditMode={this.toggleEditMode}
-                        />
-                    )
-                } */}
-                </View>
-
-                <View style={styles.editCover}>
-                    <View style={styles.album}>
-                        {/* onLayout={(event) => this.getCoverPosition(event)}
-                        ref={view => { this.coverFlip = view; }}>   */}
-                        <RecordCoverFlip
-                            edit                        
-                            info={this.state}
-                            albumStyle={styles.albumStyle}
-                            updateImage={this.updateImage}
-                            updateDescription={this.updateDescription}
-                            _moveCover={this._moveCover}
-                            moveAnimation={this.state.moveAnimation}
-                        />
-                    </View>
-
-                    <View style={styles.createButtonView}>
-                    {
-                        (this.state.rechordTitle === '') || (this.state.edit) ? (
-                            <View
-                                style={[styles.createButton, {backgroundColor: Colors.slateGreyAlpha}]}
-                            >
-                                <Text style={styles.createButtonText}>Save</Text>
-                            </View>
-                        ) : (
-                            <TouchableOpacity
-                                style={styles.createButton}
-                                activeOpacity = { .5 }
-                                onPress={() => this.saveRechord()}
-                            >
-                                <Text style={styles.createButtonText}>Save</Text>
-                            </TouchableOpacity>
+                    <View style={styles.whiteBar}>
+                    {/* {
+                        this.state.edit ? ( */}
+                            <NewRechordBarEdit
+                                item={this.state}
+                                toggleEditMode={this.toggleEditMode}
+                                updateLocation={this.updateLocation}
+                                updateDate={this.updateDate}
+                                goToFindSong={this.goToFindSong}
+                            />
+                        {/* ) : (
+                            <NewRechordBarFinal
+                                item={this.state}
+                                toggleEditMode={this.toggleEditMode}
+                            />
                         )
-                    }
+                    } */}
+                    </View>
+
+                    <View style={styles.editCover}>
+                        <View style={styles.album}>
+                            {/* onLayout={(event) => this.getCoverPosition(event)}
+                            ref={view => { this.coverFlip = view; }}>   */}
+                            <RecordCoverFlip
+                                edit                        
+                                info={this.state}
+                                albumStyle={styles.albumStyle}
+                                updateImage={this.updateImage}
+                                updateDescription={this.updateDescription}
+                                _moveCover={this._moveCover}
+                                moveAnimation={this.state.moveAnimation}
+                            />
+                        </View>
+
+                        <View style={styles.createButtonView}>
+                        {
+                            (this.state.rechordTitle === '') || (this.state.edit) ? (
+                                <View
+                                    style={[styles.createButton, {backgroundColor: Colors.slateGreyAlpha}]}
+                                >
+                                    <Text style={styles.createButtonText}>Save</Text>
+                                </View>
+                            ) : (
+                                <TouchableOpacity
+                                    style={styles.createButton}
+                                    activeOpacity = { .5 }
+                                    onPress={() => this.saveRechord()}
+                                >
+                                    <Text style={styles.createButtonText}>Save</Text>
+                                </TouchableOpacity>
+                            )
+                        }
+                        </View>
                     </View>
                 </View>
-                </TouchableOpacity>
+            </TouchableWithoutFeedback>
             </SafeAreaView>
         )
     }

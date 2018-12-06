@@ -73,6 +73,7 @@ export default class CollectionScreen extends React.Component {
             item: item,
             ref: item.reference,
             location: false,
+            personal: (this.state.index === 0)
         }
     )
     }

@@ -9,12 +9,10 @@ import {
     TextInput,
     Alert, 
 } from 'react-native';
-import { createFilter } from 'react-native-search-filter';
-import firebase from 'firebase';
+
 import Record from '../Components/Record/Record';
 import ShareHeader from '../Components/Headers/ShareHeader';
 import RecordCoverFlip from '../Components/Record/RecordCoverFlip';
-import friends from '../Data/Friends';
 import { Metrics, Colors } from '../Themes';
 
 const {width, height} = Dimensions.get('window');
@@ -25,7 +23,6 @@ export default class ShareScreen extends React.Component {
         recordStyle: styles.recordHidden,
         recordHidden: true,
         friend: 'Find a friend...',
-        friends: friends,
     }
 
     constructor(props) {
@@ -73,7 +70,15 @@ export default class ShareScreen extends React.Component {
             friendRef.child('reference').set(that.props.navigation.state.params.item.reference);
         });
 
-        this.goBack();
+        this.resetNavigation();
+    }
+
+    resetNavigation = () => {
+        const resetAction = StackActions.reset({
+            index: 0,
+            actions: [ NavigationActions.navigate({ routeName: 'CollectionScreen' }) ],
+        });
+        this.props.navigation.dispatch(resetAction);
     }
 
     sendPressed = () => {
@@ -83,6 +88,7 @@ export default class ShareScreen extends React.Component {
             [
                 {text: 'Undo', onPress: () => console.log('Undo Pressed'), style: 'destructive'},
                 {text: 'Okay', onPress: () => this.sendToFriend()},
+
             ],
             { cancelable: false }
         )

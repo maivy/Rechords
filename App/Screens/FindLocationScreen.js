@@ -2,64 +2,34 @@ import React from 'react';
 import { StyleSheet, View, SafeAreaView, TouchableOpacity, Text, Dimensions, FlatList } from 'react-native';
 import { createFilter } from 'react-native-search-filter';
 
+import friends from '../Data/Friends';
 import SearchHeader from '../Components/Headers/SearchHeader';
 import { Metrics, Colors } from '../Themes';
-import firebase from 'firebase';
 
 const KEYS_TO_FILTERS = ['name'];
 
-export default class FindFriendScreen extends React.Component {
+export default class FindLocationScreen extends React.Component {
     constructor(props) {
         super(props)
 
         this.state = {
-            searchResults: [],
-            friends: [],
-            currUserName: '',
+            searchResults: friends,
         }
 
     }
 
-    componentWillMount = () => {
-        var userRef = firebase.database().ref('users').child(firebase.auth().currentUser.uid).child('name');
-        var that = this;
-        userRef.once('value').then(function(snapshot){
-            var snapshotVal = snapshot.val()
-            that.setState({ currUserName: snapshotVal });
-        }) 
-
-        this.initFriends();
-    }
-
-    initFriends = () => {
-        var ref = firebase.database().ref('users');
-        var initFriends = [];
-        var that = this;
-
-        ref.on('value', function(dataSnapshot) {
-            initFriends = [];
-            dataSnapshot.forEach(function(childSnapshot) {
-                var childData = childSnapshot.val();
-                if(childData.name !== that.state.currUserName) {
-                    initFriends.unshift(childData);
-                }
-            })
-            that.setState({ friends: initFriends });
-            that.setState({ searchResults: initFriends });
-        });
-    }
-
     searchUpdated = (term) => {
-        const filteredFriends = this.state.friends.filter(createFilter(term, KEYS_TO_FILTERS));
+        const filteredFriends = friends.filter(createFilter(term, KEYS_TO_FILTERS));
+        // console.log("SEARCH TERMS: "+JSON.stringify(filteredFriends));
         this.setState({ searchResults: filteredFriends });
     }
 
-    goBack = (friend,) => {
+    goBack = (friend) => {
         const params = this.props.navigation.state.params;
         if (friend !== undefined) {
             params.updateFriend(friend);
         }
-        this.props.navigation.navigate('ShareScreen', { item: this.props.navigation.state.params.rechord });
+        this.props.navigation.navigate('ShareScreen');
     }
 
     _keyExtractor = (index) => JSON.stringify(index);
@@ -71,7 +41,7 @@ export default class FindFriendScreen extends React.Component {
                 style={styles.listItem}
                 onPress={() => this.goBack(friend)}>
 
-                <Text style={styles.title}>{item.name}</Text>
+                <Text style={styles.title}>{friend}</Text>
             </TouchableOpacity>
         )
     }

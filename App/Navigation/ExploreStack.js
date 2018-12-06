@@ -9,6 +9,7 @@ const ExploreStack = createStackNavigator({
     Explore: { screen: screens.Explore },
     LocationCollection: { screen: screens.LocationCollectionScreen },
     ViewerScreen: { screen: screens.ViewerScreen },
+    FindLocationScreen: { screen: screens.FindLocationScreen },
 }, {
     initialRouteName: 'Explore',
     headerMode: 'none',

@@ -34,10 +34,6 @@ export default class ShareHeader extends React.Component {
                         onPressFunction={this.props.goToFindFriend}
                     />
                 </TouchableOpacity>
-                {/* <SearchBar_White
-                    placeholder="Search for friend"
-                    onChangeTextFunction={this.props.onChangeTextFunction}
-                /> */}
             </View>
         )
     }
