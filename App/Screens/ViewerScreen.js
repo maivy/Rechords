@@ -48,7 +48,7 @@ export default class RechordViewerScreen extends React.Component {
     }
 
     
-    componentDidMount = async() => {
+    componentDidMount = () => {
         
         // var that = this;
         // that.setState({image: this.props.navigation.state.params.item.image});
@@ -127,8 +127,8 @@ export default class RechordViewerScreen extends React.Component {
                 <View style={styles.container}>
 
                     <ViewHeader
-                        // title={params.item.title}
-                        title={this.state.title}
+                        title={params.item.title}
+                        // title={this.state.title}
                         goBack={this.goBack}
                     />
 

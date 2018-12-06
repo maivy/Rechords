@@ -20,7 +20,6 @@ import { Metrics, Colors } from '../Themes';
 import firebase from 'firebase';``
 
 const {width, height} = Dimensions.get('window');
-// const date = new Date();
 const monthNames = ["January", "February", "March", "April", "May", "June",
   "July", "August", "September", "October", "November", "December"
 ];
@@ -138,13 +137,16 @@ export default class EditRechordScreen extends React.Component {
         ref.child('favorite').set(false);
 
         // await AsyncStorage.setItem('imageSaved', this.state.image);
+        this.goBackSaved();
+    }
 
+    savePressed = () => {
         Alert.alert(
             'Your changes have been saved.',
             '',
             [
-                {text: 'Undo', onPress: () => console.log('Undo Pressed'), style: 'destructive'},
-                {text: 'Okay', onPress: () => this.goBackSaved()}, 
+                {text: 'Undo', onPress: () => this.goBack()},
+                {text: 'Okay', onPress: () => this.saveRechord()}, 
             ],
             { cancelable: false }
         )
@@ -198,7 +200,7 @@ export default class EditRechordScreen extends React.Component {
                             <TouchableOpacity
                                 style={styles.createButton}
                                 activeOpacity = { .5 }
-                                onPress={() => this.saveRechord()}
+                                onPress={() => this.savePressed()}
                             >
                                 <Text style={styles.createButtonText}>Save</Text>
                             </TouchableOpacity>

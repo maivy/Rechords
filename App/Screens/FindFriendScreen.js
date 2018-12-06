@@ -16,11 +16,24 @@ export default class FindFriendScreen extends React.Component {
         this.state = {
             searchResults: [],
             friends: [],
+            currUserName: '',
         }
 
     }
 
     componentWillMount = () => {
+        var userRef = firebase.database().ref('users').child(firebase.auth().currentUser.uid).child('name');
+        var that = this;
+        userRef.once('value').then(function(snapshot){
+            var snapshotVal = snapshot.val()
+            console.log("SNAP VAL: " + snapshotVal);
+            that.setState({ currUserName: snapshotVal });
+        }) 
+
+        this.initFriends();
+    }
+
+    initFriends = () => {
         var ref = firebase.database().ref('users');
         var initFriends = [];
         var that = this;
@@ -29,13 +42,13 @@ export default class FindFriendScreen extends React.Component {
             initFriends = [];
             dataSnapshot.forEach(function(childSnapshot) {
                 var childData = childSnapshot.val();
-                initFriends.unshift(childData);
+                if(childData.name !== that.state.currUserName) {
+                    initFriends.unshift(childData);
+                }
             })
             that.setState({ friends: initFriends });
             that.setState({ searchResults: initFriends });
         });
-
-        console.log("RECHORD: " + JSON.stringify(this.props.navigation.state.params.rechord));
     }
 
     searchUpdated = (term) => {

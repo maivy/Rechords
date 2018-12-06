@@ -26,24 +26,26 @@ export default class RecordCover extends React.Component {
         super(props);
     }
 
-    componentDidMount =async () => {
-        if (this.props.fontStyle) {
-            this.setState({
-                fontStyle: this.props.fontStyle
+    componentDidMount = () => {
+        var that = this;
+        if (that.props.fontStyle) {
+            that.setState({
+                fontStyle: that.props.fontStyle
             });
         }
-        if (this.props.info.image) {
-            if (typeof this.props.info.image === 'string') {
-                await this.setState({
-                    image: { uri: this.props.info.image }
+        if (that.props.info.image) {
+            if (typeof that.props.info.image === 'string') {
+                console.log("URI: " + this.props.info.image);
+                that.setState({
+                    image: { uri: that.props.info.image }
                 });
             } else {
-                await this.setState({
-                    image: this.props.info.image
+                that.setState({
+                    image: that.props.info.image
                 });
             }
         }
-        this.setState({ ready: true });
+        that.setState({ ready: true });
     }
 
     onPressUploadPicture = async () => {

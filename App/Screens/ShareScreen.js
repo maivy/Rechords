@@ -26,6 +26,7 @@ export default class ShareScreen extends React.Component {
         recordHidden: true,
         friend: 'Find a friend...',
         friends: friends,
+        currUserName: '',
     }
 
     constructor(props) {
@@ -37,10 +38,21 @@ export default class ShareScreen extends React.Component {
     }
 
     goToFindFriend = () => {
+        // var ref = firebase.database().ref('users').child(firebase.auth().currentUser.uid).child('name');
+        // var that = this;
+        // ref.once('value').then(function(snapshot){
+        //     var snapshotVal = snapshot.val()
+        //     console.log("SNAP VAL: " + snapshotVal);
+        //     this.setState({ currUserName: JSON.stringify(snapshotVal) }, () => console.log("NEW STATE"));
+        // }) 
+
+        // console.log("SENDING NAME: " + this.state.currUserName);
+
         this.props.navigation.navigate('FindFriendScreen', {
             friend: this.state.friend,
             updateFriend: this.updateFriend,
-            rechord: this.props.navigation.state.params.item
+            rechord: this.props.navigation.state.params.item,
+            // currUserName: this.state.currUserName,
         });
     }
 
@@ -52,8 +64,6 @@ export default class ShareScreen extends React.Component {
         var ref = firebase.database().ref('users');
         var friendUID;
         var that = this;
-
-        console.log("SENDING: " + JSON.stringify(this.props.navigation.state.params.item));
 
         ref.once('value').then(function(snapshot) {
             snapshot.forEach(function(childSnapshot) {
