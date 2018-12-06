@@ -49,13 +49,15 @@ export default class CollectionScreen extends React.Component {
         });
     }
 
-    goToViewer = (item) => this.props.navigation.navigate(
+    goToViewer = (item) => {
+        console.log("ITEM: " + JSON.stringify(item));
+        this.props.navigation.navigate(
         'ViewerScreen',
         {
             item: item,
             location: true
         }
-    )
+    )}
 
     goBack = () => {
         this.props.navigation.navigate('Explore')

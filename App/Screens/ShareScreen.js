@@ -70,7 +70,7 @@ export default class ShareScreen extends React.Component {
             friendRef.child('owner').set(that.props.navigation.state.params.item.owner);
             friendRef.child('image').set(that.props.navigation.state.params.item.image);
             friendRef.child('favorite').set(false);
-            friendRef.child('reference').set(friendRef.getKey());
+            friendRef.child('reference').set(that.props.navigation.state.params.item.reference);
         });
 
         this.goBack();

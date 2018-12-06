@@ -29,7 +29,8 @@ export default class ActionBar extends React.Component {
         ref.child('description').set(this.props.item.description);
         ref.child('owner').set(this.props.item.owner);
         ref.child('image').set(this.props.item.image);
-        ref.child('favorite').set(false);
+		ref.child('favorite').set(false);
+		ref.child('reference').set(this.props.item.reference)
 	}
 
 	showShareOptions = () => {
