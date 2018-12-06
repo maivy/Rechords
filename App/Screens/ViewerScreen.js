@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, View, SafeAreaView, TouchableOpacity } from 'react-native';
 import { LinearGradient } from 'expo';
 import { NavigationEvents } from 'react-navigation';
-import { Record, ActionBar, ViewHeader, ActionBarLocation } from '../Components';
+import { Record, ActionBar, ActionBarFriend, ViewHeader, ActionBarLocation } from '../Components';
 import RecordCoverFlip from '../Components/Record/RecordCoverFlip';
 import firebase from 'firebase';
 import { Metrics, Colors } from '../Themes';
@@ -136,8 +136,6 @@ export default class RechordViewerScreen extends React.Component {
                                 small
                                 title={params.item.song}
                                 artist={params.item.artist}
-                                // title={this.state.title}
-                                // artist={this.state.artist}
                                 containerStyle={styles.record}
                             />
                         </TouchableOpacity>
@@ -145,7 +143,6 @@ export default class RechordViewerScreen extends React.Component {
                         <View style={styles.coverWrapper}>
                             <RecordCoverFlip
                                 info={params.item}
-                                // info={this.state}
                                 style={styles.recordCover}
                             />
                         </View>
@@ -155,12 +152,19 @@ export default class RechordViewerScreen extends React.Component {
                         params.location ? (
                             <ActionBarLocation/>
                         ) : (
-                            <ActionBar 
-                                navigation={this.props.navigation}
-                                item={params.item}
-                                // item={this.state}
-                                // deleteRechord={this.}
-                            />
+                            params.personal ? (
+                                <ActionBar
+                                    navigation={this.props.navigation}
+                                    item={params.item}
+                                    // item={this.state}
+                                    // deleteRechord={this.}
+                                />
+                            ) : (
+                                <ActionBarFriend
+                                    navigation={this.props.navigation}
+                                    item={params.item}
+                                />
+                            )
                         )
                     }
                 </View>

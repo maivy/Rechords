@@ -11,6 +11,7 @@ data = [
         song: 'Campfire Song Song',
         artist: 'Spongebob Squarepants',
         favorite: false,
+        reference: '',
     },
     {
         image: Images.cover8,
@@ -22,6 +23,7 @@ data = [
         song: 'Fake Friends',
         artist: 'Joan Jett and The Blackhearts',
         favorite: false,
+        reference: '',
     },
     {
         image: Images.cover9,
@@ -33,6 +35,7 @@ data = [
         song: 'Younger',
         artist: 'Ruel',
         favorite: false,
+        reference: '',
     },
     {
         location: 'Crothers',
@@ -43,6 +46,7 @@ data = [
         song: 'Everything Will Be OK',
         artist: 'G-Eazy, Kehlani',
         favorite: false,
+        reference: '',
     },
 ]
 

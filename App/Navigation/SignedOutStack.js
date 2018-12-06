@@ -4,10 +4,10 @@ import CreateAccount from "../Screens/CreateAccount";
 import SignIn from "../Screens/SignIn";
 
 const SignedOutStack = createStackNavigator({
+  SignIn: { screen: SignIn },
   CreateAccount: { screen: CreateAccount },
-  SignIn: { screen: SignIn }
 }, {
-    initalRouteName: CreateAccount,
+    initialRouteName: 'SignIn',
     headerMode: 'none',
 });
 

@@ -20,6 +20,7 @@ export default class RecordBackCover extends React.Component {
                         style={styles.description}
                         placeholder='Enter memory details...'
                         placeholderTextColor='#fff'
+                        defaultValue={this.props.description}
                         onChangeText={(text) => this.props.updateDescription(text)}
                     />
                 </ScrollView>

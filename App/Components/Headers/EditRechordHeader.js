@@ -56,6 +56,7 @@ const styles = StyleSheet.create({
         marginLeft: Metrics.smallMargin,
     },
     rechordTitle: {
+        fontFamily: 'avenir-heavy',
         color: Colors.white,
         fontSize: 20,
     },

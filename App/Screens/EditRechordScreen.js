@@ -3,7 +3,8 @@ import {
     StyleSheet, 
     View, 
     SafeAreaView, 
-    TouchableOpacity, 
+    TouchableOpacity,
+    TouchableWithoutFeedback, 
     Text, 
     Dimensions,
     Alert, 
@@ -133,64 +134,66 @@ export default class EditRechordScreen extends React.Component {
             <NavigationEvents
                 onWillFocus={() => this.updateSong()}
             />
-            <TouchableOpacity style={styles.container} onPress={Keyboard.dismiss}>
-                <EditRechordHeader 
-                    goBack={this.goBack}
-                    rechordTitle={this.state.title}
-                    updateRechordTitle={this.updateRechordTitle}
-                />
+            <TouchableWithoutFeedback style={{ flex: 1 }} onPress={Keyboard.dismiss}>
+                <View style={styles.container}>
+                    <EditRechordHeader 
+                        goBack={this.goBack}
+                        rechordTitle={this.state.title}
+                        updateRechordTitle={this.updateRechordTitle}
+                    />
 
-                <View style={styles.whiteBar}>
-                {/* {
-                    this.state.edit ? ( */}
-                        <NewRechordBarEdit
-                            item={this.state}
-                            toggleEditMode={this.toggleEditMode}
-                            updateLocation={this.updateLocation}
-                            updateDate={this.updateDate}
-                            goToFindSong={this.goToFindSong}
-                        />
-                    {/* ) : (
-                        <NewRechordBarFinal
-                            item={this.state}
-                            toggleEditMode={this.toggleEditMode}
-                        />
-                    )
-                } */}
-                </View>
-
-                <View style={styles.editCover}>
-                    <View style={styles.album}>  
-                        <RecordCoverFlip
-                            edit                        
-                            info={this.state}
-                            albumStyle={styles.albumStyle}
-                            updateImage={this.updateImage}
-                            updateDescription={this.updateDescription}
-                        />
-                    </View>
-
-                    <View style={styles.createButtonView}>
-                    {
-                        (this.state.title === '') || (this.state.edit) ? (
-                            <View
-                                style={[styles.createButton, {backgroundColor: Colors.slateGreyAlpha}]}
-                            >
-                                <Text style={styles.createButtonText}>Save</Text>
-                            </View>
-                        ) : (
-                            <TouchableOpacity
-                                style={styles.createButton}
-                                activeOpacity = { .5 }
-                                onPress={() => this.saveRechord()}
-                            >
-                                <Text style={styles.createButtonText}>Save</Text>
-                            </TouchableOpacity>
+                    <View style={styles.whiteBar}>
+                    {/* {
+                        this.state.edit ? ( */}
+                            <NewRechordBarEdit
+                                item={this.state}
+                                toggleEditMode={this.toggleEditMode}
+                                updateLocation={this.updateLocation}
+                                updateDate={this.updateDate}
+                                goToFindSong={this.goToFindSong}
+                            />
+                        {/* ) : (
+                            <NewRechordBarFinal
+                                item={this.state}
+                                toggleEditMode={this.toggleEditMode}
+                            />
                         )
-                    }
+                    } */}
+                    </View>
+
+                    <View style={styles.editCover}>
+                        <View style={styles.album}>  
+                            <RecordCoverFlip
+                                edit                        
+                                info={this.state}
+                                albumStyle={styles.albumStyle}
+                                updateImage={this.updateImage}
+                                updateDescription={this.updateDescription}
+                            />
+                        </View>
+
+                        <View style={styles.createButtonView}>
+                        {
+                            (this.state.title === '') || (this.state.edit) ? (
+                                <View
+                                    style={[styles.createButton, {backgroundColor: Colors.slateGreyAlpha}]}
+                                >
+                                    <Text style={styles.createButtonText}>Save</Text>
+                                </View>
+                            ) : (
+                                <TouchableOpacity
+                                    style={styles.createButton}
+                                    activeOpacity = { .5 }
+                                    onPress={() => this.saveRechord()}
+                                >
+                                    <Text style={styles.createButtonText}>Save</Text>
+                                </TouchableOpacity>
+                            )
+                        }
+                        </View>
                     </View>
                 </View>
-                </TouchableOpacity>
+            </TouchableWithoutFeedback>
             </SafeAreaView>
         )
     }
@@ -204,9 +207,10 @@ const styles = StyleSheet.create({
         overflow: 'scroll',
     },
     rechordTitle: {
-        fontSize: 24,
         marginTop: Metrics.mediumMargin,
         marginBottom: Metrics.tinyMargin,
+        fontFamily: 'avenir-heavy',
+        fontSize: 24,
     },
     albumStyle: {
         width: Metrics.widths.coverMedium,

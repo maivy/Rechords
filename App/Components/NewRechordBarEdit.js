@@ -33,7 +33,7 @@ export default class NewRechordBarEdit extends React.Component {
             <View style={styles.container}>
 
                 <View style={styles.allItems}>
-                    <View style={[styles.item, { marginTop: 0}]}>
+                    <View style={[styles.item, { marginTop: 0 }]}>
                         <View style={styles.iconView}>
                             <Ionicons
                                 name='ios-musical-notes'
@@ -161,7 +161,7 @@ const styles = StyleSheet.create({
         paddingRight: 5,
         paddingTop: 2,
         paddingBottom: 2,
-        width: Metrics.widths.wide * 0.74,
+        width: Metrics.widths.wide * 0.82,
         backgroundColor: Colors.slateGreyAlpha,
     },
     itemLabel: {

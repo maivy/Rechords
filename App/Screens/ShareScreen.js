@@ -9,17 +9,13 @@ import {
     TextInput,
     Alert, 
 } from 'react-native';
-import { createFilter } from 'react-native-search-filter';
 
 import Record from '../Components/Record/Record';
 import ShareHeader from '../Components/Headers/ShareHeader';
 import RecordCoverFlip from '../Components/Record/RecordCoverFlip';
-import friends from '../Data/Friends';
 import { Metrics, Colors } from '../Themes';
 
 const {width, height} = Dimensions.get('window');
-
-const KEYS_TO_FILTERS = ['name'];
 
 export default class ShareScreen extends React.Component {
 
@@ -27,7 +23,6 @@ export default class ShareScreen extends React.Component {
         recordStyle: styles.recordHidden,
         recordHidden: true,
         friend: 'Find a friend...',
-        friends: friends,
     }
 
     constructor(props) {
