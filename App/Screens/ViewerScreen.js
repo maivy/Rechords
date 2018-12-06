@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, SafeAreaView, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, SafeAreaView, TouchableOpacity, AsyncStorage } from 'react-native';
 import { LinearGradient } from 'expo';
 import { NavigationEvents } from 'react-navigation';
 import { Record, ActionBar, ActionBarFriend, ViewHeader, ActionBarLocation } from '../Components';
@@ -44,15 +44,15 @@ export default class RechordViewerScreen extends React.Component {
             reference: this.props.navigation.state.params.item.reference,
             edit: false,
         }
-        // if(this.state.reference !== '') {
-        //     this.componentWillMount
-        // }
-        this.componentWillMount();
-        // console.log(this.state.title);
+        // this.componentDidMount();
     }
 
-    componentWillMount = () => {
-        // var params = this.props.navigation.state.params;
+    
+    componentDidMount = () => {
+        
+        // var that = this;
+        // that.setState({image: this.props.navigation.state.params.item.image});
+        // console.log("image passed viewer screen " + this.props.navigation.state.params.item.image);
         if(this.state.reference !== '') {
             var ref = firebase.database().ref('users').child(firebase.auth().currentUser.uid).child('rechords').child(this.state.reference);
             var that = this;
@@ -66,15 +66,20 @@ export default class RechordViewerScreen extends React.Component {
                         that.setState({ title: childData}, () => {
                             console.log("TITLE CHANGED: " + that.state.title)
                         });
-                        // console.log("TITLE: " + that.state.title);
                     } else if(childKey === 'image') {
-                        that.setState({ image: childData }, () => {
+                         that.setState({ image: childData }, () => {
                             console.log("IMAGE: " + that.state.image);
                         });
                     }
                 })
             });
         }
+        // that.setState({image: this.props.navigation.state.params.item.image});
+        // console.log("check state image " + this.state.image);
+        // var imageStore = await AsyncStorage.getItem('imageSaved');
+        // console.log("imageStore " + imageStore);
+        // await that.setState({image: imageStore});
+        // console.log("image from aSYNC " + this.state.image);
     }
 
     // updateImage = (params) => {
@@ -112,7 +117,7 @@ export default class RechordViewerScreen extends React.Component {
         return (
             <SafeAreaView style={{flex: 1}}>
                 {/* <NavigationEvents
-                    onDidFocus={() => this.componentWillMount()}
+                    onDidFocus={() => this.updatePlease()}
                 /> */}
                 <LinearGradient
                     colors={[Colors.blue, Colors.purple]}
@@ -122,8 +127,8 @@ export default class RechordViewerScreen extends React.Component {
                 <View style={styles.container}>
 
                     <ViewHeader
-                        // title={params.item.title}
-                        title={this.state.title}
+                        title={params.item.title}
+                        // title={this.state.title}
                         goBack={this.goBack}
                     />
 

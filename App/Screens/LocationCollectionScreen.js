@@ -7,24 +7,25 @@ import {
     LocationCollectionToggle,
     CollectionListItem
 } from '../Components';
-
+import firebase from 'firebase';
 import { Metrics } from '../Themes';
-import PersonalRechords from '../Data/PersonalRechords';
 
 export default class CollectionScreen extends React.Component {  
 
     state = {
-        data: PersonalRechords,
-        index: 0
+        data: [],
+        index: 0,
+        currUserName: '',
     }
 
     // Function to toggle between personal and friend rechords
     updateIndex = (index) => {
         this.setState({index: index});
         if (index === 0) {
-            this.setState({data: PersonalRechords});
+            this.componentWillMount();
         } else {
-            this.setState({data: []})
+            // this.setState({data: []});
+            this.getMyRechords();
         }
     }
 
@@ -32,13 +33,57 @@ export default class CollectionScreen extends React.Component {
         super(props);
     }
 
-    goToViewer = (item) => this.props.navigation.navigate(
+    componentWillMount = () => {
+        // Look at following line for sort by functionality (orderByChild(...))
+        var ref = firebase.database().ref('explore').child(this.props.navigation.state.params.location);
+        var rechords = [];
+        var that = this;
+
+        ref.on('value', function(dataSnapshot) {
+            rechords = [];
+            dataSnapshot.forEach(function(childSnapshot) {
+                var childData = childSnapshot.val();
+                rechords.unshift(childData);    // Note: unshift() adds to the front of the array
+            })
+            that.setState({ data: rechords });
+        });
+
+        var userRef = firebase.database().ref('users').child(firebase.auth().currentUser.uid).child('name');
+        var that = this;
+        userRef.once('value').then(function(snapshot){
+            var snapshotVal = snapshot.val();
+            that.setState({ currUserName: snapshotVal });
+        })
+    }
+
+    getMyRechords = () => {
+        console.log("USER NAME: " + this.state.currUserName);
+        var ref = firebase.database().ref('explore').child(this.props.navigation.state.params.location);
+        var rechords = [];
+        var that = this;
+
+        ref.on('value', function(dataSnapshot) {
+            rechords = [];
+            dataSnapshot.forEach(function(childSnapshot) {
+                if(JSON.stringify(childSnapshot.child('owner')) === JSON.stringify(that.state.currUserName)) {
+                    console.log("WORKING");
+                    var childData = childSnapshot.val();
+                    rechords.unshift(childData);    // Note: unshift() adds to the front of the array
+                }
+            })
+            that.setState({ data: rechords });
+        });
+    }
+
+    goToViewer = (item) => {
+        console.log("ITEM: " + JSON.stringify(item));
+        this.props.navigation.navigate(
         'ViewerScreen',
         {
             item: item,
             location: true
         }
-    )
+    )}
 
     goBack = () => {
         this.props.navigation.navigate('Explore')

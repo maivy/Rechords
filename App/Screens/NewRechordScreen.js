@@ -20,7 +20,7 @@ import NewRechordBarEdit from '../Components/NewRechordBarEdit';
 import { Metrics, Colors } from '../Themes';
 
 const { width, height } = Dimensions.get('window');
-const date = new Date();
+const currDate = new Date();
 const monthNames = ["January", "February", "March", "April", "May", "June",
                     "July", "August", "September", "October", "November", "December"
                     ];
@@ -36,9 +36,9 @@ export default class NewRechordScreen extends React.Component {
             song: 'Put Your Rechords On',
             artist: 'Corinne Bailey Rae',
             location: '--',
-            date: (date.getMonth() + 1) + " " + date.getDate() + " " + JSON.stringify(date.getFullYear()).substr(2, 2),
-            dateString: monthNames[date.getMonth()] + " " + date.getDate() + ", " + date.getFullYear(),
-            description: 'Example Description',
+            date: '',
+            dateString: monthNames[currDate.getMonth()] + " " + currDate.getDate() + ", " + currDate.getFullYear(),
+            description: '',
             owner: '',
             image: '',
             edit: false,
@@ -46,6 +46,7 @@ export default class NewRechordScreen extends React.Component {
         }
 
         this.findOwner();
+        // this.initDate();
 
     }
 
@@ -55,6 +56,7 @@ export default class NewRechordScreen extends React.Component {
 
     componentDidMount() {
         // this.getCoverPosition();
+        this.initDate();
     }
 
     findOwner = () => {
@@ -67,6 +69,21 @@ export default class NewRechordScreen extends React.Component {
                 name = snapshot.child("name").val();
                 that.setState({ owner: name });
         });
+    }
+
+    initDate = () => {
+        var that = this;
+        var dateNums;
+        if(JSON.stringify(currDate.getDate()).length === 1) {
+            dateNums = (currDate.getMonth() + 1) + " 0" + currDate.getDate() + " " + JSON.stringify(currDate.getFullYear()).substr(2, 2);
+        } else { 
+            dateNums = (currDate.getMonth() + 1) + " " + currDate.getDate() + " " + JSON.stringify(currDate.getFullYear()).substr(2, 2);
+        }
+
+        if(JSON.stringify(currDate.getMonth()).length === 1) {
+            dateNums = "0" + dateNums;
+        }
+        that.setState({ date: dateNums});
     }
 
     _getLocationAsync = async () => {
