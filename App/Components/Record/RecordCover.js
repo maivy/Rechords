@@ -10,6 +10,7 @@ import React from 'react';
 import { StyleSheet, View, Text, Image, ImageBackground, TouchableOpacity } from 'react-native';
 import { LinearGradient, ImagePicker, Permissions } from 'expo';
 import firebase from 'firebase';
+import { NavigationEvents } from 'react-navigation';
 
 import SubmitButton from '../SubmitButton';
 import { Metrics, Colors, Images, Styles } from '../../Themes';
@@ -108,13 +109,31 @@ export default class RecordCover extends React.Component {
         }
     };
 
+    update() {
+        // console.log("============= RECORD COVER MOUNTED =============");
+        // console.log("this.state.image: " + JSON.stringify(this.state.image));
+        // console.log("this.props.info.image" + this.props.info.image);
+        if (typeof this.props.info.image === 'string') {
+            this.setState({
+                image: { uri: this.props.info.image }
+            });
+        } else {
+            this.setState({
+                image: this.props.info.image
+            });
+        }
+    }
+
     render() {
         return (
             <ImageBackground 
                 style={[styles.container, Styles.shadow]}
                 imageStyle={styles.image}
-                source={this.state.image}
-                key={this.state.imageURI}>
+                source={this.state.image}>
+
+                <NavigationEvents
+                    onDidFocus={() => this.update()}
+                />
 
                 {/* Black/Transparent Gradients on Rechord Cover */}
                 

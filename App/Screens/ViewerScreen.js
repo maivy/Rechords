@@ -53,27 +53,27 @@ export default class RechordViewerScreen extends React.Component {
         // var that = this;
         // that.setState({image: this.props.navigation.state.params.item.image});
         // console.log("image passed viewer screen " + this.props.navigation.state.params.item.image);
-        if(this.state.reference !== '') {
-            var ref = firebase.database().ref('users').child(firebase.auth().currentUser.uid).child('rechords').child(this.state.reference);
-            var that = this;
-            ref.on('value', function(dataSnapshot) {
-                console.log("CHANGE");
-                dataSnapshot.forEach(function(childSnapshot) {
-                    var childData = childSnapshot.val();
-                    var childKey = childSnapshot.key;
-                    console.log("CHILD KEY: " + childKey);
-                    if(childKey === 'title') {
-                        that.setState({ title: childData}, () => {
-                            console.log("TITLE CHANGED: " + that.state.title)
-                        });
-                    } else if(childKey === 'image') {
-                         that.setState({ image: childData }, () => {
-                            console.log("IMAGE: " + that.state.image);
-                        });
-                    }
-                })
-            });
-        }
+        // if(this.state.reference !== '') {
+        //     var ref = firebase.database().ref('users').child(firebase.auth().currentUser.uid).child('rechords').child(this.state.reference);
+        //     var that = this;
+        //     ref.on('value', function(dataSnapshot) {
+        //         console.log("CHANGE");
+        //         dataSnapshot.forEach(function(childSnapshot) {
+        //             var childData = childSnapshot.val();
+        //             var childKey = childSnapshot.key;
+        //             console.log("CHILD KEY: " + childKey);
+        //             if(childKey === 'title') {
+        //                 that.setState({ title: childData}, () => {
+        //                     console.log("TITLE CHANGED: " + that.state.title)
+        //                 });
+        //             } else if(childKey === 'image') {
+        //                  that.setState({ image: childData }, () => {
+        //                     console.log("IMAGE: " + that.state.image);
+        //                 });
+        //             }
+        //         })
+        //     });
+        // }
         // that.setState({image: this.props.navigation.state.params.item.image});
         // console.log("check state image " + this.state.image);
         // var imageStore = await AsyncStorage.getItem('imageSaved');
@@ -116,9 +116,6 @@ export default class RechordViewerScreen extends React.Component {
         const params = this.props.navigation.state.params;
         return (
             <SafeAreaView style={{flex: 1}}>
-                {/* <NavigationEvents
-                    onDidFocus={() => this.updatePlease()}
-                /> */}
                 <LinearGradient
                     colors={[Colors.blue, Colors.purple]}
                     style={styles.gradient}
@@ -148,6 +145,8 @@ export default class RechordViewerScreen extends React.Component {
                         <View style={styles.coverWrapper}>
                             <RecordCoverFlip
                                 info={params.item}
+                                // info={this.state}
+                                // image={this.state.image}
                                 style={styles.recordCover}
                             />
                         </View>
