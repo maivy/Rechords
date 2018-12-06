@@ -66,14 +66,6 @@ export default class EditRechordScreen extends React.Component {
         this.setState({ location: newLocation });
     }
 
-    // updateDate = (newDate) => {
-    //     newDateNums = (newDate.getMonth() + 1) + " " + newDate.getDate() + " " + JSON.stringify(newDate.getFullYear()).substr(2, 2);
-    //     this.setState({ date: newDateNums });
-
-    //     newDateString = monthNames[newDate.getMonth()] + " " + newDate.getDate() + ", " + newDate.getFullYear();
-    //     this.setState({ dateString: newDateString });
-    // }
-
     updateDate = (newDate) => {
         var newDateNums;
         if(JSON.stringify(newDate.getDate()).length === 1) {

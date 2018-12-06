@@ -26,7 +26,6 @@ export default class FindFriendScreen extends React.Component {
         var that = this;
         userRef.once('value').then(function(snapshot){
             var snapshotVal = snapshot.val()
-            console.log("SNAP VAL: " + snapshotVal);
             that.setState({ currUserName: snapshotVal });
         }) 
 

@@ -26,7 +26,6 @@ export default class ShareScreen extends React.Component {
         recordHidden: true,
         friend: 'Find a friend...',
         friends: friends,
-        currUserName: '',
     }
 
     constructor(props) {
@@ -38,21 +37,10 @@ export default class ShareScreen extends React.Component {
     }
 
     goToFindFriend = () => {
-        // var ref = firebase.database().ref('users').child(firebase.auth().currentUser.uid).child('name');
-        // var that = this;
-        // ref.once('value').then(function(snapshot){
-        //     var snapshotVal = snapshot.val()
-        //     console.log("SNAP VAL: " + snapshotVal);
-        //     this.setState({ currUserName: JSON.stringify(snapshotVal) }, () => console.log("NEW STATE"));
-        // }) 
-
-        // console.log("SENDING NAME: " + this.state.currUserName);
-
         this.props.navigation.navigate('FindFriendScreen', {
             friend: this.state.friend,
             updateFriend: this.updateFriend,
             rechord: this.props.navigation.state.params.item,
-            // currUserName: this.state.currUserName,
         });
     }
 
@@ -71,7 +59,7 @@ export default class ShareScreen extends React.Component {
                     friendUID = childSnapshot.key;
                 }
             })
-            var friendRef = firebase.database().ref('users').child(friendUID).child('friendsRechords').push();
+            var friendRef = firebase.database().ref('users').child(friendUID).child('friendsRechords').child(that.props.navigation.state.params.item.reference);
             friendRef.child('title').set(that.props.navigation.state.params.item.title);
             friendRef.child('song').set(that.props.navigation.state.params.item.song);
             friendRef.child('artist').set(that.props.navigation.state.params.item.artist);

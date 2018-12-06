@@ -9,7 +9,6 @@ import {
 import { Metrics } from '../../Themes';
 import { AntDesign, EvilIcons, Feather } from '@expo/vector-icons';
 import firebase from 'firebase';
-// import { Share } from '../../Screens/ShareScreen';
 
 export default class ActionBar extends React.Component {
 	goToShare = () => this.props.navigation.navigate(
@@ -18,6 +17,20 @@ export default class ActionBar extends React.Component {
 				item: this.props.item
 		}
 	)
+
+	addToLocation = () => {
+		var ref = firebase.database().ref('explore').child(this.props.item.location).child(this.props.item.reference);
+		ref.child('title').set(this.props.item.title);
+        ref.child('song').set(this.props.item.song);
+        ref.child('artist').set(this.props.item.artist);
+        ref.child('location').set(this.props.item.location);
+        ref.child('date').set(this.props.item.date);
+        ref.child('dateString').set(this.props.item.dateString);
+        ref.child('description').set(this.props.item.description);
+        ref.child('owner').set(this.props.item.owner);
+        ref.child('image').set(this.props.item.image);
+        ref.child('favorite').set(false);
+	}
 
 	showShareOptions = () => {
 		ActionSheetIOS.showActionSheetWithOptions({
@@ -34,7 +47,7 @@ export default class ActionBar extends React.Component {
 					'',
 					[
 						{text: 'Undo', onPress: () => console.log('Undo Pressed'), style: 'destructive'},
-						{text: 'Okay', onPress: () => console.log('OK Pressed')},
+						{text: 'Okay', onPress: () => this.addToLocation()},
 					],
 					{ cancelable: false }
 				)
