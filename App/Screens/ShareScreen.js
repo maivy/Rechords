@@ -9,6 +9,8 @@ import {
     TextInput,
     Alert, 
 } from 'react-native';
+import firebase from 'firebase';
+import { NavigationActions, StackActions } from 'react-navigation';
 
 import Record from '../Components/Record/Record';
 import ShareHeader from '../Components/Headers/ShareHeader';
