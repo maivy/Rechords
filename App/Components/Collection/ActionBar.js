@@ -52,17 +52,29 @@ export default class ActionBar extends React.Component {
 	goToCollection = () => this.props.navigation.navigate(
 		'CollectionScreen'
 	)
-
+	
 	deleteRechord = () => {
 		firebase.database().ref('users').child(firebase.auth().currentUser.uid).child('rechords').child(this.props.item.reference).remove();
 		this.goToCollection();
+	}
+
+	deleteRechordPressed = () => {
+		Alert.alert(
+			this.props.item.title + ' has been deleted.',
+			'',
+			[
+				{text: 'Undo', onPress: () => console.log('Undo Pressed'), style: 'destructive'},
+				{text: 'Okay', onPress: () => this.deleteRechord()},
+			],
+			{ cancelable: false }
+		)
 	}
 
   render() {
     return (
     	<View style={styles.actionBar}>
     		<TouchableOpacity
-				onPress={() => this.deleteRechord()}
+				onPress={() => this.deleteRechordPressed()}
 			>
     			<EvilIcons
     				name='trash'
