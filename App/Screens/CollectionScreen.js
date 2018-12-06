@@ -26,7 +26,8 @@ export default class CollectionScreen extends React.Component {
         if (index === 0) {
             this.componentWillMount();
         } else {
-            this.setState({data: FriendRechords})
+            // this.setState({data: FriendRechords})
+            this.getFriendRechords();
         }
     }
 
@@ -37,6 +38,21 @@ export default class CollectionScreen extends React.Component {
     componentWillMount = () => {
         // Look at following line for sort by functionality (orderByChild(...))
         var ref = firebase.database().ref('users').child(firebase.auth().currentUser.uid).child('rechords').orderByChild('date');
+        var rechords = [];
+        var that = this;
+
+        ref.on('value', function(dataSnapshot) {
+            rechords = [];
+            dataSnapshot.forEach(function(childSnapshot) {
+                var childData = childSnapshot.val();
+                rechords.unshift(childData);    // Note: unshift() adds to the front of the array
+            })
+            that.setState({ data: rechords });
+        });
+    }
+
+    getFriendRechords = () => {
+        var ref = firebase.database().ref('users').child(firebase.auth().currentUser.uid).child('friendsRechords').orderByChild('date');
         var rechords = [];
         var that = this;
 
