@@ -7,7 +7,8 @@ import {
     Text, 
     Dimensions,
     Alert, 
-    Keyboard
+    Keyboard,
+    AsyncStorage,
 } from 'react-native';
 import { NavigationEvents } from 'react-navigation';
 
@@ -44,6 +45,10 @@ export default class EditRechordScreen extends React.Component {
     }
 
     goBack = () => {
+        this.props.navigation.navigate('ViewerScreen');
+    }
+
+    goBackSaved = () => {
         console.log("SEND IMAGE BACK: " + this.state.image);
         this.props.navigation.navigate('ViewerScreen', {item: this.state});
     }
@@ -62,17 +67,35 @@ export default class EditRechordScreen extends React.Component {
         this.setState({ location: newLocation });
     }
 
-    updateDate = (newDate) => {
-        newDateNums = (newDate.getMonth() + 1) + " " + newDate.getDate() + " " + JSON.stringify(newDate.getFullYear()).substr(2, 2);
-        this.setState({ date: newDateNums });
+    // updateDate = (newDate) => {
+    //     newDateNums = (newDate.getMonth() + 1) + " " + newDate.getDate() + " " + JSON.stringify(newDate.getFullYear()).substr(2, 2);
+    //     this.setState({ date: newDateNums });
 
-        newDateString = monthNames[newDate.getMonth()] + " " + newDate.getDate() + ", " + newDate.getFullYear();
+    //     newDateString = monthNames[newDate.getMonth()] + " " + newDate.getDate() + ", " + newDate.getFullYear();
+    //     this.setState({ dateString: newDateString });
+    // }
+
+    updateDate = (newDate) => {
+        var newDateNums;
+        if(JSON.stringify(newDate.getDate()).length === 1) {
+            newDateNums = (newDate.getMonth() + 1) + " 0" + newDate.getDate() + " " + JSON.stringify(newDate.getFullYear()).substr(2, 2);
+        } else { 
+            newDateNums = (newDate.getMonth() + 1) + " " + newDate.getDate() + " " + JSON.stringify(newDate.getFullYear()).substr(2, 2);
+        }
+
+        if(JSON.stringify(newDate.getMonth()).length === 1) {
+            newDateNums = "0" + newDateNums;
+        }
+        this.setState({ date: newDateNums});
+        console.log(newDateNums);
+
+        var newDateString = monthNames[newDate.getMonth()] + " " + newDate.getDate() + ", " + newDate.getFullYear();
         this.setState({ dateString: newDateString });
     }
 
-    updateImage = (newImage) => {
+    updateImage = async (newImage) => {
         console.log("UPDATE IMAGE WITH: " + newImage);
-        this.setState({ image: newImage });
+        await this.setState({ image: newImage });
         console.log("NEW IMAGE STATE: " + this.state.image);
     }
 
@@ -90,7 +113,6 @@ export default class EditRechordScreen extends React.Component {
                 });
             }
         }
-        console.log("Song has been updated with: " + this.state.song + '-' + this.state.artist);
     }
 
     toggleEditMode = () =>  {
@@ -101,7 +123,7 @@ export default class EditRechordScreen extends React.Component {
         }
     }
 
-    saveRechord = () => {
+    saveRechord = async() => {
         var ref = firebase.database().ref('users').child(firebase.auth().currentUser.uid).child('rechords').child(this.state.reference);
         ref.child('title').set(this.state.title);
         ref.child('song').set(this.state.song);
@@ -115,15 +137,18 @@ export default class EditRechordScreen extends React.Component {
         ref.child('image').set(this.state.image);
         ref.child('favorite').set(false);
 
+        // await AsyncStorage.setItem('imageSaved', this.state.image);
+
         Alert.alert(
             'Your changes have been saved.',
             '',
             [
                 {text: 'Undo', onPress: () => console.log('Undo Pressed'), style: 'destructive'},
-                {text: 'Okay', onPress: () => this.goBack()},
+                {text: 'Okay', onPress: () => this.goBackSaved()}, 
             ],
             { cancelable: false }
         )
+        // console.log("your changes have been saved-image " + this.state.image);
     }
 
     render() {
@@ -141,22 +166,13 @@ export default class EditRechordScreen extends React.Component {
                 />
 
                 <View style={styles.whiteBar}>
-                {/* {
-                    this.state.edit ? ( */}
-                        <NewRechordBarEdit
-                            item={this.state}
-                            toggleEditMode={this.toggleEditMode}
-                            updateLocation={this.updateLocation}
-                            updateDate={this.updateDate}
-                            goToFindSong={this.goToFindSong}
-                        />
-                    {/* ) : (
-                        <NewRechordBarFinal
-                            item={this.state}
-                            toggleEditMode={this.toggleEditMode}
-                        />
-                    )
-                } */}
+                    <NewRechordBarEdit
+                        item={this.state}
+                        toggleEditMode={this.toggleEditMode}
+                        updateLocation={this.updateLocation}
+                        updateDate={this.updateDate}
+                        goToFindSong={this.goToFindSong}
+                    />
                 </View>
 
                 <View style={styles.editCover}>

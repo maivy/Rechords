@@ -10,7 +10,7 @@ import {
     Alert, 
 } from 'react-native';
 import { createFilter } from 'react-native-search-filter';
-
+import firebase from 'firebase';
 import Record from '../Components/Record/Record';
 import ShareHeader from '../Components/Headers/ShareHeader';
 import RecordCoverFlip from '../Components/Record/RecordCoverFlip';
@@ -18,8 +18,6 @@ import friends from '../Data/Friends';
 import { Metrics, Colors } from '../Themes';
 
 const {width, height} = Dimensions.get('window');
-
-const KEYS_TO_FILTERS = ['name'];
 
 export default class ShareScreen extends React.Component {
 
@@ -41,7 +39,8 @@ export default class ShareScreen extends React.Component {
     goToFindFriend = () => {
         this.props.navigation.navigate('FindFriendScreen', {
             friend: this.state.friend,
-            updateFriend: this.updateFriend
+            updateFriend: this.updateFriend,
+            rechord: this.props.navigation.state.params.item
         });
     }
 
@@ -49,13 +48,43 @@ export default class ShareScreen extends React.Component {
         this.setState({ friend: newFriend });
     }
 
-    send = () => {
+    sendToFriend = () => {
+        var ref = firebase.database().ref('users');
+        var friendUID;
+        var that = this;
+
+        console.log("SENDING: " + JSON.stringify(this.props.navigation.state.params.item));
+
+        ref.once('value').then(function(snapshot) {
+            snapshot.forEach(function(childSnapshot) {
+                if(JSON.stringify(childSnapshot.child('name')) === JSON.stringify(that.state.friend)) {
+                    friendUID = childSnapshot.key;
+                }
+            })
+            var friendRef = firebase.database().ref('users').child(friendUID).child('friendsRechords').push();
+            friendRef.child('title').set(that.props.navigation.state.params.item.title);
+            friendRef.child('song').set(that.props.navigation.state.params.item.song);
+            friendRef.child('artist').set(that.props.navigation.state.params.item.artist);
+            friendRef.child('location').set(that.props.navigation.state.params.item.location);
+            friendRef.child('date').set(that.props.navigation.state.params.item.date);
+            friendRef.child('dateString').set(that.props.navigation.state.params.item.dateString);
+            friendRef.child('description').set(that.props.navigation.state.params.item.description);
+            friendRef.child('owner').set(that.props.navigation.state.params.item.owner);
+            friendRef.child('image').set(that.props.navigation.state.params.item.image);
+            friendRef.child('favorite').set(false);
+            friendRef.child('reference').set(friendRef.getKey());
+        });
+
+        this.goBack();
+    }
+
+    sendPressed = () => {
         Alert.alert(
             this.props.navigation.state.params.item.title + ' has been sent to ' + this.state.friend,
             '',
             [
                 {text: 'Undo', onPress: () => console.log('Undo Pressed'), style: 'destructive'},
-                {text: 'Okay', onPress: () => this.goBack()},
+                {text: 'Okay', onPress: () => this.sendToFriend()},
             ],
             { cancelable: false }
         )
@@ -126,7 +155,7 @@ export default class ShareScreen extends React.Component {
                         <TouchableOpacity
                             style={styles.sendButton}
                             activeOpacity = { .5 }
-                            onPress={() => this.send()}   // Implement 
+                            onPress={() => this.sendPressed()} 
                         >
                             <Text style={styles.sendButtonText}>Send</Text>
                         </TouchableOpacity>

@@ -25,7 +25,6 @@ export default class CollectionScreen extends React.Component {
         this.setState({index: index});
         if (index === 0) {
             this.componentWillMount();
-            // this.setState({data: PersonalRechords})
         } else {
             this.setState({data: FriendRechords})
         }

@@ -132,6 +132,7 @@ export default class RecordCoverFlip extends Component {
                 this.props.edit ? (
                   <RecordEditBack
                     updateDescription={this.props.updateDescription}
+                    description={this.props.info.description}
                   />
                 ) : (
                   <RecordBackCover

@@ -26,7 +26,7 @@ export default class RecordCover extends React.Component {
         super(props);
     }
 
-    componentDidMount() {
+    componentDidMount =async () => {
         if (this.props.fontStyle) {
             this.setState({
                 fontStyle: this.props.fontStyle
@@ -34,11 +34,11 @@ export default class RecordCover extends React.Component {
         }
         if (this.props.info.image) {
             if (typeof this.props.info.image === 'string') {
-                this.setState({
+                await this.setState({
                     image: { uri: this.props.info.image }
                 });
             } else {
-                this.setState({
+                await this.setState({
                     image: this.props.info.image
                 });
             }

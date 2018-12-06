@@ -3,9 +3,9 @@ import { StyleSheet, View, SafeAreaView, TouchableOpacity, Text, Dimensions, Fla
 import { createFilter } from 'react-native-search-filter';
 
 import search from '../Data/api/searchApi';
-import friends from '../Data/Friends';
 import SearchHeader from '../Components/Headers/SearchHeader';
 import { Metrics, Colors } from '../Themes';
+import firebase from 'firebase';
 
 const KEYS_TO_FILTERS = ['name'];
 
@@ -14,24 +14,41 @@ export default class FindFriendScreen extends React.Component {
         super(props)
 
         this.state = {
-            searchResults: friends,
+            searchResults: [],
+            friends: [],
         }
 
     }
 
+    componentWillMount = () => {
+        var ref = firebase.database().ref('users');
+        var initFriends = [];
+        var that = this;
+
+        ref.on('value', function(dataSnapshot) {
+            initFriends = [];
+            dataSnapshot.forEach(function(childSnapshot) {
+                var childData = childSnapshot.val();
+                initFriends.unshift(childData);
+            })
+            that.setState({ friends: initFriends });
+            that.setState({ searchResults: initFriends });
+        });
+
+        console.log("RECHORD: " + JSON.stringify(this.props.navigation.state.params.rechord));
+    }
+
     searchUpdated = (term) => {
-        // this.setState({ searchTerm: term });
-        const filteredFriends = friends.filter(createFilter(term, KEYS_TO_FILTERS));
-        // console.log("SEARCH TERMS: "+JSON.stringify(filteredFriends));
+        const filteredFriends = this.state.friends.filter(createFilter(term, KEYS_TO_FILTERS));
         this.setState({ searchResults: filteredFriends });
     }
 
-    goBack = (friend) => {
+    goBack = (friend,) => {
         const params = this.props.navigation.state.params;
         if (friend !== undefined) {
             params.updateFriend(friend);
         }
-        this.props.navigation.navigate('ShareScreen');
+        this.props.navigation.navigate('ShareScreen', { item: this.props.navigation.state.params.rechord });
     }
 
     _keyExtractor = (index) => JSON.stringify(index);
@@ -43,7 +60,7 @@ export default class FindFriendScreen extends React.Component {
                 style={styles.listItem}
                 onPress={() => this.goBack(friend)}>
 
-                <Text style={styles.title}>{friend}</Text>
+                <Text style={styles.title}>{item.name}</Text>
             </TouchableOpacity>
         )
     }

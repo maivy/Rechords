@@ -105,8 +105,7 @@ export default class ActionBar extends React.Component {
 
 const styles = StyleSheet.create({
   actionBar: {
-		// flex: 1,
-		width: Metrics.widths.wide,
+	width: Metrics.widths.wide,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
