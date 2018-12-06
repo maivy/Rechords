@@ -18,7 +18,7 @@ export default class Explore extends React.Component {
   }
 
   goToFindLocation = () => {
-    this.props.navigation.navigation('FindLocationScreen', {
+    this.props.navigation.navigate('FindLocationScreen', {
       location: this.state.location,
       updateLocation: this.updateLocation
     });
@@ -34,6 +34,7 @@ export default class Explore extends React.Component {
         <ExploreHeader
           goToFindFriend={this.goToFindFriend}
           placeholderText={this.state.friend}   // check if I need the go back function
+          onPressFunction={this.goToFindLocation}
         />
         <ScrollView contentContainerStyle={styles.scrollView}>
           <View style={{flexDirection: 'column'}}>

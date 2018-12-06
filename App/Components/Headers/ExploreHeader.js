@@ -19,7 +19,7 @@ export default class ExploreHeader extends React.Component {
                 <SearchBar_White
                     uneditable
                     placeholder={this.props.placeholderText}
-                    onPressFunction={this.props.goToFindLocation}
+                    onPressFunction={this.props.onPressFunction}
                 />
             </View>
         )
