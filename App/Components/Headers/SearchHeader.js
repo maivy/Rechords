@@ -30,6 +30,7 @@ export default class SearchHeader extends React.Component {
                     <SearchBar_White
                         placeholder={this.props.placeholderText}
                         onChangeTextFunction={this.props.onChangeTextFunction}
+                        onPressFunction={this.props.onPressFunction}
                     />
                 </View>
 

@@ -1,18 +1,18 @@
 friends = [
     {
-        name: 'Tiffany',
+        name: 'Tiffany Manuel',
     },
     {
-        name: 'Vy',
+        name: 'Vy Mai',
     },
     {
-        name: 'Aisha',
+        name: 'Aisha Balogun',
     },
     {
-        name: 'Alaiah',
+        name: 'Alaiah Faris',
     },
     {
-        name: 'Jiamin'
+        name: 'Jiamin Huang'
     },
 ]
 

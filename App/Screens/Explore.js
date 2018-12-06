@@ -10,12 +10,32 @@ export default class Explore extends React.Component {
     recentlyVisited: ["Current Location", "Harrison Hot Springs", "Del Mar Fair", "Lynn Canyon"],
     recentlyViewed: ["Harrison Hot Springs", "Del Mar Fair", "Lynn Canyon", "Grouse Mountain"],
     addedTo: ["Harrison Hot Springs", "Del Mar Fair", "Lynn Canyon", "Grouse Mountain"],
+    location: 'Search for a location...',
+  }
+
+  goBack = () => {
+    this.props.navigation.navigation('Explore');
+  }
+
+  goToFindLocation = () => {
+    this.props.navigation.navigate('FindLocationScreen', {
+      location: this.state.location,
+      updateLocation: this.updateLocation
+    });
+  }
+
+  updateLocation = (newLocation) => {
+    this.setState({ location: newLocation });
   }
 
   render() {
     return (
       <SafeAreaView style={styles.container}>
-        <ExploreHeader/>
+        <ExploreHeader
+          goToFindFriend={this.goToFindFriend}
+          placeholderText={this.state.friend}   // check if I need the go back function
+          onPressFunction={this.goToFindLocation}
+        />
         <ScrollView contentContainerStyle={styles.scrollView}>
           <View style={{flexDirection: 'column'}}>
             <Text style={styles.category}>Recently Visited Locations</Text>

@@ -9,17 +9,14 @@ import {
     TextInput,
     Alert, 
 } from 'react-native';
-import { createFilter } from 'react-native-search-filter';
+import { NavigationActions, StackActions } from 'react-navigation';
 
 import Record from '../Components/Record/Record';
 import ShareHeader from '../Components/Headers/ShareHeader';
 import RecordCoverFlip from '../Components/Record/RecordCoverFlip';
-import friends from '../Data/Friends';
 import { Metrics, Colors } from '../Themes';
 
 const {width, height} = Dimensions.get('window');
-
-const KEYS_TO_FILTERS = ['name'];
 
 export default class ShareScreen extends React.Component {
 
@@ -27,7 +24,6 @@ export default class ShareScreen extends React.Component {
         recordStyle: styles.recordHidden,
         recordHidden: true,
         friend: 'Find a friend...',
-        friends: friends,
     }
 
     constructor(props) {
@@ -49,13 +45,25 @@ export default class ShareScreen extends React.Component {
         this.setState({ friend: newFriend });
     }
 
+    resetNavigation = () => {
+        const resetAction = StackActions.reset({
+            index: 0,
+            actions: [ NavigationActions.navigate({ routeName: 'CollectionScreen' }) ],
+        });
+        this.props.navigation.dispatch(resetAction);
+    }
+
     send = () => {
         Alert.alert(
             this.props.navigation.state.params.item.title + ' has been sent to ' + this.state.friend,
             '',
             [
                 {text: 'Undo', onPress: () => console.log('Undo Pressed'), style: 'destructive'},
-                {text: 'Okay', onPress: () => this.goBack()},
+                {text: 'Okay', onPress: () => {
+                        this.resetNavigation();
+                        // this.goBack();
+                    }
+                },
             ],
             { cancelable: false }
         )

@@ -4,7 +4,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import SearchBar_White from './SearchBar_White';
 import { Metrics, Colors, Styles } from '../../Themes';
 
-export default class ShareHeader extends React.Component {
+export default class ExploreHeader extends React.Component {
     constructor(props) {
         super(props)
     }
@@ -17,7 +17,9 @@ export default class ShareHeader extends React.Component {
                 </View>
 
                 <SearchBar_White
-                    placeholder="Search for a city, country, etc."
+                    uneditable
+                    placeholder={this.props.placeholderText}
+                    onPressFunction={this.props.onPressFunction}
                 />
             </View>
         )

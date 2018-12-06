@@ -8,7 +8,7 @@ import { Metrics, Colors } from '../Themes';
 
 const KEYS_TO_FILTERS = ['name'];
 
-export default class FindFriendScreen extends React.Component {
+export default class FindLocationScreen extends React.Component {
     constructor(props) {
         super(props)
 
