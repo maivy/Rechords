@@ -96,10 +96,10 @@ export default class EditRechordScreen extends React.Component {
     }
 
     updateSong = () => {
-        // const params = this.props.navigation.state.params;
+        const params = this.props.navigation.state.params;
         // console.log("============= EDIT SCREEN MOUNTED =============");
         // console.log("IMAGE PARAM: " + params.item.image);
-        this.setState({ image: params.item.image });
+        // this.setState({ image: params.item.image });
         if (params) {
             if (params.song) {
                 this.setState({

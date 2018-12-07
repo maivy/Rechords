@@ -1,4 +1,4 @@
-places = [
+locations = [
     {
         name: "Harrison Hot Springs"
     },
@@ -11,6 +11,9 @@ places = [
     {
         name: "Grouse Mountain"
     },
+    {
+        name: "Crothers Hall"
+    },
 ]
 
-export default places
+export default locations

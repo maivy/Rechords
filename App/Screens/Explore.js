@@ -14,14 +14,24 @@ export default class Explore extends React.Component {
   }
 
   goBack = () => {
-    this.props.navigation.navigation('Explore');
+    this.props.navigation.navigate('Explore');
   }
 
   goToFindLocation = () => {
     this.props.navigation.navigate('FindLocationScreen', {
       location: this.state.location,
-      updateLocation: this.updateLocation
+      updateLocation: this.updateLocation,
+      goToCollection: this.goToCollection,
+      goBack: this.goBack
     });
+  }
+
+  goToCollection = (location) => {
+    this.props.navigation.navigate('LocationCollection',
+        {
+            location: location,
+        }
+    )
   }
 
   updateLocation = (newLocation) => {
@@ -31,10 +41,10 @@ export default class Explore extends React.Component {
   render() {
     return (
       <SafeAreaView style={styles.container}>
-        <ExploreHeader
-          goToFindFriend={this.goToFindFriend}
-          placeholderText={this.state.friend}   // check if I need the go back function
+        <ExploreHeader          
+          placeholderText='Search for a location...'   // check if I need the go back function
           onPressFunction={this.goToFindLocation}
+          // onPressItemFunction={this.goToCollection}
         />
         <ScrollView contentContainerStyle={styles.scrollView}>
           <View style={{flexDirection: 'column'}}>
