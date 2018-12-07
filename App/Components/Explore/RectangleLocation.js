@@ -16,11 +16,11 @@ export default class RectangleLocation extends React.Component {
     }
 	goToCollection = () => {
         this.props.navigation.navigate(
-		'LocationCollection',
-		{
-            location: this.props.label,
-        }
-    )
+            'LocationCollection',
+            {
+                location: this.props.label,
+            }
+        )
     }
 
     render() {

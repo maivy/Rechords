@@ -54,7 +54,7 @@ export default class FindFriendScreen extends React.Component {
         this.setState({ searchResults: filteredFriends });
     }
 
-    goBack = (friend,) => {
+    goBack = (friend) => {
         const params = this.props.navigation.state.params;
         if (friend !== undefined) {
             params.updateFriend(friend);

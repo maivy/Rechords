@@ -86,7 +86,7 @@ export default class CollectionScreen extends React.Component {
     )}
 
     goBack = () => {
-        this.props.navigation.navigate('Explore')
+        this.props.navigation.goBack();
     }
 
     _keyExtractor = (index) => JSON.stringify(index);

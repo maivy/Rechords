@@ -1,7 +1,7 @@
 import React from 'react';
 import { Image } from 'react-native';
 import { createStackNavigator } from 'react-navigation';
-// import { CollectionStack } from './CollectionStack';
+
 import * as screens from '../Screens';
 import { Images, Styles, Colors } from '../Themes';
 

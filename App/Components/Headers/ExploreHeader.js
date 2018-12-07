@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
-import Ionicons from '@expo/vector-icons/Ionicons';
+
 import SearchBar_White from './SearchBar_White';
 import { Metrics, Colors, Styles } from '../../Themes';
 
@@ -20,6 +20,7 @@ export default class ExploreHeader extends React.Component {
                     uneditable
                     placeholder={this.props.placeholderText}
                     onPressFunction={this.props.onPressFunction}
+                    // onPressItemFunction={this.props.onPressItemFunction}
                 />
             </View>
         )
