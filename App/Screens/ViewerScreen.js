@@ -124,6 +124,7 @@ export default class RechordViewerScreen extends React.Component {
                 <View style={styles.container}>
 
                     <ViewHeader
+                        personal={params.personal}
                         title={params.item.title}
                         navigation={this.props.navigation}
                         item={params.item}
