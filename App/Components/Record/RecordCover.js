@@ -113,14 +113,16 @@ export default class RecordCover extends React.Component {
         // console.log("============= RECORD COVER MOUNTED =============");
         // console.log("this.state.image: " + JSON.stringify(this.state.image));
         // console.log("this.props.info.image" + this.props.info.image);
-        if (typeof this.props.info.image === 'string') {
-            this.setState({
-                image: { uri: this.props.info.image }
-            });
-        } else {
-            this.setState({
-                image: this.props.info.image
-            });
+        if (this.props.info.image) {
+            if (typeof this.props.info.image === 'string') {
+                this.setState({
+                    image: { uri: this.props.info.image }
+                });
+            } else {
+                this.setState({
+                    image: this.props.info.image
+                });
+            }
         }
     }
 
@@ -129,7 +131,8 @@ export default class RecordCover extends React.Component {
             <ImageBackground 
                 style={[styles.container, Styles.shadow]}
                 imageStyle={styles.image}
-                source={this.state.image}>
+                source={this.state.image}
+                key={this.state.imageURI}>
 
                 <NavigationEvents
                     onDidFocus={() => this.update()}
