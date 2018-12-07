@@ -196,7 +196,6 @@ export default class NewRechordScreen extends React.Component {
                 artist: params.artist
             });
         }
-        console.log("this.state.loading: " + JSON.stringify(this.state.loading));
         // console.log("Song has been updated with: " + this.state.song + '-' + this.state.artist);
     }
 
@@ -213,7 +212,7 @@ export default class NewRechordScreen extends React.Component {
             this.setState({ loading: false });
         } else {
             this.setState({ loading: true });
-        } console.log("TOGGLED LOADING MODE: " + JSON.stringify(this.state.loading));
+        }
     }
 
     saveRechord = () => {

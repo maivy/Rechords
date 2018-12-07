@@ -127,7 +127,6 @@ export default class EditRechordScreen extends React.Component {
         } else {
             this.setState({ loading: true });
         }
-        console.log("TOGGLED LOADING MODE: " + JSON.stringify(this.state.loading));
     }
 
     saveRechord = async() => {
