@@ -16,6 +16,7 @@ export default class CollectionScreen extends React.Component {
         data: [],
         index: 0,
         currUserName: '',
+        location: ''
     }
 
     // Function to toggle between personal and friend rechords
@@ -34,6 +35,12 @@ export default class CollectionScreen extends React.Component {
     }
 
     componentWillMount = () => {
+        const params = this.props.navigation.state.params;
+        if (params.location === 'Current Location') {
+            this.setState({ location: 'Hasso Plattner Institute of Design' });
+        } else {
+            this.setState({ location: params.location });
+        }
         // Look at following line for sort by functionality (orderByChild(...))
         var ref = firebase.database().ref('explore').child(this.props.navigation.state.params.location);
         var rechords = [];
@@ -107,7 +114,7 @@ export default class CollectionScreen extends React.Component {
             <SafeAreaView style={styles.container}>
 
                 <LocationCollectionHeader 
-                    location={params.location}
+                    location={this.state.location}
                     goBack={this.goBack}
                 />
 

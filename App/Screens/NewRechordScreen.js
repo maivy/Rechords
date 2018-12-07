@@ -15,7 +15,7 @@ import firebase from 'firebase';
 
 import NewRechordHeader from '../Components/Headers/NewRechordHeader';
 import RecordCoverFlip from '../Components/Record/RecordCoverFlip';
-import NewRechordBarFinal from '../Components/NewRechordBarFinal';
+// import NewRechordBarFinal from '../Components/NewRechordBarFinal';
 import NewRechordBarEdit from '../Components/NewRechordBarEdit';
 import { Metrics, Colors } from '../Themes';
 

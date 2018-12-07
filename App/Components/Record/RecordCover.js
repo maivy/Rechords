@@ -62,7 +62,7 @@ export default class RecordCover extends React.Component {
                     image: { uri: result.uri },
                     imageURI: result.uri
                 });
-            }
+            } else return
 
 
             const blob = await new Promise((resolve, reject) => {

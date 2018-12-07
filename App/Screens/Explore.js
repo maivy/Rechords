@@ -9,7 +9,7 @@ export default class Explore extends React.Component {
   state = {
     recentlyVisited: ["Current Location", "Harrison Hot Springs", "Del Mar Fair", "Crothers Hall"],
     recentlyViewed: ["Harrison Hot Springs", "Del Mar Fair", "Lynn Canyon", "Grouse Mountain"],
-    addedTo: ["Harrison Hot Springs", "Del Mar Fair", "Lynn Canyon", "Grouse Mountain"],
+    addedTo: ["Hasso Plattner Institute of Design", "Del Mar Fair", "Lynn Canyon", "Grouse Mountain"],
     location: 'Search for a location...',
   }
 

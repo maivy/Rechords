@@ -1,5 +1,8 @@
 locations = [
     {
+        name: "Hasso Plattner Institute of Design"
+    },
+    {
         name: "Harrison Hot Springs"
     },
     {
