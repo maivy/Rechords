@@ -32,16 +32,21 @@ export default class ViewHeader extends React.Component {
 
                 <Text style={styles.title}>{this.props.title}</Text>
 
-                <TouchableOpacity
-                    style={styles.right}
-                    onPress={() => this.goToEdit()}
-                >
-                    <Feather
-                        name='edit'
-                        size={25}
-                        color={Colors.white}
-                    />
-                </TouchableOpacity>
+                {
+                    this.props.personal ? (
+                        <TouchableOpacity
+                            style={styles.right}
+                            onPress={() => this.goToEdit()}
+                        >
+                            <Feather
+                                name='edit'
+                                size={25}
+                                color={Colors.white}
+                            />
+                        </TouchableOpacity>
+                    ) : null
+                }
+
             </View>
         )
     }
