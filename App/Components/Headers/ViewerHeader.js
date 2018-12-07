@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
-import AntDesign from '@expo/vector-icons/AntDesign';
+import { AntDesign, Feather } from '@expo/vector-icons';
 
 import { Metrics, Colors } from '../../Themes'
 
@@ -8,6 +8,13 @@ export default class ViewHeader extends React.Component {
     constructor(props) {
         super(props)
     }
+
+    goToEdit = () => this.props.navigation.navigate(
+		'EditScreen',
+		{
+			item: this.props.item
+		}
+	)
 
     render() {
         return (
@@ -19,11 +26,22 @@ export default class ViewHeader extends React.Component {
                     <AntDesign
                         name='down'
                         color={Colors.white}
-                        size={Metrics.icons.small}
+                        size={25}
                     />
                 </TouchableOpacity>
 
                 <Text style={styles.title}>{this.props.title}</Text>
+
+                <TouchableOpacity
+                    style={styles.right}
+                    onPress={() => this.goToEdit()}
+                >
+                    <Feather
+                        name='edit'
+                        size={25}
+                        color={Colors.white}
+                    />
+                </TouchableOpacity>
             </View>
         )
     }
@@ -40,10 +58,15 @@ const styles = StyleSheet.create({
         left: 0,
         zIndex: 100,
     },
+    right: {
+        position: 'absolute',
+        right: 0,
+        zIndex: 100,
+    },
     title: {
         flex: 1,
-        paddingLeft: Metrics.mediumMargin + Metrics.miniMargin,
-        paddingRight: Metrics.mediumMargin + Metrics.miniMargin,
+        paddingLeft: Metrics.mediumMargin + Metrics.smallMargin,
+        paddingRight: Metrics.mediumMargin + Metrics.smallMargin,
         textAlign: 'center',
         fontSize: 24,
         fontWeight: 'bold',

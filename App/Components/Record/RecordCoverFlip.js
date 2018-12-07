@@ -98,7 +98,7 @@ export default class RecordCoverFlip extends Component {
   render() {
     const frontAnimatedStyle = {
       transform: [
-        { rotateY: this.frontInterpolate}
+        { rotateY: this.frontInterpolate }
       ],
       opacity: this.backOpacity,
       zIndex: this.state.frontZIndex

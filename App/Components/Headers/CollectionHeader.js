@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, Image, TouchableOpacity, Platform } from 'react-native';
 import firebase from 'firebase';
 import { Metrics, Colors, Styles, Images } from '../../Themes';
 
@@ -37,10 +37,10 @@ export default class CollectionHeader extends React.Component {
             <View style={styles.container}>
                 <Text style={Styles.h1}>Rechord Collection</Text>
                     
-                <View style={styles.profileWrapper}>
-                    <Image
+                {/* <View style={styles.profileWrapper}> */}
+                    {/* <Image
                         style={styles.profileImage}
-                        source={Images.profileIcon} />
+                        source={Images.profileIcon} /> */}
                     
                     <View style={styles.profileTextWrapper}>
                         <Text style={styles.profileName}>{this.state.currUser}</Text>
@@ -48,10 +48,10 @@ export default class CollectionHeader extends React.Component {
                         <TouchableOpacity
                             onPress={() => this.signOut()}
                         >
-                            <Text style={styles.signOut}>Sign Out</Text>
+                            <Text style={styles.signOut}>(Sign Out)</Text>
                         </TouchableOpacity>
                     </View>
-                </View>
+                {/* </View> */}
             </View>
         )
     }
@@ -61,28 +61,28 @@ const styles = StyleSheet.create({
     container: {
         width: '100%',
         height: Metrics.heights.header,
-        padding: Metrics.smallMargin,
+        padding: (Platform.OS === 'ios') ? Metrics.smallMargin : Metrics.mediumMargin,
         backgroundColor: Colors.purple
     },
     profileTextWrapper: {
         flexDirection: 'column',
-        alignSelf: 'center',
+        alignItems: 'flex-start',
+        // justifyContent: 'space-between',
+        margin: (Platform.OS === 'ios') ? Metrics.mediumMargin : 0
+        // margin: Metrics.mediumMargin,
     },
     signOut: {
         fontSize: 12,
-        // color: 'rgba(255, 255, 255, 0.8)',
         color: Colors.white,
         textDecorationLine: 'underline',
     },
-    profileWrapper: {
-        flexDirection: 'row',
-    },
-    profileImage: {
-        margin: Metrics.smallMargin,
-    },
+    // profileImage: {
+    //     margin: Metrics.smallMargin,
+    // },
     profileName: {
         color: Colors.white,
         fontWeight: 'bold',
         fontSize: 18,
+        // marginRight: Metrics.miniMargin
     }
 })

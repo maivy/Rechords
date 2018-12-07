@@ -175,13 +175,6 @@ export default class ShareScreen extends React.Component {
                                 </View>
                             )
                         }
-                        {/* <TouchableOpacity
-                            style={styles.sendButton}
-                            activeOpacity = { .5 }
-                            onPress={() => this.sendPressed()} 
-                        >
-                            <Text style={styles.sendButtonText}>Send</Text>
-                        </TouchableOpacity> */}
                     </View>
                 </View>
                 

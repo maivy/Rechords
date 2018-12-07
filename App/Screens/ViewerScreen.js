@@ -125,6 +125,8 @@ export default class RechordViewerScreen extends React.Component {
 
                     <ViewHeader
                         title={params.item.title}
+                        navigation={this.props.navigation}
+                        item={params.item}
                         // title={this.state.title}
                         goBack={this.goBack}
                     />
