@@ -45,7 +45,7 @@ export default class FindSongScreen extends React.Component {
     }
 
     goBack = () => {
-        this.props.navigation.navigate('Home')
+        this.props.navigation.goBack();
     }
 
     goBackFromSearch = (screen, song, artist) => {
@@ -54,6 +54,10 @@ export default class FindSongScreen extends React.Component {
             artist: artist
         });
     }
+
+    // undoFindSong = () => {
+    //     this.props.navigation.goBack();
+    // }
 
     findSong = async (searchEntry) => {
         const results = await search({

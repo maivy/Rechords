@@ -158,13 +158,30 @@ export default class ShareScreen extends React.Component {
                     </View> */}
 
                     <View style={styles.sendButtonView}>
-                        <TouchableOpacity
+                        {
+                            this.state.friend !== 'Find a friend...' ? (
+                                <TouchableOpacity
+                                    style={styles.sendButton}
+                                    activeOpacity = { .5 }
+                                    onPress={() => this.sendPressed()} 
+                                >
+                                    <Text style={styles.sendButtonText}>Send</Text>
+                                </TouchableOpacity>
+                            ) : (
+                                <View
+                                    style={[styles.sendButton, {backgroundColor: Colors.slateGreyAlpha}]}
+                                >
+                                    <Text style={styles.sendButtonText}>Send</Text>
+                                </View>
+                            )
+                        }
+                        {/* <TouchableOpacity
                             style={styles.sendButton}
                             activeOpacity = { .5 }
                             onPress={() => this.sendPressed()} 
                         >
                             <Text style={styles.sendButtonText}>Send</Text>
-                        </TouchableOpacity>
+                        </TouchableOpacity> */}
                     </View>
                 </View>
                 
