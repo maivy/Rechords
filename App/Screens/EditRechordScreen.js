@@ -41,6 +41,7 @@ export default class EditRechordScreen extends React.Component {
             image: this.props.navigation.state.params.item.image,
             reference: this.props.navigation.state.params.item.reference,
             edit: false,
+            loading: false,
         }
     }
 
@@ -87,7 +88,9 @@ export default class EditRechordScreen extends React.Component {
 
     updateImage = async (newImage) => {
         console.log("UPDATE IMAGE WITH: " + newImage);
+        // this.setState({ edit: true });
         await this.setState({ image: newImage });
+        // this.setState({ edit: false });
         console.log("NEW IMAGE STATE: " + this.state.image);
     }
 
@@ -116,6 +119,15 @@ export default class EditRechordScreen extends React.Component {
         } else {
             this.setState({ edit: true });
         }
+    }
+
+    toggleLoadingMode = () => {
+        if (this.state.loading) {
+            this.setState({ loading: false });
+        } else {
+            this.setState({ loading: true });
+        }
+        console.log("TOGGLED LOADING MODE: " + JSON.stringify(this.state.loading));
     }
 
     saveRechord = async() => {
@@ -188,17 +200,19 @@ export default class EditRechordScreen extends React.Component {
                     <View style={styles.editCover}>
                         <View style={styles.album}>  
                             <RecordCoverFlip
-                                edit                        
+                                edit
+                                loading={this.state.loading}
                                 info={this.state}
                                 albumStyle={styles.albumStyle}
                                 updateImage={this.updateImage}
                                 updateDescription={this.updateDescription}
+                                toggleLoadingMode={this.toggleLoadingMode}
                             />
                         </View>
 
                         <View style={styles.createButtonView}>
                         {
-                            (this.state.title === '') || (this.state.edit) ? (
+                            (this.state.title === '') || (this.state.loading) ? (
                                 <View
                                     style={[styles.createButton, {backgroundColor: Colors.slateGreyAlpha}]}
                                 >
