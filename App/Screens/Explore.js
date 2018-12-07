@@ -138,5 +138,6 @@ const styles = StyleSheet.create({
   category: {
     marginTop: Metrics.smallMargin,
     fontSize: 18,
+    color: Colors.darkGrey
   },
 })

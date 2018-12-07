@@ -15,7 +15,6 @@ import firebase from 'firebase';
 
 import NewRechordHeader from '../Components/Headers/NewRechordHeader';
 import RecordCoverFlip from '../Components/Record/RecordCoverFlip';
-// import NewRechordBarFinal from '../Components/NewRechordBarFinal';
 import NewRechordBarEdit from '../Components/NewRechordBarEdit';
 import { Metrics, Colors } from '../Themes';
 
@@ -42,6 +41,7 @@ export default class NewRechordScreen extends React.Component {
             owner: '',
             image: '',
             edit: false,
+            loading: false,
             moveAnimation: undefined
         }
 
@@ -145,7 +145,7 @@ export default class NewRechordScreen extends React.Component {
     }
     
     goBack = () => {
-        this.props.navigation.navigate('Home');
+        this.props.navigation.goBack();
     }
 
     goToFindSong = () => {
@@ -207,6 +207,14 @@ export default class NewRechordScreen extends React.Component {
         }
     }
 
+    toggleLoadingMode = () => {
+        if (this.state.loading) {
+            this.setState({ loading: false });
+        } else {
+            this.setState({ loading: true });
+        }
+    }
+
     saveRechord = () => {
         var ref = firebase.database().ref('users').child(firebase.auth().currentUser.uid).child('rechords').push();
         ref.child('title').set(this.state.rechordTitle);
@@ -245,7 +253,7 @@ export default class NewRechordScreen extends React.Component {
                         this.state.edit ? ( */}
                             <NewRechordBarEdit
                                 item={this.state}
-                                toggleEditMode={this.toggleEditMode}
+                                // toggleEditMode={this.toggleEditMode}
                                 updateLocation={this.updateLocation}
                                 updateDate={this.updateDate}
                                 goToFindSong={this.goToFindSong}
@@ -269,16 +277,17 @@ export default class NewRechordScreen extends React.Component {
                                 albumStyle={styles.albumStyle}
                                 updateImage={this.updateImage}
                                 updateDescription={this.updateDescription}
-                                _moveCover={this._moveCover}
-                                moveAnimation={this.state.moveAnimation}
+                                toggleLoadingMode={this.toggleLoadingMode}
+                                // _moveCover={this._moveCover}
+                                // moveAnimation={this.state.moveAnimation}
                             />
                         </View>
 
                         <View style={styles.createButtonView}>
                         {
-                            (this.state.rechordTitle === '') || (this.state.edit) ? (
+                            (this.state.rechordTitle === '') || (this.state.loading) ? (
                                 <View
-                                    style={[styles.createButton, {backgroundColor: Colors.slateGreyAlpha}]}
+                                    style={[styles.createButton, { backgroundColor: Colors.slateGreyAlpha }]}
                                 >
                                     <Text style={styles.createButtonText}>Save</Text>
                                 </View>

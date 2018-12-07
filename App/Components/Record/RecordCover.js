@@ -7,7 +7,7 @@
 //     />
 
 import React from 'react';
-import { StyleSheet, View, Text, Image, ImageBackground, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, Image, ImageBackground, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { LinearGradient, ImagePicker, Permissions } from 'expo';
 import firebase from 'firebase';
 import { NavigationEvents } from 'react-navigation';
@@ -64,7 +64,7 @@ export default class RecordCover extends React.Component {
                 });
             } else return
 
-
+            this.props.toggleLoadingMode();
             const blob = await new Promise((resolve, reject) => {
                 const xhr = new XMLHttpRequest();
                 xhr.onload = function() {
@@ -100,6 +100,7 @@ export default class RecordCover extends React.Component {
             });
             // console.log("image url " + this.state.imageURI);
             await this.props.updateImage(this.state.imageURI);
+            await this.props.toggleLoadingMode();
             console.log("image url " + this.state.imageURI);
             // firebase.database().ref('users').child(firebase.auth().currentUser.uid).update({
             //     image: this.state.imageURI,
@@ -135,7 +136,7 @@ export default class RecordCover extends React.Component {
                 key={this.state.imageURI}>
 
                 <NavigationEvents
-                    onDidFocus={() => this.update()}
+                    onWillFocus={() => this.update()}
                 />
 
                 {/* Black/Transparent Gradients on Rechord Cover */}
@@ -160,13 +161,19 @@ export default class RecordCover extends React.Component {
                     </View>
 
                     {
-                        this.props.noImage ? (
+                        this.props.noImage && !this.props.info.loading ? (
                             <View style={styles.uploadButton}>
                                 <SubmitButton
                                     text='Select Photo'
                                     function={this.onPressUploadPicture}
                                 />
                             </View>
+                        ) : null
+                    }
+
+                    {
+                        this.props.info.loading ? (
+                            <ActivityIndicator size='small' color={Colors.blue} />
                         ) : null
                     }
 

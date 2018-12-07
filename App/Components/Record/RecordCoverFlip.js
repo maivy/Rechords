@@ -118,10 +118,12 @@ export default class RecordCoverFlip extends Component {
                 this.props.edit ? (
                   <RecordCover
                     noImage
+                    loading={this.props.loading}
                     info={this.props.info}
                     fontStyle={{ fontSize: 18 }}
                     updateImage={this.props.updateImage}
                     uid={this.props.uid}
+                    toggleLoadingMode={this.props.toggleLoadingMode}
                   />
                 ) : (
                   <RecordCover
