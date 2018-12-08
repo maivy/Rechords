@@ -1,15 +1,15 @@
 import React from 'react';
-import { StyleSheet, Text, View, SafeAreaView, Image, Button, FlatList, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, ScrollView } from 'react-native';
 import ExploreHeader from '../Components/Headers/ExploreHeader';
 import RectangleLocation from '../Components/Explore/RectangleLocation';
-// import styles from '../Themes/Styles';
+
 import { Images, Colors, Metrics } from '../Themes'
 
 export default class Explore extends React.Component {
   state = {
-    recentlyVisited: ["Current Location", "Harrison Hot Springs", "Del Mar Fair", "Crothers Hall"],
-    recentlyViewed: ["Harrison Hot Springs", "Del Mar Fair", "Lynn Canyon", "Grouse Mountain"],
-    addedTo: ["Hasso Plattner Institute of Design", "Del Mar Fair", "Lynn Canyon", "Grouse Mountain"],
+    recentlyVisited: ["Current Location", "Half Moon Bay", "Boston", "Crothers"],
+    recentlyViewed: ["New York", "Del Mar Fairgrounds", "Lynn Canyon", "Grouse Mountain"],
+    addedTo: ["Building 550", "Half Moon Bay", "Boston", "Crothers"],
     location: 'Search for a location...',
   }
 
@@ -44,7 +44,6 @@ export default class Explore extends React.Component {
         <ExploreHeader          
           placeholderText='Search for a location...'   // check if I need the go back function
           onPressFunction={this.goToFindLocation}
-          // onPressItemFunction={this.goToCollection}
         />
         <ScrollView contentContainerStyle={styles.scrollView}>
           <View style={{flexDirection: 'column'}}>

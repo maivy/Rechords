@@ -42,7 +42,7 @@ export default class CollectionScreen extends React.Component {
             this.setState({ location: params.location });
         }
         // Look at following line for sort by functionality (orderByChild(...))
-        var ref = firebase.database().ref('explore').child(this.props.navigation.state.params.location);
+        var ref = firebase.database().ref('explore').child(this.props.navigation.state.params.location).orderByChild('date');
         var rechords = [];
         var that = this;
 
