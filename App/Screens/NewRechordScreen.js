@@ -170,7 +170,7 @@ export default class NewRechordScreen extends React.Component {
             newDateNums = (newDate.getMonth() + 1) + " " + newDate.getDate() + " " + JSON.stringify(newDate.getFullYear()).substr(2, 2);
         }
 
-        if(JSON.stringify(newDate.getMonth()).length === 1) {
+        if((newDate.getMonth() + 1) <= 9) {
             newDateNums = "0" + newDateNums;
         }
         this.setState({ date: newDateNums});

@@ -1,21 +1,33 @@
 locations = [
     {
-        name: "Hasso Plattner Institute of Design"
+        name: "Building 550"
     },
     {
-        name: "Harrison Hot Springs"
+        name: "Boston"
     },
     {
-        name: "Del Mar Fair"
+        name: "Crothers"
     },
     {
-        name: "Lynn Canyon"
+        name: "Del Mar Fairgrounds"
     },
     {
         name: "Grouse Mountain"
     },
     {
-        name: "Crothers Hall"
+        name: "Half Moon Bay"
+    },
+    {
+        name: "Harrison Hot Springs"
+    },
+    {
+        name: "Lynn Canyon"
+    },
+    {
+        name: "Los Angeles"
+    },
+    {
+        name: "Stanford University"
     },
 ]
 

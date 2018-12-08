@@ -76,7 +76,7 @@ export default class EditRechordScreen extends React.Component {
             newDateNums = (newDate.getMonth() + 1) + " " + newDate.getDate() + " " + JSON.stringify(newDate.getFullYear()).substr(2, 2);
         }
 
-        if(JSON.stringify(newDate.getMonth()).length === 1) {
+        if((newDate.getMonth() + 1) <= 9) {
             newDateNums = "0" + newDateNums;
         }
         this.setState({ date: newDateNums});
@@ -88,9 +88,7 @@ export default class EditRechordScreen extends React.Component {
 
     updateImage = async (newImage) => {
         console.log("UPDATE IMAGE WITH: " + newImage);
-        // this.setState({ edit: true });
         await this.setState({ image: newImage });
-        // this.setState({ edit: false });
         console.log("NEW IMAGE STATE: " + this.state.image);
     }
 
