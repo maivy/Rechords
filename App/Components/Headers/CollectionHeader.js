@@ -37,10 +37,10 @@ export default class CollectionHeader extends React.Component {
             <View style={styles.container}>
                 <Text style={Styles.h1}>Rechord Collection</Text>
                     
-                {/* <View style={styles.profileWrapper}> */}
-                    {/* <Image
+                <View style={styles.profileWrapper}>
+                    <Image
                         style={styles.profileImage}
-                        source={Images.profileIcon} /> */}
+                        source={Images.profileIcon} />
                     
                     <View style={styles.profileTextWrapper}>
                         <Text style={styles.profileName}>{this.state.currUser}</Text>
@@ -51,7 +51,7 @@ export default class CollectionHeader extends React.Component {
                             <Text style={styles.signOut}>(Sign Out)</Text>
                         </TouchableOpacity>
                     </View>
-                {/* </View> */}
+                </View>
             </View>
         )
     }
@@ -64,11 +64,14 @@ const styles = StyleSheet.create({
         padding: (Platform.OS === 'ios') ? Metrics.smallMargin : Metrics.mediumMargin,
         backgroundColor: Colors.purple
     },
+    profileWrapper: {
+        flexDirection: 'row',
+    },
     profileTextWrapper: {
         flexDirection: 'column',
-        alignItems: 'flex-start',
-        // justifyContent: 'space-between',
-        margin: (Platform.OS === 'ios') ? Metrics.mediumMargin : 0
+        // alignItems: 'center',
+        justifyContent: 'center',
+        // margin: (Platform.OS === 'ios') ? Metrics.mediumMargin : 0
         // margin: Metrics.mediumMargin,
     },
     signOut: {
@@ -76,9 +79,9 @@ const styles = StyleSheet.create({
         color: Colors.white,
         textDecorationLine: 'underline',
     },
-    // profileImage: {
-    //     margin: Metrics.smallMargin,
-    // },
+    profileImage: {
+        margin: Metrics.smallMargin,
+    },
     profileName: {
         color: Colors.white,
         fontWeight: 'bold',

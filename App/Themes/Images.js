@@ -1,6 +1,7 @@
 const images = {
     recordEdge: require('../Images/recordEdge.png'),
     flip: require('../Images/flip.png'),
+    vyProfileIcon: require('../Images/vyProfile.png'),
     profileIcon: require('../Images/profileIcon.png'),
     recordIconBlue: require('../Images/blueIcons/record.png'),
     recordIconSlate: require('../Images/slateIcons/rechord.png'),

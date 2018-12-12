@@ -27,6 +27,9 @@ locations = [
         name: "Los Angeles"
     },
     {
+        name: "New York"
+    },
+    {
         name: "Stanford University"
     },
 ]
