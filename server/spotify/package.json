@@ -1,0 +1,17 @@
+{
+  "author": "Spotify",
+  "name": "web-api-auth-examples",
+  "description": "Basic examples of the Spotify authorization flows through OAuth 2",
+  "version": "0.0.2",
+  "dependencies": {
+    "Buffer": "0.0.0",
+    "buffer": "^5.2.1",
+    "cookie-parser": "^1.4.3",
+    "cors": "^2.8.4",
+    "express": "^4.16.4",
+    "querystring": "~0.2.0",
+    "react-native-spotify-web-api": "^0.1.0",
+    "request": "~2.83.0",
+    "save": "^2.3.3"
+  }
+}

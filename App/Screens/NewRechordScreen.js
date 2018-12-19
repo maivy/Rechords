@@ -100,7 +100,18 @@ export default class NewRechordScreen extends React.Component {
         .then((response) => response.json())
         .then((responseJson) => {
             // console.log('ADDRESS GEOCODE is BACK!! => ' + JSON.stringify(responseJson.results[0].address_components[0].short_name));
-            this.setState({ location: responseJson.results[0].address_components[0].short_name } );
+            // this.setState({ location: responseJson.results[0].address_components[0].short_name } );
+            // this.setState({ location: responseJson.results[0].formatted_address } );
+            let address_components = responseJson.results[0].address_components;
+            let street_number = address_components[0].short_name;
+            if (/^\d+$/.test(street_number)) {
+                // this.setState({ location: responseJson.results[0].formatted_address });
+                this.setState({ location: address_components[3].long_name + ', ' + address_components[5].long_name } );
+            } else {
+                // this.setState({ location: address_components[3].long_name + ', ' + address_components[5].long_name } );
+                this.setState({ location: responseJson.results[0].address_components[0].short_name } );
+            }
+
         })
     };
 
