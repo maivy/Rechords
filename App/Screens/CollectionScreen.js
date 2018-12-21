@@ -78,12 +78,7 @@ export default class CollectionScreen extends React.Component {
     };
 
     _handleScrollEndDrag = () => {
-        // this._scrollEndTimer = setTimeout(this._handleMomentumScrollEnd, 0);
         this._handleMomentumScrollEnd()
-    };
-
-    _handleMomentumScrollBegin = () => {
-        // clearTimeout(this._scrollEndTimer);
     };
 
     _handleMomentumScrollEnd = () => {
@@ -169,53 +164,7 @@ export default class CollectionScreen extends React.Component {
         return (
             <SafeAreaView style={styles.container}>
 
-            {/* <StatusBar
-                translucent={false}
-                backgroundColor={Colors.white}
-                barStyle="light-content"
-            /> */}
-                {/* <Animated.View style={{ alignItems: 'center', width: '100%' }}>
-                    <CollectionHeader logOut={this.props.screenProps.logOut} />
-
-                    <View style={styles.sortBar}>
-                        <CollectionSortBar />
-                    </View>
-                </Animated.View> */}
-
-                {/* <CollectionHeader logOut={this.props.screenProps.logOut} />
-
-                <View style={styles.sortBar}>
-                    <CollectionSortBar />
-                </View> */}
-
-                {/* <View style={styles.toggle}>
-                    <CollectionToggle
-                        index={this.state.index}
-                        updateIndex={this.updateIndex}
-                    />
-                </View> */}
-
-                {/* <AnimatedScrollView
-                    contentContainerStyle={styles.gallery}
-                    scrollEventThrottle={16}
-                    onScroll={Animated.event([
-                        { nativeEvent: { contentOffset: { y: this.state.scrollAnim } } },
-                    ])}
-                    onMomentumScrollBegin={this._handleMomentumScrollBegin}
-                    onMomentumScrollEnd={this._handleMomentumScrollEnd}
-                    onScrollEndDrag={this._handleScrollEndDrag}>
-                    {PHOTOS.map(uri => (
-                        <Image source={{ uri }} style={styles.photo} />
-                    ))}
-                </AnimatedScrollView> */}
-
                 <Animated.View style={styles.content}>
-                    {/* <View style={styles.toggle}>
-                        <CollectionToggle
-                            index={this.state.index}
-                            updateIndex={this.updateIndex}
-                        />
-                    </View> */}
 
                     <AnimatedFlatList
                         contentContainerStyle={styles.list}
@@ -224,25 +173,15 @@ export default class CollectionScreen extends React.Component {
                         data={this.state.data}
                         renderItem={({item}) => this.renderRechordItem(item)}
                         keyExtractor={this._keyExtractor}
-                        // ListHeaderComponent={toggle}
 
                         scrollEventThrottle={1}
                         onScroll={Animated.event([
                             { nativeEvent: { contentOffset: { y: this.state.scrollAnim } } },
                         ])}
-                        onMomentumScrollBegin={this._handleMomentumScrollBegin}
                         onMomentumScrollEnd={this._handleMomentumScrollEnd}
                         onScrollEndDrag={this._handleScrollEndDrag}>
                     ></AnimatedFlatList>
                 </Animated.View>
-
-                {/* <FlatList
-                    columnWrapperStyle={styles.covers}
-                    numColumns={2}
-                    data={this.state.data}
-                    renderItem={({item}) => this.renderRechordItem(item)}
-                    keyExtractor={this._keyExtractor}
-                /> */}
 
                 <Animated.View style={[styles.hideable, { transform: [{ translateY }] }]}>
                     <CollectionHeader logOut={this.props.screenProps.logOut} />
@@ -267,7 +206,6 @@ const styles = StyleSheet.create({
     container: {
         width: '100%',
         alignItems: 'center',
-        // overflow: 'scroll',
     },
     statusBarBackground: {
         width: '100%',
@@ -290,7 +228,6 @@ const styles = StyleSheet.create({
     content: {
         width: Metrics.widths.wide,
         alignItems: 'center',
-        // paddingTop: HEADER_HEIGHT,
         overflow: 'scroll',
     },
     list: {
@@ -300,7 +237,6 @@ const styles = StyleSheet.create({
     },
     sortBar: {
         marginTop: -39, // move sort bar over header
-        // zIndex: 0,
     },
     toggleView: {
         height: 65,
@@ -308,12 +244,8 @@ const styles = StyleSheet.create({
     },
     toggle: {
         alignSelf: 'center',
-        // marginTop: Metrics.smallMargin,
-        // marginBottom: Metrics.smallMargin
     },
     covers: {
-        // flex: 1,
-        // width: Metrics.widths.wide,
         justifyContent: 'space-between',
     },
     coverWrapper: {

@@ -31,6 +31,12 @@ export default class FindFriendScreen extends React.Component {
         this.initFriends();
     }
 
+    componentWillUnmount() {
+        // Detach listener for firebase
+        var userRef = firebase.database().ref('users').child(firebase.auth().currentUser.uid).child('name');
+        userRef.off();
+    }
+
     initFriends = () => {
         var ref = firebase.database().ref('users');
         var initFriends = [];
