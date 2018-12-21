@@ -23,7 +23,7 @@ export default class FindFriendScreen extends React.Component {
     componentWillMount = () => {
         var userRef = firebase.database().ref('users').child(firebase.auth().currentUser.uid).child('name');
         var that = this;
-        userRef.once('value').then(function(snapshot){
+        userRef.once('value').then(function(snapshot) {
             var snapshotVal = snapshot.val()
             that.setState({ currUserName: snapshotVal });
         }) 

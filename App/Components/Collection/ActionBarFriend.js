@@ -7,15 +7,33 @@ import {
 	Alert,
 } from 'react-native';
 import { Metrics, Colors } from '../../Themes';
-import { AntDesign, EvilIcons, Feather } from '@expo/vector-icons';
+import { AntDesign, EvilIcons } from '@expo/vector-icons';
 import firebase from 'firebase';
 
 export default class ActionBaFriends extends React.Component {
+
+  deleteRechord = () => {
+		firebase.database().ref('users').child(firebase.auth().currentUser.uid).child('friendsRechords').child(this.props.item.reference).remove();
+    this.props.navigation.goBack();
+  }
+  
+  deleteRechordPressed = () => {
+		Alert.alert(
+			this.props.item.title + ' has been deleted.',
+			'',
+			[
+				{text: 'Undo', onPress: () => console.log('Undo Pressed'), style: 'destructive'},
+				{text: 'Okay', onPress: () => this.deleteRechord()},
+			],
+			{ cancelable: false }
+		)
+	}
+
   render() {
     return (
     	<View style={styles.actionBar}>
         <TouchableOpacity
-            // onPress={() => this.deleteRechord()}
+            onPress={() => this.deleteRechordPressed()}
         >
             <EvilIcons
                 name='trash'
@@ -23,8 +41,6 @@ export default class ActionBaFriends extends React.Component {
                 color={Colors.white}
             />
         </TouchableOpacity>
-
-        {/* <View style={styles.space}></View> */}
 
     		<TouchableOpacity>
     			<AntDesign

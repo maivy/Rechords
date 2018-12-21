@@ -105,17 +105,6 @@ export default class ActionBar extends React.Component {
     			/>
     		</TouchableOpacity>
 
-
-			{/* <TouchableOpacity
-					onPress={() => this.goToEdit()}
-				>
-				<Feather
-					name='edit'
-					size={25}
-					color={'#68BEE2'}
-				/>
-			</TouchableOpacity> */}
-
 			<TouchableOpacity
 					onPress={() => this.showShareOptions()}
 				>

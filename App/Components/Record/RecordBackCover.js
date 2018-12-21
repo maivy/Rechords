@@ -6,7 +6,9 @@
 //     />
 
 import React from 'react';
-import { StyleSheet, View, Text, Image, ScrollView, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, ScrollView, TouchableOpacity } from 'react-native';
+import { MaterialIcons } from '@expo/vector-icons';
+
 
 import { Metrics, Colors, Images, Styles } from '../../Themes';
 
@@ -29,9 +31,11 @@ export default class RecordBackCover extends React.Component {
                     {
                         this.props.flip ? (
                             <TouchableOpacity onPress={() => this.props.flip()}>
-                                <Image
-                                    style={styles.flip}
-                                    source={Images.flip} />
+                                <MaterialIcons
+                                    name='sync'
+                                    color={Colors.white}
+                                    size={Metrics.icons.medium}
+                                />
                             </TouchableOpacity>
                         ) : null
                     }
@@ -67,8 +71,20 @@ const styles = StyleSheet.create({
         color: Colors.white,
         fontFamily: 'avenir'
     },
+    bottom: {
+        // left: -7,
+        width: Metrics.icons.medium + 10,
+        height: Metrics.icons.medium + 10,
+        padding: 5,
+        backgroundColor: Colors.blue,
+        borderRadius: (Metrics.icons.medium + 10) / 2
+    },
     flip: {
-        width: Metrics.icons.small,
-        resizeMode: 'contain'
+        // position: 'absolute',
+        // bottom: Metrics.smallMargin,
+        // left: Metrics.smallMargin,
+        // padding: 5,
+        // backgroundColor: Colors.blue,
+        // borderRadius: (Metrics.icons.medium + 10) / 2
     },
 })
