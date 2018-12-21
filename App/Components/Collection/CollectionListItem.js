@@ -33,6 +33,7 @@ export default class RechordListItem extends React.Component {
                 <TouchableOpacity onPress={() => this.props.goToViewer(this.props.info)}>
                     <View style={this.props.coverContainerStyle}>
                         <RecordCover
+                            heart
                             info={this.props.info}
                             fontStyle={{ fontSize: 14 }}
                         />
@@ -43,9 +44,6 @@ export default class RechordListItem extends React.Component {
 
                 <View style={styles.titleBar}>
                     <Text style={styles.title} numberOfLines={1}>{this.props.info.title}</Text>
-                    <Image                                      // still need to implement functionality
-                        source={Images.heartEmptySlate}
-                        style={styles.heart} />
                 </View>
             </View>
         )
@@ -65,7 +63,7 @@ const styles = StyleSheet.create({
         fontSize: 15,
         fontWeight: 'bold',
         color: Colors.slateGrey,
-        width: 130,
+        width: Metrics.widths.cover,
     },
     heart: {
         height: Metrics.icons.tiny,

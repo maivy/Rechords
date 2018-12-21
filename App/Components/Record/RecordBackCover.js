@@ -72,19 +72,12 @@ const styles = StyleSheet.create({
         fontFamily: 'avenir'
     },
     bottom: {
-        // left: -7,
+        right: 7,
+        top: 7,
         width: Metrics.icons.medium + 10,
         height: Metrics.icons.medium + 10,
         padding: 5,
         backgroundColor: Colors.blue,
         borderRadius: (Metrics.icons.medium + 10) / 2
-    },
-    flip: {
-        // position: 'absolute',
-        // bottom: Metrics.smallMargin,
-        // left: Metrics.smallMargin,
-        // padding: 5,
-        // backgroundColor: Colors.blue,
-        // borderRadius: (Metrics.icons.medium + 10) / 2
     },
 })

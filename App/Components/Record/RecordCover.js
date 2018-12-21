@@ -9,7 +9,7 @@
 import React from 'react';
 import { StyleSheet, View, Text, Image, ImageBackground, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { LinearGradient, ImagePicker, Permissions } from 'expo';
-import { MaterialIcons } from '@expo/vector-icons';
+import { AntDesign, MaterialIcons } from '@expo/vector-icons';
 
 import firebase from 'firebase';
 import { NavigationEvents } from 'react-navigation';
@@ -180,6 +180,18 @@ export default class RecordCover extends React.Component {
                     }
 
                     <View style={styles.bottom}>
+                        {
+                            this.props.heart ? (
+                                <TouchableOpacity>
+                                    <AntDesign
+                                        name='hearto'
+                                        size={Metrics.icons.small}
+                                        color={Colors.blue}
+                                    />
+                                </TouchableOpacity>
+                            ) : null
+                        }
+
                         <Text style={[styles.text, styles.right, this.state.fontStyle]}>{this.props.info.owner}</Text>
                     </View>
 
@@ -260,8 +272,8 @@ const styles = StyleSheet.create({
     },
     flip: {
         position: 'absolute',
-        bottom: Metrics.smallMargin,
-        left: Metrics.smallMargin,
+        bottom: Metrics.smallMargin - 7,
+        left: Metrics.smallMargin - 7,
         padding: 5,
         backgroundColor: Colors.blue,
         borderRadius: (Metrics.icons.medium + 10) / 2
