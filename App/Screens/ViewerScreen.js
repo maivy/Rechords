@@ -1,94 +1,28 @@
 import React from 'react';
-import { StyleSheet, View, SafeAreaView, TouchableOpacity, AsyncStorage } from 'react-native';
+import { StyleSheet, View, SafeAreaView, TouchableOpacity } from 'react-native';
 import { LinearGradient } from 'expo';
-import { NavigationEvents } from 'react-navigation';
-import { Record, ActionBar, ActionBarFriend, ViewHeader, ActionBarLocation } from '../Components';
+
+import {
+    Record,
+    ViewHeader,
+    ActionBar,
+    ActionBarFriend,
+    ActionBarLocation
+} from '../Components';
 import RecordCoverFlip from '../Components/Record/RecordCoverFlip';
-import firebase from 'firebase';
+
 import { Metrics, Colors } from '../Themes';
 
 export default class RechordViewerScreen extends React.Component {
 
-    // state = {
-    //     recordStyle: styles.recordHidden,
-    //     recordHidden: true,
-
-    //     title: this.props.navigation.state.params.item.title,
-    //     song: this.props.navigation.state.params.item.song,
-    //     artist: this.props.navigation.state.params.item.artist,
-    //     location: this.props.navigation.state.params.item.location,
-    //     date: this.props.navigation.state.params.item.date,
-    //     dateString: this.props.navigation.state.params.item.dateString,
-    //     description: this.props.navigation.state.params.item.description,
-    //     owner: this.props.navigation.state.params.item.owner,
-    //     image: this.props.navigation.state.params.item.image,
-    //     reference: this.props.navigation.state.params.item.reference,
-    //     edit: false,
-    // }
+    state = {
+        recordStyle: styles.recordHidden,
+        recordHidden: true,
+    }
 
     constructor(props) {
         super(props)
-        this.state = {
-            recordStyle: styles.recordHidden,
-            recordHidden: true,
-    
-            title: this.props.navigation.state.params.item.title,
-            song: this.props.navigation.state.params.item.song,
-            artist: this.props.navigation.state.params.item.artist,
-            location: this.props.navigation.state.params.item.location,
-            date: this.props.navigation.state.params.item.date,
-            dateString: this.props.navigation.state.params.item.dateString,
-            description: this.props.navigation.state.params.item.description,
-            owner: this.props.navigation.state.params.item.owner,
-            image: this.props.navigation.state.params.item.image,
-            reference: this.props.navigation.state.params.item.reference,
-            edit: false,
-        }
-        // this.componentDidMount();
     }
-
-    
-    componentDidMount = () => {
-        
-        // var that = this;
-        // that.setState({image: this.props.navigation.state.params.item.image});
-        // console.log("image passed viewer screen " + this.props.navigation.state.params.item.image);
-        // if(this.state.reference !== '') {
-        //     var ref = firebase.database().ref('users').child(firebase.auth().currentUser.uid).child('rechords').child(this.state.reference);
-        //     var that = this;
-        //     ref.on('value', function(dataSnapshot) {
-        //         console.log("CHANGE");
-        //         dataSnapshot.forEach(function(childSnapshot) {
-        //             var childData = childSnapshot.val();
-        //             var childKey = childSnapshot.key;
-        //             console.log("CHILD KEY: " + childKey);
-        //             if(childKey === 'title') {
-        //                 that.setState({ title: childData}, () => {
-        //                     console.log("TITLE CHANGED: " + that.state.title)
-        //                 });
-        //             } else if(childKey === 'image') {
-        //                  that.setState({ image: childData }, () => {
-        //                     console.log("IMAGE: " + that.state.image);
-        //                 });
-        //             }
-        //         })
-        //     });
-        // }
-        // that.setState({image: this.props.navigation.state.params.item.image});
-        // console.log("check state image " + this.state.image);
-        // var imageStore = await AsyncStorage.getItem('imageSaved');
-        // console.log("imageStore " + imageStore);
-        // await that.setState({image: imageStore});
-        // console.log("image from aSYNC " + this.state.image);
-    }
-
-    // updateImage = (params) => {
-    //     console.log("UPDATING VIEWER IMAGE: " + params.item.image);
-    //     console.log("OLD IMAGE: " + this.state.image);
-    //     this.setState({ image: params.item.image }, () => {
-    //         console.log(this.state.image, 'NEW STATE');
-    //     });
-    // }
 
     goBack = () => {
         if(this.props.navigation.state.params.location) {
@@ -128,7 +62,6 @@ export default class RechordViewerScreen extends React.Component {
                         title={params.item.title}
                         navigation={this.props.navigation}
                         item={params.item}
-                        // title={this.state.title}
                         goBack={this.goBack}
                     />
 
@@ -148,8 +81,6 @@ export default class RechordViewerScreen extends React.Component {
                         <View style={styles.coverWrapper}>
                             <RecordCoverFlip
                                 info={params.item}
-                                // info={this.state}
-                                // image={this.state.image}
                                 style={styles.recordCover}
                             />
                         </View>
@@ -163,8 +94,6 @@ export default class RechordViewerScreen extends React.Component {
                                 <ActionBar
                                     navigation={this.props.navigation}
                                     item={params.item}
-                                    // item={this.state}
-                                    // deleteRechord={this.}
                                 />
                             ) : (
                                 <ActionBarFriend
@@ -202,8 +131,6 @@ const styles = StyleSheet.create({
     },
     rechord: {
         alignItems: 'center',
-        // marginBottom: Metrics.height * 0.15,
-        // marginTop: Metrics.height
     },
     recordShown: {
         zIndex: 100

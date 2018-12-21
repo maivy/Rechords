@@ -100,15 +100,13 @@ export default class NewRechordScreen extends React.Component {
         .then((response) => response.json())
         .then((responseJson) => {
             // console.log('ADDRESS GEOCODE is BACK!! => ' + JSON.stringify(responseJson.results[0].address_components[0].short_name));
-            // this.setState({ location: responseJson.results[0].address_components[0].short_name } );
-            // this.setState({ location: responseJson.results[0].formatted_address } );
             let address_components = responseJson.results[0].address_components;
             let street_number = address_components[0].short_name;
+
+            // check if place has a name
             if (/^\d+$/.test(street_number)) {
-                // this.setState({ location: responseJson.results[0].formatted_address });
-                this.setState({ location: address_components[3].long_name + ', ' + address_components[5].long_name } );
-            } else {
-                // this.setState({ location: address_components[3].long_name + ', ' + address_components[5].long_name } );
+                this.setState({ location: responseJson.results[0].formatted_address });
+            } else {  // use formatted address instead
                 this.setState({ location: responseJson.results[0].address_components[0].short_name } );
             }
 
@@ -207,7 +205,6 @@ export default class NewRechordScreen extends React.Component {
                 artist: params.artist
             });
         }
-        // console.log("Song has been updated with: " + this.state.song + '-' + this.state.artist);
     }
 
     toggleEditMode = () =>  {
@@ -260,8 +257,6 @@ export default class NewRechordScreen extends React.Component {
                     />
 
                     <View style={styles.whiteBar}>
-                    {/* {
-                        this.state.edit ? ( */}
                             <NewRechordBarEdit
                                 item={this.state}
                                 // toggleEditMode={this.toggleEditMode}
@@ -269,13 +264,6 @@ export default class NewRechordScreen extends React.Component {
                                 updateDate={this.updateDate}
                                 goToFindSong={this.goToFindSong}
                             />
-                        {/* ) : (
-                            <NewRechordBarFinal
-                                item={this.state}
-                                toggleEditMode={this.toggleEditMode}
-                            />
-                        )
-                    } */}
                     </View>
 
                     <View style={styles.editCover}>
