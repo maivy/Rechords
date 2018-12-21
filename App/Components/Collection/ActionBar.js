@@ -11,6 +11,15 @@ import { AntDesign, EvilIcons, Feather } from '@expo/vector-icons';
 import firebase from 'firebase';
 
 export default class ActionBar extends React.Component {
+
+	constructor(props) {
+		super(props)
+
+		this.state = {
+			favorited: this.props.item.favorite
+		}
+	}
+
 	goToShare = () => this.props.navigation.navigate(
 		'ShareScreen',
 		{
@@ -84,6 +93,17 @@ export default class ActionBar extends React.Component {
 		)
 	}
 
+	toggleFavoriteRechord = async () => {
+        var ref = firebase.database().ref('users').child(firebase.auth().currentUser.uid).child('rechords').child(this.props.item.reference);
+        if (this.props.item.favorite) {
+			ref.child('favorite').set(false);
+			this.setState({ favorited: false });
+		} else {
+			ref.child('favorite').set(true);
+			this.setState({ favorited: true });
+        }
+    }
+
   render() {
     return (
     	<View style={styles.actionBar}>
@@ -96,14 +116,32 @@ export default class ActionBar extends React.Component {
     				color={'#68BEE2'}
     			/>
     		</TouchableOpacity>
+
+			<TouchableOpacity onPress={this.toggleFavoriteRechord}>
+			{
+				this.state.favorited ? (
+					<AntDesign
+						name='heart'
+						size={25}
+						color={'#68BEE2'}
+					/>
+				) : (
+					<AntDesign
+						name='hearto'
+						size={25}
+						color={'#68BEE2'}
+					/>
+				)
+			}
+			</TouchableOpacity>
     		
-    		<TouchableOpacity>
+    		{/* <TouchableOpacity>
     			<AntDesign
     				name='hearto'
     				size={25}
     				color={'#68BEE2'}
     			/>
-    		</TouchableOpacity>
+    		</TouchableOpacity> */}
 
 			<TouchableOpacity
 					onPress={() => this.showShareOptions()}

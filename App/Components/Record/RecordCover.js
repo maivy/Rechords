@@ -112,6 +112,15 @@ export default class RecordCover extends React.Component {
         }
     };
 
+    toggleFavoriteRechord = async () => {
+        var ref = firebase.database().ref('users').child(firebase.auth().currentUser.uid).child('rechords').child(this.props.info.reference);
+        if (this.props.info.favorite) {
+            ref.child('favorite').set(false);
+        } else {
+            ref.child('favorite').set(true);
+        }
+    }
+
     update() {
         // console.log("============= RECORD COVER MOUNTED =============");
         // console.log("this.state.image: " + JSON.stringify(this.state.image));
@@ -182,12 +191,25 @@ export default class RecordCover extends React.Component {
                     <View style={styles.bottom}>
                         {
                             this.props.heart ? (
-                                <TouchableOpacity>
-                                    <AntDesign
-                                        name='hearto'
-                                        size={Metrics.icons.small}
-                                        color={Colors.blue}
-                                    />
+                                <TouchableOpacity
+                                    onPress={this.toggleFavoriteRechord}
+                                >
+
+                                    {
+                                        this.props.info.favorite ? (
+                                            <AntDesign
+                                                name='heart'
+                                                size={Metrics.icons.small}
+                                                color={Colors.blue}
+                                            />
+                                        ) :  (
+                                            <AntDesign
+                                                name='hearto'
+                                                size={Metrics.icons.small}
+                                                color={Colors.blue}
+                                            />
+                                        )
+                                    }
                                 </TouchableOpacity>
                             ) : null
                         }
