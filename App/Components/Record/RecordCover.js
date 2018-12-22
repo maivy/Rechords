@@ -9,7 +9,7 @@
 import React from 'react';
 import { StyleSheet, View, Text, Image, ImageBackground, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { LinearGradient, ImagePicker, Permissions } from 'expo';
-import { AntDesign, MaterialIcons } from '@expo/vector-icons';
+import { AntDesign, MaterialIcons, Ionicons } from '@expo/vector-icons';
 
 import firebase from 'firebase';
 import { NavigationEvents } from 'react-navigation';
@@ -38,7 +38,7 @@ export default class RecordCover extends React.Component {
         }
         if (that.props.info.image) {
             if (typeof that.props.info.image === 'string') {
-                console.log("URI: " + this.props.info.image);
+                // console.log("URI: " + this.props.info.image);
                 that.setState({
                     image: { uri: that.props.info.image }
                 });
@@ -197,15 +197,15 @@ export default class RecordCover extends React.Component {
 
                                     {
                                         this.props.info.favorite ? (
-                                            <AntDesign
-                                                name='heart'
-                                                size={Metrics.icons.small}
+                                            <Ionicons
+                                                name='md-heart'
+                                                size={27}
                                                 color={Colors.blue}
                                             />
                                         ) :  (
-                                            <AntDesign
-                                                name='hearto'
-                                                size={Metrics.icons.small}
+                                            <Ionicons
+                                                name='md-heart-empty'
+                                                size={27}
                                                 color={Colors.blue}
                                             />
                                         )

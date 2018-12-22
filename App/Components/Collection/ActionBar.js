@@ -2,22 +2,23 @@ import React from 'react';
 import { 
   StyleSheet, 
   View, 
-	TouchableOpacity, 
+	TouchableOpacity,
 	ActionSheetIOS,
 	Alert,
 } from 'react-native';
-import { Metrics } from '../../Themes';
-import { AntDesign, EvilIcons, Feather } from '@expo/vector-icons';
+import { EvilIcons, Ionicons } from '@expo/vector-icons';
+
 import firebase from 'firebase';
 
+import { Metrics } from '../../Themes';
+
 export default class ActionBar extends React.Component {
+	state = {
+		favorited: this.props.item.favorite
+	}
 
 	constructor(props) {
 		super(props)
-
-		this.state = {
-			favorited: this.props.item.favorite
-		}
 	}
 
 	goToShare = () => this.props.navigation.navigate(
@@ -30,14 +31,14 @@ export default class ActionBar extends React.Component {
 	addToLocation = () => {
 		var ref = firebase.database().ref('explore').child(this.props.item.location).child(this.props.item.reference);
 		ref.child('title').set(this.props.item.title);
-        ref.child('song').set(this.props.item.song);
-        ref.child('artist').set(this.props.item.artist);
-        ref.child('location').set(this.props.item.location);
-        ref.child('date').set(this.props.item.date);
-        ref.child('dateString').set(this.props.item.dateString);
-        ref.child('description').set(this.props.item.description);
-        ref.child('owner').set(this.props.item.owner);
-        ref.child('image').set(this.props.item.image);
+		ref.child('song').set(this.props.item.song);
+		ref.child('artist').set(this.props.item.artist);
+		ref.child('location').set(this.props.item.location);
+		ref.child('date').set(this.props.item.date);
+		ref.child('dateString').set(this.props.item.dateString);
+		ref.child('description').set(this.props.item.description);
+		ref.child('owner').set(this.props.item.owner);
+		ref.child('image').set(this.props.item.image);
 		ref.child('favorite').set(false);
 		ref.child('reference').set(this.props.item.reference)
 	}
@@ -94,22 +95,23 @@ export default class ActionBar extends React.Component {
 	}
 
 	toggleFavoriteRechord = async () => {
-        var ref = firebase.database().ref('users').child(firebase.auth().currentUser.uid).child('rechords').child(this.props.item.reference);
-        if (this.props.item.favorite) {
+		// console.log("Toggle Rechord!");
+		var ref = firebase.database().ref('users').child(firebase.auth().currentUser.uid).child('rechords').child(this.props.item.reference);
+		if (this.state.favorited) {
 			ref.child('favorite').set(false);
 			this.setState({ favorited: false });
 		} else {
 			ref.child('favorite').set(true);
 			this.setState({ favorited: true });
-        }
-    }
+		}
+	}
 
   render() {
     return (
     	<View style={styles.actionBar}>
     		<TouchableOpacity
-				onPress={() => this.deleteRechordPressed()}
-			>
+					onPress={() => this.deleteRechordPressed()}
+				>
     			<EvilIcons
     				name='trash'
     				size={40}
@@ -120,28 +122,20 @@ export default class ActionBar extends React.Component {
 			<TouchableOpacity onPress={this.toggleFavoriteRechord}>
 			{
 				this.state.favorited ? (
-					<AntDesign
-						name='heart'
-						size={25}
+					<Ionicons
+						name='md-heart'
+						size={33}
 						color={'#68BEE2'}
 					/>
 				) : (
-					<AntDesign
-						name='hearto'
-						size={25}
+					<Ionicons
+						name='md-heart-empty'
+						size={33}
 						color={'#68BEE2'}
 					/>
 				)
 			}
 			</TouchableOpacity>
-    		
-    		{/* <TouchableOpacity>
-    			<AntDesign
-    				name='hearto'
-    				size={25}
-    				color={'#68BEE2'}
-    			/>
-    		</TouchableOpacity> */}
 
 			<TouchableOpacity
 					onPress={() => this.showShareOptions()}
