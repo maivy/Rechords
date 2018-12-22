@@ -113,7 +113,9 @@ export default class RecordCover extends React.Component {
     };
 
     toggleFavoriteRechord = async () => {
-        var ref = firebase.database().ref('users').child(firebase.auth().currentUser.uid).child('rechords').child(this.props.info.reference);
+        let childRefName = 'rechords';
+        if (this.props.friend) childRefName = 'friendsRechords';
+        var ref = firebase.database().ref('users').child(firebase.auth().currentUser.uid).child(childRefName).child(this.props.info.reference);
         if (this.props.info.favorite) {
             ref.child('favorite').set(false);
         } else {
@@ -190,7 +192,7 @@ export default class RecordCover extends React.Component {
 
                     <View style={styles.bottom}>
                         {
-                            this.props.heart ? (
+                            this.props.heart && (this.props.personal || this.props.friend) ? (
                                 <TouchableOpacity
                                     onPress={this.toggleFavoriteRechord}
                                 >
@@ -218,20 +220,20 @@ export default class RecordCover extends React.Component {
                     </View>
 
                     {   // flip icon
-                            this.props.flip ? (
-                                <TouchableOpacity
-                                    style={styles.flip}
-                                    onPress={() => this.props.flip()}
-                                >
+                        this.props.flip ? (
+                            <TouchableOpacity
+                                style={styles.flip}
+                                onPress={() => this.props.flip()}
+                            >
 
-                                    <MaterialIcons
-                                        name='sync'
-                                        color={Colors.white}
-                                        size={Metrics.icons.medium}
-                                    />
-                                </TouchableOpacity>
-                            ) : null
-                        }
+                                <MaterialIcons
+                                    name='sync'
+                                    color={Colors.white}
+                                    size={Metrics.icons.medium}
+                                />
+                            </TouchableOpacity>
+                        ) : null
+                    }
                     
                 </View>
 

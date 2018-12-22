@@ -135,6 +135,8 @@ export default class CollectionScreen extends React.Component {
     renderRechordItem = (item) => {
         return (
             <CollectionListItem
+                personal={this.state.index === 0}
+                friend={this.state.index === 1}
                 info={item}
                 coverContainerStyle={styles.coverWrapper}
                 goToViewer={this.goToViewer}

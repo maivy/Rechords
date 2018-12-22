@@ -34,6 +34,8 @@ export default class RechordListItem extends React.Component {
                     <View style={this.props.coverContainerStyle}>
                         <RecordCover
                             heart
+                            personal={this.props.personal ? true : false}
+                            friend={this.props.friend ? true : false}
                             info={this.props.info}
                             fontStyle={{ fontSize: 14 }}
                         />

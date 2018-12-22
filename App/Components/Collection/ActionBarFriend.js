@@ -6,11 +6,15 @@ import {
 	ActionSheetIOS,
 	Alert,
 } from 'react-native';
-import { Metrics, Colors } from '../../Themes';
-import { AntDesign, EvilIcons } from '@expo/vector-icons';
+import { Colors } from '../../Themes';
+import { EvilIcons, Ionicons } from '@expo/vector-icons';
 import firebase from 'firebase';
 
 export default class ActionBaFriends extends React.Component {
+
+  state = {
+		favorited: this.props.item.favorite
+	}
 
   deleteRechord = () => {
 		firebase.database().ref('users').child(firebase.auth().currentUser.uid).child('friendsRechords').child(this.props.item.reference).remove();
@@ -27,6 +31,18 @@ export default class ActionBaFriends extends React.Component {
 			],
 			{ cancelable: false }
 		)
+  }
+  
+  toggleFavoriteRechord = async () => {
+		// console.log("Toggle Rechord!");
+		var ref = firebase.database().ref('users').child(firebase.auth().currentUser.uid).child('friendsRechords').child(this.props.item.reference);
+		if (this.state.favorited) {
+			ref.child('favorite').set(false);
+			this.setState({ favorited: false });
+		} else {
+			ref.child('favorite').set(true);
+			this.setState({ favorited: true });
+		}
 	}
 
   render() {
@@ -42,13 +58,23 @@ export default class ActionBaFriends extends React.Component {
             />
         </TouchableOpacity>
 
-    		<TouchableOpacity>
-    			<AntDesign
-    				name='hearto'
-    				size={Metrics.icons.medium}
-    				color={Colors.white}
-    			/>
-    		</TouchableOpacity>
+        <TouchableOpacity onPress={this.toggleFavoriteRechord}>
+        {
+          this.state.favorited ? (
+            <Ionicons
+              name='md-heart'
+              size={33}
+              color={Colors.white}
+            />
+          ) : (
+            <Ionicons
+              name='md-heart-empty'
+              size={33}
+              color={Colors.white}
+            />
+          )
+        }
+        </TouchableOpacity>
     	</View>
     );
   }
