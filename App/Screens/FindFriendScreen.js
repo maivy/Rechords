@@ -1,6 +1,7 @@
 import React from 'react';
-import { StyleSheet, View, SafeAreaView, TouchableOpacity, Text, Dimensions, FlatList } from 'react-native';
+import { StyleSheet, View, SafeAreaView, TouchableOpacity, Text, FlatList } from 'react-native';
 import { createFilter } from 'react-native-search-filter';
+
 
 import SearchHeader from '../Components/Headers/SearchHeader';
 import { Metrics, Colors } from '../Themes';
@@ -20,18 +21,18 @@ export default class FindFriendScreen extends React.Component {
 
     }
 
-    componentWillMount = () => {
+    componentDidMount = async () => {
         var userRef = firebase.database().ref('users').child(firebase.auth().currentUser.uid).child('name');
         var that = this;
-        userRef.once('value').then(function(snapshot) {
+        await userRef.once('value').then(function(snapshot) {
             var snapshotVal = snapshot.val()
             that.setState({ currUserName: snapshotVal });
         }) 
 
-        this.initFriends();
+        await this.initFriends();
     }
 
-    componentWillUnmount() {
+    componentWillUnmount = () => {
         // Detach listener for firebase
         var userRef = firebase.database().ref('users').child(firebase.auth().currentUser.uid).child('name');
         userRef.off();
@@ -86,7 +87,6 @@ export default class FindFriendScreen extends React.Component {
         const params = this.props.navigation.state.params;
         return (
             <SafeAreaView style={styles.container}>
-
                 <SearchHeader
                     goBack={this.goBack}
                     screenTitle='Find A Friend'

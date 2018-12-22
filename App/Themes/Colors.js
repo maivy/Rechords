@@ -6,7 +6,10 @@ const colors = {
     slateGrey: '#90A1B5',
     slateGreyAlpha: 'rgba(144, 161, 181, 0.15)',
     white: '#fff',
-    grayGradient: '#50555C'
+    grayGradient: '#50555C',
+    // purple: '#FCC875',
+    // blue: '#E38B75',
+    // darkGrey: '#E6CCB5',
 }
 
 export default colors

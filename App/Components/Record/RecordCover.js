@@ -7,9 +7,9 @@
 //     />
 
 import React from 'react';
-import { StyleSheet, View, Text, Image, ImageBackground, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { StyleSheet, View, Text, ImageBackground, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { LinearGradient, ImagePicker, Permissions } from 'expo';
-import { AntDesign, MaterialIcons, Ionicons } from '@expo/vector-icons';
+import { MaterialIcons, Ionicons } from '@expo/vector-icons';
 
 import firebase from 'firebase';
 import { NavigationEvents } from 'react-navigation';

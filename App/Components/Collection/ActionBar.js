@@ -10,9 +10,10 @@ import { EvilIcons, Ionicons } from '@expo/vector-icons';
 
 import firebase from 'firebase';
 
-import { Metrics } from '../../Themes';
+import { Metrics, Colors } from '../../Themes';
 
 export default class ActionBar extends React.Component {
+
 	state = {
 		favorited: this.props.item.favorite
 	}
@@ -115,7 +116,7 @@ export default class ActionBar extends React.Component {
     			<EvilIcons
     				name='trash'
     				size={40}
-    				color={'#68BEE2'}
+    				color={Colors.blue}
     			/>
     		</TouchableOpacity>
 
@@ -125,13 +126,13 @@ export default class ActionBar extends React.Component {
 					<Ionicons
 						name='md-heart'
 						size={33}
-						color={'#68BEE2'}
+						color={Colors.blue}
 					/>
 				) : (
 					<Ionicons
 						name='md-heart-empty'
 						size={33}
-						color={'#68BEE2'}
+						color={Colors.blue}
 					/>
 				)
 			}
@@ -143,7 +144,7 @@ export default class ActionBar extends React.Component {
 				<EvilIcons
 					name='share-apple'
 					size={40}
-					color={'#68BEE2'}
+					color={Colors.blue}
 				/>
 			</TouchableOpacity>
     	</View>
