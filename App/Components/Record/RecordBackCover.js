@@ -7,7 +7,7 @@
 
 import React from 'react';
 import { StyleSheet, View, Text, ScrollView, TouchableOpacity } from 'react-native';
-import { MaterialIcons } from '@expo/vector-icons';
+import { AntDesign, MaterialIcons } from '@expo/vector-icons';
 
 
 import { Metrics, Colors, Images, Styles } from '../../Themes';
@@ -31,10 +31,10 @@ export default class RecordBackCover extends React.Component {
                     {
                         this.props.flip ? (
                             <TouchableOpacity onPress={() => this.props.flip()}>
-                                <MaterialIcons
+                                <AntDesign
                                     name='sync'
                                     color={Colors.white}
-                                    size={Metrics.icons.medium}
+                                    size={25}
                                 />
                             </TouchableOpacity>
                         ) : null
@@ -70,14 +70,5 @@ const styles = StyleSheet.create({
         fontSize: 18,
         color: Colors.white,
         fontFamily: 'avenir'
-    },
-    bottom: {
-        right: 7,
-        top: 7,
-        width: Metrics.icons.medium + 10,
-        height: Metrics.icons.medium + 10,
-        padding: 5,
-        backgroundColor: Colors.blue,
-        borderRadius: (Metrics.icons.medium + 10) / 2
     },
 })

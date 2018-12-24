@@ -9,7 +9,7 @@
 import React from 'react';
 import { StyleSheet, View, Text, ImageBackground, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { LinearGradient, ImagePicker, Permissions } from 'expo';
-import { MaterialIcons, Ionicons } from '@expo/vector-icons';
+import { AntDesign, MaterialIcons, Ionicons } from '@expo/vector-icons';
 
 import firebase from 'firebase';
 import { NavigationEvents } from 'react-navigation';
@@ -191,6 +191,22 @@ export default class RecordCover extends React.Component {
                     }
 
                     <View style={styles.bottom}>
+                        {   // flip icon
+                            this.props.flip ? (
+                                <TouchableOpacity
+                                    style={styles.flip}
+                                    onPress={() => this.props.flip()}
+                                >
+
+                                    <AntDesign
+                                        name='sync'
+                                        color={Colors.white}
+                                        size={25}
+                                    />
+                                </TouchableOpacity>
+                            ) : null
+                        }
+
                         {
                             this.props.heart && (this.props.personal || this.props.friend) ? (
                                 <TouchableOpacity
@@ -218,22 +234,6 @@ export default class RecordCover extends React.Component {
 
                         <Text style={[styles.text, styles.right, this.state.fontStyle]}>{this.props.info.owner}</Text>
                     </View>
-
-                    {   // flip icon
-                        this.props.flip ? (
-                            <TouchableOpacity
-                                style={styles.flip}
-                                onPress={() => this.props.flip()}
-                            >
-
-                                <MaterialIcons
-                                    name='sync'
-                                    color={Colors.white}
-                                    size={Metrics.icons.medium}
-                                />
-                            </TouchableOpacity>
-                        ) : null
-                    }
                     
                 </View>
 
@@ -295,11 +295,11 @@ const styles = StyleSheet.create({
         color: Colors.blue,
     },
     flip: {
-        position: 'absolute',
-        bottom: Metrics.smallMargin - 7,
-        left: Metrics.smallMargin - 7,
-        padding: 5,
-        backgroundColor: Colors.blue,
-        borderRadius: (Metrics.icons.medium + 10) / 2
+        // position: 'absolute',
+        // bottom: Metrics.smallMargin - 7,
+        // left: Metrics.smallMargin - 7,
+        // padding: 3,
+        // backgroundColor: Colors.blue,
+        // borderRadius: (Metrics.icons.medium + 10) / 2
     }
 })

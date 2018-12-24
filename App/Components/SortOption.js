@@ -7,16 +7,40 @@
 //     />
 
 import React from 'react';
-import { StyleSheet, View, Text, Image } from 'react-native';
+import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
 
+import { Colors } from '../Themes';
+import { SORT_ENUM } from '../Data';
+
+const SELECTED_COLOR = Colors.blue;
+const UNSELECTED_COLOR = Colors.slateGrey;
 export default class SortOption extends React.Component {
+
     constructor(props) {
         super(props);
     }
 
+    selectedColor() {
+        const { sortOption, index } = this.props;
+        // console.log("Sort Option: " + sortOption + '  Index: ' + index);
+        isNewestSort = sortOption === SORT_ENUM.NEWEST && index <= 1;
+        isSelected = sortOption === index;
+        return isSelected || isNewestSort ? SELECTED_COLOR : UNSELECTED_COLOR;
+    }
+
+    updateSortIndex = () => {
+        const { sortOption, selectedIndex } = this.props;
+        var i = sortOption;
+        if (sortOption === SORT_ENUM.NEWEST) i = selectedIndex;
+        this.props.updateIndex(i);
+    }
+
     render() {
         return (
-            <View style={styles.container}>
+            <TouchableOpacity
+                style={styles.container}
+                onPress={this.updateSortIndex}    
+            >
                 <Image
                     style={styles.sortIcon}
                     source={this.props.icon} />
@@ -24,10 +48,11 @@ export default class SortOption extends React.Component {
                 <Text
                     style={[
                         styles.sortName,
-                        { color: this.props.color } ]}>
+                        { color: this.selectedColor() }
+                    ]}>
                     {this.props.text}
                 </Text>
-            </View>
+            </TouchableOpacity>
         )
     }
 }

@@ -19,7 +19,7 @@ export default class CollectionToggle extends React.Component {
                     textStyle={styles.text}
                     innerBorderStyle={styles.innerBorder}
                     onPress={this.props.updateIndex}
-                    selectedIndex={this.props.index}
+                    selectedIndex={this.props.selectedIndex}
                     buttons={['Personal', 'Friends']}
                     containerStyle={styles.toggle}
                 />

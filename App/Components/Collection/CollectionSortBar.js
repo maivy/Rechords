@@ -1,7 +1,8 @@
 import React from 'react';
 import { StyleSheet, View, TextInput } from 'react-native';
-import { Metrics, Colors, Images } from '../../Themes';
 
+import { Metrics, Colors, Images } from '../../Themes';
+import { SORT_ENUM } from '../../Data/';
 import SortOption from '../SortOption';
 
 export default class CollectionSortBy extends React.Component {
@@ -19,36 +20,55 @@ export default class CollectionSortBy extends React.Component {
                         icon={Images.recordIconBlue}
                         text='Newest'
                         color={Colors.blue}
+                        index={this.props.index}
+                        selectedIndex={this.props.selectedIndex}
+                        updateIndex={this.props.updateIndex}
+                        sortOption={SORT_ENUM.NEWEST}
                     />
 
                     <SortOption
                         icon={Images.recordIconSlate}
                         text='Oldest'
                         color={Colors.slateGrey}
+                        index={this.props.index}
+                        updateIndex={this.props.updateIndex}
+                        sortOption={SORT_ENUM.OLDEST}
                     />
 
                     <SortOption
                         icon={Images.locationIconSlate}
                         text='Location'
                         color={Colors.slateGrey}
+                        index={this.props.index}
+                        updateIndex={this.props.updateIndex}
+                        sortOption={SORT_ENUM.LOCATION}
                     />
 
                     <SortOption
                         icon={Images.musicIconSlate}
                         text='Song'
                         color={Colors.slateGrey}
+                        index={this.props.index}
+                        updateIndex={this.props.updateIndex}
+                        sortOption={SORT_ENUM.SONG}
                     />
 
                     <SortOption
                         icon={Images.recordIconSlate}
                         text='Title'
                         color={Colors.slateGrey}
+                        index={this.props.index}
+                        updateIndex={this.props.updateIndex}
+                        sortOption={SORT_ENUM.TITLE}
                     />
 
                     <SortOption
                         icon={Images.heartIconSlate}
                         text='Favorites'
                         color={Colors.slateGrey}
+                        index={this.props.index}
+                        updateIndex={this.props.updateIndex}
+                        sortOption={SORT_ENUM.FAVORITES}
                     />
                 </View>
             </View>
