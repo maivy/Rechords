@@ -12,7 +12,7 @@ import PersonalRechords from './App/Data/PersonalRechords';
 import Images from './App/Themes/Images';
 
 var config = {
-  apiKey: "AIzaSyD_vD_Nv5vj46_Tsvvn0Ton4grfSbodnuI",
+  apiKey: "redacted because made repo public",
   authDomain: "rechords-7b3a3.firebaseapp.com",
   databaseURL: "https://rechords-7b3a3.firebaseio.com",
   projectId: "rechords-7b3a3",
