@@ -7,15 +7,9 @@ import { Metrics, Colors } from '../Themes';
 
 const {width, height} = Dimensions.get('window');
 
-// const authorizationCode = 'BQCmZAd6TlBhBbPnq7A_71PwnvkNtrIJ0w95jbf0A_g-V5tf7uWoWOzPf5NF1YJfycgNVPuZqzlwwTpSdlE';
+// const authorizationCode = ...;
 
-const SpotifyWebApi = require('spotify-web-api-node');
-const spotifyApi = new SpotifyWebApi({
-    clientId: '480497afabbc45e18eda389137bd09d5',
-    clientSecret: 'c8b10e5e4e5c4a678fc3ee2879d3395f',
-});
-
-const encodedClientKey = 'NDgwNDk3YWZhYmJjNDVlMThlZGEzODkxMzdiZDA5ZDU6YzhiMTBlNWU0ZTVjNGE2NzhmYzNlZTI4NzlkMzM5NWY=';
+const encodedClientKey = ...;
 
 export default class FindSongScreen extends React.Component {
     constructor(props) {
