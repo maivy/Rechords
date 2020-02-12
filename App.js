@@ -13,11 +13,11 @@ import Images from './App/Themes/Images';
 
 var config = {
   apiKey: "redacted because made repo public",
-  authDomain: "rechords-7b3a3.firebaseapp.com",
-  databaseURL: "https://rechords-7b3a3.firebaseio.com",
-  projectId: "rechords-7b3a3",
-  storageBucket: "rechords-7b3a3.appspot.com",
-  messagingSenderId: "396699023083"
+  authDomain: "redacted because made repo public",
+  databaseURL: "redacted because made repo public",
+  projectId: "redacted because made repo public",
+  storageBucket: "redacted because made repo public",
+  messagingSenderId: "redacted because made repo public"
 };
 
 firebase.initializeApp(config);
